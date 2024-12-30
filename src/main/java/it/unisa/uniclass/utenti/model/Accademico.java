@@ -1,15 +1,17 @@
 package it.unisa.uniclass.utenti.model;
 
+import it.unisa.uniclass.conversazioni.model.Conversazione;
+import it.unisa.uniclass.conversazioni.model.Messaggio;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
-@MappedSuperclass
-public abstract class Accademico extends Utente {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Accademico extends Utente implements Serializable {
 
     @Id
     protected String matricola;
@@ -17,6 +19,15 @@ public abstract class Accademico extends Utente {
     @OneToOne
     @JoinColumn(name = "corso_laurea_id")
     protected CorsoLaurea corsoLaurea;
+
+    @ManyToMany(mappedBy = "messaggeri")
+    private List<Conversazione> conversazioni;
+
+    @OneToMany(mappedBy = "destinatario")
+    private List<Messaggio> messaggiRicevuti;
+
+    @OneToMany(mappedBy = "autore")
+    private List<Messaggio> messaggiInviati;
 
     public Accademico() {}
 
@@ -42,5 +53,17 @@ public abstract class Accademico extends Utente {
 
     public void setMatricola(String matricola) {
         this.matricola = matricola;
+    }
+
+    public List<Conversazione> getConversazioni() {
+        return conversazioni;
+    }
+
+    public List<Messaggio> getMessaggiRicevuti() {
+        return messaggiRicevuti;
+    }
+
+    public List<Messaggio> getMessaggiInviati() {
+        return messaggiInviati;
     }
 }

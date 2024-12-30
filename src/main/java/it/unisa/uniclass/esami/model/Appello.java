@@ -3,6 +3,7 @@ package it.unisa.uniclass.esami.model;
 import it.unisa.uniclass.orari.model.Corso;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "appelli")
-public class Appello {
+public class Appello implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -19,6 +20,7 @@ public class Appello {
     private Time oraFine;
     private String aula;
     private String edificio;
+    private Stato stato; //Aperto, chiuso
 
     @OneToMany(mappedBy = "appello", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AppelloDocente> appelloDocenti = new ArrayList<>();
@@ -27,7 +29,11 @@ public class Appello {
     @JoinColumn(name = "corso_id", nullable = false)
     private Corso corso;
 
-    public Appello(LocalDate data, Time oraInizio, String aula, Time oraFine, String edificio, List<AppelloDocente> appelloDocenti, Corso corso) {
+    @OneToMany(mappedBy = "appello", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Prenotazione> prenotazioni;
+
+
+    public Appello(LocalDate data, Time oraInizio, String aula, Time oraFine, String edificio, List<AppelloDocente> appelloDocenti, Corso corso, Stato stato) {
         this.data = data;
         this.oraInizio = oraInizio;
         this.aula = aula;
@@ -35,9 +41,11 @@ public class Appello {
         this.edificio = edificio;
         this.appelloDocenti = appelloDocenti;
         this.corso = corso;
+        this.prenotazioni = new ArrayList<>();
+        this.stato = stato;
     }
 
-    public Appello(LocalDate data, Time oraInizio, Time oraFine, String aula, String edificio, Corso corso) {
+    public Appello(LocalDate data, Time oraInizio, Time oraFine, String aula, String edificio, Corso corso, Stato stato) {
         this.data = data;
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
@@ -45,6 +53,8 @@ public class Appello {
         this.edificio = edificio;
         this.corso = corso;
         this.appelloDocenti = new ArrayList<>();
+        this.prenotazioni = new ArrayList<>();
+        this.stato = stato;
     }
 
     public Appello() {}
@@ -107,6 +117,22 @@ public class Appello {
 
     public Long getId() {
         return id;
+    }
+
+    public List<Prenotazione> getPrenotazioni() {
+        return prenotazioni;
+    }
+
+    public void setPrenotazioni(List<Prenotazione> prenotazioni) {
+        this.prenotazioni = prenotazioni;
+    }
+
+    public Stato getStato() {
+        return stato;
+    }
+
+    public void setStato(Stato stato) {
+        this.stato = stato;
     }
 
     @Override

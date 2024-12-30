@@ -4,9 +4,11 @@ import it.unisa.uniclass.orari.model.Ruolo;
 import it.unisa.uniclass.utenti.model.Docente;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "appello_docente")
-public class AppelloDocente {
+public class AppelloDocente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

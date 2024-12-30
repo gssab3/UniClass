@@ -8,4 +8,6 @@ import jakarta.persistence.Id;
 public class Agenda {
     @Id @GeneratedValue
     private int id;
+
+
 }

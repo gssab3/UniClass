@@ -2,10 +2,12 @@ package it.unisa.uniclass.utenti.model;
 
 
 import jakarta.persistence.MappedSuperclass;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @MappedSuperclass
-public abstract class Utente {
+public abstract class Utente implements Serializable {
 
     protected String nome;
     protected String cognome;
