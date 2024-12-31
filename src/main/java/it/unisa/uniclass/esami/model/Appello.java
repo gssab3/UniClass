@@ -26,7 +26,7 @@ public class Appello implements Serializable {
     private List<AppelloDocente> appelloDocenti = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "corso_id", nullable = false)
+    @JoinColumn(name = "corso", nullable = false)
     private Corso corso;
 
     @OneToMany(mappedBy = "appello", cascade = CascadeType.ALL, orphanRemoval = true)

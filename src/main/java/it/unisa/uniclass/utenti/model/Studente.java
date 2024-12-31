@@ -18,7 +18,7 @@ public class Studente extends Accademico implements Serializable {
     private List<Prenotazione> prenotazioni;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "agenda_id")
+    @JoinColumn(name = "agenda")
     private Agenda agenda;
 
     public Studente() {
