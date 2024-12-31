@@ -1,0 +1,89 @@
+.barraNavigazione.open {
+        width: 300px;
+}
+
+.barraNavigazione p{
+	color: #0000FF;
+	text-decoration: none;
+	font-size: 100%;
+	text-align: center;
+	-webkit-text-stroke-color: black;
+	-webkit-text-stroke-width: 1px;
+}
+
+.barraNavigazione{
+	font-size: 35px;
+	text-shadow: 2px 2px 5px black;
+	border: 2px solid black;
+	height: 100%;
+  	position: fixed;
+  	width:0;
+  	z-index: 2;
+  	top: 0;
+  	left: 0;
+  	background-color: #5dbb63;
+  	overflow-x: hidden;
+  	transition: 0.5s;
+  	padding-top: 0px;
+}
+
+
+.barraNavigazione::-webkit-scrollbar {
+    display: none;
+}
+
+.barraNavigazione {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.barraNavigazione a{
+	text-decoration: none;
+	color: #F84B01;
+	-webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+.barraNavigazione .closebtn {
+  	position: absolute;
+  	left:0;
+  	padding:0;
+  	font-size: 36px;
+  	margin-left: 10px;
+  	margin-top:10px;
+  	text-decoration: none;
+	color: #F84B01;
+	-webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+
+@media only screen and (max-width: 767px) {
+
+    .barraNavigazione.open {
+        width: 100%;
+        font-size: 50px;
+    }
+
+}
+
+@media only screen and (min-width:768px) and (max-width:991px){
+	.barraNavigazione.open {
+        width: 50%;
+    }
+
+}
+
+
+@media only screen and (min-width:992px) and (max-width:1199px) {
+
+    .barraNavigazione.open {
+        width: 35%;
+    }
+}
+
+@media only screen and (min-width:1200px) {
+    .barraNavigazione.open {
+        width: 300px;
+    }
+}

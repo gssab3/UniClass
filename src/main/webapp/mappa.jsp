@@ -6,8 +6,8 @@
     <title>JSP - Hello World</title>
     <script src="scripts/sidebar.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
-    <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css" />
-
+    <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
+    <link type="text/css" rel="stylesheet" href="styles/mappa.css"/>
 </head>
 <body>
 
@@ -32,9 +32,20 @@
 
   <jsp:include page="header.jsp"/>
 
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+    <br>
+    <br>
+
+    <iframe
+        class="map"
+        id= "border"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6043.0962216837215!2d14.786334038892628!3d40.77196272409155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133bc5c7456b88bd%3A0x80bab96149d2993d!2sUniversit%C3%A0%20degli%20Studi%20di%20Salerno!5e0!3m2!1sit!2sit!4v1735658813332!5m2!1sit!2sit"
+        width="1000"
+        height="700"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+
+
 </body>
 </html>
