@@ -3,7 +3,14 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
              version="3.2">
-    <persistence-unit name="default">
-
+    <persistence-unit name="TestPU" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>java:global/jdbc/TestDS</jta-data-source>
+        <properties>
+            <property name="eclipselink.target-database" value="DERBY"/>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="javax.persistence.schema-generation.database.action" value="validate" />
+        </properties>
     </persistence-unit>
 </persistence>
