@@ -6,9 +6,18 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 
+import static it.unisa.uniclass.esami.model.AppelloDocente.*;
+
 @Entity
 @Table(name = "appello_docente")
+@NamedQueries({
+    @NamedQuery(name = TROVA_APPELLO, query = "SELECT ad FROM AppelloDocente ad WHERE ad.appello.id = :id"),
+    @NamedQuery(name = TROVA_DOCENTE, query = "SELECT ad FROM AppelloDocente ad WHERE ad.docente.matricola = :matricola")
+})
 public class AppelloDocente implements Serializable {
+
+    public static final String TROVA_APPELLO = "AppelloDocente.trovaAppello";
+    public static final String TROVA_DOCENTE = "AppelloDocente.trovaDocente";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

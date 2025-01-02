@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "conversazioni")
@@ -16,44 +18,36 @@ public class Conversazione implements Serializable {
     private Long id;
 
     @OneToMany(mappedBy = "conversazione", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Messaggio> messaggi;
+    private List<Messaggio> messaggi =  new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
-            name = "conversazione_accademico",
+            name = "conversazione_messaggeri",
             joinColumns = @JoinColumn(name = "conversazione_id"),
             inverseJoinColumns = @JoinColumn(name = "accademico_id")
     )
-    private List<Accademico> messaggeri;
+    private Set<Accademico> messaggeri = new HashSet<>();
 
-    public Conversazione() {
-        this.messaggi =  new ArrayList<>();
-        this.messaggeri = new ArrayList<>();
-    }
+    public Conversazione() {}
 
-    public Conversazione(List<Accademico> messaggeri) {
-        this.messaggeri = new ArrayList<>();
-        this.messaggi = new ArrayList<>();
+    public Long getId() {
+        return id;
     }
 
     public List<Messaggio> getMessaggi() {
         return messaggi;
     }
 
+    public Set<Accademico> getMessaggeri() {
+        return messaggeri;
+    }
+
     public void setMessaggi(List<Messaggio> messaggi) {
         this.messaggi = messaggi;
     }
 
-    public List<Accademico> getMessaggeri() {
-        return messaggeri;
-    }
-
-    public void setMessaggeri(List<Accademico> messaggeri) {
+    public void setMessaggeri(Set<Accademico> messaggeri) {
         this.messaggeri = messaggeri;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     @Override

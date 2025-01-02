@@ -6,9 +6,31 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import static it.unisa.uniclass.conversazioni.model.Messaggio.*;
+
 @Entity
 @Table(name = "messaggi")
+@NamedQueries({
+        @NamedQuery(name = TROVA_MESSAGGIO, query = "SELECT m FROM Messaggio m WHERE m.id = :id"),
+        @NamedQuery(name = TROVA_MESSAGGI_INVIATI, query = "SELECT m FROM Messaggio m WHERE m.autore.matricola = :matricola"),
+        @NamedQuery(name = TROVA_MESSAGGI_INVIATI_CONVERSAZIONE, query = "SELECT m FROM Messaggio m WHERE m.autore.matricola = :matricola AND m.conversazione.id = :id"),
+        @NamedQuery(name = TROVA_MESSAGGI_MESSAGGERI, query = "SELECT m FROM Messaggio m WHERE m.autore.matricola = :autore AND m.destinatario.matricola = :destinatario OR m.autore.matricola = :destinatario AND m.destinatario.matricola = :autore"),
+        @NamedQuery(name = TROVA_TUTTI, query = "SELECT m FROM Messaggio m"),
+        @NamedQuery(name = TROVA_AVVISI, query = "SELECT m FROM Messaggio m WHERE m.topic <> null"),
+        @NamedQuery(name = TROVA_AVVISI_AUTORE, query = "SELECT m FROM Messaggio m WHERE m.topic <> null AND m.autore.matricola = :autore"),
+        @NamedQuery(name = TROVA_MESSAGGI_DATA, query = "SELECT m FROM Messaggio m WHERE m.dateTime = :dateTime")
+})
 public class Messaggio implements Serializable {
+
+    public static final String TROVA_MESSAGGIO = "Messaggio.trovaMessaggio";
+    public static final String TROVA_MESSAGGI_INVIATI = "Messaggio.trovaMessaggiInviati";
+    public static final String TROVA_MESSAGGI_INVIATI_CONVERSAZIONE = "Messaggio.trovaMessaggiInviatiConversazione";
+    public static final String TROVA_MESSAGGI_MESSAGGERI = "Messaggio.trovaMessaggiMessaggeri";
+    public static final String TROVA_TUTTI = "Messaggio.trovaTutti";
+    public static final String TROVA_AVVISI = "Messaggio.trovaAvvisi";
+    public static final String TROVA_AVVISI_AUTORE = "Messaggio.trovaAvvisiAutore";
+    public static final String TROVA_MESSAGGI_DATA = "Messaggio.trovaMessaggiData";
+
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -22,6 +44,10 @@ public class Messaggio implements Serializable {
     @ManyToOne
     @JoinColumn(name = "autore")
     private Accademico autore;
+
+    @ManyToOne
+    @JoinColumn(name = "conversazione_id")
+    private Conversazione conversazione;
 
     @ManyToOne
     @JoinColumn(name = "destinatario")

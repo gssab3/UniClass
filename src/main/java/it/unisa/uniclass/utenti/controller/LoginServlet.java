@@ -1,6 +1,7 @@
 package it.unisa.uniclass.utenti.controller;
 
 import it.unisa.uniclass.utenti.model.Utente;
+import it.unisa.uniclass.utenti.service.AccademicoDAO;
 import it.unisa.uniclass.utenti.service.PersonaleTADAO;
 import jakarta.ejb.EJB;
 import jakarta.inject.Inject;
@@ -27,7 +28,7 @@ public class LoginServlet {
 
     private void doPost(HttpServletRequest request, HttpServletResponse response) {
 
-        @Inject
+        @EJB
         PersonaleTADAO personaletadao;
 
         @Inject

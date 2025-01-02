@@ -8,9 +8,23 @@ import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import static it.unisa.uniclass.esami.model.Prenotazione.*;
+
 @Entity
 @Table(name = "prenotazioni")
+@NamedQueries({
+        @NamedQuery(name = TROVA_STUDENTE, query = "SELECT p FROM Prenotazione p WHERE p.studente.matricola = :matricola"),
+        @NamedQuery(name = TROVA_APPELLO, query = "SELECT p FROM Prenotazione p WHERE p.appello.id = :id"),
+        @NamedQuery(name = TROVA_PRENOTAZIONE, query = "SELECT p FROM Prenotazione p WHERE p.id = :id"),
+        @NamedQuery(name = TROVA_TUTTE, query = "SELECT p FROM Prenotazione p")
+})
 public class Prenotazione implements Serializable {
+
+    public static final String TROVA_STUDENTE = "Prenotazione.trovaStudente";
+    public static final String TROVA_APPELLO = "Prenotazione.trovaAppello";
+    public static final String TROVA_PRENOTAZIONE = "Prenotazione.trovaPrenotazione";
+    public static final String TROVA_TUTTE = "Prenotazione.trovaTutte";
+
     @Id @GeneratedValue
     private long id;
 

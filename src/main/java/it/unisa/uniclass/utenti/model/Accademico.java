@@ -7,11 +7,23 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static it.unisa.uniclass.utenti.model.Accademico.TROVA_ACCADEMICO;
+import static it.unisa.uniclass.utenti.model.Accademico.TROVA_TUTTI;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries({
+        @NamedQuery(name = TROVA_ACCADEMICO, query = "SELECT a FROM Accademico a WHERE a.matricola = :matricola"),
+        @NamedQuery(name = TROVA_TUTTI, query = "SELECT a FROM Accademico a")
+})
 public class Accademico extends Utente implements Serializable {
+
+    public static final String TROVA_ACCADEMICO = "Accademico.trovaAccademico";
+    public static final String TROVA_TUTTI = "Accademico.trovaTutti";
 
     @Id
     protected String matricola;
@@ -21,15 +33,17 @@ public class Accademico extends Utente implements Serializable {
     protected CorsoLaurea corsoLaurea;
 
     @ManyToMany(mappedBy = "messaggeri")
-    private List<Conversazione> conversazioni;
+    private Set<Conversazione> conversazioni = new HashSet<>();
 
-    @OneToMany(mappedBy = "destinatario")
-    private List<Messaggio> messaggiRicevuti;
+    @OneToMany(mappedBy = "autore", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Messaggio> messaggiInviati = new HashSet<>();
 
-    @OneToMany(mappedBy = "autore")
-    private List<Messaggio> messaggiInviati;
+    @OneToMany(mappedBy = "destinatario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Messaggio> messaggiRicevuti = new HashSet<>();
+
 
     public Accademico() {}
+
 
     public LocalDate getIscrizione() {
         return iscrizione;
@@ -55,15 +69,27 @@ public class Accademico extends Utente implements Serializable {
         this.matricola = matricola;
     }
 
-    public List<Conversazione> getConversazioni() {
+    public Set<Conversazione> getConversazioni() {
         return conversazioni;
     }
 
-    public List<Messaggio> getMessaggiRicevuti() {
+    public void setConversazioni(Set<Conversazione> conversazioni) {
+        this.conversazioni = conversazioni;
+    }
+
+    public Set<Messaggio> getMessaggiInviati() {
+        return messaggiInviati;
+    }
+
+    public void setMessaggiInviati(Set<Messaggio> messaggiInviati) {
+        this.messaggiInviati = messaggiInviati;
+    }
+
+    public Set<Messaggio> getMessaggiRicevuti() {
         return messaggiRicevuti;
     }
 
-    public List<Messaggio> getMessaggiInviati() {
-        return messaggiInviati;
+    public void setMessaggiRicevuti(Set<Messaggio> messaggiRicevuti) {
+        this.messaggiRicevuti = messaggiRicevuti;
     }
 }

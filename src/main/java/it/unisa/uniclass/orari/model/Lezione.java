@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.List;
 
 import static it.unisa.uniclass.orari.model.Lezione.*;
 
@@ -29,6 +30,9 @@ public class Lezione {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToMany(mappedBy = "lezioni") // Relazione inversa
+    private List<Agenda> agende;
 
     private LocalDate data;
     private Time oraInizio;

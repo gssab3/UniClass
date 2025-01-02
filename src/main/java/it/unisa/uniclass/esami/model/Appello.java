@@ -1,5 +1,6 @@
 package it.unisa.uniclass.esami.model;
 
+import it.unisa.uniclass.orari.model.Aula;
 import it.unisa.uniclass.orari.model.Corso;
 import jakarta.persistence.*;
 
@@ -9,17 +10,28 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static it.unisa.uniclass.esami.model.Appello.*;
+
 @Entity
 @Table(name = "appelli")
+@NamedQueries({
+        @NamedQuery(name = TROVA_APPELLO, query = "SELECT a FROM Appello a WHERE a.id = :id"),
+        @NamedQuery(name = TROVA_APPELLO_AULA, query = "SELECT a FROM Appello a WHERE a.aula.nome = :nomeAula"),
+        @NamedQuery(name = TROVA_APPELLO_CORSO, query = "SELECT a FROM Appello a WHERE a.corso.nome = :corso"),
+        @NamedQuery(name = TROVA_TUTTI, query = "SELECT a FROM Appello a")
+})
 public class Appello implements Serializable {
+    public static final String TROVA_APPELLO_CORSO = "Appello.trovaAppelloCorso";
+    public static final String TROVA_APPELLO = "Appello.trovaAppello";
+    public static final String TROVA_APPELLO_AULA = "Appello.trovaAppelloAula";
+    public static final String TROVA_TUTTI = "Appello.trovaTutti";
+
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private LocalDate data;
     private Time oraInizio;
     private Time oraFine;
-    private String aula;
-    private String edificio;
     private Stato stato; //Aperto, chiuso
 
     @OneToMany(mappedBy = "appello", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -32,25 +44,26 @@ public class Appello implements Serializable {
     @OneToMany(mappedBy = "appello", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Prenotazione> prenotazioni;
 
+    @ManyToOne
+    @JoinColumn(name = "aula_id") // Colonna che mappa l'aula
+    private Aula aula;
 
-    public Appello(LocalDate data, Time oraInizio, String aula, Time oraFine, String edificio, List<AppelloDocente> appelloDocenti, Corso corso, Stato stato) {
+    public Appello(LocalDate data, Time oraInizio, Aula aula, Time oraFine, List<AppelloDocente> appelloDocenti, Corso corso, Stato stato) {
         this.data = data;
         this.oraInizio = oraInizio;
         this.aula = aula;
         this.oraFine = oraFine;
-        this.edificio = edificio;
         this.appelloDocenti = appelloDocenti;
         this.corso = corso;
         this.prenotazioni = new ArrayList<>();
         this.stato = stato;
     }
 
-    public Appello(LocalDate data, Time oraInizio, Time oraFine, String aula, String edificio, Corso corso, Stato stato) {
+    public Appello(LocalDate data, Time oraInizio, Time oraFine, Aula aula, Corso corso, Stato stato) {
         this.data = data;
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
         this.aula = aula;
-        this.edificio = edificio;
         this.corso = corso;
         this.appelloDocenti = new ArrayList<>();
         this.prenotazioni = new ArrayList<>();
@@ -83,20 +96,12 @@ public class Appello implements Serializable {
         this.oraFine = oraFine;
     }
 
-    public String getAula() {
+    public Aula getAula() {
         return aula;
     }
 
-    public void setAula(String aula) {
+    public void setAula(Aula aula) {
         this.aula = aula;
-    }
-
-    public String getEdificio() {
-        return edificio;
-    }
-
-    public void setEdificio(String edificio) {
-        this.edificio = edificio;
     }
 
     public List<AppelloDocente> getAppelloDocenti() {
@@ -143,7 +148,6 @@ public class Appello implements Serializable {
                 ", oraInizio=" + oraInizio +
                 ", oraFine=" + oraFine +
                 ", aula='" + aula + '\'' +
-                ", edificio='" + edificio + '\'' +
                 ", appelloDocenti=" + appelloDocenti +
                 ", corso=" + corso +
                 '}';

@@ -8,9 +8,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static it.unisa.uniclass.orari.model.Corso.*;
+
 @Entity
 @Table(name = "corsi")
+@NamedQueries({
+    @NamedQuery(name = TROVA_CORSO, query = "SELECT c FROM Corso c WHERE c.id = :id"),
+    @NamedQuery(name = TROVA_TUTTE, query = "SELECT c FROM Corso c"),
+    @NamedQuery(name = TROVA_CORSI_CORSOLAUREA, query = "SELECT c FROM Corso c WHERE c.corsoLaurea.nome = :nomeCorsoLaurea")
+})
 public class Corso implements Serializable {
+
+    public static final String TROVA_CORSO = "Corso.trovaCorso";
+    public static final String TROVA_TUTTE = "Corso.trovaTutte";
+    public static final String TROVA_CORSI_CORSOLAUREA = "Corso.trovaCorsoLaurea";
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
