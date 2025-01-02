@@ -54,7 +54,6 @@ public class Agenda implements Serializable {
         return "Agenda{" +
                 "id=" + id +
                 ", studente=" + studente +
-                ", lezioni=" + lezioni +
                 '}';
     }
 }

@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
-             version="3.2">
-    <persistence-unit name="TestPU" transaction-type="JTA">
-        <jta-data-source>java:/MyDataSource</jta-data-source>
-        <properties>
-            <property name="jakarta.persistence.schema-generation.database-action" value="create" />
-            <property name="jakarta.persistence.schema-generation.create-source" value="metadata" />
-            <property name="jakarta.persistence.schema-generation.drop-source" value="none" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
-        </properties>
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <!-- Persistence Unit del database universitario -->
+    <persistence-unit name="DBUniversityPU" transaction-type="JTA">
+        <jta-data-source>jdbc/DBUniversity</jta-data-source>
+    </persistence-unit>
+
+    <!-- Persistence Unit del database di UniClass -->
+    <persistence-unit name="DBUniClassPU" transaction-type="JTA">
+        <jta-data-source>jdbc/DBUniClass</jta-data-source>
     </persistence-unit>
 </persistence>

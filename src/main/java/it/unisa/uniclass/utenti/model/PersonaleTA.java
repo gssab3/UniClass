@@ -5,9 +5,19 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import static it.unisa.uniclass.utenti.model.PersonaleTA.TROVA_PERSONALE;
+import static it.unisa.uniclass.utenti.model.PersonaleTA.TROVA_TUTTI;
+
 @Entity
 @Table(name = "personaleTA")
+@NamedQueries({
+        @NamedQuery(name = TROVA_PERSONALE, query = "SELECT p FROM PersonaleTA p WHERE p.id = :id"),
+        @NamedQuery(name = TROVA_TUTTI, query = "SELECT p FROM PersonaleTA p")
+})
 public class PersonaleTA extends Utente implements Serializable {
+    public static final String TROVA_PERSONALE = "PersonaleTA.trovaPersonale";
+    public static final String TROVA_TUTTI = "PersonaleTA.trovaTutti";
+
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 

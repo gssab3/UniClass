@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @MappedSuperclass
-public abstract class Utente implements Serializable {
+public class Utente implements Serializable {
 
     protected String nome;
     protected String cognome;
@@ -74,7 +74,6 @@ public abstract class Utente implements Serializable {
                 ", dataNascita=" + dataNascita +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", tipo=" + tipo +
                 '}';
     }
 }

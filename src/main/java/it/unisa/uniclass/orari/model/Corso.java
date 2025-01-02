@@ -88,5 +88,13 @@ public class Corso implements Serializable {
         this.nome = nome;
     }
 
-
+    @Override
+    public String toString() {
+        return "Corso{" +
+                "id=" + id +
+                ", corsoLaurea=" + corsoLaurea +
+                ", docenti=" + docenti +
+                ", nome='" + nome + '\'' +
+                '}';
+    }
 }

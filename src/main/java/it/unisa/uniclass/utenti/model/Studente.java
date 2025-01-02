@@ -10,9 +10,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static it.unisa.uniclass.utenti.model.Studente.*;
+
 @Entity
 @Table(name = "studenti")
+@NamedQueries({
+        @NamedQuery(name = TROVA_STUDENTE, query = "SELECT s FROM Studente s WHERE s.matricola = :matricola"),
+        @NamedQuery(name = TROVA_STUDENTI_CORSO, query = "SELECT s FROM Studente s WHERE s.corsoLaurea.nome = :nome"),
+        @NamedQuery(name = TROVA_TUTTI, query = "SELECT s FROM Studente s")
+})
 public class Studente extends Accademico implements Serializable {
+
+    public static final String TROVA_STUDENTE = "Studente.trovaStudente";
+    public static final String TROVA_STUDENTI_CORSO = "Studente.trovaPerCorso";
+    public static final String TROVA_TUTTI = "Studente.trovaTutti";
 
     @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Prenotazione> prenotazioni;
@@ -22,15 +33,7 @@ public class Studente extends Accademico implements Serializable {
     private Agenda agenda;
 
     public Studente() {
-        super.setNome("");
-        super.setCognome("");
-        super.setEmail("");
-        super.setCorsoLaurea(null);
-        super.setDataNascita(null);
-        super.setIscrizione(null);
-        super.setPassword("");
         super.setTipo(Tipo.Studente);
-        super.setMatricola(null);
         prenotazioni = new ArrayList<>();
         agenda = new Agenda();
     }
@@ -68,8 +71,6 @@ public class Studente extends Accademico implements Serializable {
                 ", matricola='" + matricola + '\'' +
                 ", iscrizione=" + iscrizione +
                 ", corsoLaurea=" + corsoLaurea +
-                ", prenotazioni=" + prenotazioni +
-                ", agenda=" + agenda +
                 '}';
     }
 }

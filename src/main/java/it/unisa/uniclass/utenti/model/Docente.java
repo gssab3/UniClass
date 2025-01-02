@@ -10,9 +10,22 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static it.unisa.uniclass.utenti.model.Docente.*;
+
 @Entity
 @Table(name = "docenti")
+@NamedQueries({
+        @NamedQuery(name = TROVA_DOCENTE, query = "SELECT d FROM Docente d WHERE d.matricola = :matricola"),
+        @NamedQuery(name = TROVA_DOCENTE_CORSOLAUREA, query = "SELECT d FROM Docente d WHERE d.corsoLaurea.nome = :nome"),
+        @NamedQuery(name = TROVA_TUTTI, query = "SELECT d FROM Docente d"),
+        @NamedQuery(name = TROVA_TUTTI_DOCENTI, query = "SELECT d FROM Docente d WHERE d.tipo = 'Docente'")
+})
 public class Docente extends Accademico implements Serializable {
+
+    public static final String TROVA_DOCENTE = "Docente.trovaDocente";
+    public static final String TROVA_DOCENTE_CORSOLAUREA = "Docente.trovaDocenteCorsoLaurea";
+    public static final String TROVA_TUTTI = "Docente.trovaTutti";
+    public static final String TROVA_TUTTI_DOCENTI = "Docente.trovaTuttiDocenti";
 
     @ManyToMany
     @JoinTable(
@@ -20,12 +33,12 @@ public class Docente extends Accademico implements Serializable {
             joinColumns = @JoinColumn(name = "docente_id"),
             inverseJoinColumns = @JoinColumn(name = "corso_id")
     )
-    private List<Corso> corsi;
+    protected List<Corso> corsi;
 
-    private String dipartimento;
+    protected String dipartimento;
 
     @OneToMany(mappedBy = "docente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AppelloDocente> appelloDocenti;
+    protected List<AppelloDocente> appelloDocenti;
 
     public Docente(String nome, String cognome, LocalDate dataNascita, String email, String password, String matricola, LocalDate iscrizione, CorsoLaurea corsoLaurea, String dipartimento) {
         tipo = Tipo.Docente;
@@ -84,7 +97,6 @@ public class Docente extends Accademico implements Serializable {
                 ", iscrizione=" + iscrizione +
                 ", corsoLaurea=" + corsoLaurea +
                 ", dipartimento='" + dipartimento + '\'' +
-                ", corsi=" + corsi +
                 '}';
     }
 }
