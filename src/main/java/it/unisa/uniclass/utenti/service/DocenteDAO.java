@@ -20,7 +20,7 @@ public class DocenteDAO {
     public Docente trovaDocenteUniversity(String matricola) {
         TypedQuery<Docente> query = emUniversity.createNamedQuery(Docente.TROVA_DOCENTE, Docente.class);
         query.setParameter("matricola", matricola);
-        return query.getSingleResult();
+        return (Docente) query.getSingleResult();
     }
 
     public Docente trovaDocenteUniClass(String matricola) {
@@ -50,13 +50,20 @@ public class DocenteDAO {
         return query.getResultList();
     }
 
-    public void aggiungiDocente(Docente docente) throws NotFoundUserException {
-        if (trovaDocenteUniversity(docente.getMatricola()) != null) {
-            emUniClass.persist(docente);
-        }
-        else {
-            throw new NotFoundUserException("Docente non presente nel Database Universitario.");
-        }
+    public Docente trovaEmailUniversity(String email) {
+        TypedQuery<Docente> query = emUniversity.createNamedQuery(Docente.TROVA_EMAIL, Docente.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
+
+    public Docente trovaEmailUniClass(String email) {
+        TypedQuery<Docente> query = emUniClass.createNamedQuery(Docente.TROVA_EMAIL, Docente.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
+
+    public void aggiungiDocente(Docente docente) {
+        emUniClass.persist(docente);
     }
 
     public void rimuoviDocente(Docente docente) {

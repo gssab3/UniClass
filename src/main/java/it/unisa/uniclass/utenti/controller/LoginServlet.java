@@ -20,7 +20,11 @@ import java.sql.SQLException;
 
 @WebServlet(name = "loginServlet", value = "/Login")
 public class LoginServlet {
+    @EJB
+    private PersonaleTADAO personaleTADAO;
 
+    @EJB
+    private AccademicoDAO accademicodao;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -28,16 +32,11 @@ public class LoginServlet {
 
     private void doPost(HttpServletRequest request, HttpServletResponse response) {
 
-        @EJB
-        PersonaleTADAO personaletadao;
-
-        @Inject
-        AccademicoDAO accademicodao;
-
         try {
             String username = request.getParameter("username");
             String password = hashPassword(request.getParameter("password"));
-            Utente user = utenteDao.doRetrieveUsPass(username, password);
+            Utente user = accademicodao.trovaEmailUniClass(username);
+            if(!user.getPassword().equals(password)) {user = null;}
 
 
             if (user != null) {
@@ -48,8 +47,6 @@ public class LoginServlet {
             } else {
                 response.sendRedirect(request.getContextPath() + "/login.jsp?action=error");
             }
-        } catch (SQLException e) {
-            System.out.println("Error:" + e.getMessage());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

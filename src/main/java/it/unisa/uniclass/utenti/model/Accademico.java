@@ -11,19 +11,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static it.unisa.uniclass.utenti.model.Accademico.TROVA_ACCADEMICO;
-import static it.unisa.uniclass.utenti.model.Accademico.TROVA_TUTTI;
+import static it.unisa.uniclass.utenti.model.Accademico.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
         @NamedQuery(name = TROVA_ACCADEMICO, query = "SELECT a FROM Accademico a WHERE a.matricola = :matricola"),
-        @NamedQuery(name = TROVA_TUTTI, query = "SELECT a FROM Accademico a")
+        @NamedQuery(name = TROVA_TUTTI, query = "SELECT a FROM Accademico a"),
+        @NamedQuery(name = TROVA_EMAIL, query = "SELECT a FROM Accademico a WHERE a.email = :email")
 })
 public class Accademico extends Utente implements Serializable {
 
     public static final String TROVA_ACCADEMICO = "Accademico.trovaAccademico";
     public static final String TROVA_TUTTI = "Accademico.trovaTutti";
+    public static final String TROVA_EMAIL = "Accademico.trovaEmail";
 
     @Id
     protected String matricola;

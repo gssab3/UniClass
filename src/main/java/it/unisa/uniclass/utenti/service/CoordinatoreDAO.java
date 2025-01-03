@@ -35,17 +35,25 @@ public class CoordinatoreDAO {
         return query.getResultList();
     }
 
+    public Coordinatore trovaCoordinatoreEmailUniversity(String email) {
+        TypedQuery<Coordinatore> query = emUniversity.createNamedQuery(Coordinatore.TROVA_EMAIL, Coordinatore.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
+
+    public Coordinatore trovaCoordinatoreEmailUniclass(String email) {
+        TypedQuery<Coordinatore> query = emUniversity.createNamedQuery(Coordinatore.TROVA_EMAIL, Coordinatore.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
+
     public List<Coordinatore> trovaTutti() {
         TypedQuery<Coordinatore> query = emUniClass.createNamedQuery(Coordinatore.TROVA_TUTTI, Coordinatore.class);
         return query.getResultList();
     }
 
-    public void aggiungiCoordinatore(Coordinatore coordinatore) throws NotFoundUserException {
-        if(trovaCoordinatoreUniversity(coordinatore.getMatricola()) != null) {
-            emUniClass.persist(coordinatore);
-        }
-        else
-            throw new NotFoundUserException("Coordinatore non trovato");
+    public void aggiungiCoordinatore(Coordinatore coordinatore) {
+        emUniClass.persist(coordinatore);
     }
 
     public void rimuoviCoordinatore(Coordinatore coordinatore) {

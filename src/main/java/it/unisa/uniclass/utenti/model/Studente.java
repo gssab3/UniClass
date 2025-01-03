@@ -17,13 +17,15 @@ import static it.unisa.uniclass.utenti.model.Studente.*;
 @NamedQueries({
         @NamedQuery(name = TROVA_STUDENTE, query = "SELECT s FROM Studente s WHERE s.matricola = :matricola"),
         @NamedQuery(name = TROVA_STUDENTI_CORSO, query = "SELECT s FROM Studente s WHERE s.corsoLaurea.nome = :nome"),
-        @NamedQuery(name = TROVA_TUTTI, query = "SELECT s FROM Studente s")
+        @NamedQuery(name = TROVA_TUTTI, query = "SELECT s FROM Studente s"),
+        @NamedQuery(name = TROVA_EMAIL, query = "SELECT s FROM Studente s WHERE s.email = :email")
 })
 public class Studente extends Accademico implements Serializable {
 
     public static final String TROVA_STUDENTE = "Studente.trovaStudente";
     public static final String TROVA_STUDENTI_CORSO = "Studente.trovaPerCorso";
     public static final String TROVA_TUTTI = "Studente.trovaTutti";
+    public static final String TROVA_EMAIL = "Studente.trovaEmail";
 
     @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Prenotazione> prenotazioni;

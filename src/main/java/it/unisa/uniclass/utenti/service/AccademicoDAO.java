@@ -17,6 +17,7 @@ public class AccademicoDAO {
     @PersistenceContext(unitName = "DBUniversityPU")
     private EntityManager emUniversity;
 
+
     public Accademico trovaAccademicoUniClass(String matricola){
         TypedQuery<Accademico> query = emUniClass.createNamedQuery(Accademico.TROVA_ACCADEMICO, Accademico.class);
         query.setParameter("matricola", matricola);
@@ -39,12 +40,20 @@ public class AccademicoDAO {
         return query.getResultList();
     }
 
-    public void aggiungiAccademico(Accademico accademico) throws NotFoundUserException {
-        if(trovaAccademicoUniversity(accademico.getMatricola()) == null){
-            throw new NotFoundUserException("Accademico non trovato.");
-        }
-        else
-            emUniClass.persist(accademico);
+    public Accademico trovaEmailUniClass(String email) {
+        TypedQuery<Accademico> query = emUniClass.createNamedQuery(Accademico.TROVA_EMAIL, Accademico.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
+
+    public Accademico trovaEmailUniversity(String email) {
+        TypedQuery<Accademico> query = emUniClass.createNamedQuery(Accademico.TROVA_EMAIL, Accademico.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
+
+    public void aggiungiAccademico(Accademico accademico) {
+        emUniClass.persist(accademico);
     }
 
     public void rimuoviAccademico(Accademico accademico) {

@@ -46,14 +46,21 @@ public class StudenteDAO {
         return query.getResultList();
     }
 
+    public Studente trovaStudenteEmailUniClass(String email) {
+        TypedQuery<Studente> query = emUniClass.createNamedQuery(Studente.TROVA_EMAIL, Studente.class);
+        query.setParameter("email", email);
+        return (Studente) query.getSingleResult();
+    }
 
-    public void aggiungiStudente(Studente studente) throws NotFoundUserException {
-        if (trovaStudenteUniversity(studente.getMatricola()) != null) {
+    public Studente trovaStudenteEmailUniversity(String email) {
+        TypedQuery<Studente> query = emUniversity.createNamedQuery(Studente.TROVA_EMAIL, Studente.class);
+        query.setParameter("email", email);
+        return (Studente) query.getSingleResult();
+    }
+
+
+    public void aggiungiStudente(Studente studente) {
             emUniClass.persist(studente);
-        }
-        else {
-            throw new NotFoundUserException("Studente non presente nel Database Universitario.");
-        }
     }
 
     public void rimuoviStudente(Studente studente) {

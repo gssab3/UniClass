@@ -18,12 +18,14 @@ import static it.unisa.uniclass.utenti.model.Coordinatore.*;
 @NamedQueries({
         @NamedQuery(name = TROVA_COORDINATORE, query = "SELECT c FROM Coordinatore c WHERE c.matricola = :matricola"),
         @NamedQuery(name = TROVA_COORDINATORE_CORSOLAUREA, query = "SELECT c FROM Coordinatore c WHERE c.corsoLaurea.nome = :nomeCorsoLaurea"),
-        @NamedQuery(name = TROVA_TUTTI, query = "SELECT c FROM Coordinatore c")
+        @NamedQuery(name = TROVA_TUTTI, query = "SELECT c FROM Coordinatore c"),
+        @NamedQuery(name = TROVA_EMAIL, query = "SELECT c FROM Coordinatore c WHERE c.email = :email")
 })
 public class Coordinatore extends Docente implements Serializable {
     public static final String TROVA_COORDINATORE = "Coordinatore.trovaCoordinatore";
     public static final String TROVA_COORDINATORE_CORSOLAUREA = "Coordinatore.trovaCoordinatoreCorsoLaurea";
     public static final String TROVA_TUTTI = "Coordinatore.trovaTutti";
+    public static final String TROVA_EMAIL = "Coordinatore.trovaEmail";
 
     public Coordinatore() {super(); tipo = Tipo.Coordinatore;}
 

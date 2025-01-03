@@ -28,6 +28,12 @@ public class PersonaleTADAO {
         return query.getResultList();
     }
 
+    public PersonaleTA trovaEmail(String email) {
+        TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_EMAIL, PersonaleTA.class);
+        query.setParameter("email", email);
+        return (PersonaleTA) query.getSingleResult();
+    }
+
     public void aggiungiPersonale(PersonaleTA personaleTA) {
         emUniClass.persist(personaleTA);
     }
