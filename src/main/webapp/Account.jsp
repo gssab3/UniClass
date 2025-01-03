@@ -1,22 +1,27 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
+<%@ page import="it.unisa.uniclass.utenti.service.StudenteService" %>
+<%@ page import="it.unisa.uniclass.utenti.service.CoordinatoreService" %>
+<%@ page import="it.unisa.uniclass.utenti.service.PersonaleTAService" %>
+<%@ page import="it.unisa.uniclass.utenti.service.DocenteService" %>
+<%@ page import="it.unisa.uniclass.utenti.model.*" %>
 
 <%
     /* Sessione HTTP */
     HttpSession sessione = request.getSession(true);
     Utente user = (Utente) sessione.getAttribute("currentSessionUser");
 
-    @EJB
-    private StudenteService studenteService;
+    StudenteService studenteService = new StudenteService();
 
-    @EJB
-    private CoordinatoreService coordinatoreService;
+    CoordinatoreService coordinatoreService = new CoordinatoreService();
 
-    @EJB
-    private DocenteService docenteService;
+    DocenteService docenteService = new DocenteService();
 
-    @EJB
-    private PersonaleTAService personaleTAService;
+    PersonaleTAService personaleTAService = new PersonaleTAService();
+
+    Studente studente = null;
+    Docente docente = null;
+    Coordinatore coordinatore = null;
+    PersonaleTA personaleTA = null;
 
     /* Controllo tipo utente */
     Tipo tipoUtente;
@@ -26,17 +31,21 @@
         tipoUtente = null;
 
     /* Prendere l'utente */
-    if (tipoUtente.equals(Tipo.Studente)) {
-        Studente studente = studenteService.trovaStudenteEmailUniClass(user.getEmail());
-    } else if (tipoUtente.equals(Tipo.Docente) || tipoUtente.equals(Tipo.Coordinatore)) {
-        if (tipoUtente.equals(Tipo.Docente)) {
-            Docente docente = docenteService.trovaEmailUniClass(user.getEmail());
-        } else if (tipoUtente.equals(Tipo.Coordinatore)) {
-            Coordinatore coordinatore = coordinatoreService.trovaCoordinatoreEmailUniclass(user.getEmail);
+    if(tipoUtente != null) {
+        if (tipoUtente.equals(Tipo.Studente)) {
+            studente = studenteService.trovaStudenteEmailUniClass(user.getEmail());
         }
-    } else if (tipoUtente.equals(Tipo.PersonaleTA)) {
-        PersonaleTA personaleTA = personaleTAService.trovaEmail(user.getEmail());
+        else if (tipoUtente.equals(Tipo.Docente)) {
+            docente = docenteService.trovaEmailUniClass(user.getEmail());
+        }
+        else if (tipoUtente.equals(Tipo.Coordinatore)) {
+            coordinatore = coordinatoreService.trovaCoordinatoreEmailUniclass(user.getEmail());
+        }
+        else if (tipoUtente.equals(Tipo.PersonaleTA)) {
+            personaleTA = personaleTAService.trovaEmail(user.getEmail());
+        }
     }
+
 %>
 
 <!DOCTYPE html>
@@ -149,8 +158,7 @@
             <li id="dataNascita"><% personaleTA.getDataNascita(); %></li>
             <li id="id"><% personaleTA.getId(); %></li>
             <li id="email"><% personaleTA.getEmail(); %></li>
-            <li id="dipartimento"><% personaleTA.getDipartimento(); %></li>
-            <li id="dataIscrizione"><% personaleTA.getIscrizione(); %></li>
+            <li id="telefono"><% personaleTA.getTelefono(); %></li>
         </ul>
     </div>
 <% } %>

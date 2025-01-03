@@ -1,5 +1,6 @@
 package it.unisa.uniclass.utenti.controller;
 
+import it.unisa.uniclass.common.security.CredentialSecurity;
 import it.unisa.uniclass.utenti.model.Utente;
 import it.unisa.uniclass.utenti.service.AccademicoDAO;
 import it.unisa.uniclass.utenti.service.PersonaleTADAO;
@@ -8,9 +9,8 @@ import jakarta.ejb.EJB;
 import jakarta.inject.Inject;
 import jakarta.persistence.Entity;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.*;
+import jakarta.servlet.http.*;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class LoginServlet {
 
         try {
             String email = request.getParameter("email");
-            String password = hashPassword(request.getParameter("password"));
+            String password = CredentialSecurity.hashPassword(request.getParameter("password"));
 
             Utente user = utenteService.retrieveByUserAndPassword(email,password);
 
@@ -49,23 +49,4 @@ public class LoginServlet {
             throw new RuntimeException(e);
         }
     }
-
-    private String hashPassword(String password) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hexString = new StringBuilder(2 * hash.length);
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }
