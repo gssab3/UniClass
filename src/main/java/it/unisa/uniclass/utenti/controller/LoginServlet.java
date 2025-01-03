@@ -3,6 +3,7 @@ package it.unisa.uniclass.utenti.controller;
 import it.unisa.uniclass.utenti.model.Utente;
 import it.unisa.uniclass.utenti.service.AccademicoDAO;
 import it.unisa.uniclass.utenti.service.PersonaleTADAO;
+import it.unisa.uniclass.utenti.service.UtenteService;
 import jakarta.ejb.EJB;
 import jakarta.inject.Inject;
 import jakarta.persistence.Entity;
@@ -20,11 +21,9 @@ import java.sql.SQLException;
 
 @WebServlet(name = "loginServlet", value = "/Login")
 public class LoginServlet {
-    @EJB
-    private PersonaleTADAO personaleTADAO;
 
     @EJB
-    private AccademicoDAO accademicodao;
+    private UtenteService utenteService;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -33,11 +32,10 @@ public class LoginServlet {
     private void doPost(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            String username = request.getParameter("username");
+            String email = request.getParameter("email");
             String password = hashPassword(request.getParameter("password"));
-            Utente user = accademicodao.trovaEmailUniClass(username);
-            if(!user.getPassword().equals(password)) {user = null;}
 
+            Utente user = utenteService.retrieveByUserAndPassword(email,password);
 
             if (user != null) {
                 HttpSession session = request.getSession(true);
@@ -45,7 +43,7 @@ public class LoginServlet {
 
                 response.sendRedirect(request.getContextPath() + "/index.jsp");
             } else {
-                response.sendRedirect(request.getContextPath() + "/login.jsp?action=error");
+                response.sendRedirect(request.getContextPath() + "/Login.jsp?action=error");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

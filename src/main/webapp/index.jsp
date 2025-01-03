@@ -1,22 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%@ page import="it.unisa.uniclass.utenti.model.Utente" %>
+<%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
 
 <%
-    /* Sessione HTTP
-	HttpSession sessione = request.getSession(true);
-	Utente utUtil = (Utente) sessione.getAttribute("currentSessionUser");
-    */
+    /* Sessione HTTP */
+    HttpSession sessione = request.getSession(true);
+    Utente user = (Utente) sessione.getAttribute("currentSessionUser");
 
-	/* controllo tipo utente
 
-	Tipo tipoutente;
-	if(utUtil != null)
-		tipoutente = (Tipo) utUtil.getTipo();
-	else
-		tipoutente = null;
-	*/
+    /* controllo tipo utente*/
 
+    Tipo tipoUtente;
+    if(user != null)
+    	tipoUtente = (Tipo) user.getTipo();
+    else
+    	tipoUtente = null;
 %>
 
 
@@ -32,7 +30,7 @@
 </head>
 <body>
 
-<% if(tipoutente == null) { %>
+<% if(tipoUtente == null) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
@@ -51,31 +49,7 @@
 		</ul>
 	</div>
 
-<% } else if(tipoutente.equals(Tipo.Studente)) { %>
-
-<div class="barraNavigazione" id="barraNavigazione">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
-		<p>Menu<p>
-		<ul id="menu">
-			<li id="orari"> <a href="servelt">Orari</a>
-			</li>
-			<li id="aule"><a href="servelt">Aule</a>
-			</li>
-			<li id="agenda"><a href="servelt">Agenda</a>
-            </li>
-            <li id="appelli"><a href="servelt">Appelli</a>
-            </li>
-            <li id="conversazioni"><a href="servelt">Conversazioni</a>
-            </li>
-			<li id="mappa"><a href="mappa.jsp">Mappa</a>
-			</li>
-			<li id="infoapp"><a href="info">Info App</a>
-            </li>
-			<li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
-			</li>
-		</ul>
-	</div>
-<% } else if(tipoutente.equals(Tipo.Docente) || tipoutente.equals(Tipo.Coordinatore)) { %>
+<% } else if(tipoUtente.equals(Tipo.Studente)) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
@@ -99,8 +73,32 @@
 			</li>
 		</ul>
 	</div>
+<% } else if(tipoUtente.equals(Tipo.Docente) || tipoUtente.equals(Tipo.Coordinatore)) { %>
 
-<% } else if(tipoutente.equals(Tipo.PersonaleTA)) { %>
+<div class="barraNavigazione" id="barraNavigazione">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
+		<p>Menu<p>
+		<ul id="menu">
+			<li id="orari"> <a href="servelt">Orari</a>
+			</li>
+			<li id="aule"><a href="servelt">Aule</a>
+			</li>
+			<li id="agenda"><a href="servelt">Agenda</a>
+            </li>
+            <li id="appelli"><a href="servelt">Appelli</a>
+            </li>
+            <li id="conversazioni"><a href="servelt">Conversazioni</a>
+            </li>
+			<li id="mappa"><a href="mappa.jsp">Mappa</a>
+			</li>
+			<li id="infoapp"><a href="info">Info App</a>
+            </li>
+			<li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
+			</li>
+		</ul>
+	</div>
+
+<% } else if(tipoUtente.equals(Tipo.PersonaleTA)) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
