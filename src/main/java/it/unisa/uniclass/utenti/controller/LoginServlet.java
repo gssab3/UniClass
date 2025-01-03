@@ -29,7 +29,7 @@ public class LoginServlet {
         doPost(request, response);
     }
 
-    private void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
         try {
             String email = request.getParameter("email");

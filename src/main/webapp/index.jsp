@@ -15,6 +15,12 @@
     	tipoUtente = (Tipo) user.getTipo();
     else
     	tipoUtente = null;
+
+    // Lista<CorsoLaurea> corsiLaurea = Dao che prende tutti i corsi;
+
+
+
+
 %>
 
 
@@ -122,7 +128,42 @@
 	</div>
 <% } %>
 
-  <jsp:include page="header.jsp"/>
+    <jsp:include page="header.jsp"/>
+
+
+
+    <form action="cercaOrario" method="POST">
+        <!-- Selezione corso di laurea -->
+            <label for="corsoLaurea">Corso di Laurea:</label>
+            <select id="corsoLaurea" name="corsoLaurea" onchange="aggiornaResto()" required>
+                <option value="">-- Seleziona un corso --</option>
+                <%
+                        for (String corso : corsiLaurea.getNome()) {
+                %>
+                <option value="<%= corso %>"><%= corso %></option>
+                <%
+                        }
+                %>
+        </select>
+
+        <!-- Selezione resto (aggiornato via AJAX) -->
+        <label for="resto">Resto:</label>
+        <select id="resto" name="resto" required>
+            <option value="">-- Seleziona un resto --</option>
+            <!-- Le opzioni dei resti cambieranno dinamicamente in base alla scelta del corso -->
+        </select>
+
+        <!-- Selezione anno (aggiornato via AJAX) -->
+        <label for="anno">Anno:</label>
+        <select id="anno" name="anno" required>
+            <option value="">-- Seleziona un anno --</option>
+            <!-- Le opzioni degli anni cambieranno dinamicamente in base alla scelta del corso -->
+        </select>
+
+        <button type="submit">Cerca Orario</button>
+    </form>
+
+
 
 <h1><%= "Hello World!" %>
 </h1>

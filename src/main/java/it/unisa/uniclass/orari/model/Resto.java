@@ -2,8 +2,16 @@ package it.unisa.uniclass.orari.model;
 
 import jakarta.persistence.*;
 
+import static it.unisa.uniclass.orari.model.Resto.TROVA_RESTI_CORSO;
+
 @Entity
+@NamedQueries({
+        @NamedQuery(name = TROVA_RESTI_CORSO, query = "SELECT r FROM Resto r WHERE r.corsoLaurea.nome = :nome")
+})
 public class Resto {
+
+    public static final String TROVA_RESTI_CORSO = "Resto.trovaRestiCorso";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
