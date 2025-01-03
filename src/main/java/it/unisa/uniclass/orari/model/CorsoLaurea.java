@@ -31,6 +31,9 @@ public class CorsoLaurea {
     @OneToMany(mappedBy = "corsoLaurea", cascade = CascadeType.ALL)
     private List<Resto> resti; // I resti associati al corso di laurea
 
+    @OneToMany(mappedBy = "corsoLaurea", cascade = CascadeType.ALL)
+    private List<AnnoDidattico> anni;
+
     public CorsoLaurea(String nome) {
         this.nome = nome;
         this.corsi = new ArrayList<Corso>();
