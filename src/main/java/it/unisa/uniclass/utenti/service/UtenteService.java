@@ -7,6 +7,7 @@ import it.unisa.uniclass.utenti.model.Tipo;
 import it.unisa.uniclass.utenti.model.Utente;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
+import jakarta.persistence.NoResultException;
 
 @Stateless
 public class UtenteService {
@@ -18,24 +19,29 @@ public class UtenteService {
 
 
     public Utente retrieveByUserAndPassword(String email, String password) {
-        PersonaleTA personaleTA= (PersonaleTA) personaleTAService.trovaEmail(email);
-        Accademico accademico = (Accademico) accademicoDAO.trovaEmailUniClass(email);
-        if(personaleTA != null) {
-            if(personaleTA.getPassword().equals(password)) {
-                return personaleTA;
+        try {
+            PersonaleTA personaleTA= (PersonaleTA) personaleTAService.trovaEmail(email);
+            Accademico accademico = (Accademico) accademicoDAO.trovaEmailUniClass(email);
+            if(personaleTA != null) {
+                if(personaleTA.getPassword().equals(password)) {
+                    return personaleTA;
+                }
+                else {
+                    throw new AuthenticationException("Password errata");
+                }
             }
-            else {
-                throw new AuthenticationException("Password errata");
+            else if(accademico != null) {
+                if(accademico.getPassword().equals(password)) {
+                    return accademico;
+                }
+                else {
+                    throw new AuthenticationException("Password errata");
+                }
             }
+            return null;
         }
-        else if(accademico != null) {
-            if(accademico.getPassword().equals(password)) {
-                return accademico;
-            }
-            else {
-                throw new AuthenticationException("Password errata");
-            }
+        catch(NoResultException e) {
+            return null;
         }
-        return null;
     }
 }

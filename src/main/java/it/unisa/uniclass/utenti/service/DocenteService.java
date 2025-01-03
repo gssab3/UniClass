@@ -7,6 +7,7 @@ import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.Docente;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
+import jakarta.persistence.NoResultException;
 
 import java.util.List;
 
@@ -19,11 +20,21 @@ public class DocenteService {
     private AccademicoDAO accademicoDAO;
 
     public Docente trovaDocenteUniversity(String matricola) {
-        return dao.trovaDocenteUniversity(matricola);
+        try {
+            return dao.trovaDocenteUniversity(matricola);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
     public Docente trovaDocenteUniClass(String matricola) {
-        return dao.trovaDocenteUniClass(matricola);
+        try {
+            return dao.trovaDocenteUniClass(matricola);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
     public List<Docente> trovaDocenteCorsoLaurea(String nomeCorsoLaurea) {
@@ -43,11 +54,21 @@ public class DocenteService {
     }
 
     public Docente trovaEmailUniversity(String email) {
-        return dao.trovaEmailUniversity(email);
+        try {
+            return dao.trovaEmailUniversity(email);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
     public Docente trovaEmailUniClass(String email) {
-        return dao.trovaEmailUniClass(email);
+        try {
+            return dao.trovaEmailUniClass(email);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
     public void aggiungiDocente(Docente docente) throws IncorrectUserSpecification, NotFoundUserException, AlreadyExistentUserException {

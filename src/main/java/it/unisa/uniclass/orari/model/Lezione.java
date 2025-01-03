@@ -42,13 +42,13 @@ public class Lezione {
     @ManyToOne
     @JoinColumn(name = "corso_id")
     private Corso corso;
-    private String resto;
+    private Resto resto;
     @ManyToOne
     private Aula aula;
 
     public Lezione() {}
 
-    public Lezione(LocalDate data, Time oraInizio, Time oraFine, Giorno giorno, String resto, Corso corso, Aula aula) {
+    public Lezione(LocalDate data, Time oraInizio, Time oraFine, Giorno giorno, Resto resto, Corso corso, Aula aula) {
         this.data = data;
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
@@ -91,11 +91,11 @@ public class Lezione {
         this.giorno = giorno;
     }
 
-    public String getResto() {
+    public Resto getResto() {
         return resto;
     }
 
-    public void setResto(String resto) {
+    public void setResto(Resto resto) {
         this.resto = resto;
     }
 

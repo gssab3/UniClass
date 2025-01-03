@@ -7,6 +7,7 @@ import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.Coordinatore;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
+import jakarta.persistence.NoResultException;
 
 import java.util.List;
 
@@ -19,11 +20,21 @@ public class CoordinatoreService {
     private AccademicoDAO accademicoDAO;
 
     public Coordinatore trovaCoordinatoreUniversity(String matricola) {
-        return dao.trovaCoordinatoreUniversity(matricola);
+        try {
+            return dao.trovaCoordinatoreUniversity(matricola);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
     public Coordinatore trovaCoordinatoreUniClass(String matricola) {
-        return dao.trovaCoordinatoreUniClass(matricola);
+        try {
+            return dao.trovaCoordinatoreUniClass(matricola);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
     public List<Coordinatore> trovaCoordinatoriCorsoLaurea(String nomeCorsoLaurea) {
@@ -31,11 +42,21 @@ public class CoordinatoreService {
     }
 
     public Coordinatore trovaCoordinatoreEmailUniversity(String email) {
-        return dao.trovaCoordinatoreEmailUniversity(email);
+        try {
+            return dao.trovaCoordinatoreEmailUniversity(email);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
     public Coordinatore trovaCoordinatoreEmailUniclass(String email) {
-        return dao.trovaCoordinatoreEmailUniclass(email);
+        try {
+            return dao.trovaCoordinatoreEmailUniclass(email);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
     public List<Coordinatore> trovaTutti() {

@@ -28,14 +28,32 @@ public class CorsoLaurea {
 
     private String nome;
 
+    @OneToMany(mappedBy = "corsoLaurea", cascade = CascadeType.ALL)
+    private List<Resto> resti; // I resti associati al corso di laurea
+
     public CorsoLaurea(String nome) {
         this.nome = nome;
         this.corsi = new ArrayList<Corso>();
     }
 
+    public CorsoLaurea(String nome, List<Resto> resti) {
+        this.nome = nome;
+        this.corsi = new ArrayList<Corso>();
+        this.resti = resti;
+    }
+
     public CorsoLaurea() {
         this.corsi = new ArrayList<>();
         this.nome = null;
+        this.resti = new ArrayList<>();
+    }
+
+    public List<Resto> getResti() {
+        return resti;
+    }
+
+    public void setResti(List<Resto> resti) {
+        this.resti = resti;
     }
 
     public Long getId() {

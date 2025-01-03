@@ -3,6 +3,7 @@ package it.unisa.uniclass.utenti.service;
 import it.unisa.uniclass.utenti.model.PersonaleTA;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
+import jakarta.persistence.NoResultException;
 
 import java.util.List;
 
@@ -13,7 +14,12 @@ public class PersonaleTAService {
     private PersonaleTADAO personaleTADAO;
 
     public PersonaleTA trovaPersonale(long id) {
-        return personaleTADAO.trovaPersonale(id);
+        try {
+            return personaleTADAO.trovaPersonale(id);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
     public List<PersonaleTA> trovaTutti() {
@@ -21,7 +27,12 @@ public class PersonaleTAService {
     }
 
     public PersonaleTA trovaEmail(String email) {
-        return personaleTADAO.trovaEmail(email);
+        try {
+            return personaleTADAO.trovaEmail(email);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
     public void aggiungiPersonaleTA(PersonaleTA personaleTA) {
