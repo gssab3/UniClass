@@ -53,7 +53,7 @@ public class CoordinatoreDAO {
     }
 
     public void aggiungiCoordinatore(Coordinatore coordinatore) {
-        emUniClass.persist(coordinatore);
+        emUniClass.merge(coordinatore);
     }
 
     public void rimuoviCoordinatore(Coordinatore coordinatore) {

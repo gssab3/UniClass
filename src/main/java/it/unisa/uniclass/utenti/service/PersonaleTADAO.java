@@ -35,7 +35,7 @@ public class PersonaleTADAO {
     }
 
     public void aggiungiPersonale(PersonaleTA personaleTA) {
-        emUniClass.persist(personaleTA);
+        emUniClass.merge(personaleTA);
     }
 
     public void rimuoviPersonale(PersonaleTA personaleTA) {

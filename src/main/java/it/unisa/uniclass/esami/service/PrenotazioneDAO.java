@@ -37,7 +37,7 @@ public class PrenotazioneDAO {
     }
 
     public void aggiungiPrenotazione(Prenotazione prenotazione) {
-        emUniClass.persist(prenotazione);
+        emUniClass.merge(prenotazione);
     }
 
     public void rimuoviPrenotazione(Prenotazione prenotazione) {

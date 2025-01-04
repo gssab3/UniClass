@@ -31,18 +31,24 @@ public class CorsoLaurea {
     @OneToMany(mappedBy = "corsoLaurea", cascade = CascadeType.ALL)
     private List<Resto> resti; // I resti associati al corso di laurea
 
-    @OneToMany(mappedBy = "corsoLaurea", cascade = CascadeType.ALL)
-    private List<AnnoDidattico> anni;
+    @ManyToMany
+    @JoinTable(
+            name = "corso_laurea_anno_didattico",
+            joinColumns = @JoinColumn(name = "corso_laurea_id"),
+            inverseJoinColumns = @JoinColumn(name = "anno_didattico_id")
+    )
+    private List<AnnoDidattico> anniDidattici = new ArrayList<>();
 
     public CorsoLaurea(String nome) {
         this.nome = nome;
         this.corsi = new ArrayList<Corso>();
     }
 
-    public CorsoLaurea(String nome, List<Resto> resti) {
+    public CorsoLaurea(String nome, List<Resto> resti, List<AnnoDidattico> anniDidattici) {
         this.nome = nome;
         this.corsi = new ArrayList<Corso>();
         this.resti = resti;
+        this.anniDidattici = anniDidattici;
     }
 
     public CorsoLaurea() {

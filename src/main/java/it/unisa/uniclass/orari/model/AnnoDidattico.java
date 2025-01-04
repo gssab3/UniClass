@@ -2,34 +2,37 @@ package it.unisa.uniclass.orari.model;
 
 import jakarta.persistence.*;
 
-import static it.unisa.uniclass.orari.model.AnnoDidattico.TROVA_ANNI_CORSO;
+import java.util.ArrayList;
+import java.util.List;
+
+import static it.unisa.uniclass.orari.model.AnnoDidattico.*;
 
 @Entity
 @Table(name = "anni")
 @NamedQueries({
-        @NamedQuery(name = TROVA_ANNI_CORSO, query = "SELECT a FROM AnnoDidattico a WHERE a.corsoLaurea.nome = :nome")
+        @NamedQuery(name = TROVA_ANNO, query = "SELECT a FROM AnnoDidattico a WHERE a.anno = :anno"),
+        @NamedQuery(name = TROVA_ID, query = "SELECT a FROM AnnoDidattico a WHERE a.id = :id"),
+        @NamedQuery(name = TROVA_TUTTI, query = "SELECT a FROM AnnoDidattico a")
 })
 public class AnnoDidattico {
 
-    public static final String TROVA_ANNI_CORSO = "AnnoDidattico.trovaAnniCorso";
+    public static final String TROVA_ANNO = "AnnoDidattico.trovaAnno";
+    public static final String TROVA_ID = "AnnoDidattico.trovaId";
+    public static final String TROVA_TUTTI = "AnnoDidattico.trovaTutti";
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String anno; //Esempio: "Anno 1", "Anno 2", ecc..
 
-    @ManyToOne
-    @JoinColumn(name = "corso_laurea_id", nullable = false)
-    private CorsoLaurea corsoLaurea;
+    @ManyToMany(mappedBy = "anniDidattici")
+    private List<CorsoLaurea> corsiLaurea = new ArrayList<>();
 
-    public AnnoDidattico(String anno, CorsoLaurea corsoLaurea){
+    public AnnoDidattico(String anno){
         this.anno = anno;
-        this.corsoLaurea = corsoLaurea;
     }
 
-    public AnnoDidattico(){
-
-    }
+    public AnnoDidattico(){}
 
     public String getAnno() {
         return anno;
@@ -43,11 +46,19 @@ public class AnnoDidattico {
         return id;
     }
 
-    public CorsoLaurea getCorsoLaurea() {
-        return corsoLaurea;
+    public List<CorsoLaurea> getCorsiLaurea() {
+        return corsiLaurea;
     }
 
-    public void setCorsoLaurea(CorsoLaurea corsoLaurea) {
-        this.corsoLaurea = corsoLaurea;
+    public void setCorsiLaurea(List<CorsoLaurea> corsiLaurea) {
+        this.corsiLaurea = corsiLaurea;
+    }
+
+    @Override
+    public String toString() {
+        return "AnnoDidattico{" +
+                "id=" + id +
+                ", anno='" + anno + '\'' +
+                '}';
     }
 }

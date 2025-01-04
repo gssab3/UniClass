@@ -60,7 +60,7 @@ public class StudenteDAO {
 
 
     public void aggiungiStudente(Studente studente) {
-            emUniClass.persist(studente);
+            emUniClass.merge(studente);
     }
 
     public void rimuoviStudente(Studente studente) {

@@ -55,7 +55,7 @@ public class LezioneDAO {
     }
 
     public void aggiungiLezione(Lezione l) {
-        emUniClass.persist(l);
+        emUniClass.merge(l);
     }
 
     public void rimuoviLezione(Lezione l) {

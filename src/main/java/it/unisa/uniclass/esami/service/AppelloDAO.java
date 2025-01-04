@@ -37,7 +37,7 @@ public class AppelloDAO {
     }
 
     public void aggiungiAppello(Appello appello) {
-        emUniClass.persist(appello);
+        emUniClass.merge(appello);
     }
 
     public void rimuoviAppello(Appello appello) {

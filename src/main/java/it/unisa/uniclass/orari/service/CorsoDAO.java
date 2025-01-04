@@ -32,7 +32,7 @@ public class CorsoDAO {
     }
 
     public void aggiungiCorso(Corso corso) {
-        emUniClass.persist(corso);
+        emUniClass.merge(corso);
     }
 
     public void rimuoviCorso(Corso corso) {

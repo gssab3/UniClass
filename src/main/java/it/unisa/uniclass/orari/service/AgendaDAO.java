@@ -32,7 +32,7 @@ public class AgendaDAO {
     }
 
     public void aggiungiAgenda(Agenda agenda) {
-        emUniClass.persist(agenda);
+        emUniClass.merge(agenda);
     }
 
     public void rimuoviAgenda(Agenda agenda) {

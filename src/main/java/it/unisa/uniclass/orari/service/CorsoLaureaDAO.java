@@ -31,7 +31,7 @@ public class CorsoLaureaDAO {
     }
 
     public void aggiungiCorsoLaurea(CorsoLaurea corsoLaurea) {
-        emUniClass.persist(corsoLaurea);
+        emUniClass.merge(corsoLaurea);
     }
 
     public void rimuoviCorsoLaurea(CorsoLaurea corsoLaurea) {

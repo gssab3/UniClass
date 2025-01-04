@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
+<%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
+<%@ page import="java.util.List" %>
+<%@ page import="it.unisa.uniclass.orari.service.CorsoLaureaDAO" %>
 
 <%
     /* Sessione HTTP */
@@ -16,7 +19,8 @@
     else
     	tipoUtente = null;
 
-    // Lista<CorsoLaurea> corsiLaurea = Dao che prende tutti i corsi;
+	CorsoLaureaDAO corsoLaureaDAO = new CorsoLaureaDAO();
+    List<CorsoLaurea> corsiLaurea = corsoLaureaDAO.trovaTutti();
 
 
 
@@ -138,7 +142,8 @@
             <select id="corsoLaurea" name="corsoLaurea" onchange="aggiornaResto()" required>
                 <option value="">-- Seleziona un corso --</option>
                 <%
-                        for (String corso : corsiLaurea.getNome()) {
+                        for (CorsoLaurea cors : corsiLaurea) {
+							String corso = cors.getNome();
                 %>
                 <option value="<%= corso %>"><%= corso %></option>
                 <%

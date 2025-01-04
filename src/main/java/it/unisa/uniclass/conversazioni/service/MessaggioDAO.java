@@ -63,7 +63,7 @@ public class MessaggioDAO {
     }
 
     public void aggiungiMessaggio(Messaggio messaggio) {
-        emUniClass.persist(messaggio);
+        emUniClass.merge(messaggio);
     }
 
     public void rimuoviMessaggio(Messaggio messaggio) {

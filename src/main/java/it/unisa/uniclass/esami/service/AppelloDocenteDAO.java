@@ -26,7 +26,7 @@ public class AppelloDocenteDAO {
     }
 
     public void aggiungiAppelloDocente(AppelloDocente appelloDocente) {
-        emUniClass.persist(appelloDocente);
+        emUniClass.merge(appelloDocente);
     }
 
     public void rimuoviAppelloDocente(AppelloDocente appelloDocente) {

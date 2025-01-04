@@ -53,7 +53,7 @@ public class AccademicoDAO {
     }
 
     public void aggiungiAccademico(Accademico accademico) {
-        emUniClass.persist(accademico);
+        emUniClass.merge(accademico);
     }
 
     public void rimuoviAccademico(Accademico accademico) {

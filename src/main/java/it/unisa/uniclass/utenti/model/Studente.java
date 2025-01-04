@@ -3,6 +3,7 @@ package it.unisa.uniclass.utenti.model;
 import it.unisa.uniclass.esami.model.Prenotazione;
 import it.unisa.uniclass.orari.model.Agenda;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
+import it.unisa.uniclass.orari.model.Resto;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -40,7 +41,11 @@ public class Studente extends Accademico implements Serializable {
         agenda = new Agenda();
     }
 
-    public Studente(String nome, String cognome, LocalDate dataNascita, String email, String password, String matricola, LocalDate iscrizione, CorsoLaurea corsoLaurea) {
+    @ManyToOne
+    @JoinColumn(name = "resto", nullable = true)
+    private Resto resto;
+
+    public Studente(String nome, String cognome, LocalDate dataNascita, String email, String password, String matricola, LocalDate iscrizione, CorsoLaurea corsoLaurea, Resto resto) {
         prenotazioni = new ArrayList<Prenotazione>();
         agenda = new Agenda();
         super.setNome(nome);
@@ -52,6 +57,7 @@ public class Studente extends Accademico implements Serializable {
         super.setPassword(password);
         super.setTipo(Tipo.Studente);
         super.setMatricola(matricola);
+        this.resto = resto;
     }
 
     public List<Prenotazione> getPrenotazioni() {
@@ -60,6 +66,14 @@ public class Studente extends Accademico implements Serializable {
 
     public Agenda getAgenda() {
         return agenda;
+    }
+
+    public Resto getResto() {
+        return resto;
+    }
+
+    public void setResto(Resto resto) {
+        this.resto = resto;
     }
 
     @Override

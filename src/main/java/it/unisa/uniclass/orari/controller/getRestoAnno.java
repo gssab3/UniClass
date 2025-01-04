@@ -36,10 +36,10 @@ public class getRestoAnno extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String corsoLaurea = request.getParameter("corsoLaurea");
 
-        CorsoLaurea corso = corsoLaureaService.retriveCorsoNome(corsoLaurea);
+        CorsoLaurea corso = corsoLaureaService.trovaCorsoLaurea(corsoLaurea);
 
-        List<Resto> resti = restoService.retrieveRestiCorso(corso);
-        List<AnnoDidattico> anni = annoDidatticoService.retrieveAnniCorso(corso);
+        List<Resto> resti = restoService.trovaRestiCorsoLaurea(corso);
+        List<AnnoDidattico> anni = annoDidatticoService.trovaPerCorsoLaurea(corso);
 
         Map<String, Object> result = new HashMap<>();
         result.put("resti", resti);

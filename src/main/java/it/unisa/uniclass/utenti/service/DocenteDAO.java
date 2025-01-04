@@ -63,7 +63,7 @@ public class DocenteDAO {
     }
 
     public void aggiungiDocente(Docente docente) {
-        emUniClass.persist(docente);
+        emUniClass.merge(docente);
     }
 
     public void rimuoviDocente(Docente docente) {
