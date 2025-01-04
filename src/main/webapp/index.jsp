@@ -23,8 +23,6 @@
     List<CorsoLaurea> corsiLaurea = corsoLaureaDAO.trovaTutti();
 
 
-
-
 %>
 
 
@@ -32,7 +30,7 @@
 <html>
 
 <head>
-    <title>JSP - Hello World</title>
+    <title>UniClass</title>
     <script src="scripts/sidebar.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css" />
@@ -52,7 +50,9 @@
 			</li>
 			<li id="mappa"><a href="mappa.jsp">Mappa</a>
 			</li>
-			<li id="infoapp"><a href="info">Info App</a>
+			<li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
+            </li>
+			<li id="infoapp"><a href="infoapp.jsp">Info App</a>
             </li>
 			<li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
 			</li>
@@ -77,7 +77,9 @@
             </li>
 			<li id="mappa"><a href="mappa.jsp">Mappa</a>
 			</li>
-			<li id="infoapp"><a href="info">Info App</a>
+			<li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
+                        </li>
+			<li id="infoapp"><a href="infoapp.jsp">Info App</a>
             </li>
 			<li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
 			</li>
@@ -101,7 +103,9 @@
             </li>
 			<li id="mappa"><a href="mappa.jsp">Mappa</a>
 			</li>
-			<li id="infoapp"><a href="info">Info App</a>
+			<li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
+                        </li>
+			<li id="infoapp"><a href="infoapp.jsp">Info App</a>
             </li>
 			<li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
 			</li>
@@ -124,7 +128,9 @@
             </li>
 			<li id="mappa"><a href="mappa.jsp">Mappa</a>
 			</li>
-			<li id="infoapp"><a href="info">Info App</a>
+			<li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
+                        </li>
+			<li id="infoapp"><a href="infoapp.jsp">Info App</a>
             </li>
 			<li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
 			</li>

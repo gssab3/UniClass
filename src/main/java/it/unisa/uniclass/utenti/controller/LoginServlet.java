@@ -20,7 +20,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 @WebServlet(name = "loginServlet", value = "/Login")
-public class LoginServlet {
+public class LoginServlet extends HttpServlet{
 
     @EJB
     private UtenteService utenteService;
