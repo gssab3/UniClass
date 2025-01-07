@@ -1,9 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
-<%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
-<%@ page import="java.util.List" %>
-<%@ page import="it.unisa.uniclass.orari.service.dao.CorsoLaureaDAO" %>
+
 
 <%
     /* Sessione HTTP */
@@ -27,7 +25,8 @@
     <script src="scripts/sidebar.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css" />
-    <link type="text/css" rel="stylesheet" href="styles/chatbot.ccs"/>
+    <link type="text/css" rel="stylesheet" href="styles/chatbot.css"/>
+	<script src="scripts/chatbot.js"></script>
 
 </head>
 <body>
@@ -134,12 +133,11 @@
 
     <jsp:include page="header.jsp"/>
 
-    <div id="chatContainer">
-        <h1>Chat Bot</h1>
-        <div id="messages"></div>
-        <input type="text" id="userMessage" placeholder="Scrivi un messaggio..." />
-        <button onclick="sendMessage()">Invia</button>
-    </div>
-    <script src="scripts/chatbot.js"></script>
+	<div id="chatContainer">
+		<h1>Chat Bot</h1>
+		<div id="messages"></div>
+		<input type="text" id="userMessage" placeholder="Scrivi un messaggio..." />
+		<button onclick="sendMessage()">Invia</button>
+	</div>
 </body>
 </html>

@@ -1,0 +1,96 @@
+
+/* Contenitore del form */
+#contieniForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    padding: 20px;
+}
+
+#cercaOrarioForm {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Titolo del form */
+#cercaOrarioForm h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #2c3e50;
+}
+
+/* Etichetta e selezioni */
+#cercaOrarioForm label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+#cercaOrarioForm select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease;
+}
+
+#cercaOrarioForm select:focus {
+    border-color: #3498db;
+    background-color: #ffffff;
+    outline: none;
+}
+
+/* Placeholder (opzione predefinita) */
+#cercaOrarioForm option {
+    color: #888;
+}
+
+/* Pulsante di submit */
+#cercaOrarioForm button {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    color: white;
+    background-color: #3498db;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+#cercaOrarioForm button:hover {
+    background-color: #2980b9;
+}
+
+#cercaOrarioForm button:focus {
+    outline: none;
+}
+
+/* ResponsivitÃ  */
+@media (max-width: 600px) {
+    #cercaOrarioForm {
+        padding: 15px;
+    }
+
+    #cercaOrarioForm button {
+        padding: 10px;
+    }
+
+    #cercaOrarioForm select, #cercaOrarioForm button {
+        font-size: 14px;
+    }
+}

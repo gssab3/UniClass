@@ -1,7 +1,6 @@
 body {
     font-family: Arial, sans-serif;
 }
-
 #chatContainer {
     width: 500px;
     margin: 50px auto;
@@ -10,7 +9,6 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 #messages {
     height: 300px;
     overflow-y: auto;
@@ -19,15 +17,12 @@ body {
     padding: 10px;
     background-color: #f9f9f9;
 }
-
 .message {
     margin: 5px 0;
 }
-
 .user {
     color: blue;
 }
-
 .bot {
     color: green;
 }
