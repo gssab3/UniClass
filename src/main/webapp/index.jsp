@@ -33,7 +33,8 @@
     <title>UniClass</title>
     <script src="scripts/sidebar.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
-    <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css" />
+    <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
+	<link type="text/css" rel="stylesheet" href="styles/formcss.css"/>
 
 </head>
 <body>
@@ -141,8 +142,9 @@
     <jsp:include page="header.jsp"/>
 
 
-
-    <form action="cercaOrario" method="POST">
+	<br> <br>
+	<div id="contieniForm">
+		<form id="cercaOrarioForm" action="cercaOrario" method="POST">
         <!-- Selezione corso di laurea -->
             <label for="corsoLaurea">Corso di Laurea:</label>
             <select id="corsoLaurea" name="corsoLaurea" onchange="aggiornaResto()" required>
@@ -173,7 +175,7 @@
 
         <button type="submit">Cerca Orario</button>
     </form>
-
+	</div>
 
 
 <h1><%= "Hello World!" %>

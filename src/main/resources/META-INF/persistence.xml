@@ -8,6 +8,7 @@
 
         <properties>
             <!-- Configurazioni per PostgreSQL -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dbuniversity"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
@@ -27,6 +28,7 @@
 
         <properties>
             <!-- Configurazioni per PostgreSQL -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dbuniclass"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
