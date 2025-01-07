@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpaBuddyIdeaProjectConfig" reUseTableSchema="true">
+    <option name="reLastEntityCreationPackage" value="src/main/java/it/unisa/uniclass/utenti/model" />
+    <option name="reverseEngineeringLastDbConnectionId" value="606aa197-23a8-4d6a-b126-4c76b07df62d" />
+  </component>
+  <component name="JpaPluginProjectSettings" commentSavingStrategy="Java Doc" reExcludeTablePrefixes="" reExcludeColumnPrefixes="" reExcludeTableSuffixes="" reExcludeColumnSuffixes="" />
+</project>

@@ -5,10 +5,40 @@
     <!-- Persistence Unit del database universitario -->
     <persistence-unit name="DBUniversityPU" transaction-type="JTA">
         <jta-data-source>jdbc/DBUniversity</jta-data-source>
+
+        <properties>
+            <!-- Configurazioni per PostgreSQL -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dbuniversity"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="password"/>
+
+            <!-- Configurazione per EclipseLink -->
+            <property name="eclipselink.target-database" value="PostgreSQL"/>
+            <property name="eclipselink.ddl-generation" value="create-tables"/> <!-- Crea le tabelle automaticamente -->
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/> <!-- Usa il DB per generare le tabelle -->
+
+        </properties>
     </persistence-unit>
 
     <!-- Persistence Unit del database di UniClass -->
     <persistence-unit name="DBUniClassPU" transaction-type="JTA">
         <jta-data-source>jdbc/DBUniClass</jta-data-source>
+
+        <properties>
+            <!-- Configurazioni per PostgreSQL -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dbuniclass"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="password"/>
+
+            <!-- Configurazione per EclipseLink -->
+            <property name="eclipselink.target-database" value="PostgreSQL"/>
+            <property name="eclipselink.ddl-generation" value="create-tables"/> <!-- Crea le tabelle automaticamente -->
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/> <!-- Usa il DB per generare le tabelle -->
+
+        </properties>
     </persistence-unit>
+
+
 </persistence>

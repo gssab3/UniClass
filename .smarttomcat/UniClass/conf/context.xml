@@ -24,25 +24,28 @@
     <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
     <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
 
-    <Resource name="jdbc/DBUniversity"
-              auth="Container"
-              type="javax.sql.DataSource"
-              username="root"
-              password="password"
-              driverClassName="com.mysql.cj.jdbc.Driver"
-              url="jdbc:mysql://localhost:3308/DBUniversity"
-              maxActive="20"
-              maxIdle="10"/>
-
     <Resource name="jdbc/DBUniClass"
               auth="Container"
               type="javax.sql.DataSource"
-              username="root"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://localhost:5432/dbuniclass"
+              username="postgres"
               password="password"
-              driverClassName="com.mysql.cj.jdbc.Driver"
-              url="jdbc:mysql://localhost:3307/DBUniClass"
-              maxActive="20"
-              maxIdle="10"/>
+              maxTotal="20"
+              maxIdle="10"
+              maxWaitMillis="-1"/>
+
+
+    <Resource name="jdbc/DBUniversity"
+              auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://localhost:5432/dbuniversity"
+              username="postgres"
+              password="password"
+              maxTotal="20"
+              maxIdle="10"
+              maxWaitMillis="-1"/>
 
 
     <!-- Uncomment this to enable session persistence across Tomcat restarts -->
