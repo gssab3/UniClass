@@ -2,29 +2,34 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
-    <!-- Persistence Unit del database universitario -->
+    <!--
+    Persistence Unit del database universitario
     <persistence-unit name="DBUniversityPU" transaction-type="JTA">
         <jta-data-source>jdbc/DBUniversity</jta-data-source>
-
-        <properties>
-            <!-- Configurazioni per PostgreSQL -->
+        <class>it.unisa.uniclass.orari.model.Resto</class>
+        <properties> -->
+            <!-- Configurazioni per PostgreSQL
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/dbuniversity"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
             <property name="jakarta.persistence.jdbc.password" value="password"/>
+            -->
 
-            <!-- Configurazione per EclipseLink -->
+            <!-- Configurazione per EclipseLink
             <property name="eclipselink.target-database" value="PostgreSQL"/>
-            <property name="eclipselink.ddl-generation" value="create-tables"/> <!-- Crea le tabelle automaticamente -->
-            <property name="eclipselink.ddl-generation.output-mode" value="database"/> <!-- Usa il DB per generare le tabelle -->
-
-        </properties>
-    </persistence-unit>
+            <property name="eclipselink.ddl-generation" value="create-tables"/> --> <!-- Crea le tabelle automaticamente -->
+    <!--<property name="eclipselink.ddl-generation.output-mode" value="database"/>  Usa il DB per generare le tabelle -->
+            <!-- Logging
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.logger" value="DefaultLogger"/>
+            -->
+        <!-- </properties>
+    </persistence-unit> -->
 
     <!-- Persistence Unit del database di UniClass -->
     <persistence-unit name="DBUniClassPU" transaction-type="JTA">
         <jta-data-source>jdbc/DBUniClass</jta-data-source>
-
         <properties>
             <!-- Configurazioni per PostgreSQL -->
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
@@ -37,6 +42,10 @@
             <property name="eclipselink.ddl-generation" value="create-tables"/> <!-- Crea le tabelle automaticamente -->
             <property name="eclipselink.ddl-generation.output-mode" value="database"/> <!-- Usa il DB per generare le tabelle -->
 
+            <!-- Logging -->
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.logger" value="DefaultLogger"/>
         </properties>
     </persistence-unit>
 

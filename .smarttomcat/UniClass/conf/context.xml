@@ -35,7 +35,7 @@
               maxIdle="10"
               maxWaitMillis="-1"/>
 
-
+<!--
     <Resource name="jdbc/DBUniversity"
               auth="Container"
               type="javax.sql.DataSource"
@@ -46,7 +46,7 @@
               maxTotal="20"
               maxIdle="10"
               maxWaitMillis="-1"/>
-
+-->
 
     <!-- Uncomment this to enable session persistence across Tomcat restarts -->
     <!--

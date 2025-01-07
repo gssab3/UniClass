@@ -1,66 +1,52 @@
 package it.unisa.uniclass.utenti.service;
 
-import it.unisa.uniclass.common.config.database.qualifier.UniclassDB;
-import it.unisa.uniclass.common.config.database.qualifier.UniversityDB;
-import it.unisa.uniclass.common.exceptions.NotFoundUserException;
 import it.unisa.uniclass.utenti.model.Coordinatore;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 
 import java.util.List;
 
-@Stateless
-public class CoordinatoreDAO {
-    @Inject
-    @UniclassDB
+@Stateless(name = "CoordinatoreDAO")
+public class CoordinatoreDAO implements CoordinatoreRemote {
+
+    @PersistenceContext(unitName = "DBUniClassPU")
     private EntityManager emUniClass;
 
-    @Inject
-    @UniversityDB
-    private EntityManager emUniversity;
-
-    public Coordinatore trovaCoordinatoreUniversity(String matricola) {
-        TypedQuery<Coordinatore> query = emUniversity.createQuery(Coordinatore.TROVA_COORDINATORE, Coordinatore.class);
-        query.setParameter("matricola", matricola);
+    @Override
+    public Coordinatore trovaCoordinatoreEmailUniclass(String email) {
+        TypedQuery<Coordinatore> query = emUniClass.createNamedQuery(Coordinatore.TROVA_EMAIL, Coordinatore.class);
+        query.setParameter("email", email);
         return query.getSingleResult();
     }
 
+    @Override
     public Coordinatore trovaCoordinatoreUniClass(String matricola) {
         TypedQuery<Coordinatore> query = emUniClass.createQuery(Coordinatore.TROVA_COORDINATORE, Coordinatore.class);
         query.setParameter("matricola", matricola);
         return query.getSingleResult();
     }
 
+    @Override
     public List<Coordinatore> trovaCoordinatoriCorsoLaurea(String nomeCorsoLaurea) {
         TypedQuery<Coordinatore> query = emUniClass.createQuery(Coordinatore.TROVA_COORDINATORE, Coordinatore.class);
         query.setParameter("nomeCorsoLaurea", nomeCorsoLaurea);
         return query.getResultList();
     }
 
-    public Coordinatore trovaCoordinatoreEmailUniversity(String email) {
-        TypedQuery<Coordinatore> query = emUniversity.createNamedQuery(Coordinatore.TROVA_EMAIL, Coordinatore.class);
-        query.setParameter("email", email);
-        return query.getSingleResult();
-    }
-
-    public Coordinatore trovaCoordinatoreEmailUniclass(String email) {
-        TypedQuery<Coordinatore> query = emUniversity.createNamedQuery(Coordinatore.TROVA_EMAIL, Coordinatore.class);
-        query.setParameter("email", email);
-        return query.getSingleResult();
-    }
-
+    @Override
     public List<Coordinatore> trovaTutti() {
         TypedQuery<Coordinatore> query = emUniClass.createNamedQuery(Coordinatore.TROVA_TUTTI, Coordinatore.class);
         return query.getResultList();
     }
 
+    @Override
     public void aggiungiCoordinatore(Coordinatore coordinatore) {
         emUniClass.merge(coordinatore);
     }
 
+    @Override
     public void rimuoviCoordinatore(Coordinatore coordinatore) {
         emUniClass.remove(coordinatore);
     }

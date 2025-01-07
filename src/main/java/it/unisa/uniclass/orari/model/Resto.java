@@ -23,7 +23,7 @@ public class Resto {
     public static final String TROVA_RESTO_NOME_CORSO = "Resto.trovaRestoNomeCorso";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String nome; // Esempio: "Resto 0", "Resto 1", ecc.

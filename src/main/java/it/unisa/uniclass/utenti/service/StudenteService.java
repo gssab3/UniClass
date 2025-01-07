@@ -1,11 +1,8 @@
 package it.unisa.uniclass.utenti.service;
 
-import it.unisa.uniclass.common.exceptions.AlreadyExistentUserException;
-import it.unisa.uniclass.common.exceptions.IncorrectUserSpecification;
-import it.unisa.uniclass.common.exceptions.NotFoundUserException;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
-import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.Studente;
+import it.unisa.uniclass.utenti.service.dao.AccademicoDAO;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
@@ -20,6 +17,7 @@ public class StudenteService {
     @EJB
     private AccademicoDAO accademicoDAO;
 
+    /*
     public Studente trovaStudenteUniversity(String matricola) {
         try {
             return studenteDAO.trovaStudenteUniversity(matricola);
@@ -28,6 +26,8 @@ public class StudenteService {
             return null;
         }
     }
+
+     */
 
     public Studente trovaStudenteUniClass(String matricola) {
         try {
@@ -42,9 +42,12 @@ public class StudenteService {
         return studenteDAO.trovaStudentiCorso(corsoLaurea);
     }
 
+    /*
     public List<Studente> trovaTuttiUniversity() {
         return studenteDAO.trovaTuttiUniversity();
     }
+
+     */
 
     public List<Studente> trovaTuttiUniClass() {
         return studenteDAO.trovaTuttiUniClass();
@@ -58,6 +61,7 @@ public class StudenteService {
             return null;
         }
     }
+    /*
 
     public Studente trovaStudenteEmailUniversity(String email) {
         try {
@@ -67,6 +71,7 @@ public class StudenteService {
             return null;
         }
     }
+
 
     public void aggiungiStudente(Studente studente) throws IncorrectUserSpecification, NotFoundUserException, AlreadyExistentUserException {
         Studente trovaStudenteEmailUniversity = trovaStudenteUniversity(studente.getEmail());
@@ -101,4 +106,7 @@ public class StudenteService {
             throw new NotFoundUserException("Utente da eliminare non trovato.");
         }
     }
+
+
+     */
 }

@@ -2,17 +2,18 @@ package it.unisa.uniclass.conversazioni.service;
 
 import it.unisa.uniclass.conversazioni.model.Messaggio;
 import jakarta.ejb.Stateless;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+import jakarta.inject.Inject;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Stateless
 public class MessaggioDAO {
-    @PersistenceContext(unitName = "DBUniClassPU")
-    private EntityManager emUniClass;
+
+    EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("DBUniClassPU");
+    EntityManager emUniClass = emf1.createEntityManager();
+
 
     public Messaggio trovaMessaggio(long id) {
         TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGIO, Messaggio.class);

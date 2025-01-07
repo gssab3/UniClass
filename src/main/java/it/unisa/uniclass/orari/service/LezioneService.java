@@ -2,21 +2,35 @@ package it.unisa.uniclass.orari.service;
 
 import it.unisa.uniclass.orari.model.Giorno;
 import it.unisa.uniclass.orari.model.Lezione;
+import it.unisa.uniclass.orari.service.dao.CorsoLaureaRemote;
+import it.unisa.uniclass.orari.service.dao.LezioneDAO;
+import it.unisa.uniclass.orari.service.dao.LezioneRemote;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.sql.Time;
 import java.util.List;
 
 @Stateless
 public class LezioneService {
-    @EJB
-    private LezioneDAO dao;
+
+    private LezioneRemote lezioneDao;
+
+    public LezioneService() {
+        try {
+            InitialContext ctx = new InitialContext();
+            this.lezioneDao = (LezioneRemote) ctx.lookup("java:global/UniClass/LezioneDAO");
+        } catch (NamingException e) {
+            throw new RuntimeException("Errore durante il lookup di LezioneDAO.", e);
+        }
+    }
 
     public Lezione trovaLezione(long id) {
         try {
-            return dao.trovaLezione(id);
+            return lezioneDao.trovaLezione(id);
         }
         catch(NoResultException e) {
             return null;
@@ -24,22 +38,30 @@ public class LezioneService {
     }
 
     public List<Lezione> trovaLezioniCorso(String nomeCorso) {
-        return dao.trovaLezioniCorso(nomeCorso);
+        return lezioneDao.trovaLezioniCorso(nomeCorso);
     }
 
     public List<Lezione> trovaLezioniOre(Time oraInizio, Time oraFine) {
-        return dao.trovaLezioniOre(oraInizio, oraFine);
+        return lezioneDao.trovaLezioniOre(oraInizio, oraFine);
     }
 
     public List<Lezione> trovaLezioniOreGiorno(Time oraInizio, Time oraFine, Giorno giorno) {
-        return dao.trovaLezioniOreGiorno(oraInizio, oraFine, giorno);
+        return lezioneDao.trovaLezioniOreGiorno(oraInizio, oraFine, giorno);
     }
 
     public List<Lezione> trovaLezioniAule(String nome) {
-        return dao.trovaLezioniAule(nome);
+        return lezioneDao.trovaLezioniAule(nome);
     }
 
     public List<Lezione> trovaTutte() {
-        return dao.trovaTutte();
+        return lezioneDao.trovaTutte();
+    }
+
+    public void aggiungiLezione(Lezione lezione) {
+        lezioneDao.aggiungiLezione(lezione);
+    }
+
+    public void rimuoviLezione(Lezione lezione) {
+        lezioneDao.rimuoviLezione(lezione);
     }
 }

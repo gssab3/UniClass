@@ -1,27 +1,22 @@
 package it.unisa.uniclass.utenti.service;
 
-import it.unisa.uniclass.common.config.database.qualifier.UniclassDB;
-import it.unisa.uniclass.common.config.database.qualifier.UniversityDB;
 import it.unisa.uniclass.utenti.model.PersonaleTA;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 @Stateless
 public class PersonaleTADAO {
 
-    @Inject
-    @UniclassDB
-    private EntityManager emUniClass;
+    EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("DBUniClassPU");
+    EntityManager emUniClass = emf1.createEntityManager();
 
-    @Inject
-    @UniversityDB
-    private EntityManager emUniversity;
-
+    /*
+    EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("DBUniversityPU");
+    EntityManager emUniversity = emf2.createEntityManager();
+    */
     public PersonaleTA trovaPersonale(long id) {
         TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_PERSONALE, PersonaleTA.class);
         query.setParameter("id", id);

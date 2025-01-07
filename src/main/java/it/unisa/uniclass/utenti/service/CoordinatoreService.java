@@ -5,32 +5,34 @@ import it.unisa.uniclass.common.exceptions.IncorrectUserSpecification;
 import it.unisa.uniclass.common.exceptions.NotFoundUserException;
 import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.Coordinatore;
+import it.unisa.uniclass.utenti.service.dao.AccademicoDAO;
+import it.unisa.uniclass.utenti.service.dao.AccademicoRemote;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.util.List;
 
 @Stateless
 public class CoordinatoreService {
-    @EJB
-    private CoordinatoreDAO dao;
 
-    @EJB
-    private AccademicoDAO accademicoDAO;
+    private CoordinatoreRemote coordinatoreDao;
 
-    public Coordinatore trovaCoordinatoreUniversity(String matricola) {
+    public CoordinatoreService() {
         try {
-            return dao.trovaCoordinatoreUniversity(matricola);
+            InitialContext ctx = new InitialContext();
+            coordinatoreDao = (CoordinatoreRemote) ctx.lookup("java:global/UniClass/CoordinatoreDAO");
         }
-        catch(NoResultException e) {
-            return null;
+        catch(NamingException e) {
+            throw new RuntimeException("Errore durante il lookup di CoordinatoreDAO", e);
         }
     }
 
     public Coordinatore trovaCoordinatoreUniClass(String matricola) {
         try {
-            return dao.trovaCoordinatoreUniClass(matricola);
+            return coordinatoreDao.trovaCoordinatoreUniClass(matricola);
         }
         catch(NoResultException e) {
             return null;
@@ -38,59 +40,41 @@ public class CoordinatoreService {
     }
 
     public List<Coordinatore> trovaCoordinatoriCorsoLaurea(String nomeCorsoLaurea) {
-        return dao.trovaCoordinatoriCorsoLaurea(nomeCorsoLaurea);
+        return coordinatoreDao.trovaCoordinatoriCorsoLaurea(nomeCorsoLaurea);
     }
 
-    public Coordinatore trovaCoordinatoreEmailUniversity(String email) {
-        try {
-            return dao.trovaCoordinatoreEmailUniversity(email);
-        }
-        catch(NoResultException e) {
-            return null;
-        }
-    }
 
     public Coordinatore trovaCoordinatoreEmailUniclass(String email) {
         try {
-            return dao.trovaCoordinatoreEmailUniclass(email);
+            return coordinatoreDao.trovaCoordinatoreEmailUniclass(email);
         }
         catch(NoResultException e) {
             return null;
         }
     }
-
     public List<Coordinatore> trovaTutti() {
-        return dao.trovaTutti();
+        return coordinatoreDao.trovaTutti();
     }
 
     public void aggiungiCoordinatore(Coordinatore coordinatore) throws IncorrectUserSpecification, AlreadyExistentUserException, NotFoundUserException {
-        Coordinatore trovaCoordinatoreEmailUniClass = dao.trovaCoordinatoreEmailUniclass(coordinatore.getEmail());
-        Coordinatore trovaCoordinatoreUniversity = dao.trovaCoordinatoreUniversity(coordinatore.getMatricola());
-        Coordinatore trovaCoordinatoreEmailUniversity = dao.trovaCoordinatoreEmailUniversity(coordinatore.getEmail());
-        Coordinatore trovaCoordinatoreUniClass = dao.trovaCoordinatoreUniClass(coordinatore.getMatricola());
+        Coordinatore trovaCoordinatoreEmailUniClass = coordinatoreDao.trovaCoordinatoreEmailUniclass(coordinatore.getEmail());
+        Coordinatore trovaCoordinatoreUniClass = coordinatoreDao.trovaCoordinatoreUniClass(coordinatore.getMatricola());
 
-        if((trovaCoordinatoreEmailUniversity == trovaCoordinatoreUniversity) &&
-        (trovaCoordinatoreEmailUniversity != null) &&
-        (trovaCoordinatoreUniClass == trovaCoordinatoreEmailUniClass) &&
+        if((trovaCoordinatoreUniClass == trovaCoordinatoreEmailUniClass) &&
         (trovaCoordinatoreUniClass == null)) {
-            dao.aggiungiCoordinatore(coordinatore);
-        }
-        else if(trovaCoordinatoreEmailUniversity != trovaCoordinatoreUniversity) {
-            throw new IncorrectUserSpecification("Il coordinatore ha campi di due coordinatori differenti nel database universitario.");
+            coordinatoreDao.aggiungiCoordinatore(coordinatore);
         }
         else if(trovaCoordinatoreEmailUniClass != null) {
             throw new AlreadyExistentUserException("Utente da aggiungere già presente");
-        }
-        else if(trovaCoordinatoreEmailUniversity == null) {
-            throw new NotFoundUserException("Utente da aggiungere non trovato nel DB Universitario");
         }
     }
 
     public void rimuoviCoordinatore(Coordinatore coordinatore) throws NotFoundUserException {
         if(trovaCoordinatoreEmailUniclass(coordinatore.getEmail()) != null) {
-            Accademico accademico = accademicoDAO.trovaAccademicoUniversity(coordinatore.getMatricola());
-            dao.rimuoviCoordinatore(coordinatore);
-            accademicoDAO.rimuoviAccademico(accademico);
+            AccademicoService accademicoService = new AccademicoService();
+            Accademico accademico = accademicoService.trovaAccademicoUniClass(coordinatore.getMatricola());
+            coordinatoreDao.rimuoviCoordinatore(coordinatore);
+            accademicoService.rimuoviAccademico(accademico);
         }
         else {
             throw new NotFoundUserException("Utente da rimuovere non trovato.");

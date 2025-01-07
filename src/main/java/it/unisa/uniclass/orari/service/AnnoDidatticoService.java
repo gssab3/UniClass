@@ -2,26 +2,36 @@ package it.unisa.uniclass.orari.service;
 
 import it.unisa.uniclass.orari.model.AnnoDidattico;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
-import jakarta.ejb.EJB;
+import it.unisa.uniclass.orari.service.dao.AnnoDidatticoRemote;
 import jakarta.ejb.Stateless;
-import jakarta.inject.Inject;
 import jakarta.persistence.NoResultException;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
 public class AnnoDidatticoService {
-    @EJB
-    private AnnoDidatticoDAO dao;
+
+    private AnnoDidatticoRemote annoDidatticoDao;
+
+    public AnnoDidatticoService() {
+        try {
+            InitialContext ctx = new InitialContext();
+            this.annoDidatticoDao = (AnnoDidatticoRemote) ctx.lookup("java:global/UniClass/AnnoDidatticoDAO");
+        } catch (NamingException e) {
+            throw new RuntimeException("Errore durante il lookup di AnnoDidatticoDAO.", e);
+        }
+    }
 
     public List<AnnoDidattico> trovaAnno(int anno) {
-        return dao.trovaAnno(anno);
+        return annoDidatticoDao.trovaAnno(anno);
     }
 
     public AnnoDidattico trovaId(int id) {
         try {
-            return dao.trovaId(id);
+            return annoDidatticoDao.trovaId(id);
         }
         catch(NoResultException e) {
             return null;
@@ -29,19 +39,19 @@ public class AnnoDidatticoService {
     }
 
     public List<AnnoDidattico> trovaTutti() {
-        return dao.trovaTutti();
+        return annoDidatticoDao.trovaTutti();
     }
 
     public void aggiungiAnno(AnnoDidattico annoDidattico) {
-        dao.aggiungiAnno(annoDidattico);
+        annoDidatticoDao.aggiungiAnno(annoDidattico);
     }
 
     public void rimuoviAnno(AnnoDidattico annoDidattico) {
-        dao.rimuoviAnno(annoDidattico);
+        annoDidatticoDao.rimuoviAnno(annoDidattico);
     }
 
     public List<AnnoDidattico> trovaPerCorsoLaurea(CorsoLaurea corso) {
-        List<AnnoDidattico> anni = dao.trovaTutti();
+        List<AnnoDidattico> anni = annoDidatticoDao.trovaTutti();
         List<AnnoDidattico> results = new ArrayList<AnnoDidattico>();
         for(AnnoDidattico annoDidattico : anni) {
             if(annoDidattico.getCorsiLaurea().contains(corso))

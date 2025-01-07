@@ -1,10 +1,7 @@
 package it.unisa.uniclass.utenti.service;
 
-import it.unisa.uniclass.common.exceptions.AlreadyExistentUserException;
-import it.unisa.uniclass.common.exceptions.IncorrectUserSpecification;
-import it.unisa.uniclass.common.exceptions.NotFoundUserException;
-import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.Docente;
+import it.unisa.uniclass.utenti.service.dao.AccademicoDAO;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
@@ -19,6 +16,7 @@ public class DocenteService {
     @EJB
     private AccademicoDAO accademicoDAO;
 
+    /*
     public Docente trovaDocenteUniversity(String matricola) {
         try {
             return dao.trovaDocenteUniversity(matricola);
@@ -27,6 +25,21 @@ public class DocenteService {
             return null;
         }
     }
+
+    public List<Docente> trovaTuttiUniversity() {
+        return dao.trovaTuttiUniversity();
+    }
+
+    public Docente trovaEmailUniversity(String email) {
+        try {
+            return dao.trovaEmailUniversity(email);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
+    }
+     */
+
 
     public Docente trovaDocenteUniClass(String matricola) {
         try {
@@ -41,9 +54,7 @@ public class DocenteService {
         return dao.trovaDocenteCorsoLaurea(nomeCorsoLaurea);
     }
 
-    public List<Docente> trovaTuttiUniversity() {
-        return dao.trovaTuttiUniversity();
-    }
+
 
     public List<Docente> trovaTuttiUniClass() {
         return dao.trovaTuttiUniClass();
@@ -53,14 +64,7 @@ public class DocenteService {
         return dao.trovaTuttiDocenti();
     }
 
-    public Docente trovaEmailUniversity(String email) {
-        try {
-            return dao.trovaEmailUniversity(email);
-        }
-        catch(NoResultException e) {
-            return null;
-        }
-    }
+
 
     public Docente trovaEmailUniClass(String email) {
         try {
@@ -71,6 +75,7 @@ public class DocenteService {
         }
     }
 
+    /*
     public void aggiungiDocente(Docente docente) throws IncorrectUserSpecification, NotFoundUserException, AlreadyExistentUserException {
         Docente trovaEmailUniversity = dao.trovaEmailUniversity(docente.getEmail());
         Docente trovaDocenteUniversity = dao.trovaDocenteUniversity(docente.getMatricola());
@@ -103,4 +108,5 @@ public class DocenteService {
             throw new NotFoundUserException("Il docente inserito non è presente nel Database universitario");
         }
     }
+     */
 }

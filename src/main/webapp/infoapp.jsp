@@ -3,7 +3,7 @@
 <%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
 <%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
 <%@ page import="java.util.List" %>
-<%@ page import="it.unisa.uniclass.orari.service.CorsoLaureaDAO" %>
+<%@ page import="it.unisa.uniclass.orari.service.dao.CorsoLaureaDAO" %>
 
 <%
     /* Sessione HTTP */

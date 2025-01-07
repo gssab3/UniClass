@@ -2,19 +2,19 @@ package it.unisa.uniclass.orari.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import static it.unisa.uniclass.orari.model.CorsoLaurea.*;
 
 @Entity
-@Table(name = "corsiLaurea")
 @NamedQueries({
         @NamedQuery(name = TROVA_CORSOLAUREA, query = "SELECT c FROM CorsoLaurea c WHERE c.id = :id"),
         @NamedQuery(name = TROVA_TUTTI, query = "SELECT c FROM CorsoLaurea c"),
         @NamedQuery(name = TROVA_CORSOLAUREA_NOME, query = "SELECT c FROM CorsoLaurea c WHERE c.nome = :nome")
 })
-public class CorsoLaurea {
+public class CorsoLaurea implements Serializable {
 
     public static final String TROVA_CORSOLAUREA = "CorsoLaurea.trovaCorsoLaurea";
     public static final String TROVA_TUTTI = "CorsoLaurea.trovaTutti";

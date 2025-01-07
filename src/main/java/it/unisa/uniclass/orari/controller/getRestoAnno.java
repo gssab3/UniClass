@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -24,22 +26,16 @@ import java.util.Map;
 @WebServlet(name = "getRestoAnno", value = "/getRestoAnno")
 public class getRestoAnno extends HttpServlet {
 
-    @EJB
-    private RestoService restoService;
-
-    @EJB
-    private CorsoLaureaService corsoLaureaService;
-
-    @EJB
-    private AnnoDidatticoService annoDidatticoService;
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String corsoLaurea = request.getParameter("corsoLaurea");
+        CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
+        CorsoLaurea corsoL = corsoLaureaService.trovaCorsoLaurea("corsoLaurea");
 
-        CorsoLaurea corso = corsoLaureaService.trovaCorsoLaurea(corsoLaurea);
+        RestoService restoService = new RestoService();
+        AnnoDidatticoService annoDidatticoService = new AnnoDidatticoService();
 
-        List<Resto> resti = restoService.trovaRestiCorsoLaurea(corso);
-        List<AnnoDidattico> anni = annoDidatticoService.trovaPerCorsoLaurea(corso);
+        List<Resto> resti = restoService.trovaRestiCorsoLaurea(corsoL);
+        List<AnnoDidattico> anni = annoDidatticoService.trovaPerCorsoLaurea(corsoL);
 
         Map<String, Object> result = new HashMap<>();
         result.put("resti", resti);

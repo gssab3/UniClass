@@ -1,22 +1,33 @@
 package it.unisa.uniclass.orari.service;
 
 import it.unisa.uniclass.orari.model.CorsoLaurea;
-import jakarta.ejb.EJB;
+import it.unisa.uniclass.orari.service.dao.CorsoLaureaRemote;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.util.List;
 
 @Stateless
 public class CorsoLaureaService {
-    @EJB
-    private CorsoLaureaDAO corsoLaureaDAO;
+
+    private CorsoLaureaRemote corsoLaureaDAO;
+
+    public CorsoLaureaService() {
+        try {
+            InitialContext ctx = new InitialContext();
+            this.corsoLaureaDAO = (CorsoLaureaRemote) ctx.lookup("java:global/UniClass/CorsoLaureaDAO");
+        } catch (NamingException e) {
+            throw new RuntimeException("Errore durante il lookup di CorsoLaureaDAO.", e);
+        }
+    }
 
     public CorsoLaurea trovaCorsoLaurea(long id) {
         try {
             return corsoLaureaDAO.trovaCorsoLaurea(id);
         }
-        catch(NoResultException e) {
+        catch (NoResultException e) {
             return null;
         }
     }
@@ -25,22 +36,30 @@ public class CorsoLaureaService {
         try {
             return corsoLaureaDAO.trovaCorsoLaurea(nome);
         }
-        catch(NoResultException e) {
+        catch (NoResultException e) {
             return null;
         }
     }
 
     public List<CorsoLaurea> trovaTutti() {
-        return corsoLaureaDAO.trovaTutti();
-    }
-
-    public void aggiungiCorsoLaurea(CorsoLaurea corsoLaurea) {
-        if(trovaCorsoLaurea(corsoLaurea.getNome()) == null) {
-            corsoLaureaDAO.aggiungiCorsoLaurea(corsoLaurea);
+        try {
+            return corsoLaureaDAO.trovaTutti();
+        } catch (Exception e) {
+            throw new RuntimeException("Errore durante il recupero dei corsi di laurea.", e);
         }
     }
 
+    public void aggiungiCorsoLaurea(CorsoLaurea corsoLaurea) {
+        if (corsoLaurea == null || corsoLaurea.getNome() == null || corsoLaurea.getNome().isEmpty()) {
+            throw new IllegalArgumentException("Il corso di laurea deve avere un nome valido.");
+        }
+        corsoLaureaDAO.aggiungiCorsoLaurea(corsoLaurea);
+    }
+
     public void rimuoviCorsoLaurea(CorsoLaurea corsoLaurea) {
+        if (corsoLaurea == null) {
+            throw new IllegalArgumentException("Il corso di laurea da rimuovere non può essere null.");
+        }
         corsoLaureaDAO.rimuoviCorsoLaurea(corsoLaurea);
     }
 }

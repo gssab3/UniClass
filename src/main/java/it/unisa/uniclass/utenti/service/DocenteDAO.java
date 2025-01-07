@@ -1,32 +1,28 @@
 package it.unisa.uniclass.utenti.service;
 
-import it.unisa.uniclass.common.config.database.qualifier.UniclassDB;
-import it.unisa.uniclass.common.config.database.qualifier.UniversityDB;
-import it.unisa.uniclass.common.exceptions.NotFoundUserException;
 import it.unisa.uniclass.utenti.model.Docente;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 @Stateless
 public class DocenteDAO {
-    @Inject
-    @UniclassDB
-    private EntityManager emUniClass;
 
-    @Inject
-    @UniversityDB
-    private EntityManager emUniversity;
+    EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("DBUniClassPU");
+    EntityManager emUniClass = emf1.createEntityManager();
+
+    /*
+    EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("DBUniversityPU");
+    EntityManager emUniversity = emf2.createEntityManager();
 
     public Docente trovaDocenteUniversity(String matricola) {
         TypedQuery<Docente> query = emUniversity.createNamedQuery(Docente.TROVA_DOCENTE, Docente.class);
         query.setParameter("matricola", matricola);
         return (Docente) query.getSingleResult();
     }
+     */
 
     public Docente trovaDocenteUniClass(String matricola) {
         TypedQuery<Docente> query = emUniClass.createNamedQuery(Docente.TROVA_DOCENTE, Docente.class);
@@ -40,11 +36,18 @@ public class DocenteDAO {
         return query.getResultList();
     }
 
+    /*
     public List<Docente> trovaTuttiUniversity() {
         TypedQuery<Docente> query = emUniversity.createNamedQuery(Docente.TROVA_TUTTI, Docente.class);
         return query.getResultList();
     }
 
+    public Docente trovaEmailUniversity(String email) {
+            TypedQuery<Docente> query = emUniversity.createNamedQuery(Docente.TROVA_EMAIL, Docente.class);
+            query.setParameter("email", email);
+            return query.getSingleResult();
+        }
+     */
     public List<Docente> trovaTuttiUniClass() {
         TypedQuery<Docente> query = emUniClass.createNamedQuery(Docente.TROVA_TUTTI, Docente.class);
         return query.getResultList();
@@ -55,11 +58,7 @@ public class DocenteDAO {
         return query.getResultList();
     }
 
-    public Docente trovaEmailUniversity(String email) {
-        TypedQuery<Docente> query = emUniversity.createNamedQuery(Docente.TROVA_EMAIL, Docente.class);
-        query.setParameter("email", email);
-        return query.getSingleResult();
-    }
+
 
     public Docente trovaEmailUniClass(String email) {
         TypedQuery<Docente> query = emUniClass.createNamedQuery(Docente.TROVA_EMAIL, Docente.class);
