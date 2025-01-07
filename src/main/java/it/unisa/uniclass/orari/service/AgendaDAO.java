@@ -1,8 +1,10 @@
 package it.unisa.uniclass.orari.service;
 
+import it.unisa.uniclass.common.config.database.qualifier.UniclassDB;
 import it.unisa.uniclass.orari.model.Agenda;
 import it.unisa.uniclass.utenti.model.Studente;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -11,7 +13,8 @@ import java.util.List;
 
 @Stateless
 public class AgendaDAO {
-    @PersistenceContext(unitName = "DBUniClassPU")
+    @Inject
+    @UniclassDB
     private EntityManager emUniClass;
 
     public Agenda trovaAgenda(long id) {

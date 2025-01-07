@@ -1,0 +1,11 @@
+.map{
+    display: block;
+    margin: 20px auto;
+}
+
+#border{
+    display: block;
+    margin: 20px auto;
+    border: 5px solid black;
+    border-radius: 10px;
+}

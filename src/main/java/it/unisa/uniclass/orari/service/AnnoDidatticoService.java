@@ -4,6 +4,7 @@ import it.unisa.uniclass.orari.model.AnnoDidattico;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.NoResultException;
 
 import java.util.ArrayList;

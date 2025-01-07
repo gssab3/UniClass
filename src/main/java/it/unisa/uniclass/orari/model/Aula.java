@@ -1,7 +1,6 @@
 package it.unisa.uniclass.orari.model;
 
 import it.unisa.uniclass.esami.model.Appello;
-import jakarta.inject.Named;
 import jakarta.persistence.*;
 
 import java.io.Serializable;

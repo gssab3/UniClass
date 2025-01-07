@@ -1,8 +1,11 @@
 package it.unisa.uniclass.utenti.service;
 
+import it.unisa.uniclass.common.config.database.qualifier.UniclassDB;
+import it.unisa.uniclass.common.config.database.qualifier.UniversityDB;
 import it.unisa.uniclass.common.exceptions.NotFoundUserException;
 import it.unisa.uniclass.utenti.model.Coordinatore;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -11,10 +14,12 @@ import java.util.List;
 
 @Stateless
 public class CoordinatoreDAO {
-    @PersistenceContext(unitName = "DBUniClassPU")
+    @Inject
+    @UniclassDB
     private EntityManager emUniClass;
 
-    @PersistenceContext(unitName = "DBUniversityPU")
+    @Inject
+    @UniversityDB
     private EntityManager emUniversity;
 
     public Coordinatore trovaCoordinatoreUniversity(String matricola) {

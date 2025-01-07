@@ -6,7 +6,6 @@ import it.unisa.uniclass.utenti.service.AccademicoDAO;
 import it.unisa.uniclass.utenti.service.PersonaleTADAO;
 import it.unisa.uniclass.utenti.service.UtenteService;
 import jakarta.ejb.EJB;
-import jakarta.inject.Inject;
 import jakarta.persistence.Entity;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.*;

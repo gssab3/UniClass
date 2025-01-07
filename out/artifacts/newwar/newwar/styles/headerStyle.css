@@ -1,0 +1,105 @@
+header{
+	flex-shrink: 0;
+	position: -webkit-sticky;
+  	position: sticky;
+  	top: 0;
+  	background-color: white;
+  	box-shadow: 0 2px 6px 0  rgba(0,0,0,0.3);
+  	margin: 0;
+  	position: relative;
+  	z-index: 1;
+  	width: 100vw;
+}
+
+.ContentHeader{
+	display: flex;
+	flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.ContentHeader img{
+	width:250px;
+}
+
+.ContentHeader h5{
+	margin:0;
+}
+
+.TastoMenu{
+	float: left;
+	position:absolute;
+	top: 50%;
+	left: 20px;
+	transform: translateY(-50%);
+}
+
+.TastoLogin{
+	float: right;
+	position:absolute;
+	top: 50%;
+	right: 30px;
+	transform: translateY(-50%);
+}
+
+@media only screen and (max-width: 767px) {
+
+    .barraNavigazione.open {
+        width: 100%;
+        font-size: 50px;
+    }
+
+    .TastoMenu{
+    	left: 15px;
+    }
+
+    .TastoMenu img{
+    	width:50px;
+    }
+
+    .TastoLogin{
+    	right: 15px;
+    }
+
+    .TastoLogin img{
+    	width:50px
+    }
+
+}
+
+@media only screen and (min-width:768px) and (max-width:991px){
+
+
+}
+
+@media only screen and (min-width:992px) and (max-width:1199px) {
+
+
+}
+
+@media only screen and (min-width:1200px) {
+	header{
+		width:100%;
+	}
+
+    .barraNavigazione.open {
+        width: 300px;
+    }
+}
+
+header h1 {
+	color: #0000FF;
+	text-shadow: 2px 2px 5px black;
+	-webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+   /*
+   -moz-text-stroke-width: 1px;
+    -moz-text-stroke-color: black;
+    -o-text-stroke-width: 1px;
+    -o-text-stroke-color: black;
+    -ms-text-stroke-width: 1px;
+    -ms-text-stroke-color: black;
+    */
+}

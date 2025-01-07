@@ -1,20 +1,22 @@
 package it.unisa.uniclass.orari.service;
 
+import it.unisa.uniclass.common.config.database.qualifier.UniclassDB;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
 import it.unisa.uniclass.orari.model.Resto;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
+@Stateless
 public class RestoDAO {
 
-    @PersistenceContext(unitName = "DBUniClassPU")
+    @Inject
+    @UniclassDB
     private EntityManager emUniClass;
-
-    @PersistenceContext(unitName = "DBUniversityPU")
-    private EntityManager emUniversity;
 
     public List<Resto> trovaRestiCorsoLaurea(CorsoLaurea corsoLaurea){
         TypedQuery<Resto> query = emUniClass.createNamedQuery(Resto.TROVA_RESTI_CORSO, Resto.class);

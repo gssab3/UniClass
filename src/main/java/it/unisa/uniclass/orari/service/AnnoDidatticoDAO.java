@@ -1,9 +1,11 @@
 package it.unisa.uniclass.orari.service;
 
+import it.unisa.uniclass.common.config.database.qualifier.UniclassDB;
 import it.unisa.uniclass.orari.model.AnnoDidattico;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
 import jakarta.ejb.Stateless;
 import jakarta.enterprise.inject.Typed;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -12,11 +14,9 @@ import java.util.List;
 
 @Stateless
 public class AnnoDidatticoDAO {
-    @PersistenceContext(unitName = "DBUniClassPU")
+    @Inject
+    @UniclassDB
     private EntityManager emUniClass;
-
-    @PersistenceContext(unitName = "DBUniversityPU")
-    private EntityManager emUniversity;
 
     public List<AnnoDidattico> trovaAnno(int anno) {
         TypedQuery<AnnoDidattico> query = emUniClass.createNamedQuery(AnnoDidattico.TROVA_ANNO, AnnoDidattico.class);
