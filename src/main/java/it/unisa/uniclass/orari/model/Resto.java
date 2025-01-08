@@ -29,6 +29,9 @@ public class Resto implements Serializable {
 
     private String nome; // Esempio: "Resto 0", "Resto 1", ecc.
 
+    @OneToMany(mappedBy = "resto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Lezione> lezioni = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "corso_laurea_id", nullable = false)
     private CorsoLaurea corsoLaurea; // Corso di laurea a cui appartiene

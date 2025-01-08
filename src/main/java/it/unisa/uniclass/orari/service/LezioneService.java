@@ -1,7 +1,6 @@
 package it.unisa.uniclass.orari.service;
 
-import it.unisa.uniclass.orari.model.Giorno;
-import it.unisa.uniclass.orari.model.Lezione;
+import it.unisa.uniclass.orari.model.*;
 import it.unisa.uniclass.orari.service.dao.CorsoLaureaRemote;
 import it.unisa.uniclass.orari.service.dao.LezioneDAO;
 import it.unisa.uniclass.orari.service.dao.LezioneRemote;
@@ -55,6 +54,11 @@ public class LezioneService {
 
     public List<Lezione> trovaTutte() {
         return lezioneDao.trovaTutte();
+    }
+
+    public List<Lezione> trovaCorsoRestoAnno(CorsoLaurea corsoLaurea, Resto resto, AnnoDidattico annoDidattico) {
+        return lezioneDao.trovaCorsoRestoAnno(corsoLaurea,resto,annoDidattico);
+
     }
 
     public void aggiungiLezione(Lezione lezione) {
