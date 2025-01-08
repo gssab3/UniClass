@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,15 +36,6 @@ public class getAnno extends HttpServlet {
 
         JSONArray jsonArray = new JSONArray();
 
-        RestoService restoService = new RestoService();
-
-        List<Resto> resti = restoService.trovaRestiCorsoLaurea(corsoL);
-
-
-        for(Resto resto : resti) {
-            jsonArray.put(resto.getNome());
-        }
-
         AnnoDidatticoService annoDidatticoService = new AnnoDidatticoService();
 
 
@@ -51,14 +43,17 @@ public class getAnno extends HttpServlet {
 
 
         for (AnnoDidattico anno : anni) {
-            jsonArray.put(anno.getAnno());
+            JSONObject annoJson = new JSONObject();
+            annoJson.put("id", anno.getId());
+            annoJson.put("nome", anno.getAnno());
+            jsonArray.put(annoJson);
         }
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
         printWriter.println(jsonArray.toString());
-        response.sendRedirect("script/formOrario.js");
+        printWriter.flush();
 
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

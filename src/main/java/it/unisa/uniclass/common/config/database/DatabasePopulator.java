@@ -1,5 +1,6 @@
 package it.unisa.uniclass.common.config.database;
 
+import it.unisa.uniclass.orari.model.AnnoDidattico;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
 import it.unisa.uniclass.orari.model.Resto;
 import it.unisa.uniclass.orari.service.CorsoLaureaService;
@@ -63,7 +64,25 @@ public class DatabasePopulator {
         corsoLaurea.getResti().add(resto2);
         corsoLaurea.getResti().add(resto3);
 
-        // Persistenza
+        // Creazione degli anni didattici
+        AnnoDidattico anno1 = new AnnoDidattico("Anno 1");
+        AnnoDidattico anno2 = new AnnoDidattico("Anno 2");
+        AnnoDidattico anno3 = new AnnoDidattico("Anno 3");
+
+        // Associazione degli anni didattici con il corso di laurea "Informatica"
+        corsoLaurea.getAnniDidattici().add(anno1);
+        corsoLaurea.getAnniDidattici().add(anno2);
+        corsoLaurea.getAnniDidattici().add(anno3);
+
+        // Associazione inversa (opzionale, utile per consistenza bidirezionale)
+        anno1.getCorsiLaurea().add(corsoLaurea);
+        anno2.getCorsiLaurea().add(corsoLaurea);
+        anno3.getCorsiLaurea().add(corsoLaurea);
+
+        // Persistenza degli oggetti
+        em.persist(anno1);
+        em.persist(anno2);
+        em.persist(anno3);
         em.persist(corsoLaurea);
         em.persist(corsoLaurea2);
 

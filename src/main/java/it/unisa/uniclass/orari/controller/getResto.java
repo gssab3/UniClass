@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,7 +41,10 @@ public class getResto extends HttpServlet {
 
 
         for(Resto resto : resti) {
-            jsonArray.put(resto.getNome());
+            JSONObject restoJson = new JSONObject();
+            restoJson.put("id", resto.getId());
+            restoJson.put("nome", resto.getNome());
+            jsonArray.put(restoJson);
         }
 
 
@@ -48,8 +52,7 @@ public class getResto extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         printWriter.println(jsonArray.toString());
-        response.sendRedirect("script/formOrario.js");
-
+        printWriter.flush();
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

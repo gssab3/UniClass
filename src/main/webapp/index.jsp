@@ -31,7 +31,6 @@
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
 	<link type="text/css" rel="stylesheet" href="styles/formcss.css"/>
-	<script src="scripts/formOrario.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -173,6 +172,8 @@
         <button type="submit">Cerca Orario</button>
     </form>
 	</div>
+
+<script src="scripts/formOrario.js"></script>
 
 
 <h1><%= "Hello World!" %>

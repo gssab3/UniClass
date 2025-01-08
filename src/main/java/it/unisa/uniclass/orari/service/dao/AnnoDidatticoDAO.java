@@ -31,6 +31,8 @@ public class AnnoDidatticoDAO implements AnnoDidatticoRemote {
         return query.getResultList();
     }
 
+
+
     @Override
     public void aggiungiAnno(AnnoDidattico annoDidattico) {
         emUniClass.merge(annoDidattico);
