@@ -3,7 +3,6 @@
 <%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
 <%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
 <%@ page import="java.util.List" %>
-<%@ page import="it.unisa.uniclass.orari.service.CorsoLaureaDAO" %>
 
 <%
     /* Sessione HTTP */
@@ -19,10 +18,7 @@
     else
     	tipoUtente = null;
 
-	CorsoLaureaDAO corsoLaureaDAO = new CorsoLaureaDAO();
-    List<CorsoLaurea> corsiLaurea = corsoLaureaDAO.trovaTutti();
-
-
+	List<CorsoLaurea> corsiLaurea = (List<CorsoLaurea>) request.getAttribute("corsi");
 %>
 
 
@@ -35,6 +31,7 @@
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
 	<link type="text/css" rel="stylesheet" href="styles/formcss.css"/>
+	<script src="scripts/formOrario.js" type="text/javascript"></script>
 
 </head>
 <body>

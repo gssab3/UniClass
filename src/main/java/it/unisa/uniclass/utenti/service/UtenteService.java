@@ -11,17 +11,13 @@ import jakarta.persistence.NoResultException;
 
 @Stateless
 public class UtenteService {
-    @EJB
-    private AccademicoDAO accademicoDAO;
-
-    @EJB
-    private PersonaleTAService personaleTAService;
-
 
     public Utente retrieveByUserAndPassword(String email, String password) {
         try {
+            PersonaleTAService personaleTAService = new PersonaleTAService();
+            AccademicoService accademicoService = new AccademicoService();
             PersonaleTA personaleTA= (PersonaleTA) personaleTAService.trovaEmail(email);
-            Accademico accademico = (Accademico) accademicoDAO.trovaEmailUniClass(email);
+            Accademico accademico = (Accademico) accademicoService.trovaEmailUniClass(email);
             if(personaleTA != null) {
                 if(personaleTA.getPassword().equals(password)) {
                     return personaleTA;

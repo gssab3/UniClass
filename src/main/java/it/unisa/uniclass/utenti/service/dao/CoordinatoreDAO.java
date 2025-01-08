@@ -1,9 +1,7 @@
-package it.unisa.uniclass.utenti.service;
+package it.unisa.uniclass.utenti.service.dao;
 
 import it.unisa.uniclass.utenti.model.Coordinatore;
-import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
-import jakarta.inject.Inject;
 import jakarta.persistence.*;
 
 import java.util.List;

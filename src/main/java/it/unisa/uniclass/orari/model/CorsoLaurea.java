@@ -26,6 +26,7 @@ public class CorsoLaurea implements Serializable {
     @OneToMany(mappedBy = "corsoLaurea", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Corso> corsi;
 
+    @Column(nullable = false, unique = true)
     private String nome;
 
     @OneToMany(mappedBy = "corsoLaurea", cascade = CascadeType.ALL)
@@ -63,6 +64,14 @@ public class CorsoLaurea implements Serializable {
 
     public void setResti(List<Resto> resti) {
         this.resti = resti;
+    }
+
+    public List<AnnoDidattico> getAnniDidattici() {
+        return anniDidattici;
+    }
+
+    public void setAnniDidattici(List<AnnoDidattico> anniDidattici) {
+        this.anniDidattici = anniDidattici;
     }
 
     public Long getId() {

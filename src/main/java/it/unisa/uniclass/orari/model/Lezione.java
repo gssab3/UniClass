@@ -2,6 +2,7 @@ package it.unisa.uniclass.orari.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +19,7 @@ import static it.unisa.uniclass.orari.model.Lezione.*;
         @NamedQuery(name = TROVA_LEZIONE_AULA, query = "SELECT l FROM Lezione l WHERE l.aula.nome = :nome"),
         @NamedQuery(name = TROVA_TUTTE, query = "SELECT l FROM Lezione l")
 })
-public class Lezione {
+public class Lezione implements Serializable {
 
     public final static String TROVA_LEZIONE = "Lezione.trovaLezione";
     public final static String TROVA_LEZIONE_CORSO = "Lezione.trovaLezioneCorso";

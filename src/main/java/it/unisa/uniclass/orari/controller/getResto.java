@@ -7,50 +7,49 @@ import it.unisa.uniclass.orari.model.Resto;
 import it.unisa.uniclass.orari.service.AnnoDidatticoService;
 import it.unisa.uniclass.orari.service.CorsoLaureaService;
 import it.unisa.uniclass.orari.service.RestoService;
-import it.unisa.uniclass.utenti.service.UtenteService;
-import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "getRestoAnno", value = "/getRestoAnno")
-public class getRestoAnno extends HttpServlet {
+@WebServlet(name = "getResto", value = "/getResto")
+public class getResto extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        PrintWriter printWriter = response.getWriter();
+
         String corsoLaurea = request.getParameter("corsoLaurea");
         CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
-        CorsoLaurea corsoL = corsoLaureaService.trovaCorsoLaurea("corsoLaurea");
+        CorsoLaurea corsoL = corsoLaureaService.trovaCorsoLaurea(corsoLaurea);
+
+        JSONArray jsonArray = new JSONArray();
 
         RestoService restoService = new RestoService();
-        AnnoDidatticoService annoDidatticoService = new AnnoDidatticoService();
 
         List<Resto> resti = restoService.trovaRestiCorsoLaurea(corsoL);
-        List<AnnoDidattico> anni = annoDidatticoService.trovaPerCorsoLaurea(corsoL);
 
-        Map<String, Object> result = new HashMap<>();
-        result.put("resti", resti);
-        result.put("anni", anni);
+
+        for(Resto resto : resti) {
+            jsonArray.put(resto.getNome());
+        }
+
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        try (PrintWriter out = response.getWriter()) {
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonResponse = mapper.writeValueAsString(result);
-            out.print(jsonResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        printWriter.println(jsonArray.toString());
+        response.sendRedirect("script/formOrario.js");
+
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

@@ -1,43 +1,43 @@
-package it.unisa.uniclass.utenti.service;
+package it.unisa.uniclass.utenti.service.dao;
 
 import it.unisa.uniclass.utenti.model.PersonaleTA;
 import jakarta.ejb.Stateless;
-import jakarta.inject.Inject;
 import jakarta.persistence.*;
 
 import java.util.List;
 
-@Stateless
-public class PersonaleTADAO {
+@Stateless(name = "PersonaleTADAO")
+public class PersonaleTADAO implements PersonaleTARemote {
 
-    EntityManagerFactory emf1 = Persistence.createEntityManagerFactory("DBUniClassPU");
-    EntityManager emUniClass = emf1.createEntityManager();
+    @PersistenceContext(unitName = "DBUniClassPU")
+    private EntityManager emUniClass;
 
-    /*
-    EntityManagerFactory emf2 = Persistence.createEntityManagerFactory("DBUniversityPU");
-    EntityManager emUniversity = emf2.createEntityManager();
-    */
+    @Override
     public PersonaleTA trovaPersonale(long id) {
         TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_PERSONALE, PersonaleTA.class);
         query.setParameter("id", id);
         return (PersonaleTA) query.getSingleResult();
     }
 
+    @Override
     public List<PersonaleTA> trovaTutti() {
         TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_TUTTI, PersonaleTA.class);
         return query.getResultList();
     }
 
+    @Override
     public PersonaleTA trovaEmail(String email) {
         TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_EMAIL, PersonaleTA.class);
         query.setParameter("email", email);
         return (PersonaleTA) query.getSingleResult();
     }
 
+    @Override
     public void aggiungiPersonale(PersonaleTA personaleTA) {
         emUniClass.merge(personaleTA);
     }
 
+    @Override
     public void rimuoviPersonale(PersonaleTA personaleTA) {
         emUniClass.remove(personaleTA);
     }

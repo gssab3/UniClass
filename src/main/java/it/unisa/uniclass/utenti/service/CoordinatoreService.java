@@ -5,9 +5,7 @@ import it.unisa.uniclass.common.exceptions.IncorrectUserSpecification;
 import it.unisa.uniclass.common.exceptions.NotFoundUserException;
 import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.Coordinatore;
-import it.unisa.uniclass.utenti.service.dao.AccademicoDAO;
-import it.unisa.uniclass.utenti.service.dao.AccademicoRemote;
-import jakarta.ejb.EJB;
+import it.unisa.uniclass.utenti.service.dao.CoordinatoreRemote;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
 

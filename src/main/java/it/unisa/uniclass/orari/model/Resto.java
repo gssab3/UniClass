@@ -3,6 +3,7 @@ package it.unisa.uniclass.orari.model;
 import it.unisa.uniclass.utenti.model.Studente;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import static it.unisa.uniclass.orari.model.Resto.*;
         @NamedQuery(name = TROVA_RESTO_NOME, query = "SELECT r FROM Resto r WHERE r.nome = :nome"),
         @NamedQuery(name = TROVA_RESTO_NOME_CORSO, query = "SELECT r FROM Resto r WHERE r.nome = :nome AND r.corsoLaurea.nome = :nomeCorso")
 })
-public class Resto {
+public class Resto implements Serializable {
 
     public static final String TROVA_RESTI_CORSO = "Resto.trovaRestiCorso";
     public static final String TROVA_RESTO = "Resto.trovaResto";

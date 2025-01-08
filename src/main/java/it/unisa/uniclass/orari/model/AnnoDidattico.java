@@ -2,6 +2,7 @@ package it.unisa.uniclass.orari.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import static it.unisa.uniclass.orari.model.AnnoDidattico.*;
         @NamedQuery(name = TROVA_ID, query = "SELECT a FROM AnnoDidattico a WHERE a.id = :id"),
         @NamedQuery(name = TROVA_TUTTI, query = "SELECT a FROM AnnoDidattico a")
 })
-public class AnnoDidattico {
+public class AnnoDidattico implements Serializable {
 
     public static final String TROVA_ANNO = "AnnoDidattico.trovaAnno";
     public static final String TROVA_ID = "AnnoDidattico.trovaId";

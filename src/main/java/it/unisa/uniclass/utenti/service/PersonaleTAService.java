@@ -1,21 +1,32 @@
 package it.unisa.uniclass.utenti.service;
 
 import it.unisa.uniclass.utenti.model.PersonaleTA;
-import jakarta.ejb.EJB;
+import it.unisa.uniclass.utenti.service.dao.PersonaleTARemote;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.util.List;
 
 @Stateless
 public class PersonaleTAService {
 
-    @EJB
-    private PersonaleTADAO personaleTADAO;
+    private PersonaleTARemote personaleTAdao;
+
+    public PersonaleTAService() {
+        try {
+            InitialContext ctx = new InitialContext();
+            personaleTAdao = (PersonaleTARemote) ctx.lookup("java:global/UniClass/PersonaleTADAO");
+        }
+        catch(NamingException e) {
+            throw new RuntimeException("Errore durante il lookup di PersonaleTADAO", e);
+        }
+    }
 
     public PersonaleTA trovaPersonale(long id) {
         try {
-            return personaleTADAO.trovaPersonale(id);
+            return personaleTAdao.trovaPersonale(id);
         }
         catch(NoResultException e) {
             return null;
@@ -23,12 +34,12 @@ public class PersonaleTAService {
     }
 
     public List<PersonaleTA> trovaTutti() {
-        return personaleTADAO.trovaTutti();
+        return personaleTAdao.trovaTutti();
     }
 
     public PersonaleTA trovaEmail(String email) {
         try {
-            return personaleTADAO.trovaEmail(email);
+            return personaleTAdao.trovaEmail(email);
         }
         catch(NoResultException e) {
             return null;
@@ -36,10 +47,10 @@ public class PersonaleTAService {
     }
 
     public void aggiungiPersonaleTA(PersonaleTA personaleTA) {
-        personaleTADAO.aggiungiPersonale(personaleTA);
+        personaleTAdao.aggiungiPersonale(personaleTA);
     }
 
     public void rimuoviPersonaleTA(PersonaleTA personaleTA) {
-        personaleTADAO.rimuoviPersonale(personaleTA);
+        personaleTAdao.rimuoviPersonale(personaleTA);
     }
 }

@@ -39,7 +39,7 @@
 
             <!-- Configurazione per EclipseLink -->
             <property name="eclipselink.target-database" value="PostgreSQL"/>
-            <property name="eclipselink.ddl-generation" value="create-tables"/> <!-- Crea le tabelle automaticamente -->
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/> <!-- Crea le tabelle automaticamente -->
             <property name="eclipselink.ddl-generation.output-mode" value="database"/> <!-- Usa il DB per generare le tabelle -->
 
             <!-- Logging -->
