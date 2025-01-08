@@ -1,0 +1,137 @@
+/* CSS specifico per la pagina di login */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f9; /* Colore di sfondo della pagina */
+    font-family: 'Roboto', sans-serif; /* Applica il font Roboto */
+}
+
+.squarelogin {
+    background-color: #fff;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contenutologin {
+    width: 100%;
+}
+
+.loginform {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.titolologin {
+    text-align: center;
+    font-size: 1.8em;
+    color: #333;
+}
+
+.titolologin span {
+    font-weight: bold;
+}
+
+.descrizionelogin {
+    text-align: center;
+    font-size: 1.1em;
+    color: #777;
+}
+
+.campilogin {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.titoloemailpass {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Applica al campo email e password */
+.emailpass {
+    padding: 12px;              /* Imposta un padding uniforme su tutti i lati */
+    font-size: 1em;             /* Imposta la dimensione del font */
+    border: 1px solid #ccc;    /* Imposta un bordo sottile */
+    border-radius: 5px;        /* Angoli arrotondati */
+    background-color: #f9f9f9; /* Colore di sfondo */
+    margin-bottom: 20px;       /* Spazio sotto il campo di input */
+    width: 100%;                /* Occupa tutta la larghezza disponibile */
+    box-sizing: border-box;    /* Includi padding e border nelle dimensioni totali */
+}
+
+/* Rimuovi l'outline quando l'input è in focus */
+.emailpass:focus {
+    outline: none;
+/ border-color: #3498db;
+    background-color: #fff;
+}
+.pulsantilogin {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.logreg {
+    padding: 12px;
+    font-size: 1.1em;
+    color: white;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.logreg:hover {
+    background-color: #2980b9;
+}
+
+a {
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Stile per il messaggio di errore */
+.error {
+    color: #e74c3c;
+    font-size: 1.1em;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Media Queries per schermi più piccoli */
+@media (max-width: 600px) {
+    .squarelogin {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .titolologin {
+        font-size: 1.6em;
+    }
+
+    .descrizionelogin {
+        font-size: 1em;
+    }
+
+    .logreg {
+        font-size: 1em;
+    }
+}

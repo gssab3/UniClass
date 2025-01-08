@@ -29,7 +29,7 @@ public class AnnoDidatticoService {
         }
     }
 
-    public List<AnnoDidattico> trovaAnno(int anno) {
+    public List<AnnoDidattico> trovaAnno(String anno) {
         return annoDidatticoDao.trovaAnno(anno);
     }
 

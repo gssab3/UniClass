@@ -35,21 +35,23 @@ section {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-ul {
+/* Applicare le regole solo alla lista all'interno di <section> */
+section ul {
     list-style-type: none;
     padding: 0;
 }
 
-ul li {
+section ul li {
     margin: 15px 0;
     font-size: 1.2em;
     line-height: 1.6;
 }
 
-strong {
+section strong {
     color: #3e8e41;
     font-weight: bold;
 }
+
 
 footer {
     background-color: #3e8e41;

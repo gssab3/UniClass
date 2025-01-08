@@ -1,15 +1,13 @@
-<%@ page import="it.unisa.uniclass.utenti.model.Utente" %>
-<%@ page import="it.unisa.uniclass.utenti.model.Tipo" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
+<%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
 <%@ page import="java.util.List" %>
-<%@ page import="it.unisa.uniclass.orari.model.*" %>
-<%@ page import="java.sql.Time" %><%--
-  Created by IntelliJ IDEA.
-  User: davan
-  Date: 08/01/2025
-  Time: 00:15
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="it.unisa.uniclass.orari.service.dao.CorsoLaureaDAO" %>
+<%@ page import="it.unisa.uniclass.conversazioni.model.Conversazione" %>
+<%@ page import="it.unisa.uniclass.utenti.model.Accademico" %>
+<%@ page import="it.unisa.uniclass.conversazioni.service.ConversazioneService" %>
+<%@ page import="it.unisa.uniclass.utenti.service.AccademicoService" %>
 
 <%
   /* Sessione HTTP */
@@ -25,26 +23,32 @@
   else
     tipoUtente = null;
 
-  CorsoLaurea corsoLaurea = (CorsoLaurea) request.getAttribute("corsoLaurea");
-  Resto resto = (Resto) request.getAttribute("resto");
-  AnnoDidattico annoDidattico = (AnnoDidattico) request.getAttribute("anno");
+  List<Conversazione> conversazioni = List.of();
+  ConversazioneService conversazioneService = new ConversazioneService();
 
-  List<Lezione> lezioni = (List<Lezione>) request.getAttribute("lezioni");
+  AccademicoService accademicoService = new AccademicoService();
 
+  Accademico accademicoSelf = accademicoService.trovaEmailUniClass(user.getEmail());
 
+  if (tipoUtente == Tipo.Docente || tipoUtente == Tipo.Studente || tipoUtente == Tipo.Coordinatore){
+    conversazioni = (List<Conversazione>) request.getAttribute("conversazioni");
+  }
 %>
+
+
+<!DOCTYPE html>
 <html>
+
 <head>
-  <title>UniClass</title>
+  <title>UniClass Chat</title>
   <script src="scripts/sidebar.js" type="text/javascript"></script>
   <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
-  <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
-  <link type="text/css" rel="stylesheet" href="styles/formcss.css"/>
+  <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css" />
 
 </head>
-<body>
+<body id="uniClassChat">
 
-<% if(tipoUtente == null) { %>
+  <% if(tipoUtente == null) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
@@ -65,33 +69,7 @@
   </ul>
 </div>
 
-<% } else if(tipoUtente.equals(Tipo.Studente)) { %>
-
-<div class="barraNavigazione" id="barraNavigazione">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
-  <p>Menu<p>
-  <ul id="menu">
-    <li id="orari"> <a href="servelt">Orari</a>
-    </li>
-    <li id="aule"><a href="servelt">Aule</a>
-    </li>
-    <li id="agenda"><a href="servelt">Agenda</a>
-    </li>
-    <li id="appelli"><a href="servelt">Appelli</a>
-    </li>
-    <li id="conversazioni"><a href="servelt">Conversazioni</a>
-    </li>
-    <li id="mappa"><a href="mappa.jsp">Mappa</a>
-    </li>
-    <li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
-    </li>
-    <li id="infoapp"><a href="infoapp.jsp">Info App</a>
-    </li>
-    <li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
-    </li>
-  </ul>
-</div>
-<% } else if(tipoUtente.equals(Tipo.Docente) || tipoUtente.equals(Tipo.Coordinatore)) { %>
+  <% } else if(tipoUtente.equals(Tipo.Studente)) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
@@ -105,7 +83,33 @@
     </li>
     <li id="appelli"><a href="servelt">Appelli</a>
     </li>
-    <li id="conversazioni"><a href="servelt">Conversazioni</a>
+    <li id="conversazioni"><a href="/ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
+    </li>
+    <li id="mappa"><a href="mappa.jsp">Mappa</a>
+    </li>
+    <li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
+    </li>
+    <li id="infoapp"><a href="infoapp.jsp">Info App</a>
+    </li>
+    <li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
+    </li>
+  </ul>
+</div>
+  <% } else if(tipoUtente.equals(Tipo.Docente) || tipoUtente.equals(Tipo.Coordinatore)) { %>
+
+<div class="barraNavigazione" id="barraNavigazione">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
+  <p>Menu<p>
+  <ul id="menu">
+    <li id="orari"> <a href="servelt">Orari</a>
+    </li>
+    <li id="aule"><a href="servelt">Aule</a>
+    </li>
+    <li id="agenda"><a href="servelt">Agenda</a>
+    </li>
+    <li id="appelli"><a href="servelt">Appelli</a>
+    </li>
+    <li id="conversazioni"><a href="/ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
     </li>
     <li id="mappa"><a href="mappa.jsp">Mappa</a>
     </li>
@@ -118,7 +122,7 @@
   </ul>
 </div>
 
-<% } else if(tipoUtente.equals(Tipo.PersonaleTA)) { %>
+  <% } else if(tipoUtente.equals(Tipo.PersonaleTA)) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
@@ -142,51 +146,38 @@
     </li>
   </ul>
 </div>
-<% } %>
+  <% } %>
 
 <jsp:include page="header.jsp"/>
 
+//fare retrieve delle conversazioni dell'utente'
+
+<body id="uniClassChat">
+<div class="mega-container">
+  <h1>Conversazioni</h1>
+
+  <% for (Conversazione conversazione :  conversazioni) {
+        Accademico accademico = conversazioneService.trovaAltroConversazione(conversazione, accademicoSelf);
+  %>
+  <!-- Singolo blocco per ogni conversazione -->
+  <a href="/chatServlet?conversazione?=<%=conversazione.getId()%>&accademico?=<%=accademico.getEmail()%>>" style="text-decoration: none; color: inherit;">
+  <div class="conversation-item">
+    <div class="conversation-img">
+      <% if (accademico.getTipo().equals(Tipo.Studente)) { %>
+      <img src="images/icons/iconstudent.png" alt="immagineutente">
+      <%} else if (accademico.getTipo().equals(Tipo.Docente) || accademico.getTipo().equals(Tipo.Coordinatore)) { %>
+      <img src="images/icons/iconprof.png" alt="immagineutente">
+      <%}%>
+    </div>
+    <div class="conversation-info">
+      <h3><%= accademico.getNome() %> <%= accademico.getCognome() %></h3>
+    </div>
+  </div>
+  </a>
+  <% } %>
+</div>
 
 
-
-<h1>ORARIO: <%= corsoLaurea.getNome()%> <%=resto.getNome()%> <%=annoDidattico.getAnno()%></h1>
-<table>
-  <tr>
-    <th>Giorno</th>
-    <th>I<br>9:00-10:00</th>
-    <th>II<br>10:00-11:00</th>
-    <th>III<br>11:00-12:00</th>
-    <th>12:00-13:00</th>
-    <th>IV<br>13:00-14:00</th>
-    <th>V<br>14:00-15:00</th>
-    <th>VI<br>15:00-16:00</th>
-    <th>VII<br>16:00-17:00</th>
-    <th>VIII<br>17:00-18:00</th>
-  </tr>
-  <tr>
-    <% for (Giorno giorno : Giorno.values()) { %>
-
-    <td class="highlight"><b><%= giorno.toString() %></b></td>
-
-    <% for (Lezione lezione : lezioni) {
-      if (lezione.getGiorno().equals(giorno)) {
-        for (int i = 9; i <= 17; i++) {
-          if (lezione.getOraInizio().equals(Time.valueOf(i + ":00:00"))) {
-            long durata = lezione.getOraFine().getTime() - lezione.getOraInizio().getTime();
-            long durataSecondi = durata / 1000;
-            long durataMinuti = durataSecondi / 60;
-            long durataOre = durataMinuti / 60;
-    %>
-    <td colspan="<%= durataOre %>"><%= lezione.getCorso().getNome() %></td>
-    <%
-            }
-          }
-        }
-      } %>
-
-    <% } %>
-  </tr>
-</table>
 
 
 </body>
