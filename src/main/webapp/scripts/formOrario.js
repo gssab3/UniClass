@@ -4,8 +4,11 @@ function aggiornaResto() {
 
     if (corsoLaurea) {
         var xhr = new XMLHttpRequest();
+        var xhrr = new XMLHttpRequest();
 
-        xhr.open("GET", "getRestoAnno?corsoLaurea=" + corsoLaurea, true);
+        xhr.open("GET", "getResto?corsoLaurea=" + corsoLaurea, true);
+        xhrr.open("GET", "getAnno?corsoLaurea=" + corsoLaurea, true);
+
         xhr.onload = function() {
             if (xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
@@ -17,6 +20,14 @@ function aggiornaResto() {
                     restoSelect.innerHTML += `<option value="${resto.id}">${resto.nome}</option>`;
                 });
 
+
+            }
+        };
+
+        xhrr.onload = function() {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+
                 // Aggiorna le opzioni per l'"anno"
                 var annoSelect = document.getElementById("anno");
                 annoSelect.innerHTML = '<option value="">-- Seleziona un anno --</option>';
@@ -25,6 +36,8 @@ function aggiornaResto() {
                 });
             }
         };
+
         xhr.send();
+        xhrr.send();
     }
 }

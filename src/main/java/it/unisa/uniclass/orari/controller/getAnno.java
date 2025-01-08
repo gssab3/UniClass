@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -23,34 +24,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "getRestoAnno", value = "/getRestoAnno")
-public class getRestoAnno extends HttpServlet {
+@WebServlet(name = "getAnno", value = "/getAnno")
+public class getAnno extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        PrintWriter printWriter = response.getWriter();
+
         String corsoLaurea = request.getParameter("corsoLaurea");
         CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
-        CorsoLaurea corsoL = corsoLaureaService.trovaCorsoLaurea("corsoLaurea");
+        CorsoLaurea corsoL = corsoLaureaService.trovaCorsoLaurea(corsoLaurea);
 
-        RestoService restoService = new RestoService();
+        JSONArray jsonArray = new JSONArray();
+
         AnnoDidatticoService annoDidatticoService = new AnnoDidatticoService();
 
-        List<Resto> resti = restoService.trovaRestiCorsoLaurea(corsoL);
+
         List<AnnoDidattico> anni = annoDidatticoService.trovaPerCorsoLaurea(corsoL);
 
-        Map<String, Object> result = new HashMap<>();
-        result.put("resti", resti);
-        result.put("anni", anni);
+
+        for (AnnoDidattico anno : anni) {
+            jsonArray.put(anno.getAnno());
+        }
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        try (PrintWriter out = response.getWriter()) {
-            ObjectMapper mapper = new ObjectMapper();
-            String jsonResponse = mapper.writeValueAsString(result);
-            out.print(jsonResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        printWriter.println(jsonArray.toString());
+        response.sendRedirect("script/formOrario.js");
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

@@ -135,9 +135,10 @@
 
        <jsp:include page="header.jsp"/>
 
-    <h1>Scopri UniClass: l'app che semplifica la tua vita universitaria</h1>
+
 
         <section>
+			<h1>Scopri UniClass: l'app che semplifica la tua vita universitaria</h1>
             <p>UniClass è l’app perfetta per studenti e docenti che vogliono ottimizzare la gestione della propria giornata accademica. Grazie a questa piattaforma intuitiva, puoi accedere a tutte le informazioni necessarie in tempo reale, senza bisogno di cercarle su più applicazioni.</p>
 
             <h2>Funzionalità principali:</h2>
