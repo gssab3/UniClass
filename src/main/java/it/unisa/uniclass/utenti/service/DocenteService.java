@@ -42,6 +42,7 @@ public class DocenteService {
         return docenteDao.trovaDocenteCorsoLaurea(nomeCorsoLaurea);
     }
 
+
     public List<Docente> trovaTuttiUniClass() {
         return docenteDao.trovaTuttiUniClass();
     }

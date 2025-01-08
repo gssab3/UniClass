@@ -58,12 +58,12 @@ public class LezioneService {
         return lezioneDao.trovaTutte();
     }
 
-    public List<Lezione> trovaCorsoRestoAnno(CorsoLaurea corsoLaurea, Resto resto, AnnoDidattico annoDidattico) {
-        List<Lezione> risultati = new ArrayList<>(Collections.emptyList());
-        for(Corso corso : corsoLaurea.getCorsi()) {
-            risultati.addAll(lezioneDao.trovaLezioniCorso(corso.getNome()));
-        }
-        return risultati;
+    public List<Lezione> trovaLezioneCorsoResto(Corso corso, Resto resto) {
+        return lezioneDao.trovaLezioneCorsoResto(corso.getNome(), resto.getNome());
+    }
+
+    public List<Lezione> trovaLezioneCorsoResto(String corso, String resto) {
+        return lezioneDao.trovaLezioneCorsoResto(corso, resto);
     }
 
     public void aggiungiLezione(Lezione lezione) {
@@ -72,5 +72,15 @@ public class LezioneService {
 
     public void rimuoviLezione(Lezione lezione) {
         lezioneDao.rimuoviLezione(lezione);
+    }
+
+    public List<Lezione> trovaCorsoRestoAnno(CorsoLaurea corsoLaurea, Resto resto, AnnoDidattico anno) {
+        List<Lezione> results = List.of();
+        for(Corso corso : corsoLaurea.getCorsi()) {
+            if(corso.getAnnoDidattico().equals(anno)) {
+                results.addAll(trovaLezioneCorsoResto(corso, resto));
+            }
+        }
+        return results;
     }
 }

@@ -29,7 +29,7 @@ public class Resto implements Serializable {
 
     private String nome; // Esempio: "Resto 0", "Resto 1", ecc.
 
-    @OneToMany(mappedBy = "resto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "resto", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Lezione> lezioni = new ArrayList<>();
 
     @ManyToOne

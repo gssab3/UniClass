@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ArrayList;
 
 import static it.unisa.uniclass.orari.model.Lezione.*;
 
@@ -18,7 +19,7 @@ import static it.unisa.uniclass.orari.model.Lezione.*;
         @NamedQuery(name = TROVA_LEZIONE_ORE_GIORNO, query = "SELECT l FROM Lezione l WHERE l.giorno = :giorno AND l.oraInizio = :oraInizio AND l.oraFine = :oraFine"),
         @NamedQuery(name = TROVA_LEZIONE_AULA, query = "SELECT l FROM Lezione l WHERE l.aula.nome = :nome"),
         @NamedQuery(name = TROVA_TUTTE, query = "SELECT l FROM Lezione l"),
-        @NamedQuery(name = TROVA_LEZIONI_CRA, query = "SELECT l FROM Lezione l WHERE l.corso.nome = :corso AND l.resto.nome = :resto AND l.annoDidattico.anno = :anno")
+        @NamedQuery(name = TROVA_LEZIONE_CORSO_RESTO, query = "SELECT l FROM Lezione l WHERE l.corso.nome = :nome AND l.resto.nome = :nomeresto")
 })
 public class Lezione implements Serializable {
 
@@ -28,8 +29,7 @@ public class Lezione implements Serializable {
     public final static String TROVA_LEZIONE_ORE_GIORNO = "Lezione.trovaLezioneOreGiorno";
     public static final String TROVA_LEZIONE_AULA = "Lezione.trovaLezioneAula";
     public static final String TROVA_TUTTE = "Lezione.trovaTutte";
-    public static final String TROVA_LEZIONI_CRA ="Lezione.trovaLezioniCra";
-
+    public static final String TROVA_LEZIONE_CORSO_RESTO = "Lezione.trovaLezioneCorsoResto";
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -49,9 +49,6 @@ public class Lezione implements Serializable {
     @JoinColumn(name = "resto_id")
     private Resto resto;
     @ManyToOne
-    @JoinColumn(name = "anno_id")
-    private AnnoDidattico annoDidattico;
-    @ManyToOne
     private Aula aula;
 
     public Lezione() {}
@@ -64,6 +61,7 @@ public class Lezione implements Serializable {
         this.resto = resto;
         this.corso = corso;
         this.aula = aula;
+        this.agende = new ArrayList<>();
     }
 
     public List<Agenda> getAgende() {
@@ -80,14 +78,6 @@ public class Lezione implements Serializable {
 
     public void setSemestre(int semestre) {
         this.semestre = semestre;
-    }
-
-    public AnnoDidattico getAnnoDidattico() {
-        return annoDidattico;
-    }
-
-    public void setAnnoDidattico(AnnoDidattico annoDidattico) {
-        this.annoDidattico = annoDidattico;
     }
 
     public Time getOraInizio() {
@@ -153,7 +143,6 @@ public class Lezione implements Serializable {
                 ", giorno=" + giorno +
                 ", corso=" + corso +
                 ", resto=" + resto +
-                ", annoDidattico=" + annoDidattico +
                 ", aula=" + aula +
                 '}';
     }

@@ -15,20 +15,10 @@ public class LezioneDAO implements LezioneRemote {
     private EntityManager emUniClass;
 
     @Override
-    public List<Lezione> trovaLezioniCRA(Corso corso, Resto resto, AnnoDidattico anno) {
-        TypedQuery<Lezione> query = emUniClass.createNamedQuery(Lezione.TROVA_LEZIONI_CRA, Lezione.class);
-        query.setParameter("corso", corso.getNome());
-        query.setParameter("resto", resto.getNome());
-        query.setParameter("anno", anno.getAnno());
-        return query.getResultList();
-    }
-
-    @Override
-    public List<Lezione> trovaLezioniCRA(String corso, String resto, String anno) {
-        TypedQuery<Lezione> query = emUniClass.createNamedQuery(Lezione.TROVA_LEZIONI_CRA, Lezione.class);
-        query.setParameter("corso", corso);
-        query.setParameter("resto", resto);
-        query.setParameter("anno", anno);
+    public List<Lezione> trovaLezioneCorsoResto(String corso, String resto) {
+        TypedQuery<Lezione> query = emUniClass.createNamedQuery(Lezione.TROVA_LEZIONE_CORSO_RESTO, Lezione.class);
+        query.setParameter("nome", corso);
+        query.setParameter("nomeresto", resto);
         return query.getResultList();
     }
 

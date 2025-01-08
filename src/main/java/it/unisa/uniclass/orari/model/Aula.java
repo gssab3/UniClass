@@ -4,6 +4,7 @@ import it.unisa.uniclass.esami.model.Appello;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,10 +28,10 @@ public class Aula implements Serializable {
     private int id;
 
     @OneToMany(mappedBy = "aula", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Lezione> lezioni;
+    private List<Lezione> lezioni = new ArrayList<>();
 
     @OneToMany(mappedBy = "aula", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Appello> appelli;
+    private List<Appello> appelli = new ArrayList<>();
 
     private String edificio;
     private String nome;
@@ -39,14 +40,9 @@ public class Aula implements Serializable {
         this.id = id;
         this.edificio = edificio;
         this.nome = nome;
-        lezioni = Collections.emptyList();
-        appelli = Collections.emptyList();
     }
 
-    public Aula() {
-        lezioni = Collections.emptyList();
-        appelli = Collections.emptyList();
-    }
+    public Aula() {}
 
     public int getId() {
         return id;

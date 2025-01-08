@@ -35,12 +35,12 @@ public class Docente extends Accademico implements Serializable {
             joinColumns = @JoinColumn(name = "docente_id"),
             inverseJoinColumns = @JoinColumn(name = "corso_id")
     )
-    protected List<Corso> corsi;
+    protected List<Corso> corsi = new ArrayList<>();
 
     protected String dipartimento;
 
     @OneToMany(mappedBy = "docente", cascade = CascadeType.ALL, orphanRemoval = true)
-    protected List<AppelloDocente> appelloDocenti;
+    protected List<AppelloDocente> appelloDocenti = new ArrayList<>();
 
     public Docente(String nome, String cognome, LocalDate dataNascita, String email, String password, String matricola, LocalDate iscrizione, CorsoLaurea corsoLaurea, String dipartimento) {
         tipo = Tipo.Docente;

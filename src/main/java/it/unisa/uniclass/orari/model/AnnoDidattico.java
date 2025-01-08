@@ -30,9 +30,6 @@ public class AnnoDidattico implements Serializable {
     private List<CorsoLaurea> corsiLaurea = new ArrayList<>();
 
     @OneToMany(mappedBy = "annoDidattico", cascade = CascadeType.ALL)
-    List<Lezione> lezioni = new ArrayList<>();
-
-    @OneToMany(mappedBy = "annoDidattico", cascade = CascadeType.ALL)
     private List<Corso> corsi = new ArrayList<>();
 
     public List<Corso> getCorsi() {
@@ -64,14 +61,6 @@ public class AnnoDidattico implements Serializable {
 
     public List<CorsoLaurea> getCorsiLaurea() {
         return corsiLaurea;
-    }
-
-    public List<Lezione> getLezioni() {
-        return lezioni;
-    }
-
-    public void setLezioni(List<Lezione> lezioni) {
-        this.lezioni = lezioni;
     }
 
     public void setCorsiLaurea(List<CorsoLaurea> corsiLaurea) {
