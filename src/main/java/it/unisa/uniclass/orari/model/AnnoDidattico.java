@@ -32,6 +32,18 @@ public class AnnoDidattico implements Serializable {
     @OneToMany(mappedBy = "annoDidattico", cascade = CascadeType.ALL)
     List<Lezione> lezioni = new ArrayList<>();
 
+    @OneToMany(mappedBy = "annoDidattico", cascade = CascadeType.ALL)
+    private List<Corso> corsi = new ArrayList<>();
+
+    public List<Corso> getCorsi() {
+        return corsi;
+    }
+
+    public void setCorsi(List<Corso> corsi) {
+        this.corsi = corsi;
+    }
+
+
     public AnnoDidattico(String anno){
         this.anno = anno;
     }

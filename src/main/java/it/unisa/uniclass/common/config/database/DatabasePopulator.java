@@ -1,8 +1,6 @@
 package it.unisa.uniclass.common.config.database;
 
-import it.unisa.uniclass.orari.model.AnnoDidattico;
-import it.unisa.uniclass.orari.model.CorsoLaurea;
-import it.unisa.uniclass.orari.model.Resto;
+import it.unisa.uniclass.orari.model.*;
 import it.unisa.uniclass.orari.service.CorsoLaureaService;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.sql.DataSourceDefinition;
@@ -11,6 +9,9 @@ import jakarta.ejb.Singleton;
 import jakarta.ejb.Startup;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import java.util.List;
+import java.util.ArrayList;
+import java.sql.Time;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -43,53 +44,76 @@ public class DatabasePopulator {
         CorsoLaurea corsoLaurea = new CorsoLaurea();
         corsoLaurea.setNome("Informatica");
 
-        CorsoLaurea corsoLaurea2 = new CorsoLaurea();
-        corsoLaurea2.setNome("Fisica");
-
         // Creazione dei resti e associazione con il corso di laurea
-        Resto resto = new Resto();
-        resto.setNome("Resto 0");
-        resto.setCorsoLaurea(corsoLaurea);
+        Resto resto0 = new Resto();
+        resto0.setNome("Resto 0");
+        resto0.setCorsoLaurea(corsoLaurea);
+
+        Resto resto1 = new Resto();
+        resto1.setNome("Resto 1");
+        resto1.setCorsoLaurea(corsoLaurea);
 
         Resto resto2 = new Resto();
-        resto2.setNome("Resto 1");
+        resto2.setNome("Resto 2");
         resto2.setCorsoLaurea(corsoLaurea);
 
-        Resto resto3 = new Resto();
-        resto3.setNome("Resto 2");
-        resto3.setCorsoLaurea(corsoLaurea);
-
         // Aggiunta dei resti al corso di laurea
-        corsoLaurea.getResti().add(resto);
+        corsoLaurea.getResti().add(resto0);
+        corsoLaurea.getResti().add(resto1);
         corsoLaurea.getResti().add(resto2);
-        corsoLaurea.getResti().add(resto3);
 
         // Creazione degli anni didattici
         AnnoDidattico anno1 = new AnnoDidattico("Anno 1");
         AnnoDidattico anno2 = new AnnoDidattico("Anno 2");
         AnnoDidattico anno3 = new AnnoDidattico("Anno 3");
 
-        // Associazione degli anni didattici con il corso di laurea "Informatica"
+        // Associazione degli anni didattici al corso di laurea
         corsoLaurea.getAnniDidattici().add(anno1);
         corsoLaurea.getAnniDidattici().add(anno2);
         corsoLaurea.getAnniDidattici().add(anno3);
 
-        // Associazione inversa (opzionale, utile per consistenza bidirezionale)
         anno1.getCorsiLaurea().add(corsoLaurea);
         anno2.getCorsiLaurea().add(corsoLaurea);
         anno3.getCorsiLaurea().add(corsoLaurea);
+
+        // Creazione del corso "Ingegneria del Software" e associazione con l'anno 3
+        Corso corsoIDS = new Corso();
+        corsoIDS.setNome("Ingegneria del Software");
+        corsoIDS.setCorsoLaurea(corsoLaurea);
+        corsoIDS.setAnnoDidattico(anno3);
+
+        // Aggiunta delle lezioni al corso per ciascun resto
+        for (Resto resto : List.of(resto0, resto1, resto2)) {
+            List<Lezione> lezioni = new ArrayList<>();
+            for (int i = 1; i <= 3; i++) {
+                Lezione lezione = new Lezione();
+                lezione.setSemestre(1);
+                lezione.setOraInizio(Time.valueOf("09:00:00"));
+                lezione.setOraFine(Time.valueOf("11:00:00"));
+                lezione.setGiorno(Giorno.LUNEDI); // Puoi variare i giorni se necessario
+                lezione.setResto(resto);
+                lezione.setCorso(corsoIDS);
+                lezioni.add(lezione);
+            }
+            corsoIDS.getLezioni().addAll(lezioni);
+        }
 
         // Persistenza degli oggetti
         em.persist(anno1);
         em.persist(anno2);
         em.persist(anno3);
+        em.persist(resto0);
+        em.persist(resto1);
+        em.persist(resto2);
         em.persist(corsoLaurea);
-        em.persist(corsoLaurea2);
+        em.persist(corsoIDS);
 
         // Inizializzazione dei dati
         em.flush(); // Forza il salvataggio su database
         em.clear(); // Pulisce il contesto per simulare un nuovo fetch
     }
+
+
 
 
 

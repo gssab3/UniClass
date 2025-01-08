@@ -45,6 +45,11 @@ public class Studente extends Accademico implements Serializable {
     @JoinColumn(name = "resto", nullable = true)
     private Resto resto;
 
+    @ManyToOne
+    @JoinColumn(name = "corso_laurea_id", nullable = false) // Colonna FK per CorsoLaurea
+    private CorsoLaurea corsoLaurea;
+
+
     public Studente(String nome, String cognome, LocalDate dataNascita, String email, String password, String matricola, LocalDate iscrizione, CorsoLaurea corsoLaurea, Resto resto) {
         prenotazioni = new ArrayList<Prenotazione>();
         agenda = new Agenda();
@@ -58,6 +63,7 @@ public class Studente extends Accademico implements Serializable {
         super.setTipo(Tipo.Studente);
         super.setMatricola(matricola);
         this.resto = resto;
+        this.corsoLaurea = corsoLaurea;
     }
 
     public List<Prenotazione> getPrenotazioni() {
@@ -70,6 +76,24 @@ public class Studente extends Accademico implements Serializable {
 
     public Resto getResto() {
         return resto;
+    }
+
+    public void setAgenda(Agenda agenda) {
+        this.agenda = agenda;
+    }
+
+    @Override
+    public CorsoLaurea getCorsoLaurea() {
+        return corsoLaurea;
+    }
+
+    @Override
+    public void setCorsoLaurea(CorsoLaurea corsoLaurea) {
+        this.corsoLaurea = corsoLaurea;
+    }
+
+    public void setPrenotazioni(List<Prenotazione> prenotazioni) {
+        this.prenotazioni = prenotazioni;
     }
 
     public void setResto(Resto resto) {

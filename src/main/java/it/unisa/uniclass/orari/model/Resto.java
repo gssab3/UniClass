@@ -39,6 +39,7 @@ public class Resto implements Serializable {
     @OneToMany(mappedBy = "resto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Studente> studenti = new ArrayList<>();
 
+
     public Resto(String nome, CorsoLaurea corsoLaurea) {
         this.nome = nome;
         this.corsoLaurea = corsoLaurea;

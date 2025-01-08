@@ -39,6 +39,19 @@ public class Corso implements Serializable {
     @OneToMany(mappedBy = "corso", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appello> appelli;
 
+    @ManyToOne
+    @JoinColumn(name = "anno_didattico_id", nullable = false)
+    private AnnoDidattico annoDidattico;
+
+    public AnnoDidattico getAnnoDidattico() {
+        return annoDidattico;
+    }
+
+    public void setAnnoDidattico(AnnoDidattico annoDidattico) {
+        this.annoDidattico = annoDidattico;
+    }
+
+
     private String nome;
 
     public Corso(String nome) {

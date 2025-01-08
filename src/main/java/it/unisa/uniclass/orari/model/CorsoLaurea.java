@@ -1,9 +1,11 @@
 package it.unisa.uniclass.orari.model;
 
+import it.unisa.uniclass.utenti.model.Studente;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static it.unisa.uniclass.orari.model.CorsoLaurea.*;
@@ -40,6 +42,8 @@ public class CorsoLaurea implements Serializable {
     )
     private List<AnnoDidattico> anniDidattici = new ArrayList<>();
 
+    @OneToMany(mappedBy = "corsoLaurea", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Studente> studenti;
 
     public CorsoLaurea(String nome) {
         this.nome = nome;
@@ -101,5 +105,13 @@ public class CorsoLaurea implements Serializable {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 '}';
+    }
+
+    public Collection<Studente> getStudenti() {
+        return studenti;
+    }
+
+    public void setStudenti(List<Studente> studenti) {
+        this.studenti = studenti;
     }
 }

@@ -1,13 +1,16 @@
 package it.unisa.uniclass.conversazioni.service;
 
+import it.unisa.uniclass.conversazioni.model.Conversazione;
 import it.unisa.uniclass.conversazioni.model.Messaggio;
 import it.unisa.uniclass.conversazioni.service.dao.MessaggioRemote;
+import it.unisa.uniclass.utenti.model.Accademico;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 @Stateless
@@ -71,5 +74,17 @@ public class MessaggioService {
         if (messaggio != null) {
             messaggioDao.rimuoviMessaggio(messaggio);
         }
+    }
+
+    public List<Messaggio> trovaMessaggiConversazione(Conversazione conversazione) {
+        List<Messaggio> results = new java.util.ArrayList<>(List.of());
+        if (conversazione != null) {
+            List<Accademico> accademiciMessaggeri = (List<Accademico>) conversazione.getMessaggeri();
+            for(Accademico acc : accademiciMessaggeri) {
+                results.addAll(trovaMessaggiInviatiConversazione(acc.getMatricola(),conversazione.getId()));
+            }
+            results.sort(Comparator.comparing(Messaggio::getDateTime));
+        }
+        return results;
     }
 }
