@@ -4,6 +4,8 @@
 <%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
 <%@ page import="java.util.List" %>
 <%@ page import="it.unisa.uniclass.orari.service.dao.CorsoLaureaDAO" %>
+<%@ page import="it.unisa.uniclass.conversazioni.model.Conversazione" %>
+<%@ page import="it.unisa.uniclass.utenti.model.Accademico" %>
 
 <%
     /* Sessione HTTP */
@@ -19,6 +21,10 @@
     else
     	tipoUtente = null;
 
+	if (tipoUtente == Tipo.Docente || tipoUtente == Tipo.Studente || tipoUtente == Tipo.PersonaleTA){
+		Conversazione conversazioni = request.getAttribute()
+
+	}
 %>
 
 
@@ -142,7 +148,7 @@
     <div class="mega-container">
         <h1>Conversazioni</h1>
 
-        <% for (Conversazione conversazione : conversazioni) { %>
+        <% for (Accademico accademici : Conversazione conversazione.get) { %>
             <!-- Singolo blocco per ogni conversazione -->
             <div class="conversation-item">
                 <div class="conversation-img">
@@ -155,7 +161,7 @@
                     <%}%>
                 </div>
                 <div class="conversation-info">
-                    <h3><%= conversazione.getNome() %></h3>
+                    <h3><%= conversazione.getMessaggeri() %></h3>
                 </div>
             </div>
         <% } %>
