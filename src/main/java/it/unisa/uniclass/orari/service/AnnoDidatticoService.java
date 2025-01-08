@@ -50,6 +50,20 @@ public class AnnoDidatticoService {
         annoDidatticoDao.rimuoviAnno(annoDidattico);
     }
 
+    public List<AnnoDidattico> trovaPerCorsoLaurea(String corso) {
+        List<AnnoDidattico> anni = annoDidatticoDao.trovaTutti();
+        List<AnnoDidattico> results = new ArrayList<>();
+        for(AnnoDidattico annoDidattico : anni) {
+            for(CorsoLaurea corsoLaurea: annoDidattico.getCorsiLaurea()) {
+                if(corsoLaurea.getNome().equals(corso)) {
+                    results.add(annoDidattico);
+                }
+            }
+        }
+        return results;
+    }
+
+
     public List<AnnoDidattico> trovaPerCorsoLaurea(CorsoLaurea corso) {
         List<AnnoDidattico> anni = annoDidatticoDao.trovaTutti();
         List<AnnoDidattico> results = new ArrayList<AnnoDidattico>();

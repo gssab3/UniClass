@@ -23,36 +23,14 @@ import java.util.Map;
 
 @WebServlet(name = "getResto", value = "/getResto")
 public class getResto extends HttpServlet {
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        PrintWriter printWriter = response.getWriter();
-
         String corsoLaurea = request.getParameter("corsoLaurea");
-        CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
-        CorsoLaurea corsoL = corsoLaureaService.trovaCorsoLaurea(corsoLaurea);
-
-        JSONArray jsonArray = new JSONArray();
-
         RestoService restoService = new RestoService();
+        // Recupera i resti associati al corso di laurea
+        List<Resto> resti = restoService.trovaRestiCorsoLaurea("corsoLaurea")
 
-        List<Resto> resti = restoService.trovaRestiCorsoLaurea(corsoL);
-
-
-        for(Resto resto : resti) {
-            jsonArray.put(resto.getNome());
-        }
-
-
+        // Imposta il content type e invia i dati come JSON
         response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
-        printWriter.println(jsonArray.toString());
-        response.sendRedirect("script/formOrario.js");
-
+        response.getWriter().write(new Gson().toJson(resti));
     }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
-
 }
