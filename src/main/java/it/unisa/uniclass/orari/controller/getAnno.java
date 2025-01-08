@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,32 +22,42 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @WebServlet(name = "getAnno", value = "/getAnno")
 public class getAnno extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String corsoLaurea = request.getParameter("corsoLaurea");
-        if (corsoLaurea == null || corsoLaurea.isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        PrintWriter printWriter = response.getWriter();
+
+        String corsoLaurea = request.getParameter("corsoLaurea");
         CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
         CorsoLaurea corsoL = corsoLaureaService.trovaCorsoLaurea(corsoLaurea);
 
+        JSONArray jsonArray = new JSONArray();
+
         AnnoDidatticoService annoDidatticoService = new AnnoDidatticoService();
+
+
         List<AnnoDidattico> anni = annoDidatticoService.trovaPerCorsoLaurea(corsoL);
 
-        // Creazione della risposta JSON
-        JSONArray jsonArray = new JSONArray();
+
         for (AnnoDidattico anno : anni) {
-            Map<String, String> map = new HashMap<>();
-            map.put("id", String.valueOf(anno.getId()));
-            map.put("nome", anno.getAnno());
-            jsonArray.put(map);
+            JSONObject annoJson = new JSONObject();
+            annoJson.put("id", anno.getId());
+            annoJson.put("nome", anno.getAnno());
+            jsonArray.put(annoJson);
         }
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(jsonArray.toString());
+
+        printWriter.println(jsonArray.toString());
+        printWriter.flush();
+
     }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
 }
