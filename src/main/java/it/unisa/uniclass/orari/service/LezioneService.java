@@ -11,6 +11,8 @@ import jakarta.persistence.NoResultException;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Stateless
@@ -57,8 +59,11 @@ public class LezioneService {
     }
 
     public List<Lezione> trovaCorsoRestoAnno(CorsoLaurea corsoLaurea, Resto resto, AnnoDidattico annoDidattico) {
-        return lezioneDao.trovaCorsoRestoAnno(corsoLaurea,resto,annoDidattico);
-
+        List<Lezione> risultati = new ArrayList<>(Collections.emptyList());
+        for(Corso corso : corsoLaurea.getCorsi()) {
+            risultati.addAll(lezioneDao.trovaLezioniCorso(corso.getNome()));
+        }
+        return risultati;
     }
 
     public void aggiungiLezione(Lezione lezione) {

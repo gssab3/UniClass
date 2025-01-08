@@ -18,7 +18,7 @@ import static it.unisa.uniclass.orari.model.Lezione.*;
         @NamedQuery(name = TROVA_LEZIONE_ORE_GIORNO, query = "SELECT l FROM Lezione l WHERE l.giorno = :giorno AND l.oraInizio = :oraInizio AND l.oraFine = :oraFine"),
         @NamedQuery(name = TROVA_LEZIONE_AULA, query = "SELECT l FROM Lezione l WHERE l.aula.nome = :nome"),
         @NamedQuery(name = TROVA_TUTTE, query = "SELECT l FROM Lezione l"),
-        @NamedQuery(name = TROVA_LEZIONI_CRA, query = "SELECT l FROM Lezione l WHERE l.corso.corsoLaurea = :corsoLaurea")
+        @NamedQuery(name = TROVA_LEZIONI_CRA, query = "SELECT l FROM Lezione l WHERE l.corso.nome = :corso AND l.resto.nome = :resto AND l.annoDidattico.anno = :anno")
 })
 public class Lezione implements Serializable {
 
@@ -37,7 +37,7 @@ public class Lezione implements Serializable {
     @ManyToMany(mappedBy = "lezioni") // Relazione inversa
     private List<Agenda> agende;
 
-    private LocalDate data;
+    private int semestre; //1 o 2
     private Time oraInizio;
     private Time oraFine;
     @Enumerated(EnumType.STRING)
@@ -49,13 +49,16 @@ public class Lezione implements Serializable {
     @JoinColumn(name = "resto_id")
     private Resto resto;
     @ManyToOne
+    @JoinColumn(name = "anno_id")
+    private AnnoDidattico annoDidattico;
+    @ManyToOne
     private Aula aula;
 
     public Lezione() {}
 
-    public Lezione(LocalDate data, Time oraInizio, Time oraFine, Giorno giorno, Resto resto, Corso corso, Aula aula) {
-        this.data = data;
+    public Lezione(int semestre, Time oraInizio, Time oraFine, Giorno giorno, Resto resto, Corso corso, Aula aula) {
         this.oraInizio = oraInizio;
+        this.semestre = semestre;
         this.oraFine = oraFine;
         this.giorno = giorno;
         this.resto = resto;
@@ -63,12 +66,28 @@ public class Lezione implements Serializable {
         this.aula = aula;
     }
 
-    public LocalDate getData() {
-        return data;
+    public List<Agenda> getAgende() {
+        return agende;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setAgende(List<Agenda> agende) {
+        this.agende = agende;
+    }
+
+    public int getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(int semestre) {
+        this.semestre = semestre;
+    }
+
+    public AnnoDidattico getAnnoDidattico() {
+        return annoDidattico;
+    }
+
+    public void setAnnoDidattico(AnnoDidattico annoDidattico) {
+        this.annoDidattico = annoDidattico;
     }
 
     public Time getOraInizio() {
@@ -128,12 +147,14 @@ public class Lezione implements Serializable {
     public String toString() {
         return "Lezione{" +
                 "id=" + id +
-                ", data=" + data +
+                ", semestre=" + semestre +
                 ", oraInizio=" + oraInizio +
                 ", oraFine=" + oraFine +
                 ", giorno=" + giorno +
                 ", corso=" + corso +
-                ", resto='" + resto + '\'' +
+                ", resto=" + resto +
+                ", annoDidattico=" + annoDidattico +
+                ", aula=" + aula +
                 '}';
     }
 }

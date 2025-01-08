@@ -1,7 +1,6 @@
 package it.unisa.uniclass.orari.service.dao;
 
-import it.unisa.uniclass.orari.model.Giorno;
-import it.unisa.uniclass.orari.model.Lezione;
+import it.unisa.uniclass.orari.model.*;
 import jakarta.ejb.Remote;
 
 import java.sql.Time;
@@ -17,4 +16,6 @@ public interface LezioneRemote {
     public List<Lezione> trovaTutte();
     public void aggiungiLezione(Lezione l);
     public void rimuoviLezione(Lezione l);
+    public List<Lezione> trovaLezioniCRA(String corso, String resto, String anno);
+    public List<Lezione> trovaLezioniCRA(Corso corso, Resto resto, AnnoDidattico anno);
 }
