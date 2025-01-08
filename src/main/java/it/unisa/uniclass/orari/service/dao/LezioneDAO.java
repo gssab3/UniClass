@@ -1,8 +1,8 @@
 package it.unisa.uniclass.orari.service.dao;
 
-import it.unisa.uniclass.orari.model.Giorno;
-import it.unisa.uniclass.orari.model.Lezione;
+import it.unisa.uniclass.orari.model.*;
 import jakarta.ejb.Stateless;
+import jakarta.enterprise.inject.Typed;
 import jakarta.persistence.*;
 
 import java.sql.Time;
@@ -50,6 +50,10 @@ public class LezioneDAO implements LezioneRemote {
         TypedQuery<Lezione> query = emUniClass.createNamedQuery(Lezione.TROVA_LEZIONE_AULA, Lezione.class);
         query.setParameter("nome", nome);
         return query.getResultList();
+    }
+
+    public List<Lezione> trovaCorsoRestoAnno(CorsoLaurea corsoLaurea, Resto resto, AnnoDidattico annoDidattico){
+        TypedQuery<Lezione> query = emUniClass.createNamedQuery(Lezione.TROVA_LEZIONI_CRA, Lezione.class);
     }
 
     @Override
