@@ -12,7 +12,7 @@ public class AnnoDidatticoDAO implements AnnoDidatticoRemote {
     private EntityManager emUniClass;
 
     @Override
-    public List<AnnoDidattico> trovaAnno(int anno) {
+    public List<AnnoDidattico> trovaAnno(String anno) {
         TypedQuery<AnnoDidattico> query = emUniClass.createNamedQuery(AnnoDidattico.TROVA_ANNO, AnnoDidattico.class);
         query.setParameter("anno", anno);
         return query.getResultList();

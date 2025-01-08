@@ -1,89 +1,95 @@
-.barraNavigazione.open {
-        width: 300px;
-}
+/* Importazione del font "Anton" da Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
-.barraNavigazione p{
-	color: #0000FF;
-	text-decoration: none;
-	font-size: 100%;
-	text-align: center;
-	-webkit-text-stroke-color: black;
-	-webkit-text-stroke-width: 1px;
-}
-
-.barraNavigazione{
-	font-size: 35px;
-	text-shadow: 2px 2px 5px black;
+/* Generale barra di navigazione */
+.barraNavigazione {
+	font-family: 'Anton', sans-serif; /* Applicazione del font Anton */
+	font-size: 40px;
+	font-weight: 700; /* Grassetto */
 	border: 2px solid black;
 	height: 100%;
-  	position: fixed;
-  	width:0;
-  	z-index: 2;
-  	top: 0;
-  	left: 0;
-  	background-color: #5dbb63;
-  	overflow-x: hidden;
-  	transition: 0.5s;
-  	padding-top: 0px;
+	position: fixed;
+	width: 0;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	background-color: #4CAFEC; /* Azzurro */
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 20px; /* Padding più visibile */
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* Aggiunta ombra nera al testo */
 }
 
+/* Messaggi all'interno della barra di navigazione (testo principale) */
+.barraNavigazione p {
+	color: #227cd7; /* Blu scuro per il testo */
+	text-decoration: none;
+	font-size: 120%;
+	text-align: center;
+	-webkit-text-stroke-color: black;
+	-webkit-text-stroke-width: 0.1px;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Aggiunta ombra nera per miglior contrasto */
+}
 
+/* Modifica colore dei link */
+.barraNavigazione a {
+	text-decoration: none;
+	color: #D2C7B3;
+	-webkit-text-stroke-width: 0.1px;
+	-webkit-text-stroke-color: black;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Aggiunta ombra per i link */
+}
+
+/* Bottone per chiudere la barra */
+.barraNavigazione .closebtn {
+	position: absolute;
+	left: 0;
+	padding: 0;
+	font-size: 36px;
+	margin-left: 10px;
+	margin-top: 10px;
+	text-decoration: none;
+	color: #2E8B57; /* Verde scuro */
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: black;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Aggiunta ombra per il pulsante di chiusura */
+}
+
+/* Scrollbar personalizzata nascosta */
 .barraNavigazione::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 
 .barraNavigazione {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
 
-.barraNavigazione a{
-	text-decoration: none;
-	color: #F84B01;
-	-webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-}
-
-.barraNavigazione .closebtn {
-  	position: absolute;
-  	left:0;
-  	padding:0;
-  	font-size: 36px;
-  	margin-left: 10px;
-  	margin-top:10px;
-  	text-decoration: none;
-	color: #F84B01;
-	-webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: black;
-}
-
-
+/* Responsività per schermi piccoli */
 @media only screen and (max-width: 767px) {
-
-    .barraNavigazione.open {
-        width: 100%;
-        font-size: 50px;
-    }
-
-}
-
-@media only screen and (min-width:768px) and (max-width:991px){
 	.barraNavigazione.open {
-        width: 50%;
-    }
-
+		width: 100%;
+		font-size: 50px;
+	}
 }
 
-
-@media only screen and (min-width:992px) and (max-width:1199px) {
-
-    .barraNavigazione.open {
-        width: 35%;
-    }
+/* Responsività per schermi medi (tablet) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.barraNavigazione.open {
+		width: 50%;
+	}
 }
 
-@media only screen and (min-width:1200px) {
-    .barraNavigazione.open {
-        width: 300px;
-    }
+/* Responsività per schermi grandi (desktop medio) */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	.barraNavigazione.open {
+		width: 35%;
+	}
+}
+
+/* Responsività per schermi molto grandi (desktop) */
+@media only screen and (min-width: 1200px) {
+	.barraNavigazione.open {
+		width: 300px;
+	}
 }

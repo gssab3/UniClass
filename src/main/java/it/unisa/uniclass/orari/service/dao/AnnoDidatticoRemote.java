@@ -8,7 +8,7 @@ import java.util.List;
 @Remote
 public interface AnnoDidatticoRemote {
 
-    public List<AnnoDidattico> trovaAnno(int anno);
+    public List<AnnoDidattico> trovaAnno(String anno);
     public AnnoDidattico trovaId(int id);
     public List<AnnoDidattico> trovaTutti();
     public void aggiungiAnno(AnnoDidattico annoDidattico);

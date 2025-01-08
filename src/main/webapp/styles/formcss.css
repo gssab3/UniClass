@@ -1,3 +1,5 @@
+/* Importazione del font "Poetsen One" da Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap');
 
 /* Contenitore del form */
 #contieniForm {
@@ -17,6 +19,7 @@
     display: inline-block;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.3);
+    font-family: 'Poetsen One', sans-serif; /* Applicazione del font Poetsen One */
 }
 
 /* Titolo del form */
@@ -25,15 +28,17 @@
     margin-bottom: 20px;
     font-size: 24px;
     color: #2c3e50;
+    font-family: 'Poetsen One', sans-serif; /* Applicazione del font Poetsen One */
 }
 
 /* Etichetta e selezioni */
 #cercaOrarioForm label {
-    font-size: 16px;
+    font-size: 25px;
     font-weight: bold;
     color: #333;
     margin-bottom: 8px;
     display: inline-block;
+    font-family: 'Poetsen One', sans-serif; /* Applicazione del font Poetsen One */
 }
 
 #cercaOrarioForm select {
@@ -45,6 +50,7 @@
     margin-bottom: 20px;
     background-color: #fafafa;
     transition: border-color 0.3s ease;
+    font-family: 'Poetsen One', sans-serif; /* Applicazione del font Poetsen One */
 }
 
 #cercaOrarioForm select:focus {
@@ -70,6 +76,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: bold;
+    font-family: 'Poetsen One', sans-serif; /* Applicazione del font Poetsen One */
 }
 
 #cercaOrarioForm button:hover {
@@ -80,7 +87,7 @@
     outline: none;
 }
 
-/* ResponsivitÃ  */
+/* Responsività */
 @media (max-width: 600px) {
     #cercaOrarioForm {
         padding: 15px;

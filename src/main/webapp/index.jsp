@@ -97,7 +97,7 @@
             </li>
             <li id="appelli"><a href="servelt">Appelli</a>
             </li>
-            <li id="conversazioni"><a href="servelt">Conversazioni</a>
+            <li id="conversazioni"><a href="/ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
             </li>
 			<li id="mappa"><a href="mappa.jsp">Mappa</a>
 			</li>

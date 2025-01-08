@@ -1,0 +1,109 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Chat Container */
+.chat-container {
+  width: 360px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+}
+
+/* Chat Header */
+.chat-header {
+  background-color: #4CAFEC; /* Azzurro */
+  color: white;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  text-align: center;
+}
+
+/* Chat Box */
+.chat-box {
+  padding: 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+  background-color: #f9f9f9;
+}
+
+/* Styling for Messages */
+.message {
+  margin-bottom: 10px;
+  display: flex;
+  max-width: 75%;
+}
+
+.message-text {
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.message.self .message-text {
+  background-color: #4CAFEC; /* Azzurro */
+  color: white;
+  align-self: flex-start;
+}
+
+.message.author .message-text {
+  background-color: #ddd;
+  color: black;
+  align-self: flex-end;
+}
+
+/* Specific styling for messages with the "red-text" class */
+.red-text .message-text {
+  background-color: #FF6347; /* Light red */
+  color: white;
+  font-weight: bold;
+  align-self: flex-start;
+}
+
+/* Chat Input Container */
+.chat-input-container {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  background-color: #f1f1f1;
+  border-radius: 0 0 10px 10px;
+}
+
+/* Input Field */
+.chat-input-container .chat-input {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+/* Send Button */
+.chat-input-container .send-button {
+  padding: 10px 20px;
+  background-color: #4CAFEC; /* Azzurro */
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.chat-input-container .send-button:hover {
+  background-color: #45a049; /* Verde scuro per hover */
+}
