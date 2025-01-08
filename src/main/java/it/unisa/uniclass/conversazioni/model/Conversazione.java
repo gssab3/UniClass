@@ -2,6 +2,7 @@ package it.unisa.uniclass.conversazioni.model;
 
 import it.unisa.uniclass.esami.model.Prenotazione;
 import it.unisa.uniclass.utenti.model.Accademico;
+import jakarta.inject.Named;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -10,9 +11,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static it.unisa.uniclass.conversazioni.model.Conversazione.*;
+
 @Entity
 @Table(name = "conversazioni")
+@NamedQueries({
+        @NamedQuery(name = TROVA_CONVERSAZIONE, query = "SELECT c FROM Conversazione c WHERE c.id = :id"),
+        @NamedQuery(name = TROVA_TUTTE, query = "SELECT c FROM Conversazione c")
+})
 public class Conversazione implements Serializable {
+
+    public static final String TROVA_CONVERSAZIONE = "Conversazione.trovaConversazione";
+    public static final String TROVA_TUTTE = "Conversazione.trovaTutte";
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

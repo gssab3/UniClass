@@ -40,6 +40,7 @@ public class CorsoLaurea implements Serializable {
     )
     private List<AnnoDidattico> anniDidattici = new ArrayList<>();
 
+
     public CorsoLaurea(String nome) {
         this.nome = nome;
         this.corsi = new ArrayList<Corso>();

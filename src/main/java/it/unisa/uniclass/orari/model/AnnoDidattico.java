@@ -29,7 +29,7 @@ public class AnnoDidattico implements Serializable {
     @ManyToMany(mappedBy = "anniDidattici")
     private List<CorsoLaurea> corsiLaurea = new ArrayList<>();
 
-    @OneToMany(mappedBy = "anniDidattici", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "annoDidattico", cascade = CascadeType.ALL)
     List<Lezione> lezioni = new ArrayList<>();
 
     public AnnoDidattico(String anno){
@@ -65,6 +65,8 @@ public class AnnoDidattico implements Serializable {
     public void setCorsiLaurea(List<CorsoLaurea> corsiLaurea) {
         this.corsiLaurea = corsiLaurea;
     }
+
+
 
     @Override
     public String toString() {

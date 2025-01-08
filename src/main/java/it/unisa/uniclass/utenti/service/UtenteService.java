@@ -40,4 +40,18 @@ public class UtenteService {
             return null;
         }
     }
+
+    public Utente retrieveByEmail(String email) {
+        PersonaleTAService personaleTAService = new PersonaleTAService();
+        AccademicoService accademicoService = new AccademicoService();
+        PersonaleTA personaleTA= (PersonaleTA) personaleTAService.trovaEmail(email);
+        Accademico accademico = (Accademico) accademicoService.trovaEmailUniClass(email);
+        if(personaleTA != null) {
+            return personaleTA;
+        }
+        else if(accademico != null) {
+            return accademico;
+        }
+        return null;
+    }
 }

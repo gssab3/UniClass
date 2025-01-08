@@ -32,7 +32,6 @@ public class LoginServlet extends HttpServlet{
             if (user != null) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser", user);
-
                 response.sendRedirect(request.getContextPath() + "/index.jsp");
             } else {
                 response.sendRedirect(request.getContextPath() + "/Login.jsp?action=error");
