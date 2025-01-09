@@ -40,7 +40,7 @@
   <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
   <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
   <link type="text/css" rel="stylesheet" href="styles/formcss.css"/>
-
+  <link type="text/css" rel="stylesheet" href="styles/tableStyle.css">
 </head>
 <body>
 
@@ -150,43 +150,62 @@
 
 
 <h1>ORARIO: <%= corsoLaurea.getNome()%> <%=resto.getNome()%> <%=annoDidattico.getAnno()%></h1>
-<table>
-  <tr>
-    <th>Giorno</th>
-    <th>I<br>9:00-10:00</th>
-    <th>II<br>10:00-11:00</th>
-    <th>III<br>11:00-12:00</th>
-    <th>12:00-13:00</th>
-    <th>IV<br>13:00-14:00</th>
-    <th>V<br>14:00-15:00</th>
-    <th>VI<br>15:00-16:00</th>
-    <th>VII<br>16:00-17:00</th>
-    <th>VIII<br>17:00-18:00</th>
-  </tr>
-  <tr>
-    <% for (Giorno giorno : Giorno.values()) { %>
-
-    <td class="highlight"><b><%= giorno.toString() %></b></td>
-
-    <% for (Lezione lezione : lezioni) {
-      if (lezione.getGiorno().equals(giorno)) {
-        for (int i = 9; i <= 17; i++) {
-          if (lezione.getOraInizio().equals(Time.valueOf(i + ":00:00"))) {
-            long durata = lezione.getOraFine().getTime() - lezione.getOraInizio().getTime();
-            long durataSecondi = durata / 1000;
-            long durataMinuti = durataSecondi / 60;
-            long durataOre = durataMinuti / 60;
-    %>
-    <td colspan="<%= durataOre %>"><%= lezione.getCorso().getNome() %></td>
+<div class="table-container">
+  <table class="schedule-table">
+    <tr>
+      <th>Giorno</th>
+      <th>I<br>9:00-10:00</th>
+      <th>II<br>10:00-11:00</th>
+      <th>III<br>11:00-12:00</th>
+      <th>IV<br>12:00-13:00</th>
+      <th>V<br>13:00-14:00</th>
+      <th>VI<br>14:00-15:00</th>
+      <th>VII<br>15:00-16:00</th>
+      <th>VIII<br>16:00-17:00</th>
+      <th>IX<br>17:00-18:00</th>
+    </tr>
     <%
-            }
+      for (Giorno giorno : Giorno.values()) {
+    %>
+    <tr>
+      <td class="highlight"><b><%= giorno.toString() %></b></td>
+      <%
+        int currentHour = 9; // Ora iniziale della giornata
+
+        for (Lezione lezione : lezioni) {
+          if (lezione.getGiorno().equals(giorno)) {
+            int oraInizio = lezione.getOraInizio().toLocalTime().getHour();
+            int oraFine = lezione.getOraFine().toLocalTime().getHour();
+            int durataOre = oraFine - oraInizio;
+
+            // Aggiungi celle vuote fino all'ora di inizio della lezione
+            while (currentHour < oraInizio) {
+      %>
+      <td></td>
+      <%
+          currentHour++;
+        }
+      %>
+      <td colspan="<%= durataOre %>" class="subject-<%= lezione.getCorso().getNome().toLowerCase().replaceAll("\\s+", "-") %>">
+        <%= lezione.getCorso().getNome() %>
+      </td>
+      <%
+            currentHour += durataOre;
           }
         }
-      } %>
-
+        while (currentHour <= 17) {
+      %>
+      <td></td>
+      <%
+          currentHour++;
+        }
+      %>
+    </tr>
     <% } %>
-  </tr>
-</table>
+  </table>
+</div>
+
+
 
 
 </body>
