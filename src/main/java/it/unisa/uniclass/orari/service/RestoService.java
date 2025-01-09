@@ -46,12 +46,22 @@ public class RestoService {
         }
     }
 
-    public List<Resto> trovaRestoNomeCorso(String nomeResto, CorsoLaurea corso) {
-        return restoDao.trovaRestoNomeCorso(nomeResto, corso);
+    public Resto trovaRestoNomeCorso(String nomeResto, CorsoLaurea corso) {
+        try {
+            return restoDao.trovaRestoNomeCorso(nomeResto, corso);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
-    public List<Resto> trovaRestoNomeCorso(String nomeResto, String nomeCorso) {
-        return restoDao.trovaRestoNomeCorso(nomeResto, nomeCorso);
+    public Resto trovaRestoNomeCorso(String nomeResto, String nomeCorso) {
+        try {
+            return restoDao.trovaRestoNomeCorso(nomeResto, nomeCorso);
+        }
+        catch(NoResultException e) {
+            return null;
+        }
     }
 
     public void aggiungiResto(Resto resto) {

@@ -14,13 +14,7 @@ public class LezioneDAO implements LezioneRemote {
     @PersistenceContext(unitName = "DBUniClassPU")
     private EntityManager emUniClass;
 
-    @Override
-    public List<Lezione> trovaLezioneCorsoResto(String corso, String resto) {
-        TypedQuery<Lezione> query = emUniClass.createNamedQuery(Lezione.TROVA_LEZIONE_CORSO_RESTO, Lezione.class);
-        query.setParameter("nome", corso);
-        query.setParameter("nomeresto", resto);
-        return query.getResultList();
-    }
+
 
     @Override
     public Lezione trovaLezione(long id){
@@ -74,5 +68,24 @@ public class LezioneDAO implements LezioneRemote {
     @Override
     public void rimuoviLezione(Lezione l) {
         emUniClass.remove(l);
+    }
+
+    @Override
+    public List<Lezione> trovaLezioniCorsoLaureaRestoAnno(long clid, long reid, int anid) {
+        TypedQuery<Lezione> query = emUniClass.createNamedQuery(Lezione.TROVA_LEZIONE_CORSO_RESTO_ANNO, Lezione.class);
+        query.setParameter("corsoLaureaId", clid);
+        query.setParameter("restoId", reid);
+        query.setParameter("annoId", anid);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Lezione> trovaLezioniCorsoLaureaRestoAnnoSemestre(long clid, long reid, int anid, int semestre) {
+        TypedQuery<Lezione> query = emUniClass.createNamedQuery(Lezione.TROVA_LEZIONE_CORSO_RESTO_ANNO_SEMESTRE, Lezione.class);
+        query.setParameter("corsoLaureaId", clid);
+        query.setParameter("restoId", reid);
+        query.setParameter("annoId", anid);
+        query.setParameter("semestre", semestre);
+        return query.getResultList();
     }
 }

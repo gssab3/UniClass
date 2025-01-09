@@ -14,7 +14,7 @@ import static it.unisa.uniclass.orari.model.Resto.*;
         @NamedQuery(name = TROVA_RESTI_CORSO, query = "SELECT r FROM Resto r WHERE r.corsoLaurea.nome = :nome"),
         @NamedQuery(name = TROVA_RESTO, query = "SELECT r FROM Resto r WHERE r.id = :id"),
         @NamedQuery(name = TROVA_RESTO_NOME, query = "SELECT r FROM Resto r WHERE r.nome = :nome"),
-        @NamedQuery(name = TROVA_RESTO_NOME_CORSO, query = "SELECT r FROM Resto r WHERE r.nome = :nome AND r.corsoLaurea.nome = :nomeCorso")
+        @NamedQuery(name = TROVA_RESTO_NOME_CORSO, query = "SELECT r FROM Resto r JOIN r.corsoLaurea cl WHERE r.nome = :nome AND cl.nome = :nomeCorso")
 })
 public class Resto implements Serializable {
 

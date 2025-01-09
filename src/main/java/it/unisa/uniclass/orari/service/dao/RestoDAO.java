@@ -42,19 +42,19 @@ public class RestoDAO implements RestoRemote {
     }
 
     @Override
-    public List<Resto> trovaRestoNomeCorso(String nomeResto, CorsoLaurea corso){
+    public Resto trovaRestoNomeCorso(String nomeResto, CorsoLaurea corso){
         TypedQuery<Resto> query = emUniClass.createNamedQuery(Resto.TROVA_RESTO_NOME_CORSO, Resto.class);
         query.setParameter("nome", nomeResto);
         query.setParameter("nomeCorso", corso.getNome());
-        return  query.getResultList();
+        return  query.getSingleResult();
     }
 
     @Override
-    public List<Resto> trovaRestoNomeCorso(String nomeResto, String nomeCorso){
+    public Resto trovaRestoNomeCorso(String nomeResto, String nomeCorso){
         TypedQuery<Resto> query = emUniClass.createNamedQuery(Resto.TROVA_RESTO_NOME_CORSO, Resto.class);
         query.setParameter("nome", nomeResto);
         query.setParameter("nomeCorso", nomeCorso);
-        return  query.getResultList();
+        return  query.getSingleResult();
     }
 
     @Override

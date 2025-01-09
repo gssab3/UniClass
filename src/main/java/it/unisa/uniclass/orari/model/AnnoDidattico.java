@@ -13,13 +13,17 @@ import static it.unisa.uniclass.orari.model.AnnoDidattico.*;
 @NamedQueries({
         @NamedQuery(name = TROVA_ANNO, query = "SELECT a FROM AnnoDidattico a WHERE a.anno = :anno"),
         @NamedQuery(name = TROVA_ID, query = "SELECT a FROM AnnoDidattico a WHERE a.id = :id"),
-        @NamedQuery(name = TROVA_TUTTI, query = "SELECT a FROM AnnoDidattico a")
+        @NamedQuery(name = TROVA_TUTTI, query = "SELECT a FROM AnnoDidattico a"),
+        @NamedQuery(name = TROVA_ANNI_CORSOLAUREA, query = "SELECT a FROM AnnoDidattico a JOIN a.corsiLaurea c WHERE c.id = :corsoId"),
+        @NamedQuery(name = TROVA_ANNI_CORSOLAUREA_NOME, query = "SELECT a FROM AnnoDidattico a JOIN a.corsiLaurea c WHERE c.id = :corsoId AND a.anno = :anno")
 })
 public class AnnoDidattico implements Serializable {
 
     public static final String TROVA_ANNO = "AnnoDidattico.trovaAnno";
     public static final String TROVA_ID = "AnnoDidattico.trovaId";
     public static final String TROVA_TUTTI = "AnnoDidattico.trovaTutti";
+    public static final String TROVA_ANNI_CORSOLAUREA = "AnnoDidattico.trovaAnniCorsoLaurea";
+    public static final String TROVA_ANNI_CORSOLAUREA_NOME = "AnnoDidattico.trovaAnniCorsoLaureaNome";
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

@@ -28,36 +28,27 @@ public class cercaOrario extends HttpServlet {
         String restoNome = request.getParameter("resto");
         String annoNome = request.getParameter("anno");
 
-
         CorsoLaureaService corsoLaureaService = new CorsoLaureaService();
         CorsoLaurea corsoLaurea = corsoLaureaService.trovaCorsoLaurea(corsoNome);
 
+
+        //Prendo il resto
         RestoService restoService = new RestoService();
-        List<Resto> resti = restoService.trovaResto(restoNome);
-        Resto resto = null;
-        for (Resto r : resti) {
-            if(corsoLaurea.getResti().contains(r)) {
-                resto = r;
-            }
-        }
+        Resto resto = restoService.trovaRestoNomeCorso(restoNome, corsoLaurea);
 
+        //Prendo l'anno di quel certo corso (e l'anno ha un certo nome)
         AnnoDidatticoService annoDidatticoService = new AnnoDidatticoService();
-        List<AnnoDidattico> anni = annoDidatticoService.trovaAnno(annoNome);
-        AnnoDidattico anno = null;
-        for (AnnoDidattico a : anni) {
-            if (corsoLaurea.getAnniDidattici().contains(a)){
-                anno = a;
-            }
-        }
+        AnnoDidattico annoDidattico = annoDidatticoService.trovaTuttiCorsoLaureaNome(corsoLaurea.getId(),annoNome);
 
+        //Prendo le lezioni di quel corsoLaurea, quel resto e quell'anno
         LezioneService lezioneService = new LezioneService();
-        List<Lezione> lezioni = lezioneService.trovaCorsoRestoAnno(corsoLaurea,resto,anno);
+        List<Lezione> lezioni = lezioneService.trovaLezioniCorsoLaureaRestoAnno(corsoLaurea.getId(),resto.getId(),annoDidattico.getId());
 
         request.setAttribute("lezioni", lezioni);
 
         request.setAttribute("corsoLaurea", corsoLaurea);
         request.setAttribute("resto", resto);
-        request.setAttribute("anno", anno);
+        request.setAttribute("anno", annoDidattico);
 
         request.getRequestDispatcher("/OrarioSingolo.jsp").forward(request, response);
 

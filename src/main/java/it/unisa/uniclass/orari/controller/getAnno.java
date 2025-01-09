@@ -39,7 +39,7 @@ public class getAnno extends HttpServlet {
         AnnoDidatticoService annoDidatticoService = new AnnoDidatticoService();
 
 
-        List<AnnoDidattico> anni = annoDidatticoService.trovaPerCorsoLaurea(corsoL);
+        List<AnnoDidattico> anni = annoDidatticoService.trovaTuttiCorsoLaurea(corsoL.getId());
 
 
         for (AnnoDidattico anno : anni) {

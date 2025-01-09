@@ -175,6 +175,23 @@
 	</div>
 
 <script src="scripts/formOrario.js"></script>
+<script>
+	// Intercetta l'evento submit del form
+	document.getElementById("cercaOrarioForm").addEventListener("submit", function(event) {
+		// Recupera i valori dei campi del form
+		const corsoLaurea = document.getElementById("corsoLaurea").value;
+		const resto = document.getElementById("resto").value;
+		const anno = document.getElementById("anno").value;
+
+		// Log dei valori nella console
+		console.log("Corso di Laurea:", corsoLaurea);
+		console.log("Resto:", resto);
+		console.log("Anno:", anno);
+
+		// (Opzionale) Lascia inviare il form o previeni l'invio per debugging
+		// event.preventDefault(); // Previene l'invio del form per testare i log
+	});
+</script>
 
 
 <h1><%= "Hello World!" %>

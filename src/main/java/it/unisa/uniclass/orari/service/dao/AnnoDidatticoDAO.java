@@ -31,6 +31,20 @@ public class AnnoDidatticoDAO implements AnnoDidatticoRemote {
         return query.getResultList();
     }
 
+    @Override
+    public List<AnnoDidattico> trovaTuttiCorsoLaurea(long id) {
+        TypedQuery<AnnoDidattico> query = emUniClass.createNamedQuery(AnnoDidattico.TROVA_ANNI_CORSOLAUREA, AnnoDidattico.class);
+        query.setParameter("corsoId", id);
+        return query.getResultList();
+    }
+
+    @Override
+    public AnnoDidattico trovaCorsoLaureaNome(long id, String anno) {
+        TypedQuery<AnnoDidattico> query = emUniClass.createNamedQuery(AnnoDidattico.TROVA_ANNI_CORSOLAUREA_NOME, AnnoDidattico.class);
+        query.setParameter("corsoId", id);
+        query.setParameter("anno", anno);
+        return query.getSingleResult();
+    }
 
 
     @Override

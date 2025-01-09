@@ -54,27 +54,16 @@ public class AnnoDidatticoService {
         annoDidatticoDao.rimuoviAnno(annoDidattico);
     }
 
-    public List<AnnoDidattico> trovaPerCorsoLaurea(CorsoLaurea corsoLaurea) {
-        String query = "SELECT a FROM AnnoDidattico a " +
-                "JOIN FETCH a.corsiLaurea c " +
-                "WHERE c = :corsoLaurea";
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DBUniClassPU");
-        EntityManager em = emf.createEntityManager();
-
-        return em.createQuery(query, AnnoDidattico.class)
-                .setParameter("corsoLaurea", corsoLaurea)
-                .getResultList();
+    public List<AnnoDidattico> trovaTuttiCorsoLaurea(long id) {
+        return annoDidatticoDao.trovaTuttiCorsoLaurea(id);
     }
 
-    /*
-    public List<AnnoDidattico> trovaPerCorsoLaurea(CorsoLaurea corso) {
-        List<AnnoDidattico> anni = annoDidatticoDao.trovaTutti();
-        List<AnnoDidattico> results = new ArrayList<AnnoDidattico>();
-        for(AnnoDidattico annoDidattico : anni) {
-            if(annoDidattico.getCorsiLaurea().contains(corso))
-                results.add(annoDidattico);
+    public AnnoDidattico trovaTuttiCorsoLaureaNome(long id, String anno) {
+        try {
+            return annoDidatticoDao.trovaCorsoLaureaNome(id, anno);
         }
-        return results;
-    }*/
+        catch(NoResultException e) {
+            return null;
+        }
+    }
 }

@@ -40,8 +40,8 @@ public class ConversazioneService {
         return conversazioneDao.trovaTutte();
     }
 
+    //Trova tutte le conversazioni di un certo accademico
     public List<Conversazione> trovaConversazioneAccademico(Accademico accademico) {
-        AccademicoService service = new AccademicoService();
         List<Conversazione> results = new ArrayList<>();
         List<Conversazione> conversazioni = conversazioneDao.trovaTutte();
         for(Conversazione c : conversazioni) {

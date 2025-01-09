@@ -11,6 +11,8 @@ public interface AnnoDidatticoRemote {
     public List<AnnoDidattico> trovaAnno(String anno);
     public AnnoDidattico trovaId(int id);
     public List<AnnoDidattico> trovaTutti();
+    public List<AnnoDidattico> trovaTuttiCorsoLaurea(long id);
+    public AnnoDidattico trovaCorsoLaureaNome(long id, String anno);
     public void aggiungiAnno(AnnoDidattico annoDidattico);
     public void rimuoviAnno(AnnoDidattico annoDidattico);
 }

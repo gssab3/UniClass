@@ -1,12 +1,16 @@
 package it.unisa.uniclass.orari.service;
 
+import it.unisa.uniclass.orari.model.AnnoDidattico;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
+import it.unisa.uniclass.orari.model.Resto;
 import it.unisa.uniclass.orari.service.dao.CorsoLaureaRemote;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
+import jakarta.transaction.Transactional;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless

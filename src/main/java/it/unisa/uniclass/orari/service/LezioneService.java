@@ -7,6 +7,7 @@ import it.unisa.uniclass.orari.service.dao.LezioneRemote;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
+import jakarta.transaction.Transactional;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -58,12 +59,12 @@ public class LezioneService {
         return lezioneDao.trovaTutte();
     }
 
-    public List<Lezione> trovaLezioneCorsoResto(Corso corso, Resto resto) {
-        return lezioneDao.trovaLezioneCorsoResto(corso.getNome(), resto.getNome());
+    public List<Lezione> trovaLezioniCorsoLaureaRestoAnno(long clid, long rid, int annoid) {
+        return lezioneDao.trovaLezioniCorsoLaureaRestoAnno(clid, rid, annoid);
     }
 
-    public List<Lezione> trovaLezioneCorsoResto(String corso, String resto) {
-        return lezioneDao.trovaLezioneCorsoResto(corso, resto);
+    public List<Lezione> trovaLezioniCorsoLaureaRestoAnnoSemestre(long clid, long rid, int annoid, int semestre) {
+        return lezioneDao.trovaLezioniCorsoLaureaRestoAnnoSemestre(clid, rid, annoid, semestre);
     }
 
     public void aggiungiLezione(Lezione lezione) {
@@ -74,13 +75,5 @@ public class LezioneService {
         lezioneDao.rimuoviLezione(lezione);
     }
 
-    public List<Lezione> trovaCorsoRestoAnno(CorsoLaurea corsoLaurea, Resto resto, AnnoDidattico anno) {
-        List<Lezione> results = List.of();
-        for(Corso corso : corsoLaurea.getCorsi()) {
-            if(corso.getAnnoDidattico().equals(anno)) {
-                results.addAll(trovaLezioneCorsoResto(corso, resto));
-            }
-        }
-        return results;
-    }
+
 }

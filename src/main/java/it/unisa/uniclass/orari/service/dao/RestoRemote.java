@@ -12,8 +12,8 @@ public interface RestoRemote {
     public List<Resto> trovaRestiCorsoLaurea(String nomeCorsoLaurea);
     public List<Resto> trovaResto(String nomeResto);
     public Resto trovaResto(long id);
-    public List<Resto> trovaRestoNomeCorso(String nomeResto, CorsoLaurea corso);
-    public List<Resto> trovaRestoNomeCorso(String nomeResto, String nomeCorso);
+    public Resto trovaRestoNomeCorso(String nomeResto, CorsoLaurea corso);
+    public Resto trovaRestoNomeCorso(String nomeResto, String nomeCorso);
     public void aggiungiResto(Resto resto);
     public void rimuoviResto(Resto resto);
 }

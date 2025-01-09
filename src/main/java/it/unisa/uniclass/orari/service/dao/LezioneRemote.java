@@ -14,7 +14,8 @@ public interface LezioneRemote {
     public List<Lezione> trovaLezioniOreGiorno(Time oraInizio, Time oraFine, Giorno giorno);
     public List<Lezione> trovaLezioniAule(String nome);
     public List<Lezione> trovaTutte();
+    public List<Lezione> trovaLezioniCorsoLaureaRestoAnno(long clid, long reid, int anid);
+    public List<Lezione> trovaLezioniCorsoLaureaRestoAnnoSemestre(long clid, long reid, int anid, int semestre);
     public void aggiungiLezione(Lezione l);
     public void rimuoviLezione(Lezione l);
-    public List<Lezione> trovaLezioneCorsoResto(String corso, String resto);
 }

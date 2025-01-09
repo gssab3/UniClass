@@ -20,7 +20,7 @@ function aggiornaResto() {
                 response.forEach(function(resto) {
                     // Aggiungi ogni "resto" come opzione nel select
                     console.log(resto);
-                    restoSelect.innerHTML += `<option value="${resto.id}">${resto["nome"]}</option>`;
+                    restoSelect.innerHTML += `<option value="${resto["nome"]}">${resto["nome"]}</option>`;
                 });
             }
         };
@@ -38,7 +38,7 @@ function aggiornaResto() {
                 annoSelect.innerHTML = '<option value="">-- Seleziona un anno --</option>';
                 response.forEach(function(anno) {
                     console.log(anno);
-                    annoSelect.innerHTML += `<option value="${anno.id}">${anno["nome"]}</option>`;
+                    annoSelect.innerHTML += `<option value="${anno["nome"]}">${anno["nome"]}</option>`;
                 });
             }
         };
