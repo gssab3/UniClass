@@ -44,6 +44,8 @@ public class cercaOrario extends HttpServlet {
         LezioneService lezioneService = new LezioneService();
         List<Lezione> lezioni = lezioneService.trovaLezioniCorsoLaureaRestoAnno(corsoLaurea.getId(),resto.getId(),annoDidattico.getId());
 
+        System.out.println(lezioni);
+
         request.setAttribute("lezioni", lezioni);
 
         request.setAttribute("corsoLaurea", corsoLaurea);

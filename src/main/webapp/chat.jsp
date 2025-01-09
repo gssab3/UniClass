@@ -53,6 +53,7 @@
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/chatCss.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 </head>
 <body>
@@ -200,6 +201,7 @@
     </form>
 </div>
 
+<script src="scripts/aggiornaChat.js"></script>
 
 
 <h1><%= "Hello World!" %>
