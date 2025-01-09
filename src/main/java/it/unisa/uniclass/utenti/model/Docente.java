@@ -3,6 +3,7 @@ package it.unisa.uniclass.utenti.model;
 import it.unisa.uniclass.esami.model.AppelloDocente;
 import it.unisa.uniclass.orari.model.Corso;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
+import it.unisa.uniclass.orari.model.Lezione;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -37,6 +38,16 @@ public class Docente extends Accademico implements Serializable {
     )
     protected List<Corso> corsi = new ArrayList<>();
 
+
+    @ManyToMany
+    @JoinTable(
+            name = "docente_lezione",
+            joinColumns = @JoinColumn(name = "docente_id"),
+            inverseJoinColumns = @JoinColumn(name = "lezione_id")
+    )
+    private List<Lezione> lezioni = new ArrayList<>();
+
+
     protected String dipartimento;
 
     @OneToMany(mappedBy = "docente", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -61,6 +72,14 @@ public class Docente extends Accademico implements Serializable {
         appelloDocenti = new ArrayList<>();
         corsi = new ArrayList<>();
         tipo = Tipo.Docente;
+    }
+
+    public List<Lezione> getLezioni() {
+        return lezioni;
+    }
+
+    public void setLezioni(List<Lezione> lezioni) {
+        this.lezioni = lezioni;
     }
 
     public List<AppelloDocente> getAppelloDocenti() {

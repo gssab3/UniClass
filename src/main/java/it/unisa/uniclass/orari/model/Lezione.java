@@ -1,5 +1,6 @@
 package it.unisa.uniclass.orari.model;
 
+import it.unisa.uniclass.utenti.model.Docente;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -35,8 +36,8 @@ import static it.unisa.uniclass.orari.model.Lezione.*;
                 "JOIN c.annoDidattico a " +
                 "WHERE cl.id = :corsoLaureaId " +
                 "AND r.id = :restoId " +
-                "AND a.id = :annoId AND l.semestre = :semestre")
-
+                "AND a.id = :annoId AND l.semestre = :semestre"),
+        @NamedQuery(name = TROVA_LEZIONI_DOCENTE, query = "SELECT l FROM Lezione l JOIN l.docenti d WHERE d.nome = :nomeDocente")
 })
 public class Lezione implements Serializable {
 
@@ -48,12 +49,16 @@ public class Lezione implements Serializable {
     public static final String TROVA_TUTTE = "Lezione.trovaTutte";
     public static final String TROVA_LEZIONE_CORSO_RESTO_ANNO = "Lezione.trovaLezioneCorsoRestoAnno";
     public static final String TROVA_LEZIONE_CORSO_RESTO_ANNO_SEMESTRE = "Lezione.trovaLezioneCorsoRestoAnnoSemestre";
+    public static final String TROVA_LEZIONI_DOCENTE = "Lezione.trovaLezioniDocente";
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToMany(mappedBy = "lezioni") // Relazione inversa
     private List<Agenda> agende;
+
+    @ManyToMany(mappedBy = "lezioni")
+    private List<Docente> docenti = new ArrayList<>();
 
     private int semestre; //1 o 2
     private Time oraInizio;
@@ -80,6 +85,14 @@ public class Lezione implements Serializable {
         this.corso = corso;
         this.aula = aula;
         this.agende = new ArrayList<>();
+    }
+
+    public List<Docente> getDocenti() {
+        return docenti;
+    }
+
+    public void setDocenti(List<Docente> docenti) {
+        this.docenti = docenti;
     }
 
     public List<Agenda> getAgende() {

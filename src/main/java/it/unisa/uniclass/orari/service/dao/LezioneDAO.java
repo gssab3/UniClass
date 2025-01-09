@@ -88,4 +88,11 @@ public class LezioneDAO implements LezioneRemote {
         query.setParameter("semestre", semestre);
         return query.getResultList();
     }
+
+    @Override
+    public List<Lezione> trovaLezioniDocente(String nomeDocente) {
+        TypedQuery<Lezione> query = emUniClass.createNamedQuery(Lezione.TROVA_LEZIONI_DOCENTE, Lezione.class);
+        query.setParameter("nomeDocente", nomeDocente);
+        return query.getResultList();
+    }
 }

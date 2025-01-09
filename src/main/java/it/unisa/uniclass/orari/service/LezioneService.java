@@ -67,6 +67,10 @@ public class LezioneService {
         return lezioneDao.trovaLezioniCorsoLaureaRestoAnnoSemestre(clid, rid, annoid, semestre);
     }
 
+    public List<Lezione> trovaLezioniDocente(String nomeDocente) {
+        return lezioneDao.trovaLezioniDocente(nomeDocente);
+    }
+
     public void aggiungiLezione(Lezione lezione) {
         lezioneDao.aggiungiLezione(lezione);
     }
