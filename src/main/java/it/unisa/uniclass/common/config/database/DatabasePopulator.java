@@ -215,7 +215,7 @@ public class DatabasePopulator {
         lezione6.setCorso(corso3);
         lezione6.setGiorno(Giorno.LUNEDI);
         lezione6.setResto(resto);
-        lezione6.setOraInizio(Time.valueOf("13:30:00"));
+        lezione6.setOraInizio(Time.valueOf("14:30:00"));
         lezione6.setOraFine(Time.valueOf("17:30:00"));
         lezione6.setSemestre(1);
 

@@ -154,15 +154,24 @@
   <table class="schedule-table">
     <tr>
       <th>Giorno</th>
-      <th>I<br>9:00-10:00</th>
-      <th>II<br>10:00-11:00</th>
-      <th>III<br>11:00-12:00</th>
-      <th>IV<br>12:00-13:00</th>
-      <th>V<br>13:00-14:00</th>
-      <th>VI<br>14:00-15:00</th>
-      <th>VII<br>15:00-16:00</th>
-      <th>VIII<br>16:00-17:00</th>
-      <th>IX<br>17:00-18:00</th>
+      <th>I<br>9:00-9:30</th>
+      <th>II<br>9:30-10:00</th>
+      <th>III<br>10:00-10:30</th>
+      <th>IV<br>10:30-11:00</th>
+      <th>V<br>11:00-11:30</th>
+      <th>VI<br>11:30-12:00</th>
+      <th>VII<br>12:00-12:30</th>
+      <th>VIII<br>12:30-13:00</th>
+      <th>IX<br>13:00-13:30</th>
+      <th>X<br>13:30-14:00</th>
+      <th>XII<br>14:00-14:30</th>
+      <th>XIII<br>14:30-15:00</th>
+      <th>XIV<br>15:00-15:30</th>
+      <th>XV<br>15:30-16:00</th>
+      <th>XVI<br>16:00-16:30</th>
+      <th>XVII<br>16:30-17:00</th>
+      <th>XVIII<br>17:00-17:30</th>
+      <th>XIX<br>17:30-18:00</th>
     </tr>
     <%
       for (Giorno giorno : Giorno.values()) {
@@ -170,12 +179,12 @@
     <tr>
       <td class="highlight"><b><%= giorno.toString() %></b></td>
       <%
-        int currentHour = 9; // Ora iniziale della giornata
+        int currentHour = 9 * 2; // Iniziamo da 9:00, considerando che 1 unità = 30 minuti (9 * 2)
 
         for (Lezione lezione : lezioni) {
           if (lezione.getGiorno().equals(giorno)) {
-            int oraInizio = lezione.getOraInizio().toLocalTime().getHour();
-            int oraFine = lezione.getOraFine().toLocalTime().getHour();
+            int oraInizio = lezione.getOraInizio().toLocalTime().getHour() * 2 + lezione.getOraInizio().toLocalTime().getMinute() / 30;
+            int oraFine = lezione.getOraFine().toLocalTime().getHour() * 2 + lezione.getOraFine().toLocalTime().getMinute() / 30;
             int durataOre = oraFine - oraInizio;
 
             // Aggiungi celle vuote fino all'ora di inizio della lezione
@@ -193,7 +202,7 @@
             currentHour += durataOre;
           }
         }
-        while (currentHour <= 17) {
+        while (currentHour < 18 * 2) { // Raggiungi le 18:00 (considerando 1 unità = 30 min)
       %>
       <td></td>
       <%
@@ -204,6 +213,7 @@
     <% } %>
   </table>
 </div>
+
 
 
 

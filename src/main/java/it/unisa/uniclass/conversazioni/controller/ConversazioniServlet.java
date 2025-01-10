@@ -28,12 +28,26 @@ public class ConversazioniServlet extends HttpServlet {
         String email = request.getParameter("utenteEmail");
 
         AccademicoService accademicoService = new AccademicoService();
+        Accademico accademicoSelf = accademicoService.trovaEmailUniClass(email);
 
         ConversazioneService conversazioneService = new ConversazioneService();
+        List<Conversazione> conversazioni = conversazioneService.trovaConversazioneAccademico(accademicoSelf);
+
+
+
 
         Accademico accademico = accademicoService.trovaEmailUniClass(email);
 
-        List<Conversazione> conversazioni = conversazioneService.trovaConversazioneAccademico(accademico);
+
+
+
+
+
+
+
+
+
+
 
 
         request.setAttribute("conversazioni", conversazioni);

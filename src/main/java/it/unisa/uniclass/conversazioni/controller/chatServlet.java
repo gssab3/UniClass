@@ -25,6 +25,7 @@ public class chatServlet extends HttpServlet {
         Long id = Long.parseLong(req.getParameter("conversazione"));
 
         String email = req.getParameter("accademico");
+        String emailSelf = req.getParameter("accademicoSelf");
 
         ConversazioneService conversazioneService = new ConversazioneService();
 
@@ -32,6 +33,7 @@ public class chatServlet extends HttpServlet {
 
         AccademicoService accademicoService = new AccademicoService();
         Accademico accademico = accademicoService.trovaEmailUniClass(email);
+        Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSelf);
 
         MessaggioService messaggioService = new MessaggioService();
 
@@ -40,6 +42,9 @@ public class chatServlet extends HttpServlet {
         req.setAttribute("messaggi", messaggi);
         req.setAttribute("id", id);
         req.setAttribute("email", email);
+        req.setAttribute("accademico", accademico);
+        req.setAttribute("accdemicoSelf", accademicoSelf);
+        req.setAttribute("conversazione", conversazione);
 
         req.getRequestDispatcher("chat.jsp").forward(req, resp);
     }

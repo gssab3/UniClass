@@ -26,14 +26,15 @@
     Long id = (Long) request.getAttribute("id");
     String email = (String) request.getAttribute("email");
 
-    ConversazioneService conversazioneService = new ConversazioneService();
 
-    Conversazione conversazione = conversazioneService.trovaConversazione(id);
 
-    AccademicoService accademicoService = new AccademicoService();
+    Conversazione conversazione = (Conversazione) request.getAttribute("conversazione");
 
-    Accademico accademico = accademicoService.trovaEmailUniClass(email);
-    Accademico accademicoSelf = conversazioneService.trovaAltroConversazione(conversazione,accademico);
+
+    Accademico accademico = (Accademico) request.getAttribute("accademico");
+    Accademico accademicoSelf = (Accademico) request.getAttribute("accademicoSelf");
+
+
 
     List<Messaggio> messaggi = List.of();
 

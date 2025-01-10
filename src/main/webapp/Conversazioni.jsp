@@ -24,11 +24,9 @@
     tipoUtente = null;
 
   List<Conversazione> conversazioni = List.of();
-  ConversazioneService conversazioneService = new ConversazioneService();
 
-  AccademicoService accademicoService = new AccademicoService();
+  Accademico accademicoSelf = (Accademico) request.getAttribute("accademicoSelf");
 
-  Accademico accademicoSelf = accademicoService.trovaEmailUniClass(user.getEmail());
 
   if (tipoUtente == Tipo.Docente || tipoUtente == Tipo.Studente || tipoUtente == Tipo.Coordinatore){
     conversazioni = (List<Conversazione>) request.getAttribute("conversazioni");
@@ -160,7 +158,7 @@
         Accademico accademico = conversazioneService.trovaAltroConversazione(conversazione, accademicoSelf);
   %>
   <!-- Singolo blocco per ogni conversazione -->
-  <a href="/chatServlet?conversazione?=<%=conversazione.getId()%>&accademico?=<%=accademico.getEmail()%>>" style="text-decoration: none; color: inherit;">
+  <a href="/chatServlet?conversazione?=<%=conversazione.getId()%>&accademico?=<%=accademico.getEmail()%>&?=<%=accademicoSelf.getEmail()%>>" style="text-decoration: none; color: inherit;">
   <div class="conversation-item">
     <div class="conversation-img">
       <% if (accademico.getTipo().equals(Tipo.Studente)) { %>
