@@ -14,7 +14,7 @@
     <div class="squarelogin">
         <div class="contenutologin">
 
-            <form action="Login" class="loginform">
+            <form action="Login" class="loginform" method="POST">
 
                 <% if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("error") ){ %>
                 <div class="tableRow">

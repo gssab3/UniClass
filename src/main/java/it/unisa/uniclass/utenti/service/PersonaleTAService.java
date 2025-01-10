@@ -1,5 +1,6 @@
 package it.unisa.uniclass.utenti.service;
 
+import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.PersonaleTA;
 import it.unisa.uniclass.utenti.service.dao.PersonaleTARemote;
 import jakarta.ejb.Stateless;
@@ -42,6 +43,14 @@ public class PersonaleTAService {
             return personaleTAdao.trovaEmail(email);
         }
         catch(NoResultException e) {
+            return null;
+        }
+    }
+
+    public PersonaleTA trovaEmailPass(String email, String pass) {
+        try{
+            return  personaleTAdao.trovaEmailPassword(email, pass);
+        }catch(Exception e) {
             return null;
         }
     }

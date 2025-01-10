@@ -17,7 +17,7 @@ public class AccademicoService {
     public AccademicoService() {
         try {
             InitialContext ctx = new InitialContext();
-            accademicoDao = (AccademicoRemote) ctx.lookup("java:global/UniClass/AgendaDAO");
+            accademicoDao = (AccademicoRemote) ctx.lookup("java:global/UniClass/AccademicoDAO");
         }
         catch(NamingException e) {
             throw new RuntimeException("Errore durante il lookup di AccademicoDAO", e);
@@ -29,6 +29,23 @@ public class AccademicoService {
             return accademicoDao.trovaAccademicoUniClass(matricola);
         }
         catch(NoResultException e) {
+            return null;
+        }
+    }
+
+    public Accademico trovaEmailPassUniclass(String email, String pass) {
+        try{
+            Accademico accademico = accademicoDao.trovaEmailUniClass(email);
+            if(accademico != null) {
+                if(accademico.getPassword().equals(pass)) {
+                    return accademico;
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } catch(NoResultException e) {
             return null;
         }
     }
