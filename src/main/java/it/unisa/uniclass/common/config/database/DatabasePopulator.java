@@ -3,6 +3,7 @@ package it.unisa.uniclass.common.config.database;
 import it.unisa.uniclass.orari.model.*;
 import it.unisa.uniclass.orari.service.CorsoLaureaService;
 import it.unisa.uniclass.utenti.model.Docente;
+import it.unisa.uniclass.utenti.model.Studente;
 import it.unisa.uniclass.utenti.model.Tipo;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.sql.DataSourceDefinition;
@@ -153,6 +154,62 @@ public class DatabasePopulator {
         docente3.setEmail("giacomoporetti@unisa.it");
         corso3.getDocenti().add(docente3);
 
+        Docente docente1_1 = new Docente();
+        docente1_1.setNome("Alberto");
+        docente1_1.setCognome("Sorrisi");
+        docente1_1.setCorsoLaurea(corsoLaurea);
+        docente1_1.setDipartimento("Informatica");
+        docente1_1.setIscrizione(LocalDate.now());
+        docente1_1.setMatricola("0512110033");
+        docente1_1.setDataNascita(LocalDate.of(1977,4,20));
+        docente1_1.setPassword("3333");
+        docente1_1.setTipo(Tipo.Docente);
+        docente1_1.getCorsi().add(corso1);
+        corso1.getDocenti().add(docente1_1);
+        docente1_1.setEmail("albertosorrisi@unisa.it");
+
+        Docente docente3_1 = new Docente();
+        docente3_1.setNome("Stefano");
+        docente3_1.setCognome("Alberi");
+        docente3_1.setCorsoLaurea(corsoLaurea);
+        docente3_1.setDipartimento("Informatica");
+        docente3_1.setIscrizione(LocalDate.now());
+        docente3_1.setMatricola("0512110932");
+        docente3_1.setDataNascita(LocalDate.of(1967,2,2));
+        docente3_1.setPassword("4444");
+        docente3_1.setTipo(Tipo.Docente);
+        docente3_1.getCorsi().add(corso3);
+        docente3_1.setEmail("stefalberi@unisa.it");
+        corso3.getDocenti().add(docente3_1);
+
+        Docente docente1_2 = new Docente();
+        docente1_2.setNome("Marianna");
+        docente1_2.setCognome("Angelini");
+        docente1_2.setCorsoLaurea(corsoLaurea);
+        docente1_2.setDipartimento("Informatica");
+        docente1_2.setIscrizione(LocalDate.now());
+        docente1_2.setMatricola("0512112033");
+        docente1_2.setDataNascita(LocalDate.of(1991,1,3));
+        docente1_2.setPassword("3333");
+        docente1_2.setTipo(Tipo.Docente);
+        docente1_2.getCorsi().add(corso1);
+        docente1_2.setEmail("angelinimar@unisa.it");
+        corso1.getDocenti().add(docente1_2);
+
+        Docente docente3_2 = new Docente();
+        docente3_2.setNome("Lorenzo");
+        docente3_2.setCognome("Lanzini");
+        docente3_2.setCorsoLaurea(corsoLaurea);
+        docente3_2.setDipartimento("Informatica");
+        docente3_2.setIscrizione(LocalDate.now());
+        docente3_2.setMatricola("0512112133");
+        docente3_2.setDataNascita(LocalDate.of(1980,8,30));
+        docente3_2.setPassword("6666");
+        docente3_2.setTipo(Tipo.Docente);
+        docente3_2.getCorsi().add(corso3);
+        docente3_2.setEmail("lorelanz@unisa.it");
+        corso3.getDocenti().add(docente3_2);
+
         //Creazione Lezioni
         //Lezioni di IS resto 0
         Lezione lezione1 = new Lezione();
@@ -182,6 +239,20 @@ public class DatabasePopulator {
         Lezione lezione6_1 = new Lezione();
         Lezione lezione7_1 = new Lezione();
         Lezione lezione8_1 = new Lezione();
+
+        //Lezioni di IS resto2
+        Lezione lezione1_2 = new Lezione();
+        Lezione lezione2_2 = new Lezione();
+        Lezione lezione3_2 = new Lezione();
+
+        //Lezioni di FIA resto2
+        Lezione lezione4_2 = new Lezione();
+        Lezione lezione5_2 = new Lezione();
+
+        //Lezioni di PD resto2
+        Lezione lezione6_2 = new Lezione();
+        Lezione lezione7_2 = new Lezione();
+        Lezione lezione8_2 = new Lezione();
 
 
         //Associazione lezioni
@@ -252,14 +323,14 @@ public class DatabasePopulator {
         lezione2_1.setCorso(corso1);
         lezione2_1.setGiorno(Giorno.GIOVEDI);
         lezione2_1.setResto(resto2);
-        lezione2_1.setOraInizio(Time.valueOf("11:00:00"));
-        lezione2_1.setOraFine(Time.valueOf("13:00:00"));
+        lezione2_1.setOraInizio(Time.valueOf("9:00:00"));
+        lezione2_1.setOraFine(Time.valueOf("11:00:00"));
         lezione2_1.setSemestre(1);
 
         lezione3_1.setCorso(corso1);
         lezione3_1.setGiorno(Giorno.VENERDI);
         lezione3_1.setResto(resto2);
-        lezione3_1.setOraInizio(Time.valueOf("9:00:00"));
+        lezione3_1.setOraInizio(Time.valueOf("11:00:00"));
         lezione3_1.setOraFine(Time.valueOf("13:00:00"));
         lezione3_1.setSemestre(1);
 
@@ -271,12 +342,88 @@ public class DatabasePopulator {
         lezione4_1.setSemestre(1);
 
         lezione5_1.setCorso(corso2);
-        lezione5_1.setCorso(corso2);
         lezione5_1.setGiorno(Giorno.GIOVEDI);
         lezione5_1.setResto(resto2);
         lezione5_1.setOraInizio(Time.valueOf("13:30:00"));
         lezione5_1.setOraFine(Time.valueOf("15:30:00"));
         lezione5_1.setSemestre(1);
+
+        lezione6_1.setCorso(corso3);
+        lezione6_1.setResto(resto2);
+        lezione6_1.setGiorno(Giorno.LUNEDI);
+        lezione6_1.setOraInizio(Time.valueOf("14:30:00"));
+        lezione6_1.setOraFine(Time.valueOf("17:30:00"));
+        lezione6_1.setSemestre(1);
+
+        lezione7_1.setCorso(corso3);
+        lezione7_1.setResto(resto2);
+        lezione7_1.setGiorno(Giorno.GIOVEDI);
+        lezione7_1.setOraInizio(Time.valueOf("11:00:00"));
+        lezione7_1.setOraFine(Time.valueOf("13:00:00"));
+        lezione7_1.setSemestre(1);
+
+        lezione8_1.setCorso(corso3);
+        lezione8_1.setResto(resto2);
+        lezione8_1.setGiorno(Giorno.VENERDI);
+        lezione8_1.setOraInizio(Time.valueOf("9:00:00"));
+        lezione8_1.setOraFine(Time.valueOf("11:00:00"));
+        lezione8_1.setSemestre(1);
+
+        lezione1_2.setCorso(corso1);
+        lezione1_2.setResto(resto3);
+        lezione1_2.setGiorno(Giorno.LUNEDI);
+        lezione1_2.setOraInizio(Time.valueOf("15:30:00"));
+        lezione1_2.setOraFine(Time.valueOf("17:30:00"));
+        lezione1_2.setSemestre(1);
+
+        lezione2_2.setCorso(corso1);
+        lezione2_2.setResto(resto3);
+        lezione2_2.setGiorno(Giorno.GIOVEDI);
+        lezione2_2.setOraInizio(Time.valueOf("9:00:00"));
+        lezione2_2.setOraFine(Time.valueOf("11:00:00"));
+        lezione2_2.setSemestre(1);
+
+        lezione3_2.setCorso(corso1);
+        lezione3_2.setResto(resto3);
+        lezione3_2.setGiorno(Giorno.VENERDI);
+        lezione3_2.setOraInizio(Time.valueOf("11:00:00"));
+        lezione3_2.setOraFine(Time.valueOf("13:00:00"));
+        lezione3_2.setSemestre(1);
+
+        lezione4_2.setCorso(corso2);
+        lezione4_2.setResto(resto3);
+        lezione4_2.setGiorno(Giorno.MARTEDI);
+        lezione4_2.setOraInizio(Time.valueOf("13:30:00"));
+        lezione4_2.setOraFine(Time.valueOf("15:30:00"));
+        lezione4_2.setSemestre(1);
+
+        lezione5_2.setCorso(corso2);
+        lezione5_2.setResto(resto3);
+        lezione5_2.setGiorno(Giorno.GIOVEDI);
+        lezione5_2.setOraInizio(Time.valueOf("13:30:00"));
+        lezione5_2.setOraFine(Time.valueOf("15:30:00"));
+        lezione5_2.setSemestre(1);
+
+        lezione6_2.setCorso(corso3);
+        lezione6_2.setResto(resto3);
+        lezione6_2.setGiorno(Giorno.LUNEDI);
+        lezione6_2.setOraInizio(Time.valueOf("11:00:00"));
+        lezione6_2.setOraFine(Time.valueOf("14:00:00"));
+        lezione6_2.setSemestre(1);
+
+        lezione7_2.setCorso(corso3);
+        lezione7_2.setResto(resto3);
+        lezione7_2.setGiorno(Giorno.GIOVEDI);
+        lezione7_2.setOraInizio(Time.valueOf("11:00:00"));
+        lezione7_2.setOraFine(Time.valueOf("13:00:00"));
+        lezione7_2.setSemestre(1);
+
+        lezione8_2.setCorso(corso3);
+        lezione8_2.setResto(resto3);
+        lezione8_2.setGiorno(Giorno.VENERDI);
+        lezione8_2.setOraInizio(Time.valueOf("9:00:00"));
+        lezione8_2.setOraFine(Time.valueOf("11:00:00"));
+        lezione8_2.setSemestre(1);
 
         //Aula
         Aula Sammet = new Aula();
@@ -293,13 +440,41 @@ public class DatabasePopulator {
         lezione1_1.setAula(hopper);
         hopper.getLezioni().add(lezione1_1);
 
+        Aula p3 = new Aula();
+        p3.setNome("P3");
+        p3.setEdificio("F3");
+        lezione2_2.setAula(p3);
+        lezione3_2.setAula(p3);
+        lezione7_2.setAula(p3);
+        lezione8_2.setAula(p3);
+        p3.getLezioni().add(lezione7_2);
+        p3.getLezioni().add(lezione2_2);
+        p3.getLezioni().add(lezione3_2);
+        p3.getLezioni().add(lezione8_2);
+
         Aula p4 = new Aula();
         p4.setNome("P4");
         p4.setEdificio("F3");
         lezione2_1.setAula(p4);
         lezione3_1.setAula(p4);
+        lezione7_1.setAula(p4);
+        lezione8_1.setAula(p4);
+        p4.getLezioni().add(lezione8_1);
+        p4.getLezioni().add(lezione7_1);
         p4.getLezioni().add(lezione2_1);
         p4.getLezioni().add(lezione3_1);
+
+        Aula f4 = new Aula();
+        f4.setNome("F4");
+        f4.setEdificio("F2");
+        lezione1_2.setAula(f4);
+        f4.getLezioni().add(lezione1_2);
+
+        Aula p13 = new Aula();
+        p13.setNome("P13");
+        p13.setEdificio("F3");
+        lezione6_2.setAula(p13);
+        p13.getLezioni().add(lezione6_2);
 
         Aula f8 = new Aula();
         f8.setNome("F8");
@@ -312,6 +487,9 @@ public class DatabasePopulator {
         lezione8.setAula(f8);
         lezione4_1.setAula(f8);
         lezione5_1.setAula(f8);
+        lezione6_1.setAula(f8);
+        lezione4_2.setAula(f8);
+        lezione5_2.setAula(f8);
         f8.getLezioni().add(lezione2);
         f8.getLezioni().add(lezione3);
         f8.getLezioni().add(lezione4);
@@ -320,6 +498,9 @@ public class DatabasePopulator {
         f8.getLezioni().add(lezione8);
         f8.getLezioni().add(lezione4_1);
         f8.getLezioni().add(lezione5_1);
+        f8.getLezioni().add(lezione6_1);
+        f8.getLezioni().add(lezione4_2);
+        f8.getLezioni().add(lezione5_2);
 
         //Tra lezioni e docenti
         lezione1.getDocenti().add(docente1);
@@ -330,6 +511,22 @@ public class DatabasePopulator {
         lezione6.getDocenti().add(docente3);
         lezione7.getDocenti().add(docente3);
         lezione8.getDocenti().add(docente3);
+        lezione1_1.getDocenti().add(docente1_1);
+        lezione2_1.getDocenti().add(docente1_1);
+        lezione3_1.getDocenti().add(docente1_1);
+        lezione4_1.getDocenti().add(docente2);
+        lezione5_1.getDocenti().add(docente2);
+        lezione6_1.getDocenti().add(docente3_1);
+        lezione7_1.getDocenti().add(docente3_1);
+        lezione8_1.getDocenti().add(docente3_1);
+        lezione1_2.getDocenti().add(docente1_2);
+        lezione2_2.getDocenti().add(docente1_2);
+        lezione3_2.getDocenti().add(docente1_2);
+        lezione4_2.getDocenti().add(docente2);
+        lezione5_2.getDocenti().add(docente2);
+        lezione6_2.getDocenti().add(docente3_2);
+        lezione7_2.getDocenti().add(docente3_2);
+        lezione8_2.getDocenti().add(docente3_2);
 
         docente1.getLezioni().add(lezione1);
         docente1.getLezioni().add(lezione2);
@@ -339,6 +536,48 @@ public class DatabasePopulator {
         docente3.getLezioni().add(lezione6);
         docente3.getLezioni().add(lezione7);
         docente3.getLezioni().add(lezione8);
+        docente1_1.getLezioni().add(lezione1_1);
+        docente1_1.getLezioni().add(lezione2_1);
+        docente1_1.getLezioni().add(lezione3_1);
+        docente2.getLezioni().add(lezione4_1);
+        docente2.getLezioni().add(lezione5_1);
+        docente3_1.getLezioni().add(lezione6_1);
+        docente3_1.getLezioni().add(lezione7_1);
+        docente3_1.getLezioni().add(lezione8_1);
+        docente1_2.getLezioni().add(lezione1_2);
+        docente1_2.getLezioni().add(lezione2_2);
+        docente1_2.getLezioni().add(lezione3_2);
+        docente2.getLezioni().add(lezione4_2);
+        docente2.getLezioni().add(lezione5_2);
+        docente3_2.getLezioni().add(lezione6_2);
+        docente3_2.getLezioni().add(lezione7_2);
+        docente3_2.getLezioni().add(lezione8_2);
+
+
+
+        //Studenti
+        Studente studente = new Studente();
+        studente.setNome("Saverio");
+        studente.setCognome("D'Avanzo");
+        studente.setEmail("s.davanzo5@studenti.unisa.it");
+        studente.setCorsoLaurea(corsoLaurea);
+        studente.setIscrizione(LocalDate.now());
+        studente.setPassword("9009");
+        studente.setTipo(Tipo.Studente);
+        studente.setResto(resto);
+        studente.setMatricola("0512118330");
+        Agenda agendaStudente = new Agenda();
+        agendaStudente.setStudente(studente);
+        agendaStudente.getLezioni().add(lezione1);
+        agendaStudente.getLezioni().add(lezione2);
+        agendaStudente.getLezioni().add(lezione3);
+        agendaStudente.getLezioni().add(lezione4);
+        agendaStudente.getLezioni().add(lezione5);
+        agendaStudente.getLezioni().add(lezione6);
+        agendaStudente.getLezioni().add(lezione7);
+        agendaStudente.getLezioni().add(lezione8);
+        studente.setAgenda(agendaStudente);
+        studente.setDataNascita(LocalDate.of(2004,1,27));
 
 
         // Persistenza degli oggetti
@@ -353,8 +592,14 @@ public class DatabasePopulator {
         em.persist(docente1);
         em.persist(docente2);
         em.persist(docente3);
+        em.persist(docente1_1);
+        em.persist(docente3_1);
+        em.persist(docente1_2);
+        em.persist(docente3_2);
         em.persist(Sammet);
         em.persist(hopper);
+        em.persist(p3);
+        em.persist(p13);
         em.persist(p4);
         em.persist(f8);
         em.persist(lezione1);
@@ -368,6 +613,21 @@ public class DatabasePopulator {
         em.persist(lezione1_1);
         em.persist(lezione2_1);
         em.persist(lezione3_1);
+        em.persist(lezione4_1);
+        em.persist(lezione5_1);
+        em.persist(lezione6_1);
+        em.persist(lezione7_1);
+        em.persist(lezione8_1);
+        em.persist(lezione3_2);
+        em.persist(lezione2_2);
+        em.persist(lezione1_2);
+        em.persist(lezione4_2);
+        em.persist(lezione5_2);
+        em.persist(lezione6_2);
+        em.persist(lezione7_2);
+        em.persist(lezione8_2);
+        em.persist(agendaStudente);
+        em.persist(studente);
 
         em.flush();
         em.clear();
