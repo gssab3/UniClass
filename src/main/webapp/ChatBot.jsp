@@ -26,7 +26,7 @@
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css" />
     <link type="text/css" rel="stylesheet" href="styles/chatbot.css"/>
-	<script src="scripts/chatbot.js"></script>
+	<script src="scripts/chatBotJS.js"></script>
 
 </head>
 <body>
