@@ -196,7 +196,7 @@
         }
       %>
       <td colspan="<%= durataOre %>" class="subject-<%= lezione.getCorso().getNome().toLowerCase().replaceAll("\\s+", "-") %>">
-        <%= lezione.getCorso().getNome() %>
+        <%= lezione.getCorso().getNome() %><br><%= lezione.getDocenti()%>
       </td>
       <%
             currentHour += durataOre;

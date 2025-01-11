@@ -1,0 +1,35 @@
+{
+  "name": "naudiodon",
+  "version": "2.3.6",
+  "description": "Node Stream bindings for PortAudio.",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "keywords": [
+    "portaudio",
+    "audio",
+    "play",
+    "record",
+    "wav",
+    "raspberry pi"
+  ],
+  "bugs": {
+    "url": "https://github.com/Streampunk/naudiodon/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Streampunk/naudiodon.git"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "segfault-handler": "^1.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.10"
+  },
+  "author": "Streampunk Media Ltd",
+  "license": "Apache-2.0",
+  "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "gypfile": true
+}
