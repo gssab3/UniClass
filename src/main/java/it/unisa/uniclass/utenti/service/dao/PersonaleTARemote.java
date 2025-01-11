@@ -10,6 +10,7 @@ public interface PersonaleTARemote {
     public PersonaleTA trovaPersonale(long id);
     public List<PersonaleTA> trovaTutti();
     public PersonaleTA trovaEmail(String email);
+    public PersonaleTA trovaEmailPassword(String email, String password);
     public void aggiungiPersonale(PersonaleTA personaleTA);
     public void rimuoviPersonale(PersonaleTA personaleTA);
 }

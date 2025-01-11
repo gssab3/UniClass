@@ -2,6 +2,8 @@ package it.unisa.uniclass.utenti.controller;
 
 import it.unisa.uniclass.common.security.CredentialSecurity;
 import it.unisa.uniclass.utenti.model.Utente;
+import it.unisa.uniclass.utenti.service.AccademicoService;
+import it.unisa.uniclass.utenti.service.PersonaleTAService;
 import it.unisa.uniclass.utenti.service.UtenteService;
 import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
@@ -14,8 +16,7 @@ import java.io.IOException;
 @WebServlet(name = "loginServlet", value = "/Login")
 public class LoginServlet extends HttpServlet{
 
-    @EJB
-    private UtenteService utenteService;
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -25,14 +26,29 @@ public class LoginServlet extends HttpServlet{
 
         try {
             String email = request.getParameter("email");
-            String password = CredentialSecurity.hashPassword(request.getParameter("password"));
+            //String password = CredentialSecurity.hashPassword(request.getParameter("password"));
+            String password = request.getParameter("password");
 
-            Utente user = utenteService.retrieveByUserAndPassword(email,password);
+            AccademicoService accademicoService = new AccademicoService();
+            PersonaleTAService personaleTAService = new PersonaleTAService();
+            Utente user1 = accademicoService.trovaEmailPassUniclass(email, password);
+            Utente user2 = personaleTAService.trovaEmailPass(email,password);
+            Utente user = null;
+
+            if(user1 == null){
+                if(user2 == null){
+                    response.sendRedirect(request.getContextPath() + "/Login.jsp?action=error");
+                } else {
+                    user = user2;
+                }
+            }else {
+                user = user1;
+            }
 
             if (user != null) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("currentSessionUser", user);
-                response.sendRedirect(request.getContextPath() + "/index.jsp");
+                response.sendRedirect(request.getContextPath() + "/Home");
             } else {
                 response.sendRedirect(request.getContextPath() + "/Login.jsp?action=error");
             }

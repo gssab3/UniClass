@@ -12,12 +12,14 @@ import static it.unisa.uniclass.utenti.model.PersonaleTA.*;
 @NamedQueries({
         @NamedQuery(name = TROVA_PERSONALE, query = "SELECT p FROM PersonaleTA p WHERE p.id = :id"),
         @NamedQuery(name = TROVA_TUTTI, query = "SELECT p FROM PersonaleTA p"),
-        @NamedQuery(name = TROVA_EMAIL, query = "SELECT p FROM PersonaleTA p WHERE p.email = :email")
+        @NamedQuery(name = TROVA_EMAIL, query = "SELECT p FROM PersonaleTA p WHERE p.email = :email"),
+        @NamedQuery(name = TROVA_EMAIL_PASSWORD, query = "SELECT p FROM PersonaleTA p WHERE p.email = :email AND p.password = :password" )
 })
 public class PersonaleTA extends Utente implements Serializable {
     public static final String TROVA_PERSONALE = "PersonaleTA.trovaPersonale";
     public static final String TROVA_TUTTI = "PersonaleTA.trovaTutti";
     public static final String TROVA_EMAIL = "PersonaleTA.trovaEmail";
+    public static final String TROVA_EMAIL_PASSWORD = "PersonaleTA.trovaEmailPassword";
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
