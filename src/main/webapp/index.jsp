@@ -32,6 +32,7 @@
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
 	<link type="text/css" rel="stylesheet" href="styles/formcss.css"/>
+	<link type="text/css" rel="stylesheet" href="styles/footerstyle.css">
 
 </head>
 <body>
@@ -194,9 +195,11 @@
 </script>
 
 
-<h1><%= "Hello World!" %>
+<!--<h1><%= "Hello World!" %>
 </h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<br/>-->
+<br>
+<!--<a href="hello-servlet">Hello Servlet</a>-->
+<%@include file = "footer.jsp" %>
 </body>
 </html>

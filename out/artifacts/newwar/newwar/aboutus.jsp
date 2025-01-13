@@ -3,7 +3,7 @@
 <%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
 <%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
 <%@ page import="java.util.List" %>
-<%@ page import="it.unisa.uniclass.orari.service.CorsoLaureaDAO" %>
+<%@ page import="it.unisa.uniclass.orari.service.dao.CorsoLaureaDAO" %>
 
 <%
     /* Sessione HTTP */
@@ -29,6 +29,7 @@
     <script src="scripts/sidebar.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
+	<link type="text/css" rel="stylesheet" href="styles/aboutinfo.css">
 
 </head>
 <body>
@@ -135,9 +136,10 @@
 
        <jsp:include page="header.jsp"/>
 
-    <h1>Chi siamo</h1>
+
 
         <section>
+			<h1>Chi siamo</h1>
             <h2>La nostra missione</h2>
             <p>UniClass è un'applicazione digitale open-source pensata per migliorare l’esperienza universitaria di studenti e docenti. La nostra piattaforma rende facilmente accessibili tutte le informazioni quotidiane di cui hai bisogno, come gli orari delle lezioni, la disponibilità delle aule e la calendarizzazione dei corsi.</p>
 
