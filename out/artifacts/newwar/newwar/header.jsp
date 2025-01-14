@@ -36,7 +36,7 @@
         </div>
 
         <div class="ContentHeader">
-        		<a href="${pageContext.request.contextPath}/index.jsp" style="cursor: pointer"><img alt="logo UniClass" src="${pageContext.request.contextPath}/images/logois.png"></a>
+        		<a href="${pageContext.request.contextPath}/Home" style="cursor: pointer"><img alt="logo UniClass" src="${pageContext.request.contextPath}/images/logois.png"></a>
         </div>
 
         <% if (tipoUtente == null){ %>

@@ -1,0 +1,88 @@
+/* Centrare la tabella nella pagina */
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    margin: 0;
+}
+
+/* Stile per la tabella */
+.schedule-table {
+    width: 80%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-table th,
+.schedule-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.schedule-table th {
+    background-color: #3498DB;
+    color: white;
+    font-weight: bold;
+}
+
+.schedule-table .highlight {
+    background-color: #e8f5e9;
+    font-weight: bold;
+}
+
+/* Evidenziazione di righe alternate */
+.schedule-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.schedule-table tr:hover {
+    background-color: #d1e7dd;
+}
+
+/* Ridimensionare il testo nelle celle */
+.schedule-table td {
+    font-size: 14px;
+}
+
+/* Stile per il titolo */
+h1 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Stile per Ingegneria del Software */
+.subject-ingegneria-del-software {
+    background-color: #ffdddd; /* Colore rosato */
+    color: #000; /* Testo nero */
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid #000 !important; /* Bordo nero per questa materia */
+}
+
+/* Stile per Fondamenti di Intelligenza Artificiale */
+.subject-fondamenti-di-intelligenza-artificiale {
+    background-color: #ddffdd; /* Colore verde chiaro */
+    color: #000; /* Testo nero */
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid #000 !important; /* Bordo nero per questa materia */
+}
+
+.subject-programmazione-distribuita {
+    background-color: #ddfaff;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid #000 !important;
+}
+
+/* Stile di default per tutte le materie (opzionale) */
+td[class^="subject-"] {
+    padding: 10px; /* Aggiungi un po' di spazio interno */
+}
