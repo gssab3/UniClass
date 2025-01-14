@@ -22,26 +22,26 @@ public class chatServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Long id = Long.parseLong(req.getParameter("conversazione"));
+        //da rivedere
 
         String email = req.getParameter("accademico");
         String emailSelf = req.getParameter("accademicoSelf");
 
-        ConversazioneService conversazioneService = new ConversazioneService();
-
-        Conversazione conversazione = conversazioneService.trovaConversazione(id);
-
         AccademicoService accademicoService = new AccademicoService();
         Accademico accademico = accademicoService.trovaEmailUniClass(email);
         Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSelf);
+
+        ConversazioneService conversazioneService = new ConversazioneService();
+
+        Conversazione conversazione = conversazioneService.trovaConversazioneDueAccademici(accademico, accademicoSelf);
+
+
 
         MessaggioService messaggioService = new MessaggioService();
 
         List<Messaggio> messaggi = messaggioService.trovaMessaggiConversazione(conversazione);
 
         req.setAttribute("messaggi", messaggi);
-        req.setAttribute("id", id);
-        req.setAttribute("email", email);
         req.setAttribute("accademico", accademico);
         req.setAttribute("accdemicoSelf", accademicoSelf);
         req.setAttribute("conversazione", conversazione);

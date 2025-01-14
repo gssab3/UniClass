@@ -24,11 +24,11 @@
     PersonaleTA personaleTA = null;
 
     /* Controllo tipo utente */
-    Tipo tipoUtente;
+    Tipo tipoUtente = null;
     if (user != null)
         tipoUtente = (Tipo) user.getTipo();
     else
-        tipoUtente = null;
+        response.sendRedirect("Login.jsp");
 
     /* Prendere l'utente */
     if(tipoUtente != null) {
@@ -61,7 +61,7 @@
 
 <body>
 
-<% if(tipoUtente == null) { %>
+<% if(tipoUtente.equals(Tipo.Studente)) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
@@ -71,28 +71,7 @@
 			</li>
 			<li id="aule"><a href="servelt">Aule</a>
 			</li>
-			<li id="mappa"><a href="mappa.jsp">Mappa</a>
-			</li>
-			<li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
-            </li>
-			<li id="infoapp"><a href="infoapp.jsp">Info App</a>
-            </li>
-			<li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
-			</li>
-		</ul>
-	</div>
-
-<% } else if(tipoUtente.equals(Tipo.Studente)) { %>
-
-<div class="barraNavigazione" id="barraNavigazione">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
-		<p>Menu<p>
-		<ul id="menu">
-			<li id="orari"> <a href="servelt">Orari</a>
-			</li>
-			<li id="aule"><a href="servelt">Aule</a>
-			</li>
-			<li id="agenda"><a href="servelt">Agenda</a>
+			<li id="agenda"><a href="servelt">Gestisci Agenda</a>
             </li>
             <li id="appelli"><a href="servelt">Appelli</a>
             </li>
@@ -114,12 +93,8 @@
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
 		<p>Menu<p>
 		<ul id="menu">
-			<li id="orari"> <a href="servelt">Orari</a>
-			</li>
 			<li id="aule"><a href="servelt">Aule</a>
 			</li>
-			<li id="agenda"><a href="servelt">Agenda</a>
-            </li>
             <li id="appelli"><a href="servelt">Appelli</a>
             </li>
             <li id="conversazioni"><a href="servelt">Conversazioni</a>
@@ -141,8 +116,6 @@
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
 		<p>Menu<p>
 		<ul id="menu">
-			<li id="orari"> <a href="servelt">Orari</a>
-			</li>
 			<li id="aule"><a href="servelt">Aule</a>
 			</li>
             <li id="appelli"><a href="servelt">Appelli</a>

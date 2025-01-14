@@ -55,7 +55,8 @@
     <title>JSP - Hello World</title>
     <script src="scripts/sidebar.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css" />
-    <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css" />
+    <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
+    <link type="text/css" rel="stylesheet" href="styles/informazioniStyle.css">
 </head>
 
 <body>
@@ -166,26 +167,32 @@
     <div class="listaInfo" id="listaInfo">
         <h2>Informazioni</h2>
         <ul id="infolist">
-            <li id="nome"><%= studente.getNome(); %></li>
-            <li id="cognome"><%= studente.getCognome(); %></li>
-            <li id="dataNascita"><%= studente.getDataNascita(); %></li>
-            <li id="matricola"><%= studente.getMatricola(); %></li>
-            <li id="email"><%= studente.getEmail(); %></li>
-            <li id="corsoLaurea"><%= studente.getCorsoLaurea(); %></li>
-            <li id="dataIscrizione"><%= studente.getIscrizione(); %></li>
+            <% if (user.getTipo().equals(Tipo.Studente)) { %>
+            <img src="images/icons/iconstudent.png" alt="immagineutente">
+            <%} %>
+            <li id="nome"><%= studente.getNome() %></li>
+            <li id="cognome"><%= studente.getCognome() %></li>
+            <li id="dataNascita"><%= studente.getDataNascita() %></li>
+            <li id="matricola"><%= studente.getMatricola() %></li>
+            <li id="email"><%= studente.getEmail() %></li>
+            <li id="corsoLaurea"><%= studente.getCorsoLaurea()%></li>
+            <li id="dataIscrizione"><%= studente.getIscrizione() %></li>
         </ul>
     </div>
 <% } else if (tipoUtente.equals(Tipo.Docente)) { %>
     <div class="listaInfo" id="listaInfo">
         <h2>Informazioni</h2>
         <ul id="infolist">
-            <li id="nome"><%= docente.getNome(); %></li>
-            <li id="cognome"><%= docente.getCognome(); %></li>
-            <li id="dataNascita"><%= docente.getDataNascita(); %></li>
-            <li id="matricola"><%= docente.getMatricola(); %></li>
-            <li id="email"><%= docente.getEmail(); %></li>
-            <li id="corsoLaurea"><%= docente.getCorsoLaurea(); %></li>
-            <li id="dataIscrizione"><%= docente.getIscrizione(); %></li>
+            <% if (user.getTipo().equals(Tipo.Docente)) { %>
+            <img src="images/icons/iconprof.png" alt="immagineutente">
+            <%}%>
+            <li id="nome"><%= docente.getNome() %></li>
+            <li id="cognome"><%= docente.getCognome() %></li>
+            <li id="dataNascita"><%= docente.getDataNascita() %></li>
+            <li id="matricola"><%= docente.getMatricola() %></li>
+            <li id="email"><%= docente.getEmail() %></li>
+            <li id="corsoLaurea"><%= docente.getCorsoLaurea() %></li>
+            <li id="dataIscrizione"><%= docente.getIscrizione() %></li>
             <li id="corsiInsegnati:"><%= "Corsi Insegnati: " + docente.getCorsi() %></li>
         </ul>
     </div>
@@ -193,13 +200,16 @@
     <div class="listaInfo" id="listaInfo">
         <h2>Informazioni</h2>
         <ul id="infolist">
-            <li id="nome"><%= coordinatore.getNome(); %></li>
-            <li id="cognome"><%= coordinatore.getCognome(); %></li>
-            <li id="dataNascita"><%= coordinatore.getDataNascita(); %></li>
-            <li id="matricola"><%= coordinatore.getMatricola(); %></li>
-            <li id="email"><%= coordinatore.getEmail(); %></li>
-            <li id="corsoLaurea"><%= coordinatore.getCorsoLaurea(); %></li>
-            <li id="dataIscrizione"><%= coordinatore.getIscrizione(); %></li>
+            <% if (user.getTipo().equals(Tipo.Coordinatore)) { %>
+            <img src="images/icons/iconprof.png" alt="immagineutente">
+            <%}%>
+            <li id="nome"><%= coordinatore.getNome() %></li>
+            <li id="cognome"><%= coordinatore.getCognome() %></li>
+            <li id="dataNascita"><%= coordinatore.getDataNascita() %></li>
+            <li id="matricola"><%= coordinatore.getMatricola() %></li>
+            <li id="email"><%= coordinatore.getEmail() %></li>
+            <li id="corsoLaurea"><%= coordinatore.getCorsoLaurea() %></li>
+            <li id="dataIscrizione"><%= coordinatore.getIscrizione() %></li>
             <li id="corsiInsegnati:"><%= "Corsi Insegnati: " + docente.getCorsi() %></li>
         </ul>
     </div>
@@ -207,12 +217,15 @@
     <div class="listaInfo" id="listaInfo">
         <h2>Informazioni</h2>
         <ul id="infolist">
-            <li id="nome"><%= personaleTA.getNome(); %></li>
-            <li id="cognome"><%= personaleTA.getCognome(); %></li>
-            <li id="dataNascita"><%= personaleTA.getDataNascita(); %></li>
-            <li id="id"><%= personaleTA.getId(); %></li>
-            <li id="email"><%= personaleTA.getEmail(); %></li>
-            <li id="telefono"><%= personaleTA.getTelefono(); %></li>
+            <% if (user.getTipo().equals(Tipo.PersonaleTA)) { %>
+            <img src="images/icons/iconpersonaleTA.png" alt="immagineutente">
+            <%}%>
+            <li id="nome"><%= personaleTA.getNome() %></li>
+            <li id="cognome"><%= personaleTA.getCognome() %></li>
+            <li id="dataNascita"><%= personaleTA.getDataNascita() %></li>
+            <li id="id"><%= personaleTA.getId() %></li>
+            <li id="email"><%= personaleTA.getEmail() %></li>
+            <li id="telefono"><%= personaleTA.getTelefono() %></li>
         </ul>
     </div>
 <% } %>

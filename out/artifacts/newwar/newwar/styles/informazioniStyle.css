@@ -1,0 +1,53 @@
+.listaInfo {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto; /* Centra il contenitore */
+    padding: 20px;
+    background-color: #f9f9f9; /* Colore di sfondo chiaro */
+    border: 1px solid #ddd; /* Bordo sottile */
+    border-radius: 10px; /* Angoli arrotondati */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra leggera */
+    font-family: Arial, sans-serif; /* Font leggibile */
+    color: #333; /* Colore del testo */
+}
+
+.listaInfo h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #555;
+    border-bottom: 2px solid #ddd; /* Linea decorativa */
+    padding-bottom: 10px;
+}
+
+.listaInfo ul {
+    list-style: none; /* Rimuove i puntini della lista */
+    padding: 0;
+    margin: 0;
+}
+
+.listaInfo ul li {
+    font-size: 1rem;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #ffffff; /* Sfondo bianco per i singoli elementi */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease, background-color 0.2s ease; /* Animazione al passaggio del mouse */
+}
+
+.listaInfo ul li:hover {
+    background-color: #f0f0f0; /* Sfondo più chiaro al passaggio del mouse */
+    transform: scale(1.02); /* Leggero ingrandimento */
+}
+
+.listaInfo img {
+    display: block;
+    max-width: 100px;
+    margin: 10px auto;
+    border-radius: 50%; /* Rende l'immagine circolare */
+    border: 2px solid #ddd;
+}

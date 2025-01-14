@@ -1,0 +1,60 @@
+/* Stile generale per la pagina */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenitore principale per la lista delle conversazioni */
+.conversations-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Stile per ogni conversazione */
+.conversation {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Rimuove il bordo dall'ultima conversazione */
+.conversation:last-child {
+    border-bottom: none;
+}
+
+/* Stile per la foto profilo */
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    border: 2px solid #ddd;
+}
+
+/* Immagine dentro il cerchio */
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Nome utente */
+.username {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Aggiunta di un effetto hover (opzionale) */
+.conversation:hover {
+    background-color: #f9f9f9;
+    cursor: pointer;
+}

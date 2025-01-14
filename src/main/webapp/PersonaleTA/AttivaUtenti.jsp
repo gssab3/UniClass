@@ -36,42 +36,42 @@
 	</div>
 
 
-	<div class="container">
-                <div class="left-block">
-                    <h2>Lista Utenti</h2>
-                    <div class="list">
-                        <p>Elemento 1</p>
-                        <p>Elemento 2</p>
-                        <p>Elemento 3</p>
-                    </div>
-                </div>
 
-                <div class="right-block">
-                    <h2>Aggiunta Utente</h2>
-                    <form action="AggiuntaUtente" method="POST">
-                    <label for="matricola">Matricola:</label>
-                    <input type="text" id="matricola" name="matricola" required><br><br>
-
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required><br><br>
-
-                    <label for="tipo">Tipo:</label>
-                    <select id="tipo" name="tipo" required>
-                        <option value="Studente">Studente</option>
-                        <option value="Docente">Docente</option>
-                        <option value="Coordinatore">Coordinatore</option>
-                        <option value="PersonaleTA">PersonaleTA</option>
-                    </select><br><br>
-
-                    <input type="submit" value="Invia">
-                </form>
-                </div>
-            </div>
 
 
     <jsp:include page="../header.jsp"/>
 
+<div class="container">
+    <div class="left-block">
+        <h2>Lista Utenti</h2>
+        <div class="list">
+            <p>Elemento 1</p>
+            <p>Elemento 2</p>
+            <p>Elemento 3</p>
+        </div>
+    </div>
 
+    <div class="right-block">
+        <h2>Aggiunta Utente</h2>
+        <form action="/AttivaUtentiServlet" method="POST">
+            <label for="matricola">Matricola:</label>
+            <input type="text" id="matricola" name="matricola" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="tipo">Tipo:</label>
+            <select id="tipo" name="tipo" required>
+                <option value="Studente">Studente</option>
+                <option value="Docente">Docente</option>
+                <option value="Coordinatore">Coordinatore</option>
+                <option value="PersonaleTA">PersonaleTA</option>
+            </select><br><br>
+
+            <input type="submit" value="Invia">
+        </form>
+    </div>
+</div>
 
 
     </body>
