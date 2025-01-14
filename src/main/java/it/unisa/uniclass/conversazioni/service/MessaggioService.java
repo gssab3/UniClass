@@ -2,6 +2,7 @@ package it.unisa.uniclass.conversazioni.service;
 
 import it.unisa.uniclass.conversazioni.model.Conversazione;
 import it.unisa.uniclass.conversazioni.model.Messaggio;
+import it.unisa.uniclass.conversazioni.model.Topic;
 import it.unisa.uniclass.conversazioni.service.dao.MessaggioRemote;
 import it.unisa.uniclass.utenti.model.Accademico;
 import jakarta.ejb.Stateless;
@@ -65,15 +66,8 @@ public class MessaggioService {
         return messaggioDao.trovaMessaggiData(dateTime);
     }
 
-    public void aggiungiMessaggio(Messaggio messaggio) {
-        if (messaggio != null) {
-            messaggioDao.aggiungiMessaggio(messaggio);
-        }
-    }
-    public void rimuoviMessaggio(Messaggio messaggio) {
-        if (messaggio != null) {
-            messaggioDao.rimuoviMessaggio(messaggio);
-        }
+    public List<Messaggio> trovaTopic(Topic topic) {
+        return messaggioDao.trovaTopic(topic);
     }
 
     public List<Messaggio> trovaMessaggiConversazione(Conversazione conversazione) {
@@ -86,5 +80,16 @@ public class MessaggioService {
             results.sort(Comparator.comparing(Messaggio::getDateTime));
         }
         return results;
+    }
+
+    public void aggiungiMessaggio(Messaggio messaggio) {
+        if (messaggio != null) {
+            messaggioDao.aggiungiMessaggio(messaggio);
+        }
+    }
+    public void rimuoviMessaggio(Messaggio messaggio) {
+        if (messaggio != null) {
+            messaggioDao.rimuoviMessaggio(messaggio);
+        }
     }
 }
