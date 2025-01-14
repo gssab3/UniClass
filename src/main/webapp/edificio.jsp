@@ -8,6 +8,9 @@
 <%@ page import="it.unisa.uniclass.orari.service.LezioneService" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.sql.Time" %>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.format.TextStyle" %>
+<%@ page import="java.time.LocalTime" %>
 
 <%
     /* Sessione HTTP */
@@ -199,29 +202,55 @@
 <br>
 
 <h1> Edificio <%= edificio%> </h1>
+
+
+
+
+
 <ul class="buildings">
-    <% Time oraCorrente = new Time(System.currentTimeMillis());
-        boolean occ = false;
+    <%
+        LocalTime oraCorrente = LocalTime.now();
+        LocalDate oggi = LocalDate.now();
+        String giornoCorrente = oggi.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ITALY);
+        String giornoCorrenteMaiuscolo = giornoCorrente.replace("è", "e").replace("ì", "i").toUpperCase(Locale.ITALY);
+        %> <p><%= giornoCorrenteMaiuscolo%></p> <%
+
         for (Aula aula : aule){
+            boolean occ = false; // Reset for each classroom
 
-        LezioneService lezioneService = new LezioneService();
-        List<Lezione> lezioni = lezioneService.trovaLezioniAule(aula.getNome());
-        lezioni.sort(
-                Comparator.comparing(Lezione::getGiorno)
-                        .thenComparing(Lezione::getOraInizio));
-        for(Lezione lezione: lezioni){
-            if(oraCorrente.after(lezione.getOraInizio()) && oraCorrente.before(lezione.getOraFine())){
-                occ = true;
-            }else{
-                occ = false;
+            LezioneService lezioneService = new LezioneService();
+            List<Lezione> lezioni = lezioneService.trovaLezioniAule(aula.getNome());
+            lezioni.sort(Comparator.comparing(Lezione::getGiorno).thenComparing(Lezione::getOraInizio));
+
+            // Check if the aula is occupied at the current time of day
+            for(Lezione lezione : lezioni){
+                LocalTime oraInizioLezione = lezione.getOraInizio().toLocalTime();
+                LocalTime oraFineLezione = lezione.getOraFine().toLocalTime();
+
+                if(giornoCorrenteMaiuscolo.equals(lezione.getGiorno().toString())){
+                    if (oraCorrente.isAfter(oraInizioLezione) && oraCorrente.isBefore(oraFineLezione)) {
+
+                        occ = true;
+                        break; // Exit the loop if the room is occupied at the current time
+                    }else{
+                        break;
+                    }
+                }
             }
-        }
 
+            // Output for each classroom
     %>
-    <li class="building"> <%if(occ){ %> <img class="imgOcc" src="images/icons/aulaOccupata.png"> <% } else { %> <img class="imgOcc" src="images/icons/aulaLibera.png"> <% } %> <%= aula.getNome()%>
+    <li class="building">
+        <% if (occ) { %>
+        <img class="imgOcc" src="images/icons/aulaOccupata.png">
+        <% } else { %>
+        <img class="imgOcc" src="images/icons/aulaLibera.png">
+        <% } %>
+        <%= aula.getNome() %>
 
         <ul class="classes">
             <%
+                // Displaying the lessons for the classroom
                 for (Lezione lezione : lezioni) {
                     if(lezione.getAula().getNome().equals(aula.getNome())){
             %>
@@ -230,18 +259,22 @@
                 <%= lezione.getOraInizio() %>
                 <%= lezione.getOraFine() %>
                 <%= lezione.getCorso().getNome() %>
-                <%= lezione.getCorso().getAnnoDidattico().getAnno()%>
+                <%= lezione.getCorso().getAnnoDidattico().getAnno() %>
                 <%= lezione.getResto().getNome() %>
             </li>
             <%
                     }
                 }
             %>
-
         </ul>
     </li>
-    <%}    %>
+    <%
+        } // End for each aula
+    %>
 </ul>
+
+
+
 
 <script>
     document.querySelectorAll('.building').forEach(building => {
