@@ -76,6 +76,10 @@ public class LezioneDAO implements LezioneRemote {
         query.setParameter("corsoLaureaId", clid);
         query.setParameter("restoId", reid);
         query.setParameter("annoId", anid);
+
+        for (Lezione lezione : query.getResultList()) {
+            lezione.getDocenti().size(); // Forza il caricamento
+        }
         return query.getResultList();
     }
 

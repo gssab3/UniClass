@@ -48,9 +48,6 @@ public class cercaOrario extends HttpServlet {
         lezioni.sort(Comparator.comparing(Lezione::getGiorno).thenComparing(Lezione::getOraInizio));
 
 
-
-        System.out.println(lezioni);
-
         request.setAttribute("lezioni", lezioni);
         request.setAttribute("corsoLaurea", corsoLaurea);
         request.setAttribute("resto", resto);

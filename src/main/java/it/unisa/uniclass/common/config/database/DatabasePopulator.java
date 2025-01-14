@@ -631,6 +631,7 @@ public class DatabasePopulator {
 
         em.flush();
         em.clear();
+        System.out.println(docente1.getLezioni());
     }
 
 

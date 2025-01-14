@@ -2,7 +2,8 @@
 <%@ page import="it.unisa.uniclass.utenti.model.Tipo" %>
 <%@ page import="java.util.List" %>
 <%@ page import="it.unisa.uniclass.orari.model.*" %>
-<%@ page import="java.sql.Time" %><%--
+<%@ page import="java.sql.Time" %>
+<%@ page import="java.util.stream.Collectors" %><%--
   Created by IntelliJ IDEA.
   User: davan
   Date: 08/01/2025
@@ -188,7 +189,9 @@
         }
       %>
       <td colspan="<%= durataOre %>" class="subject-<%= lezione.getCorso().getNome().toLowerCase().replaceAll("\\s+", "-") %>">
-        <%= lezione.getCorso().getNome() %><br><%= lezione.getDocenti()%>
+        <%= lezione.getCorso().getNome() %><br><%= lezione.getDocenti().stream()
+              .map(docente -> docente.getNome() + " " + docente.getCognome())
+              .collect(Collectors.joining(", ")) %>
       </td>
       <%
             currentHour += durataOre;
@@ -205,10 +208,5 @@
     <% } %>
   </table>
 </div>
-
-
-
-
-
 </body>
 </html>
