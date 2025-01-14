@@ -18,10 +18,12 @@
     /* controllo tipo utente*/
 
     Tipo tipoUtente;
-    if(user != null)
+    if(user != null && ((user.getTipo() != Tipo.Docente) && (user.getTipo() != Tipo.Coordinatore) && (user.getTipo()) != Tipo.Studente))
         tipoUtente = (Tipo) user.getTipo();
+    else if (user != null && (user.getTipo() == Tipo.PersonaleTA))
+        response.sendRedirect("ErroreAccesso.jsp");
     else
-        tipoUtente = null;
+        response.sendRedirect("Login.jsp");
 
     Long id = (Long) request.getAttribute("id");
     String email = (String) request.getAttribute("email");
@@ -59,7 +61,7 @@
 </head>
 <body>
 
-<% if(tipoUtente == null) { %>
+<% if(tipoUtente.equals(Tipo.Studente)) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
@@ -69,32 +71,11 @@
         </li>
         <li id="aule"><a href="servelt">Aule</a>
         </li>
-        <li id="mappa"><a href="mappa.jsp">Mappa</a>
-        </li>
-        <li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
-        </li>
-        <li id="infoapp"><a href="infoapp.jsp">Info App</a>
-        </li>
-        <li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
-        </li>
-    </ul>
-</div>
-
-<% } else if(tipoUtente.equals(Tipo.Studente)) { %>
-
-<div class="barraNavigazione" id="barraNavigazione">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
-    <p>Menu<p>
-    <ul id="menu">
-        <li id="orari"> <a href="servelt">Orari</a>
-        </li>
-        <li id="aule"><a href="servelt">Aule</a>
-        </li>
-        <li id="agenda"><a href="servelt">Agenda</a>
+        <li id="agenda"><a href="servelt">Gestisci Agenda</a>
         </li>
         <li id="appelli"><a href="servelt">Appelli</a>
         </li>
-        <li id="conversazioni"><a href="/ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
+        <li id="conversazioni"><a href="servelt">Conversazioni</a>
         </li>
         <li id="mappa"><a href="mappa.jsp">Mappa</a>
         </li>
@@ -112,15 +93,11 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
     <p>Menu<p>
     <ul id="menu">
-        <li id="orari"> <a href="servelt">Orari</a>
-        </li>
         <li id="aule"><a href="servelt">Aule</a>
-        </li>
-        <li id="agenda"><a href="servelt">Agenda</a>
         </li>
         <li id="appelli"><a href="servelt">Appelli</a>
         </li>
-        <li id="conversazioni"><a href="/ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
+        <li id="conversazioni"><a href="servelt">Conversazioni</a>
         </li>
         <li id="mappa"><a href="mappa.jsp">Mappa</a>
         </li>
@@ -133,30 +110,6 @@
     </ul>
 </div>
 
-<% } else if(tipoUtente.equals(Tipo.PersonaleTA)) { %>
-
-<div class="barraNavigazione" id="barraNavigazione">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
-    <p>Menu<p>
-    <ul id="menu">
-        <li id="orari"> <a href="servelt">Orari</a>
-        </li>
-        <li id="aule"><a href="servelt">Aule</a>
-        </li>
-        <li id="appelli"><a href="servelt">Appelli</a>
-        </li>
-        <li id="gutenti"><a href="servlet">Gestione Utenti</a>
-        </li>
-        <li id="mappa"><a href="mappa.jsp">Mappa</a>
-        </li>
-        <li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
-        </li>
-        <li id="infoapp"><a href="infoapp.jsp">Info App</a>
-        </li>
-        <li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
-        </li>
-    </ul>
-</div>
 <% } %>
 
 <jsp:include page="header.jsp"/>

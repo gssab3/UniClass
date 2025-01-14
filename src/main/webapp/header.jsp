@@ -30,7 +30,7 @@
 
 	<header>
 		<div class="TastoMenu">
-        	<span style="font-size:30px;cursor:pointer" onclick="openNav()">
+        	<span style="font-size:50px;cursor:pointer" onclick="openNav()">
         		<img src="${pageContext.request.contextPath}/images/icons/menuClosedIcon.png" alt="open">
         	</span>
         </div>

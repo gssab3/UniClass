@@ -1,5 +1,20 @@
+<%@ page import="it.unisa.uniclass.utenti.model.Utente" %>
+<%@ page import="it.unisa.uniclass.utenti.model.Tipo" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+         pageEncoding="ISO-8859-1"%>
+
+<%
+    HttpSession sessione = request.getSession(true);
+    Utente user = (Utente) sessione.getAttribute("currentSessionUser");
+
+
+    /* controllo tipo utente*/
+    Tipo tipoUtente;
+    if(user != null)
+        response.sendRedirect("/Home");
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
