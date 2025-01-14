@@ -71,7 +71,8 @@ public class Lezione implements Serializable {
     @ManyToOne
     @JoinColumn(name = "resto_id")
     private Resto resto;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "aula_id")
     private Aula aula;
 
     public Lezione() {}

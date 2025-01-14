@@ -4,6 +4,7 @@ import it.unisa.uniclass.utenti.model.Studente;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,10 +36,9 @@ public class Agenda implements Serializable {
             joinColumns = @JoinColumn(name = "agenda_id"), // Colonna che fa riferimento ad Agenda
             inverseJoinColumns = @JoinColumn(name = "lezione_id") // Colonna che fa riferimento a Lezione
     )
-    private List<Lezione> lezioni;
+    private List<Lezione> lezioni = new ArrayList<>() ;
 
     public Agenda() {
-        this.lezioni = Collections.emptyList();
     }
 
     public Agenda(Studente studente) {

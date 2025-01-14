@@ -13,7 +13,7 @@
                 <br>
                 <a href=""> Privacy policy</a>
                 <br>
-                Developed by: Cetrulo G.Antonio D'Avanzo Saverio Gallo Sara Sabetta Giuseppe</p>
+                Developed by: Cetrulo G.Antonio, D'Avanzo Saverio, Gallo Sara, Sabetta Giuseppe</p>
         </div>
     </div>
 </footer>

@@ -308,8 +308,8 @@ public class DatabasePopulator {
         lezione8.setCorso(corso3);
         lezione8.setGiorno(Giorno.VENERDI);
         lezione8.setResto(resto);
-        lezione8.setOraInizio(Time.valueOf("11:00:00"));
-        lezione8.setOraFine(Time.valueOf("13:00:00"));
+        lezione8.setOraInizio(Time.valueOf("9:00:00"));
+        lezione8.setOraFine(Time.valueOf("11:00:00"));
         lezione8.setSemestre(1);
 
 

@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Comparator;
 import java.util.List;
 
 @WebServlet(name = "cercaOrarioServlet", value = "/cercaOrario")
@@ -44,10 +45,13 @@ public class cercaOrario extends HttpServlet {
         LezioneService lezioneService = new LezioneService();
         List<Lezione> lezioni = lezioneService.trovaLezioniCorsoLaureaRestoAnno(corsoLaurea.getId(),resto.getId(),annoDidattico.getId());
 
+        lezioni.sort(Comparator.comparing(Lezione::getGiorno).thenComparing(Lezione::getOraInizio));
+
+
+
         System.out.println(lezioni);
 
         request.setAttribute("lezioni", lezioni);
-
         request.setAttribute("corsoLaurea", corsoLaurea);
         request.setAttribute("resto", resto);
         request.setAttribute("anno", annoDidattico);
