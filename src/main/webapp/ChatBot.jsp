@@ -26,6 +26,7 @@
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css" />
     <link type="text/css" rel="stylesheet" href="styles/chatbot.css"/>
+	<link type="text/css" rel="stylesheet" href="styles/footerstyle.css">
 	<script src="scripts/chatBotJS.js"></script>
 
 </head>
@@ -131,5 +132,6 @@
 		<input type="text" id="userMessage" placeholder="Scrivi un messaggio..." />
 		<button onclick="sendMessage()">Invia</button>
 	</div>
+	<%@include file = "footer.jsp" %>
 </body>
 </html>

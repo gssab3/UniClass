@@ -29,6 +29,7 @@
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/mappa.css"/>
+	<link type="text/css" rel="stylesheet" href="styles/footerstyle.css">
 </head>
 <body>
 
@@ -142,6 +143,6 @@
         referrerpolicy="no-referrer-when-downgrade">
     </iframe>
 
-
+<%@include file = "footer.jsp" %>
 </body>
 </html>

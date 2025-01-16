@@ -30,6 +30,7 @@
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
 	<link type="text/css" rel="stylesheet" href="styles/aboutinfo.css">
+	<link type="text/css" rel="stylesheet" href="styles/footerinfostyle.css">
 
 </head>
 <body>
@@ -156,6 +157,6 @@
             <h2>La nostra visione</h2>
             <p>Vogliamo migliorare l'efficienza e la produttività degli studenti e del personale docente, rendendo la vita universitaria più organizzata e serena. Con UniClass, ogni attività è semplificata, per un'esperienza universitaria senza stress.</p>
         </section>
-
+   <%@include file = "footer.jsp" %>
 </body>
 </html>

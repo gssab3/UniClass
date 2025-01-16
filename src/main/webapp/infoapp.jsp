@@ -29,6 +29,7 @@
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/aboutinfo.css"/>
+	<link type="text/css" rel="stylesheet" href="styles/footerinfostyle.css">
 
 </head>
 <body>
@@ -151,6 +152,6 @@
             <h2>Un'esperienza universitaria semplificata</h2>
             <p>Con UniClass, la tua vita universitaria diventa più fluida, meno caotica e decisamente più efficiente. Provala oggi stesso e scopri come semplificare ogni aspetto della tua giornata accademica!</p>
         </section>
-
+<%@include file = "footer.jsp" %>
 </body>
 </html>
