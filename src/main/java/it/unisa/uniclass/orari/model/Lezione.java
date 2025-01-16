@@ -11,6 +11,11 @@ import java.util.ArrayList;
 
 import static it.unisa.uniclass.orari.model.Lezione.*;
 
+/**
+ * Rappresenta una lezione nel sistema di gestione orari.
+ * Contiene informazioni come la data, l'orario, il giorno, il corso associato, l'aula e altre proprietà rilevanti.
+ * */
+
 @Entity
 @Table(name = "lezioni")
 @NamedQueries({
@@ -41,14 +46,41 @@ import static it.unisa.uniclass.orari.model.Lezione.*;
 })
 public class Lezione implements Serializable {
 
+    /**
+     * Query per trovare una lezione tramite ID
+     * */
     public final static String TROVA_LEZIONE = "Lezione.trovaLezione";
+    /**
+     * Query per trovare lezioni associate a un corso specifico.
+     * */
     public final static String TROVA_LEZIONE_CORSO = "Lezione.trovaLezioneCorso";
+    /**
+     * Query per trovare lezioni in base all'orario di inizio e fine.
+     * */
     public final static String TROVA_LEZIONE_ORE = "Lezione.trovaLezioneOre";
+    /**
+     * Query per trovare lezioni in base all'orario e al giorno
+     * */
     public final static String TROVA_LEZIONE_ORE_GIORNO = "Lezione.trovaLezioneOreGiorno";
+    /**
+     * Query per trovare lezioni in base all'aula
+     * */
     public static final String TROVA_LEZIONE_AULA = "Lezione.trovaLezioneAula";
+    /**
+     * Query per trovare tutte le lezioni.
+     * */
     public static final String TROVA_TUTTE = "Lezione.trovaTutte";
+    /**
+     * Query per trovare lezioni in base al corso, resto e anno.
+     * */
     public static final String TROVA_LEZIONE_CORSO_RESTO_ANNO = "Lezione.trovaLezioneCorsoRestoAnno";
+    /**
+     * Query per trovare lezioni in base al corso, resto, anno e semestre.
+     * */
     public static final String TROVA_LEZIONE_CORSO_RESTO_ANNO_SEMESTRE = "Lezione.trovaLezioneCorsoRestoAnnoSemestre";
+    /**
+     * Query per trovare lezioni di uno specifico docente.
+     * */
     public static final String TROVA_LEZIONI_DOCENTE = "Lezione.trovaLezioniDocente";
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -75,7 +107,23 @@ public class Lezione implements Serializable {
     @JoinColumn(name = "aula_id")
     private Aula aula;
 
+    /**
+     *
+     * Costruttore predefinito.
+     * */
     public Lezione() {}
+
+    /**
+     * Costruttore con parametri.
+     *
+     * @param oraInizio L'orario di inizio.
+     * @param semestre Il semestre considerato.
+     * @param oraFine L'orario di fine.
+     * @param giorno Il giorno della settimana,.
+     * @param resto Informazioni aggiuntive sulla lezione.
+     * @param corso Il corso associato.
+     * @param aula L'aula della lezione
+     * */
 
     public Lezione(int semestre, Time oraInizio, Time oraFine, Giorno giorno, Resto resto, Corso corso, Aula aula) {
         this.oraInizio = oraInizio;
@@ -104,67 +152,141 @@ public class Lezione implements Serializable {
         this.agende = agende;
     }
 
+    /**
+     * Ottiene il semestre in cui è presente della lezione.
+     *
+     * @return semestre della lezione
+     * */
     public int getSemestre() {
         return semestre;
     }
 
+    /**Imposta il semestre in cui è presente la lezione.
+     *
+     * @param semestre Semestre in cui è presente la lezione.
+     * */
     public void setSemestre(int semestre) {
         this.semestre = semestre;
     }
 
+    /**
+     * Ottiene l'ora di inizio della lezione.
+     *
+     * @return ora dell'inizio della lezione
+     * */
     public Time getOraInizio() {
         return oraInizio;
     }
 
+    /**Imposta l'ora di inizio della lezione.
+     *
+     * @param oraInizio L'ora di inzio della lezione.
+     * */
     public void setOraInizio(Time oraInizio) {
         this.oraInizio = oraInizio;
     }
 
+    /**
+     * Ottiene l'ora di fine della lezione.
+     *
+     * @return ora di fine della lezione
+     * */
     public Time getOraFine() {
         return oraFine;
     }
 
+    /**Imposta l'ora di fine della lezione.
+     *
+     * @param oraFine L'ora di inzio della lezione.
+     * */
     public void setOraFine(Time oraFine) {
         this.oraFine = oraFine;
     }
 
     @Enumerated(EnumType.STRING)
+
+    /**
+     * Ottiene il giorno della lezione.
+     *
+     * @return giorno della lezione
+     * */
     public Giorno getGiorno() {
         return giorno;
     }
 
+    /**Imposta il giorno della lezione.
+     *
+     * @param giorno Giorno della lezione.
+     * */
     public void setGiorno(Giorno giorno) {
         this.giorno = giorno;
     }
 
+    /**
+     * Ottiene il resto in cui è presente la lezione.
+     *
+     * @return resto in cui è presente la lezione
+     * */
     public Resto getResto() {
         return resto;
     }
 
+    /**Imposta il resto in cui è presente la lezione.
+     *
+     * @param resto Resto in cui è presente la lezione.
+     * */
     public void setResto(Resto resto) {
         this.resto = resto;
     }
 
+    /**
+     * Ottiene l'id della lezione.
+     *
+     * @return id della lezione
+     * */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Ottiene il corso in cui è presente la lezione.
+     *
+     * @return il corso in cui è presente la lezione
+     * */
     public Corso getCorso() {
         return corso;
     }
 
+    /**
+     * Ottiene l'aula della lezione.
+     *
+     * @return aula della lezione
+     * */
     public Aula getAula() {
         return aula;
     }
 
+    /**Imposta l'aula in cui è presente la lezione.
+     *
+     * @param aula Aula in cui è presente la lezione.
+     * */
     public void setAula(Aula aula) {
         this.aula = aula;
     }
 
+    /**Imposta il corso in cui è presente la lezione.
+     *
+     * @param corso Corso in cui è presente la lezione.
+     * */
     public void setCorso(Corso corso) {
         this.corso = corso;
     }
 
+    /**
+     * Restituisce una rappresentazione testuale dell'oggetto.
+     *
+     * @return Stringa rappresentativa della lezione.
+     * */
     @Override
     public String toString() {
         return "Lezione{" +
