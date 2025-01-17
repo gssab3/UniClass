@@ -136,18 +136,38 @@ public class Lezione implements Serializable {
         this.agende = new ArrayList<>();
     }
 
+    /**
+     * Ottiene la lista di docenti associati alla lezione.
+     *
+     * @return Lista di docenti.
+     */
     public List<Docente> getDocenti() {
         return docenti;
     }
 
+    /**
+     * Imposta la lista di docenti associati alla lezione.
+     *
+     * @param docenti Lista di docenti.
+     */
     public void setDocenti(List<Docente> docenti) {
         this.docenti = docenti;
     }
 
+    /**
+     * Ottiene la lista di agende associate alla lezione.
+     *
+     * @return Lista di agende.
+     */
     public List<Agenda> getAgende() {
         return agende;
     }
 
+    /**
+     * Imposta la lista di agende associate alla lezione.
+     *
+     * @param agende Lista di agende.
+     */
     public void setAgende(List<Agenda> agende) {
         this.agende = agende;
     }

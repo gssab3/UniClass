@@ -13,6 +13,10 @@ import java.util.List;
 
 import static it.unisa.uniclass.utenti.model.Docente.*;
 
+/**
+ * Rappresenta un docente universitario.
+ * Estende la classe {@link Accademico} e implementa {@link Serializable}.
+ * */
 @Entity
 @Table(name = "docenti")
 @NamedQueries({
@@ -24,10 +28,25 @@ import static it.unisa.uniclass.utenti.model.Docente.*;
 })
 public class Docente extends Accademico implements Serializable {
 
+    /**
+     * Query per trovare un docente tramite la matricola
+     * */
     public static final String TROVA_DOCENTE = "Docente.trovaDocente";
+    /**
+     * Query per trovare docenti di un corso di laurea specifico
+     * */
     public static final String TROVA_DOCENTE_CORSOLAUREA = "Docente.trovaDocenteCorsoLaurea";
+    /**
+     * Query per trovare tutti i docenti
+     * */
     public static final String TROVA_TUTTI = "Docente.trovaTutti";
+    /**
+     * Query per trovare tuttii docenti con tipo "Docente".
+     * */
     public static final String TROVA_TUTTI_DOCENTI = "Docente.trovaTuttiDocenti";
+    /**
+     * Query per trovare un docente tramite email
+     * */
     public static final String TROVA_EMAIL = "Docente.trovaEmail";
 
     @ManyToMany
@@ -48,11 +67,17 @@ public class Docente extends Accademico implements Serializable {
     private List<Lezione> lezioni = new ArrayList<>();
 
 
+    /**
+     * Dipartimento a cui appartiene il docente
+     * */
     protected String dipartimento;
 
     @OneToMany(mappedBy = "docente", cascade = CascadeType.ALL, orphanRemoval = true)
     protected List<AppelloDocente> appelloDocenti = new ArrayList<>();
 
+    /**
+     * Costruttore parametrico della classe Docente
+     * */
     public Docente(String nome, String cognome, LocalDate dataNascita, String email, String password, String matricola, LocalDate iscrizione, CorsoLaurea corsoLaurea, String dipartimento) {
         tipo = Tipo.Docente;
         corsi = new ArrayList<Corso>();
@@ -68,6 +93,9 @@ public class Docente extends Accademico implements Serializable {
         appelloDocenti = new ArrayList<>();
     }
 
+    /**
+     * Costruttore di default della classe Docente
+     * */
     public Docente() {
         appelloDocenti = new ArrayList<>();
         corsi = new ArrayList<>();
@@ -82,30 +110,65 @@ public class Docente extends Accademico implements Serializable {
         this.lezioni = lezioni;
     }
 
+    /**
+     * Restituisce la lista di appelli associati al docente.
+     *
+     * @return Lista di {@link AppelloDocente}
+     * */
     public List<AppelloDocente> getAppelloDocenti() {
         return appelloDocenti;
     }
 
+    /**
+     * Imposta la lista di appelli associati al docente.
+     *
+     * @param appelloDocenti Lista di {@link AppelloDocente}.
+     * */
     public void setAppelloDocenti(List<AppelloDocente> appelloDocenti) {
         this.appelloDocenti = appelloDocenti;
     }
 
+    /**
+     * Restituisce il dipartimeno del docente
+     *
+     * @return Diaprtimento del docente
+     * */
     public String getDipartimento() {
         return dipartimento;
     }
 
+    /**
+     * Imposta il dipartimento del docente.
+     *
+     * @param dipartimento Dipartimento del docente.
+     * */
     public void setDipartimento(String dipartimento) {
         this.dipartimento = dipartimento;
     }
 
+    /**
+     * Restituisce la lista dei corsi associati al docente.
+     *
+     * @return Lista di {@link Corso}.
+     * */
     public List<Corso> getCorsi() {
         return corsi;
     }
 
+    /**
+     * Imposta la lista dei corsi associati al docente.
+     *
+     * @param corsi Lista di {@link Corso}.
+     * */
     public void setCorsi(List<Corso> corsi) {
         this.corsi = corsi;
     }
 
+    /**
+     * Restituisce una rappresentazione testuale del docente.
+     *
+     * @return Stringa rappresentante il docente.
+     * */
     @Override
     public String toString() {
         return "Docente{" +
