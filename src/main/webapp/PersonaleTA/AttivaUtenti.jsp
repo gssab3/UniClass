@@ -1,3 +1,31 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
+<%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
+<%@ page import="java.util.List" %>
+<%@ page import="it.unisa.uniclass.utenti.model.Accademico" %>
+
+<%
+    /* Sessione HTTP */
+    HttpSession sessione = request.getSession(true);
+    Utente user = (Utente) sessione.getAttribute("currentSessionUser");
+
+
+    /* controllo tipo utente*/
+
+    Tipo tipoUtente;
+    if(user != null) {
+        tipoUtente = (Tipo) user.getTipo();
+        if(!tipoUtente.equals(Tipo.PersonaleTA)) {
+            response.sendRedirect("ErroreAccesso.jsp");
+        }
+    }
+    else
+        response.sendRedirect("Login.jsp");
+
+    List<Accademico> accademiciNonAttivati = (List<Accademico>) request.getAttribute("accademiciNonAttivati");
+
+%>
 <!DOCTYPE html>
 <html>
 
@@ -65,7 +93,7 @@
                 <option value="Studente">Studente</option>
                 <option value="Docente">Docente</option>
                 <option value="Coordinatore">Coordinatore</option>
-                <option value="PersonaleTA">PersonaleTA</option>
+                <!-- <option value="PersonaleTA">PersonaleTA</option> -->
             </select><br><br>
 
             <input type="submit" value="Invia">
