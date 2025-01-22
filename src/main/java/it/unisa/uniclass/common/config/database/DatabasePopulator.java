@@ -562,7 +562,6 @@ public class DatabasePopulator {
         studente.setEmail("s.davanzo5@studenti.unisa.it");
         studente.setCorsoLaurea(corsoLaurea);
         studente.setIscrizione(LocalDate.now());
-        studente.setPassword("9009");
         studente.setTipo(Tipo.Studente);
         studente.setResto(resto);
         studente.setMatricola("0512118330");
@@ -589,12 +588,19 @@ public class DatabasePopulator {
         em.persist(corso2);
         em.persist(corso1);
         em.persist(corso3);
+        docente1.setAttivato(true);
         em.persist(docente1);
+        docente2.setAttivato(true);
         em.persist(docente2);
+        docente3.setAttivato(true);
         em.persist(docente3);
+        docente1_1.setAttivato(true);
         em.persist(docente1_1);
+        docente3_1.setAttivato(true);
         em.persist(docente3_1);
+        docente1_2.setAttivato(true);
         em.persist(docente1_2);
+        docente3_2.setAttivato(true);
         em.persist(docente3_2);
         em.persist(Sammet);
         em.persist(hopper);

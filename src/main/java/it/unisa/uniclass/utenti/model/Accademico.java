@@ -27,7 +27,8 @@ import static it.unisa.uniclass.utenti.model.Accademico.*;
 @NamedQueries({
         @NamedQuery(name = TROVA_ACCADEMICO, query = "SELECT a FROM Accademico a WHERE a.matricola = :matricola"),
         @NamedQuery(name = TROVA_TUTTI, query = "SELECT a FROM Accademico a"),
-        @NamedQuery(name = TROVA_EMAIL, query = "SELECT a FROM Accademico a WHERE a.email = :email")
+        @NamedQuery(name = TROVA_EMAIL, query = "SELECT a FROM Accademico a WHERE a.email = :email"),
+        @NamedQuery(name = TROVA_ATTIVATI, query = "SELECT a FROM Accademico a WHERE a.attivato = :attivato")
 })
 public class Accademico extends Utente implements Serializable {
 
@@ -43,6 +44,7 @@ public class Accademico extends Utente implements Serializable {
      * Nome della query per trovare un accademico data l'email
      */
     public static final String TROVA_EMAIL = "Accademico.trovaEmail";
+    public static final String TROVA_ATTIVATI = "Accademico.trovaAttivati";
 
     /** Relazione unidirezionale {@code @OneToOne}, mappata sul campo {@code corso_laurea_id}
      * */
@@ -52,6 +54,9 @@ public class Accademico extends Utente implements Serializable {
     @OneToOne
     @JoinColumn(name = "corso_laurea_id")
     protected CorsoLaurea corsoLaurea;
+
+
+    protected boolean attivato = false;
 
     @ManyToMany(mappedBy = "messaggeri")
     private Set<Conversazione> conversazioni = new HashSet<>();
@@ -73,6 +78,24 @@ public class Accademico extends Utente implements Serializable {
      */
     public Accademico() {}
 
+
+    /**
+     * Restituisce il valore d'attivazione dell'account
+     *
+     * @return il valore dell'attivazione
+     */
+    public boolean isAttivato() {
+        return attivato;
+    }
+
+    /**
+     * Imposta il valore dell'attivazione dell'account
+     *
+     * @param attivato il nuovo valore d'attivazione
+     */
+    public void setAttivato(boolean attivato) {
+        this.attivato = attivato;
+    }
 
     /**
      * Restituisce la data di iscrizione dell'accademico.
@@ -168,7 +191,7 @@ public class Accademico extends Utente implements Serializable {
 
     /** Restituisce i messaggi ricevuti dall'accademico.
      *
-     * @return un {@link set} di {@link Messaggio}.
+     * @return un {@link Set} di {@link Messaggio}.
      * */
     public Set<Messaggio> getMessaggiRicevuti() {
         return messaggiRicevuti;
