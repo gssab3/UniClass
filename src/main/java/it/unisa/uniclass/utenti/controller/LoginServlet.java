@@ -1,6 +1,7 @@
 package it.unisa.uniclass.utenti.controller;
 
 import it.unisa.uniclass.common.security.CredentialSecurity;
+import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.Utente;
 import it.unisa.uniclass.utenti.service.AccademicoService;
 import it.unisa.uniclass.utenti.service.PersonaleTAService;
@@ -12,6 +13,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "loginServlet", value = "/Login")
 public class LoginServlet extends HttpServlet{
@@ -31,6 +33,7 @@ public class LoginServlet extends HttpServlet{
 
             AccademicoService accademicoService = new AccademicoService();
             PersonaleTAService personaleTAService = new PersonaleTAService();
+            List<Accademico> attivati = accademicoService.trovaAttivati(true);
             Utente user1 = accademicoService.trovaEmailPassUniclass(email, password);
             Utente user2 = personaleTAService.trovaEmailPass(email,password);
             Utente user = null;
@@ -41,8 +44,11 @@ public class LoginServlet extends HttpServlet{
                 } else {
                     user = user2;
                 }
-            }else {
+            }else if(attivati.contains(user1)){
                 user = user1;
+            }
+            else {
+                response.sendRedirect(request.getContextPath() + "/Login.jsp?action=error");
             }
 
             if (user != null) {

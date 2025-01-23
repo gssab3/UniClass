@@ -64,7 +64,9 @@ public class AccademicoService {
         }
     }
 
-
+    public List<Accademico> trovaAttivati(boolean attivato) {
+        return accademicoDao.trovaAttivati(attivato);
+    }
 
     public void aggiungiAccademico(Accademico accademico) {
         accademicoDao.aggiungiAccademico(accademico);

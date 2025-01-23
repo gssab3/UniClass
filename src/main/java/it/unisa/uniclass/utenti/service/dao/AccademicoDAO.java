@@ -33,6 +33,13 @@ public class AccademicoDAO implements AccademicoRemote {
     }
 
     @Override
+    public List<Accademico> trovaAttivati(boolean attivazione) {
+        TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_ATTIVATI, Accademico.class);
+        query.setParameter("attivato", attivazione);
+        return query.getResultList();
+    }
+
+    @Override
     public void aggiungiAccademico(Accademico accademico) {
         emUniclass.merge(accademico);
     }
