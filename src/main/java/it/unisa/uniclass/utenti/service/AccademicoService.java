@@ -37,7 +37,7 @@ public class AccademicoService {
         try{
             Accademico accademico = accademicoDao.trovaEmailUniClass(email);
             if(accademico != null) {
-                if(accademico.getPassword().equals(pass)) {
+                if(accademico.getPassword() == null || accademico.getPassword().equals(pass)) {
                     return accademico;
                 } else {
                     return null;

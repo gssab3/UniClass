@@ -35,8 +35,12 @@
                 <div class="tableRow">
                     <p class="error">email o password errati!</p>
                 </div>
-                <% } %>
-
+                <% } else if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("notactivated") ) { %>
+                <div class="tableRow">
+                    <p class="error">Il tuo Account non è ancora stato attivato!</p>
+                    <p class="error">Riceverai le credenziali di accesso quando il tuo account sarà attivo.</p>
+                </div>
+                <% }%>
                 <div>
                     <h1 class="titolologin">
                         <span>Bentornato</span>
