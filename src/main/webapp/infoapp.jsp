@@ -132,11 +132,12 @@
 
         <section>
 			<h1>Scopri UniClass: l'app che semplifica la tua vita universitaria</h1>
+			<br>
             <p>UniClass è l’app perfetta per studenti e docenti che vogliono ottimizzare la gestione della propria giornata accademica. Grazie a questa piattaforma intuitiva, puoi accedere a tutte le informazioni necessarie in tempo reale, senza bisogno di cercarle su più applicazioni.</p>
 
             <h2>Funzionalità principali:</h2>
             <ul>
-                <li><strong>Disponibilità aule in tempo reale:</strong> Visualizza le aule libere e prenotabili direttamente dall’app.</li>
+                <li><strong>Disponibilità aule in tempo reale:</strong> Visualizza le aule libere direttamente dalla piattaforma stessa.</li>
                 <li><strong>Orari delle lezioni:</strong> Consulta facilmente gli orari delle tue lezioni e ottimizza il tuo piano di studio.</li>
                 <li><strong>Calendario corsi:</strong> Organizza la tua settimana accademica con un semplice clic.</li>
                 <li><strong>Comunicazione facile:</strong> Contatta i tuoi docenti e interagisci senza difficoltà.</li>
@@ -144,12 +145,13 @@
 
             <h2>Perché scegliere UniClass?</h2>
             <ul>
-                <li><strong>Tutto in un'unica app:</strong> Non dovrai più usare più applicazioni per trovare le informazioni che ti servono.</li>
+                <li><strong>Tutto in un'unica app:</strong> Non dovrai più usare applicazioni differenti per trovare le informazioni che ti servono.</li>
                 <li><strong>Semplicità e velocità:</strong> Trova rapidamente aule, orari e aggiornamenti senza stress.</li>
                 <li><strong>Interazione diretta:</strong> Comunica senza problemi con docenti e colleghi.</li>
             </ul>
 
             <h2>Un'esperienza universitaria semplificata</h2>
+			<br>
             <p>Con UniClass, la tua vita universitaria diventa più fluida, meno caotica e decisamente più efficiente. Provala oggi stesso e scopri come semplificare ogni aspetto della tua giornata accademica!</p>
         </section>
 <%@include file = "footer.jsp" %>
