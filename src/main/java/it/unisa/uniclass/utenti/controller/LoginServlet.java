@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet{
             AccademicoService accademicoService = new AccademicoService();
             PersonaleTAService personaleTAService = new PersonaleTAService();
             List<Accademico> attivati = accademicoService.trovaAttivati(true);
+            password = CredentialSecurity.hashPassword(password);
             Utente user1 = accademicoService.trovaEmailPassUniclass(email, password);
             Utente user2 = personaleTAService.trovaEmailPass(email,password);
             Utente user = null;
