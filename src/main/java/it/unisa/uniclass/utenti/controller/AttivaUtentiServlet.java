@@ -57,11 +57,10 @@ public class AttivaUtentiServlet extends HttpServlet {
                     System.out.println(e.toString());
                 }
                 accademico.setAttivato(true);
-                /*
-                String passwordhash = CredentialSecurity.hashPassword(password);
-                accademico.setPassword(passwordhash);
-                */
-                accademico.setPassword(password);
+                accademico.setPassword(CredentialSecurity.hashPassword(password));
+
+                //Dopo averlo attivato e settato password hashata, facciamo il merge con la funzione del DAO
+                accademicoService.aggiungiAccademico(accademico);
             }
         }
     }

@@ -1,5 +1,6 @@
 package it.unisa.uniclass.common.config.database;
 
+import it.unisa.uniclass.common.security.CredentialSecurity;
 import it.unisa.uniclass.orari.model.*;
 import it.unisa.uniclass.orari.service.CorsoLaureaService;
 import it.unisa.uniclass.utenti.model.Docente;
@@ -120,10 +121,11 @@ public class DatabasePopulator {
         docente1.setIscrizione(LocalDate.now());
         docente1.setMatricola("0512110000");
         docente1.setDataNascita(LocalDate.of(1980, 10, 20));
-        docente1.setPassword("0000");
+        docente1.setPassword(CredentialSecurity.hashPassword("0000"));
         docente1.setTipo(Tipo.Docente);
         docente1.getCorsi().add(corso1);
         docente1.setEmail("giovanni@unisa.it");
+        docente1.setAttivato(true);
         corso1.getDocenti().add(docente1);
 
         Docente docente2 = new Docente();
@@ -134,10 +136,11 @@ public class DatabasePopulator {
         docente2.setIscrizione(LocalDate.now());
         docente2.setMatricola("0512111090");
         docente2.setDataNascita(LocalDate.of(1980,1,13));
-        docente2.setPassword("1111");
+        docente2.setPassword(CredentialSecurity.hashPassword("1111"));
         docente2.setTipo(Tipo.Docente);
         docente2.getCorsi().add(corso2);
         docente2.setEmail("albertorossi@unisa.it");
+        docente2.setAttivato(true);
         corso2.getDocenti().add(docente2);
 
         Docente docente3 = new Docente();
@@ -148,10 +151,11 @@ public class DatabasePopulator {
         docente3.setIscrizione(LocalDate.now());
         docente3.setMatricola("0512111101");
         docente3.setDataNascita(LocalDate.of(1990,1,10));
-        docente3.setPassword("2222");
+        docente3.setPassword(CredentialSecurity.hashPassword("2222"));
         docente3.setTipo(Tipo.Docente);
         docente3.getCorsi().add(corso3);
         docente3.setEmail("giacomoporetti@unisa.it");
+        docente3.setAttivato(true);
         corso3.getDocenti().add(docente3);
 
         Docente docente1_1 = new Docente();
@@ -162,9 +166,10 @@ public class DatabasePopulator {
         docente1_1.setIscrizione(LocalDate.now());
         docente1_1.setMatricola("0512110033");
         docente1_1.setDataNascita(LocalDate.of(1977,4,20));
-        docente1_1.setPassword("3333");
+        docente1_1.setPassword(CredentialSecurity.hashPassword("3333"));
         docente1_1.setTipo(Tipo.Docente);
         docente1_1.getCorsi().add(corso1);
+        docente1_1.setAttivato(true);
         corso1.getDocenti().add(docente1_1);
         docente1_1.setEmail("albertosorrisi@unisa.it");
 
@@ -176,9 +181,10 @@ public class DatabasePopulator {
         docente3_1.setIscrizione(LocalDate.now());
         docente3_1.setMatricola("0512110932");
         docente3_1.setDataNascita(LocalDate.of(1967,2,2));
-        docente3_1.setPassword("4444");
+        docente3_1.setPassword(CredentialSecurity.hashPassword("4444"));
         docente3_1.setTipo(Tipo.Docente);
         docente3_1.getCorsi().add(corso3);
+        docente3_1.setAttivato(true);
         docente3_1.setEmail("stefalberi@unisa.it");
         corso3.getDocenti().add(docente3_1);
 
@@ -190,10 +196,11 @@ public class DatabasePopulator {
         docente1_2.setIscrizione(LocalDate.now());
         docente1_2.setMatricola("0512112033");
         docente1_2.setDataNascita(LocalDate.of(1991,1,3));
-        docente1_2.setPassword("3333");
+        docente1_2.setPassword(CredentialSecurity.hashPassword("3333"));
         docente1_2.setTipo(Tipo.Docente);
         docente1_2.getCorsi().add(corso1);
         docente1_2.setEmail("angelinimar@unisa.it");
+        docente1_2.setAttivato(true);
         corso1.getDocenti().add(docente1_2);
 
         Docente docente3_2 = new Docente();
@@ -204,10 +211,11 @@ public class DatabasePopulator {
         docente3_2.setIscrizione(LocalDate.now());
         docente3_2.setMatricola("0512112133");
         docente3_2.setDataNascita(LocalDate.of(1980,8,30));
-        docente3_2.setPassword("6666");
+        docente3_2.setPassword(CredentialSecurity.hashPassword("6666"));
         docente3_2.setTipo(Tipo.Docente);
         docente3_2.getCorsi().add(corso3);
         docente3_2.setEmail("lorelanz@unisa.it");
+        docente3_2.setAttivato(true);
         corso3.getDocenti().add(docente3_2);
 
         //Creazione Lezioni
