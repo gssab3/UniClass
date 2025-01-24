@@ -35,6 +35,7 @@ public class LoginServlet extends HttpServlet{
             PersonaleTAService personaleTAService = new PersonaleTAService();
             List<Accademico> attivati = accademicoService.trovaAttivati(true);
             List<Accademico> nonAttivati = accademicoService.trovaAttivati(false);
+            List<Accademico> nonAttivati = accademicoService.trovaAttivati(false);
             Utente user1 = accademicoService.trovaEmailPassUniclass(email, password);
             Utente user2 = personaleTAService.trovaEmailPass(email,password);
             Utente user = null;
