@@ -198,8 +198,7 @@
 <ul class="buildings">
     <li class="building"> F1
         <ul class="classes">
-            <% AulaService aulaService = new AulaService();
-                List<Lezione> lezioni = (List<Lezione>)  %>
+            <% //AulaService aulaService = new AulaService();// List<Lezione> lezioni = (List<Lezione>)  %>
             <li class="class">Monday 9:00 AM - 11:00 AM</li>
             <li class="class">Wednesday 2:00 PM - 4:00 PM</li>
         </ul>

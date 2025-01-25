@@ -174,13 +174,13 @@
 <br>
 <div class="container-wrapper">
     <div class="container">
-        <h2> <a href="/EdificioServlet?ed=F">Edificio F</a></h2>
+        <h2> <a href="EdificioServlet?ed=F">Edificio F</a></h2>
     </div>
     <div class="container">
-        <h2><a href="/EdificioServlet?ed=F2">Edificio F2</a> </h2>
+        <h2><a href="EdificioServlet?ed=F2">Edificio F2</a> </h2>
     </div>
     <div class="container">
-        <h2><a href="/EdificioServlet?ed=F3">Edificio F3</a> </h2>
+        <h2><a href="EdificioServlet?ed=F3">Edificio F3</a> </h2>
 
     </div>
 </div>
