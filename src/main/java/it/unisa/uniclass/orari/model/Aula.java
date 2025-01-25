@@ -19,7 +19,8 @@ import static it.unisa.uniclass.orari.model.Aula.*;
         @NamedQuery(name = TROVA_AULANOME, query = "SELECT a FROM Aula a WHERE a.nome = :nome"),
         @NamedQuery(name = TROVA_AULA, query = "SELECT a FROM Aula a WHERE a.id = :id"),
         @NamedQuery(name = TROVA_AULA_EDIFICIO, query = "SELECT a FROM Aula a WHERE a.edificio = :edificio"),
-        @NamedQuery(name = TROVA_TUTTE, query = "SELECT a FROM Aula a")
+        @NamedQuery(name = TROVA_TUTTE, query = "SELECT a FROM Aula a"),
+        @NamedQuery(name = TROVA_EDIFICI, query = "SELECT a.edificio FROM Aula a GROUP BY a.edificio")
 })
 public class Aula implements Serializable {
     /**
@@ -39,6 +40,11 @@ public class Aula implements Serializable {
      * Nome della query per trovare tutte le aule.
      * */
     public static final String TROVA_TUTTE = "Aula.trovaTutte";
+
+    /**
+     * Nome della query per trovare tutti gli edifici (distinti)
+     */
+    public static final String TROVA_EDIFICI = "Aula.trovaEdifici";
 
     /**
      * Identificativo univoco dell'Aula

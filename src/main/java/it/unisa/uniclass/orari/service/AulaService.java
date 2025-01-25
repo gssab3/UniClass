@@ -48,6 +48,10 @@ public class AulaService {
         return aulaDao.trovaAuleEdificio(edificio);
     }
 
+    public List<String> trovaEdifici() {
+        return aulaDao.trovaEdifici();
+    }
+
     public void aggiungiAula(Aula aula) {
         if (aula == null) {
             throw new IllegalArgumentException("Argument 'aula' must not be null");
