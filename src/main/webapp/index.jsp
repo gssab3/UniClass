@@ -70,7 +70,7 @@
             </li>
             <li id="appelli"><a href="servelt">Appelli</a>
             </li>
-            <li id="conversazioni"><a href="/ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
+            <li id="conversazioni"><a href="ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
             </li>
 			<li id="mappa"><a href="mappa.jsp">Mappa</a>
 			</li>
@@ -95,7 +95,7 @@
 			-->
             <li id="appelli"><a href="servelt">Appelli</a>
             </li>
-            <li id="conversazioni"><a href="/ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
+            <li id="conversazioni"><a href="ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
             </li>
 			<li id="mappa"><a href="mappa.jsp">Mappa</a>
 			</li>
@@ -118,7 +118,7 @@
 		</li>
 		<li id="appelli"><a href="servelt">Appelli</a>
 		</li>
-		<li id="gutenti"><a href="/GestioneUtenti">Gestione Utenti</a>
+		<li id="gutenti"><a href="GestioneUtenti">Gestione Utenti</a>
 		</li>
 		<li id="mappa"><a href="mappa.jsp">Mappa</a>
 		</li>
