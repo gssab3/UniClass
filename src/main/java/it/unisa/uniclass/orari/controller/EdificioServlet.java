@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.naming.NamingException;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +19,12 @@ public class EdificioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String edificio = req.getParameter("ed");
 
-        AulaService aulaService = new AulaService();
+        AulaService aulaService = null;
+        try {
+            aulaService = new AulaService();
+        } catch (NamingException e) {
+            throw new RuntimeException(e);
+        }
 
         List<Aula> aule = aulaService.trovaAuleEdificio(edificio);
 
