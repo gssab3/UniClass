@@ -2,13 +2,12 @@
 
 <%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
 <%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
-<%@ page import="java.util.List" %>
 <%@ page import="it.unisa.uniclass.orari.model.Lezione" %>
 <%@ page import="it.unisa.uniclass.orari.service.AulaService" %>
 <%@ page import="it.unisa.uniclass.orari.model.Aula" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="it.unisa.uniclass.orari.service.LezioneService" %>
-<%@ page import="java.util.Comparator" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.sql.Time" %>
 
 <%
     /* Sessione HTTP */
@@ -50,7 +49,12 @@
             padding-left: 250px;
             padding-right: 250px;
         }
+        .imgOcc{
+            vertical-align: text-top;
+        }
         .building {
+            font-size: 20px;
+            text-align: center;
             background-color: #3498db;
             color: white;
             margin-bottom: 10px;
@@ -66,9 +70,6 @@
             display: none;
             list-style-type: none;
             padding-left: 20px;
-        }
-        .class {
-
         }
         .libera{
             background-color: #2ecc71;
@@ -197,21 +198,44 @@
 <br>
 <br>
 
-<h1> Edificio F </h1>
+<h1> Edificio <%= edificio%> </h1>
 <ul class="buildings">
-    <% for (Aula aula : aule){ %>
-    <li class="building"> <%= aula.getNome()%>
+    <% Time oraCorrente = new Time(System.currentTimeMillis());
+        boolean occ = false;
+        for (Aula aula : aule){
+
+        LezioneService lezioneService = new LezioneService();
+        List<Lezione> lezioni = lezioneService.trovaLezioniAule(aula.getNome());
+        lezioni.sort(
+                Comparator.comparing(Lezione::getGiorno)
+                        .thenComparing(Lezione::getOraInizio));
+        for(Lezione lezione: lezioni){
+            if(oraCorrente.after(lezione.getOraInizio()) && oraCorrente.before(lezione.getOraFine())){
+                occ = true;
+            }else{
+                occ = false;
+            }
+        }
+
+    %>
+    <li class="building"> <%if(occ){ %> <img class="imgOcc" src="images/icons/aulaOccupata.png"> <% } else { %> <img class="imgOcc" src="images/icons/aulaLibera.png"> <% } %> <%= aula.getNome()%>
 
         <ul class="classes">
-            <%  LezioneService lezioneService = new LezioneService();
-                List<Lezione> lezioni = lezioneService.trovaLezioniAule(aula.getNome());
-                lezioni.sort(Comparator.comparing(Lezione::getOraInizio));
+            <%
                 for (Lezione lezione : lezioni) {
                     if(lezione.getAula().getNome().equals(aula.getNome())){
             %>
-            <li class="occupata"><%= lezione.getGiorno()%> <%= lezione.getOraInizio()%> <%= lezione.getOraFine()%></li>
-            <% }
-            }
+            <li class="occupata">
+                <%= lezione.getGiorno() %>
+                <%= lezione.getOraInizio() %>
+                <%= lezione.getOraFine() %>
+                <%= lezione.getCorso().getNome() %>
+                <%= lezione.getCorso().getAnnoDidattico().getAnno()%>
+                <%= lezione.getResto().getNome() %>
+            </li>
+            <%
+                    }
+                }
             %>
 
         </ul>
