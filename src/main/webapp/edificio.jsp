@@ -6,6 +6,9 @@
 <%@ page import="it.unisa.uniclass.orari.model.Lezione" %>
 <%@ page import="it.unisa.uniclass.orari.service.AulaService" %>
 <%@ page import="it.unisa.uniclass.orari.model.Aula" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="it.unisa.uniclass.orari.service.LezioneService" %>
+<%@ page import="java.util.Comparator" %>
 
 <%
     /* Sessione HTTP */
@@ -196,37 +199,24 @@
 
 <h1> Edificio F </h1>
 <ul class="buildings">
-    <li class="building"> F1
+    <% for (Aula aula : aule){ %>
+    <li class="building"> <%= aula.getNome()%>
+
         <ul class="classes">
-            <% //AulaService aulaService = new AulaService();// List<Lezione> lezioni = (List<Lezione>)  %>
-            <li class="class">Monday 9:00 AM - 11:00 AM</li>
-            <li class="class">Wednesday 2:00 PM - 4:00 PM</li>
+            <%  LezioneService lezioneService = new LezioneService();
+                List<Lezione> lezioni = lezioneService.trovaLezioniAule(aula.getNome());
+                lezioni.sort(Comparator.comparing(Lezione::getOraInizio));
+                for (Lezione lezione : lezioni) {
+                    if(lezione.getAula().getNome().equals(aula.getNome())){
+            %>
+            <li class="occupata"><%= lezione.getGiorno()%> <%= lezione.getOraInizio()%> <%= lezione.getOraFine()%></li>
+            <% }
+            }
+            %>
+
         </ul>
     </li>
-    <li class="building"> F2
-        <ul class="classes">
-            <li class="class">Monday 9:00 AM - 11:00 AM</li>
-            <li class="class">Wednesday 2:00 PM - 4:00 PM</li>
-        </ul>
-    </li>
-    <li class="building"> F3
-        <ul class="classes">
-            <li class="class">Monday 9:00 AM - 11:00 AM</li>
-            <li class="class">Wednesday 2:00 PM - 4:00 PM</li>
-        </ul>
-    </li>
-    <li class="building"> F4
-        <ul class="classes">
-            <li class="class">Monday 9:00 AM - 11:00 AM</li>
-            <li class="class">Wednesday 2:00 PM - 4:00 PM</li>
-        </ul>
-    </li>
-    <li class="building"> F5
-        <ul class="classes">
-            <li class="class">Monday 9:00 AM - 11:00 AM</li>
-            <li class="class">Wednesday 2:00 PM - 4:00 PM</li>
-        </ul>
-    </li>
+    <%}    %>
 </ul>
 
 <script>

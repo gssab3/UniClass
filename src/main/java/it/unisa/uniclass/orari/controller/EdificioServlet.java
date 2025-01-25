@@ -1,7 +1,9 @@
 package it.unisa.uniclass.orari.controller;
 
 import it.unisa.uniclass.orari.model.Aula;
+import it.unisa.uniclass.orari.model.Lezione;
 import it.unisa.uniclass.orari.service.AulaService;
+import it.unisa.uniclass.orari.service.LezioneService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
