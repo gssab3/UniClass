@@ -2,6 +2,7 @@ package it.unisa.uniclass.utenti.controller;
 
 import it.unisa.uniclass.common.security.CredentialSecurity;
 import it.unisa.uniclass.utenti.model.Accademico;
+import it.unisa.uniclass.utenti.model.PersonaleTA;
 import it.unisa.uniclass.utenti.model.Utente;
 import it.unisa.uniclass.utenti.service.AccademicoService;
 import it.unisa.uniclass.utenti.service.PersonaleTAService;
@@ -28,67 +29,35 @@ public class LoginServlet extends HttpServlet{
 
         try {
             String email = request.getParameter("email");
-            //String password = CredentialSecurity.hashPassword(request.getParameter("password"));
+            //Password non hashata, così come viene digitata
             String password = request.getParameter("password");
 
             AccademicoService accademicoService = new AccademicoService();
             PersonaleTAService personaleTAService = new PersonaleTAService();
-            List<Accademico> attivati = accademicoService.trovaAttivati(true);
-            List<Accademico> nonAttivati = accademicoService.trovaAttivati(false);
+            //password hashata, da come viene digitata all'hashing
             password = CredentialSecurity.hashPassword(password);
-            Utente user1 = accademicoService.trovaEmailPassUniclass(email, password);
-            Utente user2 = personaleTAService.trovaEmailPass(email,password);
+            Accademico user1 = accademicoService.trovaEmailPassUniclass(email, password);
+            PersonaleTA user2 = personaleTAService.trovaEmailPass(email,password);
             Utente user = null;
 
-            Utente user1email = accademicoService.trovaEmailUniClass(email);
-            Utente user2email = personaleTAService.trovaEmail(email);
 
             /*
-            if(user1email != null){
-                if(nonAttivati.contains(user1email)){
-                    response.sendRedirect(request.getContextPath() + "/Login.jsp?action=notactivated");
-                    return;
-                }
-            }
-            else if (user2email != null)
-            {
-                if(nonAttivati.contains(user2email)){
-                    response.sendRedirect(request.getContextPath() + "/Login.jsp?action=notactivated");
-                    return;
-                }
-            }
-            */
-
+            Si deve prima cercare di capire quale user è null. Quello non null bisogna vedere se è accademico (in quel caso controllare se
+            è attivato, altrimenti senza password c'è errore), altrimenti vedere se è personaleTA (esso non viene attivato, c'è e basta)
+             */
             if(user1 == null && user2 == null){
                 response.sendRedirect(request.getContextPath() + "/Login.jsp?action=error");
                 return;
             } else if(user1 != null && user2 == null){
-                if(attivati.contains(user1)) {
+                if(user1.isAttivato()) {
                     user = user1;
                 }else if(user1.getPassword() == null){
                     response.sendRedirect(request.getContextPath() + "/Login.jsp?action=notactivated");
                     return;
                 }
             } else if(user1 == null && user2 != null) {
-                if(attivati.contains(user2)) {
-                    user = user2;
-                }else if(user2.getPassword() == null){
-                    response.sendRedirect(request.getContextPath() + "/Login.jsp?action=notactivated");
-                    return;
-                }
+                user = user2;
             }
-
-            /*
-            if(user1 == null){
-                if(user2 == null){
-                    response.sendRedirect(request.getContextPath() + "/Login.jsp?action=error");
-                } else {
-                    user = user2;
-                }
-            }else if(attivati.contains(user1)){
-                user = user1;
-            }
-            */
 
 
             if (user != null) {

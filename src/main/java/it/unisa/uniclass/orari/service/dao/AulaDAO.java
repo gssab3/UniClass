@@ -40,6 +40,12 @@ public class AulaDAO implements AulaRemote {
     }
 
     @Override
+    public List<String> trovaEdifici() {
+        TypedQuery<String> query = emUniClass.createNamedQuery(Aula.TROVA_EDIFICI, String.class);
+        return query.getResultList();
+    }
+
+    @Override
     public void aggiungiAula(Aula aula) {
         emUniClass.merge(aula);
     }

@@ -11,6 +11,7 @@ public interface AulaRemote {
     public Aula trovaAula(String nome);
     public List<Aula> trovaTutte();
     public List<Aula> trovaAuleEdificio(String edificio);
+    public List<String> trovaEdifici();
     public void aggiungiAula(Aula aula);
     public void rimuoviAula(Aula aula);
 }
