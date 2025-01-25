@@ -1,6 +1,7 @@
 package it.unisa.uniclass.conversazioni.service.dao;
 
 import it.unisa.uniclass.conversazioni.model.Messaggio;
+import it.unisa.uniclass.conversazioni.model.Topic;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 
@@ -67,6 +68,13 @@ public class MessaggioDAO implements MessaggioRemote {
     public List<Messaggio> trovaMessaggiData(LocalDateTime dateTime) {
         TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_DATA, Messaggio.class);
         query.setParameter("dateTime", dateTime);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Messaggio> trovaTopic(Topic topic) {
+        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_TOPIC, Messaggio.class);
+        query.setParameter("topic", topic);
         return query.getResultList();
     }
 

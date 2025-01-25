@@ -1,6 +1,7 @@
 package it.unisa.uniclass.conversazioni.service.dao;
 
 import it.unisa.uniclass.conversazioni.model.Messaggio;
+import it.unisa.uniclass.conversazioni.model.Topic;
 import jakarta.ejb.Remote;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ public interface MessaggioRemote {
     public List<Messaggio> trovaAvvisi();
     public List<Messaggio> trovaAvvisiAutore(String autore);
     public List<Messaggio> trovaMessaggiData(LocalDateTime dateTime);
+    public List<Messaggio> trovaTopic(Topic topic);
     public void aggiungiMessaggio(Messaggio messaggio);
     public void rimuoviMessaggio(Messaggio messaggio);
 

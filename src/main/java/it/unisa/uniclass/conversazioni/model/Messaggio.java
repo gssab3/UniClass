@@ -22,7 +22,8 @@ import static it.unisa.uniclass.conversazioni.model.Messaggio.*;
         @NamedQuery(name = TROVA_TUTTI, query = "SELECT m FROM Messaggio m"),
         @NamedQuery(name = TROVA_AVVISI, query = "SELECT m FROM Messaggio m WHERE m.topic <> null"),
         @NamedQuery(name = TROVA_AVVISI_AUTORE, query = "SELECT m FROM Messaggio m WHERE m.topic <> null AND m.autore.matricola = :autore"),
-        @NamedQuery(name = TROVA_MESSAGGI_DATA, query = "SELECT m FROM Messaggio m WHERE m.dateTime = :dateTime")
+        @NamedQuery(name = TROVA_MESSAGGI_DATA, query = "SELECT m FROM Messaggio m WHERE m.dateTime = :dateTime"),
+        @NamedQuery(name = TROVA_TOPIC, query = "SELECT m FROM Messaggio m WHERE m.topic = :topic")
 })
 public class Messaggio implements Serializable {
 
@@ -58,14 +59,13 @@ public class Messaggio implements Serializable {
      * Nome della query per trovare i messaggi in base alla data e ora.
      * */
     public static final String TROVA_MESSAGGI_DATA = "Messaggio.trovaMessaggiData";
+    /**
+     * Nome della query per trovare i messaggi in base all'id del topic (eventuale)
+     */
+    public static final String TROVA_TOPIC = "Messaggio.trovaTopic";
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    /**
-     * Topic del messaggio (può essere null).
-     * */
-    private String topic;
 
     /**
      * Data e ore di creazione del messaggio.
@@ -98,6 +98,10 @@ public class Messaggio implements Serializable {
     @ManyToOne
     @JoinColumn(name = "destinatario")
     private Accademico destinatario;
+
+    @ManyToOne
+    @JoinColumn(name = "topic")
+    private Topic topic;
 
     //Getter e Setter con Javadoc
     /**
@@ -150,30 +154,12 @@ public class Messaggio implements Serializable {
      * @param body  Il corpo del Messaggio
      * @param dateTime  La data e ora di creazione
      * */
-    public Messaggio(Accademico autore, Accademico destinatario, String topic, String body, LocalDateTime dateTime) {
+    public Messaggio(Accademico autore, Accademico destinatario, Topic topic, String body, LocalDateTime dateTime) {
         this.autore = autore;
         this.destinatario = destinatario;
         this.topic = topic;
         this.body = body;
         this.dateTime = dateTime;
-    }
-
-    /**
-     * Restituisce il topic del messaggio.
-     *
-     * @return Il topic.
-     * */
-    public String getTopic() {
-        return topic;
-    }
-
-    /**
-     * Imposta il topic del messaggio.
-     *
-     * @param topic Il topic da impostare.
-     * */
-    public void setTopic(String topic) {
-        this.topic = topic;
     }
 
     /**
@@ -211,6 +197,24 @@ public class Messaggio implements Serializable {
      * */
     public void setBody(String body) {
         this.body = body;
+    }
+
+    /**
+     * Restituisce il topic del messaggio.
+     *
+     * @return Il topic.
+     * */
+    public Topic getTopic() {
+        return topic;
+    }
+
+    /**
+     * Imposta il topic del messaggio.
+     *
+     * @param topic Il topic da impostare.
+     * */
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 
     /**
