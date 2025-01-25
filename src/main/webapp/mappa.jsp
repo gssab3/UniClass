@@ -41,7 +41,7 @@
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
 	<p>Menu<p>
 	<ul id="menu">
-		<li id="aule"><a href="servelt">Aule</a>
+		<li id="aule"><a href="aula.jsp">Aule</a>
 		</li>
 		<li id="mappa"><a href="mappa.jsp">Mappa</a>
 		</li>
@@ -86,11 +86,11 @@
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
 	<p>Menu<p>
 	<ul id="menu">
-		<li id="aule"><a href="servelt">Aule</a>
+		<li id="aule"><a href="aula.jsp">Aule</a>
 		</li>
 		<li id="appelli"><a href="servelt">Appelli</a>
 		</li>
-		<li id="conversazioni"><a href="servelt">Conversazioni</a>
+		<li id="conversazioni"><a href="/ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
 		</li>
 		<li id="mappa"><a href="mappa.jsp">Mappa</a>
 		</li>
@@ -103,17 +103,17 @@
 	</ul>
 </div>
 
-<% } else if(tipoUtente.equals(Tipo.PersonaleTA)) { %>
+<% } } else if(tipoUtente.equals(Tipo.PersonaleTA)) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
 	<p>Menu<p>
 	<ul id="menu">
-		<li id="aule"><a href="servelt">Aule</a>
+		<li id="aule"><a href="aula.jsp">Aule</a>
 		</li>
 		<li id="appelli"><a href="servelt">Appelli</a>
 		</li>
-		<li id="gutenti"><a href="servlet">Gestione Utenti</a>
+		<li id="gutenti"><a href="/GestioneUtenti">Gestione Utenti</a>
 		</li>
 		<li id="mappa"><a href="mappa.jsp">Mappa</a>
 		</li>

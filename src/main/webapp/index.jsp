@@ -43,8 +43,6 @@
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
 		<p>Menu<p>
 		<ul id="menu">
-			<li id="orari"> <a href="servelt">Orari</a>
-			</li>
 			<li id="aule"><a href="aula.jsp">Aule</a>
 			</li>
 			<li id="mappa"><a href="mappa.jsp">Mappa</a>
@@ -89,13 +87,12 @@
 <div class="barraNavigazione" id="barraNavigazione">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
 		<p>Menu<p>
-		<ul id="menu">
-			<li id="orari"> <a href="servelt">Orari</a>
-			</li>
 			<li id="aule"><a href="aula.jsp">Aule</a>
 			</li>
+			<!--
 			<li id="agenda"><a href="servelt">Agenda</a>
             </li>
+			-->
             <li id="appelli"><a href="servelt">Appelli</a>
             </li>
             <li id="conversazioni"><a href="/ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
@@ -137,6 +134,9 @@
 
     <jsp:include page="header.jsp"/>
 
+	<% if (tipoUtente.equals(Tipo.Studente)) {%>
+		<p>mostrare agenda</p>
+	<%} else {%>
 
 	<br> <br>
 	<div id="contieniForm">
@@ -172,6 +172,8 @@
         <button type="submit">Cerca Orario</button>
     </form>
 	</div>
+
+	<%}%>
 
 <script src="scripts/formOrario.js"></script>
 <script>

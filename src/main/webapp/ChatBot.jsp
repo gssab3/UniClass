@@ -106,7 +106,7 @@
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
 		<p>Menu<p>
 		<ul id="menu">
-			<li id="aule"><a href="servelt">Aule</a>
+			<li id="aule"><a href="aula.jsp">Aule</a>
 			</li>
 			<li id="appelli"><a href="servelt">Appelli</a>
 			</li>
