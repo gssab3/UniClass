@@ -1,6 +1,7 @@
-package it.unisa.uniclass.utenti.controller;
+package com.example.service;
 
 import it.unisa.uniclass.common.exceptions.AuthenticationException;
+import it.unisa.uniclass.utenti.controller.LoginServlet;
 import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.PersonaleTA;
 import it.unisa.uniclass.utenti.model.Utente;

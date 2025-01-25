@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet{
         doPost(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) {
 
         try {
             String email = request.getParameter("email");
