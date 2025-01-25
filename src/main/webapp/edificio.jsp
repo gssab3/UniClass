@@ -3,6 +3,9 @@
 <%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
 <%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
 <%@ page import="java.util.List" %>
+<%@ page import="it.unisa.uniclass.orari.model.Lezione" %>
+<%@ page import="it.unisa.uniclass.orari.service.AulaService" %>
+<%@ page import="it.unisa.uniclass.orari.model.Aula" %>
 
 <%
     /* Sessione HTTP */
@@ -19,6 +22,8 @@
         tipoUtente = null;
 
     List<CorsoLaurea> corsiLaurea = (List<CorsoLaurea>) request.getAttribute("corsi");
+    List<Aula> aule = (List<Aula>) request.getAttribute("aule");
+    String edificio = (String) request.getAttribute("ed");
 
 %>
 <html>
@@ -60,6 +65,9 @@
             padding-left: 20px;
         }
         .class {
+
+        }
+        .libera{
             background-color: #2ecc71;
             color: white;
             margin-top: 5px;
@@ -68,6 +76,16 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+        .occupata{
+            background-color: #e53549;
+            color: white;
+            margin-top: 5px;
+            padding: 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
         .class:hover {
             background-color: #27ae60;
         }
@@ -180,6 +198,8 @@
 <ul class="buildings">
     <li class="building"> F1
         <ul class="classes">
+            <% AulaService aulaService = new AulaService();
+                List<Lezione> lezioni = (List<Lezione>)  %>
             <li class="class">Monday 9:00 AM - 11:00 AM</li>
             <li class="class">Wednesday 2:00 PM - 4:00 PM</li>
         </ul>

@@ -103,7 +103,7 @@
 	</ul>
 </div>
 
-<% } } else if(tipoUtente.equals(Tipo.PersonaleTA)) { %>
+<% } else if(tipoUtente.equals(Tipo.PersonaleTA)) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>

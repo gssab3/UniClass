@@ -134,7 +134,7 @@
 
     <jsp:include page="header.jsp"/>
 
-	<% if (tipoUtente.equals(Tipo.Studente)) {%>
+	<% if (tipoUtente != null && tipoUtente.equals(Tipo.Studente)) {%>
 		<p>mostrare agenda</p>
 	<%} else {%>
 
