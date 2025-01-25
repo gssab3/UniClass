@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-@WebServlet("/Conversazioni")
+@WebServlet(name = "ConversazioniServlet", value = "/ConversazioniServlet")
 public class ConversazioniServlet extends HttpServlet {
 
 

@@ -131,7 +131,7 @@
     <h1>Conversazioni</h1>
       <div class="conversations-container">
         <% for(Accademico accademico: accademici){ %>
-            <a href="/chatServlet?accademico=<%=accademico.getEmail()%>&accademicoSelf=<%=accademicoSelf.getEmail()%>" class="conversation">
+            <a href="chatServlet?accademico=<%=accademico.getEmail()%>&accademicoSelf=<%=accademicoSelf.getEmail()%>" class="conversation">
             <%    if(accademico.getTipo().equals(Tipo.Studente)){ %>
                 <div class="profile-picture">
                   <img src="images/icons/iconstudent.png" alt="Foto profilo">
