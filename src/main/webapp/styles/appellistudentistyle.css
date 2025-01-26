@@ -1,0 +1,83 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --card-background: #fff;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header1 {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+
+h1 {
+    margin: 0;
+}
+
+.roll-calls-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.roll-call-card {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.roll-call-card:hover {
+    transform: translateY(-5px);
+}
+
+.roll-call-title {
+    font-size: 1.2rem;
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.roll-call-details {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.roll-call-time,
+.roll-call-location {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin: 5px 0;
+}
+
+.book-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+.book-button:hover {
+    background-color: #27ae60;
+}
+
+@media (max-width: 600px) {
+    .roll-calls-list {
+        grid-template-columns: 1fr;
+    }
+}
