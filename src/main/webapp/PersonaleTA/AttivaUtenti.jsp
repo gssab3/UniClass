@@ -68,12 +68,11 @@
     <jsp:include page="../header.jsp"/>
 
 <div class="container">
+
     <div class="left-block">
         <h2>Lista Utenti</h2>
         <div class="list">
-            <p>Elemento 1</p>
-            <p>Elemento 2</p>
-            <p>Elemento 3</p>
+
         </div>
     </div>
 
@@ -99,6 +98,7 @@
     </div>
 </div>
 
+<script src="/scripts/trovaNonAttivati.js" defer></script>
 
     </body>
     </html>
