@@ -39,10 +39,14 @@ public class PersonaleTADAO implements PersonaleTARemote {
 
     @Override
     public PersonaleTA trovaEmailPassword(String email, String password){
+        try {
         TypedQuery<PersonaleTA> query = emUniClass.createNamedQuery(PersonaleTA.TROVA_EMAIL_PASSWORD, PersonaleTA.class);
         query.setParameter("email", email);
         query.setParameter("password", password);
         return query.getSingleResult();
+        } catch (jakarta.persistence.NoResultException e) {
+            return null;
+        }
     }
 
     @Override

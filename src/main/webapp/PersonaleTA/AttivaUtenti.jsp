@@ -21,7 +21,7 @@
         }
     }
     else
-        response.sendRedirect("Login.jsp");
+        response.sendRedirect(request.getContextPath() + "/Login.jsp");
 
     List<Accademico> accademiciNonAttivati = (List<Accademico>) request.getAttribute("accademiciNonAttivati");
 
@@ -31,32 +31,32 @@
 
 <head>
     <title>UniClass</title>
-    <script src="../scripts/sidebar.js" type="text/javascript"></script>
+    <script src="/UniClass/scripts/sidebar.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="../styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="../styles/barraNavigazioneStyle.css" />
     <link type="text/css" rel="stylesheet" href="../styles/uniClassAdd.css" />
-
+    <script src="${pageContext.request.contextPath}/scripts/trovaNonAttivati.js" defer></script>
 </head>
 <body id="uniClassAdd">
 
 
 <div class="barraNavigazione" id="barraNavigazione">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="${pageContext.request.contextPath}/images/icons/menuOpenIcon.png" alt="closebtn"></a>
     <p>Menu<p>
     <ul id="menu">
-        <li id="aule"><a href="aula.jsp">Aule</a>
+        <li id="aule"><a href="${pageContext.request.contextPath}/aula.jsp">Aule</a>
         </li>
         <li id="appelli"><a href="servelt">Appelli</a>
         </li>
-        <li id="gutenti"><a href="/GestioneUtenti">Gestione Utenti</a>
+        <li id="gutenti"><a href="AttivaUtenti.jsp">Gestione Utenti</a>
         </li>
-        <li id="mappa"><a href="mappa.jsp">Mappa</a>
+        <li id="mappa"><a href="${pageContext.request.contextPath}/mappa.jsp">Mappa</a>
         </li>
-        <li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
+        <li id="ChatBot"><a href="${pageContext.request.contextPath}/ChatBot.jsp">ChatBot</a>
         </li>
-        <li id="infoapp"><a href="infoapp.jsp">Info App</a>
+        <li id="infoapp"><a href="${pageContext.request.contextPath}/infoapp.jsp">Info App</a>
         </li>
-        <li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
+        <li id="aboutus"><a href="${pageContext.request.contextPath}/aboutus.jsp">Chi Siamo</a>
         </li>
     </ul>
 </div>
@@ -76,8 +76,9 @@
         </div>
     </div>
 
-    <div class="right-block">
-        <h2>Aggiunta Utente</h2>
+    <div class="center-block">
+        <h2>Attivazione Utente</h2>
+        <br>
         <form action="/AttivaUtentiServlet" method="POST">
             <label for="matricola">Matricola:</label>
             <input type="text" id="matricola" name="matricola" required><br><br>
@@ -96,9 +97,26 @@
             <input type="submit" value="Invia">
         </form>
     </div>
+
+    <div class ="right-block">
+        <h2>Disattivazione Utente</h2>
+        <br>
+        <form action="/DisattivaUtente" method="POST">
+
+            <label for="email-remove"">Email:</label>
+            <select id="email-remove" name="email-remove" required>
+                <option value="">-- Seleziona un'email --</option>
+
+            </select><br><br>
+
+            <input type="submit" value="Invia">
+        </form>
+    </div>
+
 </div>
 
-<script src="/scripts/trovaNonAttivati.js" defer></script>
+
+
 
     </body>
     </html>

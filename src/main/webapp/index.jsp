@@ -118,7 +118,7 @@
 		</li>
 		<li id="appelli"><a href="servelt">Appelli</a>
 		</li>
-		<li id="gutenti"><a href="GestioneUtenti">Gestione Utenti</a>
+		<li id="gutenti"><a href="PersonaleTA/AttivaUtenti.jsp">Gestione Utenti</a>
 		</li>
 		<li id="mappa"><a href="mappa.jsp">Mappa</a>
 		</li>

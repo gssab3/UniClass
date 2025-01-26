@@ -64,8 +64,9 @@ body#uniClassAdd {
 }
 
 
-.right-block {
+.center-block {
     padding: 30px;
+    padding-top: 10px;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -74,6 +75,16 @@ body#uniClassAdd {
     width: 48%;
 }
 
+.right-block {
+    padding: 30px;
+    padding-top: 10px;
+    background-color: #fff;
+    display: flow;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 48%;
+}
 
 form {
     width: 100%;
@@ -130,6 +141,7 @@ input[type="submit"]:hover {
     }
 
     .left-block,
+    .center-block,
     .right-block {
         padding: 20px;
         width: 100%;
