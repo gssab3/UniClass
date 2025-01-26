@@ -68,7 +68,7 @@ body#uniClassAdd {
     padding: 30px;
     padding-top: 10px;
     background-color: #fff;
-    display: flex;
+    display: flow;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -117,7 +117,8 @@ select:focus {
     outline: none;
 }
 
-input[type="submit"] {
+
+.submit-btn {
     background-color: #4CAF50;
     color: white;
     padding: 12px;
@@ -128,9 +129,26 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
-input[type="submit"]:hover {
+.submit-btn:hover {
     background-color: #45a049;
 }
+
+
+.cancel-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background-color: #e53935;
+}
+
 
 
 @media (max-width: 768px) {

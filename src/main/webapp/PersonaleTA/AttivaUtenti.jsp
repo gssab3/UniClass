@@ -94,7 +94,7 @@
                 <!-- <option value="PersonaleTA">PersonaleTA</option> -->
             </select><br><br>
 
-            <input type="submit" value="Invia">
+            <input type="submit" class="submit-btn" value="Invia">
         </form>
     </div>
 
@@ -109,7 +109,7 @@
 
             </select><br><br>
 
-            <input type="submit" value="Invia">
+            <input type="submit" class="cancel-btn" value="Invia">
         </form>
     </div>
 
