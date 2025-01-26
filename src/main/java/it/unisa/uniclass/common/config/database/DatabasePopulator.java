@@ -4,6 +4,7 @@ import it.unisa.uniclass.common.security.CredentialSecurity;
 import it.unisa.uniclass.orari.model.*;
 import it.unisa.uniclass.orari.service.CorsoLaureaService;
 import it.unisa.uniclass.utenti.model.Docente;
+import it.unisa.uniclass.utenti.model.PersonaleTA;
 import it.unisa.uniclass.utenti.model.Studente;
 import it.unisa.uniclass.utenti.model.Tipo;
 import jakarta.annotation.PostConstruct;
@@ -586,6 +587,16 @@ public class DatabasePopulator {
         studente.setAgenda(agendaStudente);
         studente.setDataNascita(LocalDate.of(2004,1,27));
 
+        //PersonaleTA
+        PersonaleTA personaleTA1 = new PersonaleTA();
+        personaleTA1.setNome("Gianni");
+        personaleTA1.setCognome("Sereni");
+        personaleTA1.setTelefono("3294839201");
+        personaleTA1.setEmail("giannisereni@unisa.it");
+        personaleTA1.setDataNascita(LocalDate.of(1974,6,27));
+        personaleTA1.setPassword("3021");
+        personaleTA1.setTipo(Tipo.PersonaleTA);
+
 
         // Persistenza degli oggetti
         em.persist(anno1);
@@ -642,10 +653,11 @@ public class DatabasePopulator {
         em.persist(lezione8_2);
         em.persist(agendaStudente);
         em.persist(studente);
+        em.persist(personaleTA1);
 
         em.flush();
         em.clear();
-        System.out.println(docente1.getLezioni());
+        //System.out.println(docente1.getLezioni());
     }
 
 
