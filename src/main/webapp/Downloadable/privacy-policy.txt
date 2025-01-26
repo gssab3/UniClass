@@ -1,0 +1,58 @@
+PRIVACY POLICY DI UNICLASS
+Ultimo aggiornamento: 26/01/2025
+
+INTRODUZIONE
+Benvenuto su UniClass! La tua privacy è importante per noi. Questa Privacy Policy spiega come raccogliamo, utilizziamo, conserviamo e proteggiamo i tuoi dati personali quando utilizzi il nostro sito web e i nostri servizi.
+
+1. CHI SIAMO
+UniClass è una piattaforma che facilita l’organizzazione delle attività universitarie, come la visualizzazione degli orari delle lezioni, la comunicazione con i docenti e la ricerca di aule libere.
+Titolare del trattamento dei dati:
+Nome: UniClass
+Email di contatto: UniClass@gmail.com
+
+2. QUALI DATI RACCOGLIAMO
+UniClass utilizza esclusivamente i dati forniti dal database universitario ufficiale. I dati raccolti includono:
+
+Dati forniti attraverso il database universitario:
+
+Nome, cognome, email istituzionale e matricola.
+Informazioni accademiche come corsi frequentati, orari delle lezioni e assegnazione aule.
+Dati raccolti automaticamente durante l’uso della piattaforma:
+
+Informazioni tecniche di base come l'indirizzo IP e il tipo di dispositivo.
+Nota: UniClass non raccoglie dati direttamente dall'utente; tutte le informazioni sono recuperate dal database universitario con il consenso dell'università.
+
+3. PERCHÉ RACCOGLIAMO I TUOI DATI
+I dati personali vengono utilizzati esclusivamente per:
+
+Fornire i servizi di UniClass: Garantire il funzionamento della piattaforma, inclusa la visualizzazione degli orari delle lezioni e la ricerca delle aule.
+Personalizzazione: Migliorare l’esperienza utente in base alle tue informazioni accademiche.
+Sicurezza e conformità legale: Proteggere il sito e rispettare gli obblighi previsti dalle normative.
+4. CONDIVISIONE DEI DATI
+UniClass non condivide i tuoi dati personali con terze parti, salvo nei seguenti casi:
+
+Per adempiere a obblighi di legge.
+Con fornitori di servizi che ci supportano nella gestione del sito (es. hosting).
+Con il tuo consenso esplicito.
+5. CONSERVAZIONE DEI DATI
+I dati personali sono conservati esclusivamente per il tempo necessario a fornire i servizi di UniClass o per rispettare gli obblighi legali. Le informazioni sono sincronizzate con il database universitario e vengono eliminate o aggiornate automaticamente in base alle disposizioni dell’università.
+
+6. I TUOI DIRITTI
+In conformità con le normative sulla protezione dei dati, hai il diritto di:
+
+Accedere ai tuoi dati personali.
+Correggere eventuali dati inesatti o incompleti (attraverso l’università).
+Richiedere la cancellazione dei tuoi dati dalla piattaforma, nei limiti delle disposizioni universitarie.
+Limitare o opporti al trattamento dei dati.
+Ricevere i tuoi dati in formato portabile.
+Per esercitare i tuoi diritti, contattaci a: UniClass@gmail.com. Potremmo anche indirizzarti all’amministrazione universitaria, se necessario.
+
+7. SICUREZZA DEI DATI
+UniClass adotta misure tecniche e organizzative adeguate per proteggere i tuoi dati personali da accessi non autorizzati, perdite o utilizzi impropri.
+
+8. AGGIORNAMENTI ALLA PRIVACY POLICY
+Potremmo aggiornare questa Privacy Policy periodicamente per riflettere eventuali modifiche nei servizi o nelle normative. Ti informeremo di eventuali aggiornamenti pubblicandoli sul nostro sito web.
+
+9. CONTATTI
+Per qualsiasi domanda o richiesta riguardante questa Privacy Policy, puoi contattarci a:
+Email: UniClass@gmail.com

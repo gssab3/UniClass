@@ -36,12 +36,13 @@
 %>
 <html>
 <head>
-  <title>UniClass</title>
+  <title>Orario UniClass</title>
   <script src="scripts/sidebar.js" type="text/javascript"></script>
   <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
   <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
   <link type="text/css" rel="stylesheet" href="styles/formcss.css"/>
   <link type="text/css" rel="stylesheet" href="styles/tableStyle.css">
+  <link type="text/css" rel="stylesheet" href="styles/footerstyle.css">
   <link rel="icon" href="images/logois.png" sizes="32x32" type="image/png">
 </head>
 <body>
@@ -142,30 +143,31 @@
 
 
 
-
+<br>
 <h1>ORARIO: <%= corsoLaurea.getNome()%> <%=resto.getNome()%> <%=annoDidattico.getAnno()%></h1>
+<br>
 <div class="table-container">
   <table class="schedule-table">
     <tr>
       <th>Giorno</th>
-      <th>I<br>9:00-9:30</th>
-      <th>II<br>9:30-10:00</th>
-      <th>III<br>10:00-10:30</th>
-      <th>IV<br>10:30-11:00</th>
-      <th>V<br>11:00-11:30</th>
-      <th>VI<br>11:30-12:00</th>
-      <th>VII<br>12:00-12:30</th>
-      <th>VIII<br>12:30-13:00</th>
-      <th>IX<br>13:00-13:30</th>
-      <th>X<br>13:30-14:00</th>
-      <th>XII<br>14:00-14:30</th>
-      <th>XIII<br>14:30-15:00</th>
-      <th>XIV<br>15:00-15:30</th>
-      <th>XV<br>15:30-16:00</th>
-      <th>XVI<br>16:00-16:30</th>
-      <th>XVII<br>16:30-17:00</th>
-      <th>XVIII<br>17:00-17:30</th>
-      <th>XIX<br>17:30-18:00</th>
+      <th>9:00-9:30</th>
+      <th>9:30-10:00</th>
+      <th>10:00-10:30</th>
+      <th>10:30-11:00</th>
+      <th>11:00-11:30</th>
+      <th>11:30-12:00</th>
+      <th>12:00-12:30</th>
+      <th>12:30-13:00</th>
+      <th>13:00-13:30</th>
+      <th>13:30-14:00</th>
+      <th>14:00-14:30</th>
+      <th>14:30-15:00</th>
+      <th>15:00-15:30</th>
+      <th>15:30-16:00</th>
+      <th>16:00-16:30</th>
+      <th>16:30-17:00</th>
+      <th>17:00-17:30</th>
+      <th>17:30-18:00</th>
     </tr>
     <%
       for (Giorno giorno : Giorno.values()) {
@@ -209,5 +211,9 @@
     <% } %>
   </table>
 </div>
+<br>
+<br>
+<br>
+<%@include file = "footer.jsp" %>
 </body>
 </html>

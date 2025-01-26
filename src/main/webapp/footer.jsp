@@ -11,7 +11,7 @@
         <div class="copyright">
             <p>&copy; 2025 UniClass. Tutti i diritti riservati.
                 <br>
-                <a href=""> Privacy policy</a>
+                <a href="Downloadable/privacy-policy.txt" download="privacy-policy.txt">Privacy Policy</a>
                 <br>
                 Developed by: Cetrulo G.Antonio, D'Avanzo Saverio, Gallo Sara, Sabetta Giuseppe</p>
         </div>

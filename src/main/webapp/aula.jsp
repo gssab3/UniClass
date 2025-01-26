@@ -29,7 +29,7 @@
         <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
         <link type="text/css" rel="stylesheet" href="styles/formcss.css"/>
         <link type="text/css" rel="stylesheet" href="styles/footerstyle.css">
-        <link type="text/css" rel="stylesheet" href="styles/aulastyle.css.css">
+        <link type="text/css" rel="stylesheet" href="styles/aulastyle.css">
         <link rel="icon" href="images/logois.png" sizes="32x32" type="image/png">
 
 </head>
