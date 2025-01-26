@@ -594,7 +594,7 @@ public class DatabasePopulator {
         personaleTA1.setTelefono("3294839201");
         personaleTA1.setEmail("giannisereni@unisa.it");
         personaleTA1.setDataNascita(LocalDate.of(1974,6,27));
-        personaleTA1.setPassword("3021");
+        personaleTA1.setPassword(CredentialSecurity.hashPassword("3201"));
         personaleTA1.setTipo(Tipo.PersonaleTA);
 
 
