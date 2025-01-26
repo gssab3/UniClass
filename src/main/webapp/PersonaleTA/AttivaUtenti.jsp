@@ -68,6 +68,11 @@
     <jsp:include page="../header.jsp"/>
 
 <div class="container">
+    <% if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("error") ){ %>
+        <div class="tableRow">
+            <p class="error">email o password errati!</p>
+        </div>
+    <% } %>
 
     <div class="left-block">
         <h2>Lista Utenti</h2>
@@ -79,7 +84,7 @@
     <div class="center-block">
         <h2>Attivazione Utente</h2>
         <br>
-        <form action="/AttivaUtentiServlet" method="POST">
+        <form action="${pageContext.request.contextPath}/AttivaUtentiServlet?param=add" method="POST">
             <label for="matricola">Matricola:</label>
             <input type="text" id="matricola" name="matricola" required><br><br>
 
@@ -101,9 +106,9 @@
     <div class ="right-block">
         <h2>Disattivazione Utente</h2>
         <br>
-        <form action="/DisattivaUtente" method="POST">
+        <form action="${pageContext.request.contextPath}/AttivaUtentiServlet?param=remove" method="POST">
 
-            <label for="email-remove"">Email:</label>
+            <label for="email-remove">Email:</label>
             <select id="email-remove" name="email-remove" required>
                 <option value="">-- Seleziona un'email --</option>
 
@@ -118,5 +123,5 @@
 
 
 
-    </body>
-    </html>
+</body>
+</html>

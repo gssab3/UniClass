@@ -14,9 +14,13 @@ public class AccademicoDAO implements AccademicoRemote {
 
     @Override
     public Accademico trovaAccademicoUniClass(String matricola){
-        TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_ACCADEMICO, Accademico.class);
-        query.setParameter("matricola", matricola);
-        return query.getSingleResult();
+        try {
+            TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_ACCADEMICO, Accademico.class);
+            query.setParameter("matricola", matricola);
+            return query.getSingleResult();
+        } catch (jakarta.persistence.PersistenceException e) {
+            return null;
+        }
     }
 
     @Override
