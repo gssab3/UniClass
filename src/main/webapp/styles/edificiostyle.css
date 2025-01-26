@@ -1,0 +1,55 @@
+h1
+{
+    text-align: center;
+}
+.buildings {
+    list-style-type: none;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 250px;
+    padding-right: 250px;
+}
+.imgOcc{
+    vertical-align: text-top;
+}
+.building {
+    font-size: 20px;
+    text-align: center;
+    background-color: #3498db;
+    color: white;
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.building:hover {
+    background-color: #2980b9;
+}
+.classes {
+    display: none;
+    list-style-type: none;
+    padding-left: 20px;
+}
+.libera{
+    background-color: #2ecc71;
+    color: white;
+    margin-top: 5px;
+    padding: 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.occupata{
+    background-color: #e53549;
+    color: white;
+    margin-top: 5px;
+    padding: 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.class:hover {
+    background-color: #27ae60;
+}
