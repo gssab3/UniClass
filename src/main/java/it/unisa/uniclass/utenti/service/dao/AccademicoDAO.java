@@ -39,6 +39,8 @@ public class AccademicoDAO implements AccademicoRemote {
         return query.getResultList();
     }
 
+
+
     @Override
     public void aggiungiAccademico(Accademico accademico) {
         emUniclass.merge(accademico);
@@ -47,5 +49,11 @@ public class AccademicoDAO implements AccademicoRemote {
     @Override
     public void rimuoviAccademico(Accademico accademico) {
         emUniclass.remove(accademico);
+    }
+
+    @Override
+    public List<String> retrieveEmail() {
+        TypedQuery<String> query = emUniclass.createNamedQuery(Accademico.RETRIEVE_EMAIL, String.class);
+        return query.getResultList();
     }
 }

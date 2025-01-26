@@ -75,4 +75,8 @@ public class AccademicoService {
     public void rimuoviAccademico(Accademico accademico) {
         accademicoDao.rimuoviAccademico(accademico);
     }
+
+    public List<String> retrieveEmail() {
+        return accademicoDao.retrieveEmail();
+    }
 }

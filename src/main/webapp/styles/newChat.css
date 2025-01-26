@@ -1,0 +1,103 @@
+/* Resetting some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Titolo */
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #4A90E2;
+    font-weight: bold;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Form container specifico per la classe */
+.chat-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Label styling */
+.form-label {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Select styling */
+.form-select, .form-textarea {
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+/* Focus effect for inputs */
+.form-select:focus, .form-textarea:focus {
+    border-color: #4A90E2;
+}
+
+/* Textarea specific */
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Button styling */
+.form-button {
+    background-color: #4A90E2;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.form-button:hover {
+    background-color: #357ABD;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .chat-form {
+        padding: 15px;
+        max-width: 100%;
+    }
+
+    .form-select, .form-textarea, .form-button {
+        font-size: 1rem;
+    }
+}

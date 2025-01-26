@@ -28,7 +28,8 @@ import static it.unisa.uniclass.utenti.model.Accademico.*;
         @NamedQuery(name = TROVA_ACCADEMICO, query = "SELECT a FROM Accademico a WHERE a.matricola = :matricola"),
         @NamedQuery(name = TROVA_TUTTI, query = "SELECT a FROM Accademico a"),
         @NamedQuery(name = TROVA_EMAIL, query = "SELECT a FROM Accademico a WHERE a.email = :email"),
-        @NamedQuery(name = TROVA_ATTIVATI, query = "SELECT a FROM Accademico a WHERE a.attivato = :attivato")
+        @NamedQuery(name = TROVA_ATTIVATI, query = "SELECT a FROM Accademico a WHERE a.attivato = :attivato"),
+        @NamedQuery(name = RETRIEVE_EMAIL, query = "SELECT a.email FROM Accademico a")
 })
 public class Accademico extends Utente implements Serializable {
 
@@ -45,6 +46,7 @@ public class Accademico extends Utente implements Serializable {
      */
     public static final String TROVA_EMAIL = "Accademico.trovaEmail";
     public static final String TROVA_ATTIVATI = "Accademico.trovaAttivati";
+    public static final String RETRIEVE_EMAIL = "Accademico.retrieveEmail";
 
     /** Relazione unidirezionale {@code @OneToOne}, mappata sul campo {@code corso_laurea_id}
      * */

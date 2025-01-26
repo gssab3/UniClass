@@ -17,19 +17,23 @@
 
   /* controllo tipo utente*/
 
-  Tipo tipoUtente;
-  if(user != null && ((user.getTipo() != Tipo.Docente) && (user.getTipo() != Tipo.Coordinatore) && (user.getTipo()) != Tipo.Studente))
-    tipoUtente = (Tipo) user.getTipo();
-  else if (user != null && (user.getTipo() == Tipo.PersonaleTA))
-    response.sendRedirect("ErroreAccesso.jsp");
-  else
-    response.sendRedirect("Login.jsp");
+  Tipo tipoUtente = null; // Inizializzazione predefinita
+  if (user != null) {
+    tipoUtente = user.getTipo();
 
+    if (tipoUtente == Tipo.PersonaleTA) {
+      response.sendRedirect("ErroreAccesso.jsp");
+      return; // Interrompi l'esecuzione della pagina JSP
+    }
+  } else {
+    response.sendRedirect("Login.jsp");
+    return; // Interrompi l'esecuzione della pagina JSP
+  }
 
   Accademico accademicoSelf = (Accademico) request.getAttribute("accademicoSelf");
   List<Accademico> accademici = (List<Accademico>) request.getAttribute("accademici");
 
-  if (tipoUtente == Tipo.Docente || tipoUtente == Tipo.Studente || tipoUtente == Tipo.Coordinatore){
+  if (tipoUtente == Tipo.Docente || tipoUtente == Tipo.Studente || tipoUtente == Tipo.Coordinatore) {
     List<Conversazione> conversazioni = (List<Conversazione>) request.getAttribute("conversazioni");
   }
 %>
@@ -42,7 +46,9 @@
   <title>UniClass Chat</title>
   <script src="scripts/sidebar.js" type="text/javascript"></script>
   <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
-  <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css" />
+  <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
+  <link type="text/css" rel="stylesheet" href="styles/conversazioniStyle.css">
+  <link type="text/css" rel="stylesheet" href="styles/newChat.css">
 
 </head>
 <body id="uniClassChat">
@@ -105,26 +111,7 @@
 
 
 
-  <!-- <% //for (Conversazione conversazione :  conversazioni) {
-        //Accademico accademico = conversazioneService.trovaAltroConversazione(conversazione, accademicoSelf);
-  %>
-   Singolo blocco per ogni conversazione
-  <a href="/chatServlet?conversazione?= <%= //conversazione.getId()%>&accademico?=<%= //accademico.getEmail()%>&?=<%= //accademicoSelf.getEmail()%>>" style="text-decoration: none; color: inherit;">
-  <div class="conversation-item">
-    <div class="conversation-img">
-      <%// if (accademico.getTipo().equals(Tipo.Studente)) { %>
-      <img src="images/icons/iconstudent.png" alt="immagineutente">
-      <%//} else if (accademico.getTipo().equals(Tipo.Docente) || accademico.getTipo().equals(Tipo.Coordinatore)) { %>
-      <img src="images/icons/iconprof.png" alt="immagineutente">
-      <%//}%>
-    </div>
-    <div class="conversation-info">
-      <h3><%=// accademico.getNome() %> <%= //accademico.getCognome() %></h3>
-    </div>
-  </div>
-  </a>
-  <%// } %>
-</div> -->
+
 
 
   <div class="mega-container">
@@ -150,6 +137,27 @@
   </div>
 
 
+  <h1>Crea una nuova Chat</h1>
+
+  <div class="form-container">
+    <form id="myForm" method="post" class="chat-form">
+      <label for="email" class="form-label">Seleziona un'email:</label>
+      <select id="email" name="email" class="form-select">
+        <!-- Le opzioni delle email verranno caricate tramite AJAX -->
+      </select>
+
+      <br><br>
+
+      <label for="testo" class="form-label">Testo del messaggio:</label>
+      <textarea id="testo" name="testo" class="form-textarea" rows="5" cols="40"></textarea>
+
+      <br><br>
+
+      <button type="submit" class="form-button">Invia</button>
+    </form>
+  </div>
+
+  <script src="scripts/formChat.js" defer></script>
 
 </body>
 </html>

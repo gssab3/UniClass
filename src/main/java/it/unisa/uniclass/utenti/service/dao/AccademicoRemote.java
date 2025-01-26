@@ -13,4 +13,5 @@ public interface AccademicoRemote {
     public List<Accademico> trovaAttivati(boolean attivazione);
     public void aggiungiAccademico(Accademico accademico);
     public void rimuoviAccademico(Accademico accademico);
+    public List<String> retrieveEmail();
 }
