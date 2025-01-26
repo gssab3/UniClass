@@ -1,0 +1,34 @@
+a {
+    text-decoration: none;
+    color: white;
+}
+h1
+{
+    text-align: center;
+}
+.container-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    height: 255px;
+    margin: 0 auto;
+}
+.container {
+    align-items: center;
+    flex: 0 1 30%;
+    padding: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    color: white;
+    background-color: #3498db;
+}
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.container h2 {
+    margin-top: 0;
+}

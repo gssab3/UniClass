@@ -30,6 +30,7 @@
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/mappa.css"/>
 	<link type="text/css" rel="stylesheet" href="styles/footerstyle.css">
+	<link rel="icon" href="images/logois.png" sizes="32x32" type="image/png">
 </head>
 <body>
 

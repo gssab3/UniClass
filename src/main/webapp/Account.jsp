@@ -52,11 +52,12 @@
 <html>
 
 <head>
-    <title>JSP - Hello World</title>
+    <title>UniClass Account</title>
     <script src="scripts/sidebar.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css" />
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/informazioniStyle.css">
+    <link rel="icon" href="images/logois.png" sizes="32x32" type="image/png">
 </head>
 
 <body>
@@ -151,6 +152,9 @@
             <li id="corsoLaurea"><%= studente.getCorsoLaurea()%></li>
             <li id="dataIscrizione"><%= studente.getIscrizione() %></li>
         </ul>
+        <form action="LogoutServlet" method="post">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
     </div>
 <% } else if (tipoUtente.equals(Tipo.Docente)) { %>
     <div class="listaInfo" id="listaInfo">
@@ -168,6 +172,9 @@
             <li id="dataIscrizione"><%= docente.getIscrizione() %></li>
             <li id="corsiInsegnati:"><%= "Corsi Insegnati: " + docente.getCorsi() %></li>
         </ul>
+        <form action="LogoutServlet" method="post">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
     </div>
 <% } else if (tipoUtente.equals(Tipo.Coordinatore)) { %>
     <div class="listaInfo" id="listaInfo">
@@ -185,6 +192,9 @@
             <li id="dataIscrizione"><%= coordinatore.getIscrizione() %></li>
             <li id="corsiInsegnati:"><%= "Corsi Insegnati: " + docente.getCorsi() %></li>
         </ul>
+        <form action="LogoutServlet" method="post">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
     </div>
 <% } else if (tipoUtente.equals(Tipo.PersonaleTA)) { %>
     <div class="listaInfo" id="listaInfo">
@@ -200,14 +210,14 @@
             <li id="email"><%= personaleTA.getEmail() %></li>
             <li id="telefono"><%= personaleTA.getTelefono() %></li>
         </ul>
+        <form action="LogoutServlet" method="post">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
     </div>
 <% } %>
 
     <!-- Inserire pulsante Logout -->
 
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+
 </body>
 </html>
