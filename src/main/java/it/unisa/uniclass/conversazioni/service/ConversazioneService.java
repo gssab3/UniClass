@@ -74,6 +74,7 @@ public class ConversazioneService {
         }
     }
 
+    //Trovare l'altro accademico con cui conversa acc nella conversazione c
     public Accademico trovaAltroConversazione(Conversazione c, Accademico acc) {
         for(Accademico x : c.getMessaggeri()) {
             if(!x.getMatricola().equals(acc.getMatricola())) {

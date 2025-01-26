@@ -79,4 +79,8 @@ public class AccademicoService {
     public List<String> retrieveEmail() {
         return accademicoDao.retrieveEmail();
     }
+
+    public void cambiaAttivazione(Accademico accademico, boolean attivazione) {
+        accademicoDao.cambiaAttivazione(accademico, attivazione);
+    }
 }

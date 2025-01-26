@@ -45,7 +45,7 @@ public class CorsoLaurea implements Serializable {
      * Lista dei corsi associati a questo corso di laurea
      * */
     @OneToMany(mappedBy = "corsoLaurea", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Corso> corsi;
+    private List<Corso> corsi = new ArrayList<>();
 
     @Column(nullable = false, unique = true)
     /**
@@ -57,7 +57,7 @@ public class CorsoLaurea implements Serializable {
      * Lista dei resti associati al corso di laurea
      * */
     @OneToMany(mappedBy = "corsoLaurea", cascade = CascadeType.ALL)
-    private List<Resto> resti; // I resti associati al corso di laurea
+    private List<Resto> resti = new ArrayList<>(); // I resti associati al corso di laurea
 
     /**
      * Lista degli anni didattici assocaiti al corso di laurea
@@ -74,7 +74,7 @@ public class CorsoLaurea implements Serializable {
      * Lista degli studenti iscritti al corso di laurea.
      */
     @OneToMany(mappedBy = "corsoLaurea", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Studente> studenti;
+    private List<Studente> studenti = new ArrayList<>();
 
     /**
      * Costruttore con il nome del corso di laurea

@@ -64,4 +64,10 @@ public class AccademicoDAO implements AccademicoRemote {
         TypedQuery<String> query = emUniclass.createNamedQuery(Accademico.RETRIEVE_EMAIL, String.class);
         return query.getResultList();
     }
+
+    @Override
+    public void cambiaAttivazione(Accademico accademico, boolean attivazione) {
+        accademico.setAttivato(attivazione);
+        emUniclass.merge(accademico);
+    }
 }

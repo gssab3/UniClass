@@ -585,6 +585,8 @@ public class DatabasePopulator {
         agendaStudente.getLezioni().add(lezione7);
         agendaStudente.getLezioni().add(lezione8);
         studente.setAgenda(agendaStudente);
+        studente.setCorsoLaurea(corsoLaurea);
+        corsoLaurea.getStudenti().add(studente);
         studente.setDataNascita(LocalDate.of(2004,1,27));
 
         //PersonaleTA

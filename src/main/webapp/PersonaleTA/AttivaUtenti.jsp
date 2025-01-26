@@ -75,7 +75,7 @@
     <% } %>
 
     <div class="left-block">
-        <h2>Lista Utenti</h2>
+        <h2>Lista Utenti non Attivati</h2>
         <div class="list">
 
         </div>
@@ -87,7 +87,6 @@
         <form action="${pageContext.request.contextPath}/AttivaUtentiServlet?param=add" method="POST">
             <label for="matricola">Matricola:</label>
             <input type="text" id="matricola" name="matricola" required><br><br>
-
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required><br><br>
 
