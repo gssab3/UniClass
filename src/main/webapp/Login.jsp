@@ -22,6 +22,7 @@
  <meta name="viewport"  content="initial-scale=1, width=device-width">
 <title>UniClass</title>
     <link type="text/css" rel="stylesheet" href="styles/login.css">
+    <link rel="icon" href="images/logois.png" sizes="32x32" type="image/png">
 </head>
 <body style="background-image: none;">
 

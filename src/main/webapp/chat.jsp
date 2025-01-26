@@ -51,11 +51,12 @@
 <html>
 
 <head>
-    <title>UniClass</title>
+    <title>UniClass Chat</title>
     <script src="scripts/sidebar.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/chatCss.css">
+    <link rel="icon" href="images/logois.png" sizes="32x32" type="image/png">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 </head>

@@ -39,64 +39,8 @@
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/formcss.css"/>
     <link type="text/css" rel="stylesheet" href="styles/footerstyle.css">
-
-    <style>
-        h1
-        {
-            text-align: center;
-        }
-        .buildings {
-            list-style-type: none;
-            padding-bottom: 20px;
-            padding-top: 20px;
-            padding-left: 250px;
-            padding-right: 250px;
-        }
-        .imgOcc{
-            vertical-align: text-top;
-        }
-        .building {
-            font-size: 20px;
-            text-align: center;
-            background-color: #3498db;
-            color: white;
-            margin-bottom: 10px;
-            padding: 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .building:hover {
-            background-color: #2980b9;
-        }
-        .classes {
-            display: none;
-            list-style-type: none;
-            padding-left: 20px;
-        }
-        .libera{
-            background-color: #2ecc71;
-            color: white;
-            margin-top: 5px;
-            padding: 8px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .occupata{
-            background-color: #e53549;
-            color: white;
-            margin-top: 5px;
-            padding: 8px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .class:hover {
-            background-color: #27ae60;
-        }
-    </style>
+    <link type="text/css" rel="stylesheet" href="styles/edificiostyle.css">
+    <link rel="icon" href="images/logois.png" sizes="32x32" type="image/png">
 </head>
 <body>
 <% if(tipoUtente == null) { %>
@@ -213,7 +157,6 @@
         LocalDate oggi = LocalDate.now();
         String giornoCorrente = oggi.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ITALY);
         String giornoCorrenteMaiuscolo = giornoCorrente.replace("è", "e").replace("ì", "i").toUpperCase(Locale.ITALY);
-        %> <p><%= giornoCorrenteMaiuscolo%></p> <%
 
         for (Aula aula : aule){
             boolean occ = false; // Reset for each classroom

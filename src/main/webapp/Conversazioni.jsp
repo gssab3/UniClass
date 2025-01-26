@@ -49,6 +49,7 @@
   <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
   <link type="text/css" rel="stylesheet" href="styles/conversazioniStyle.css">
   <link type="text/css" rel="stylesheet" href="styles/newChat.css">
+  <link type="text/css" rel="stylesheet" href="styles/footerstyle.css">
 
 </head>
 <body id="uniClassChat">
@@ -158,6 +159,6 @@
   </div>
 
   <script src="scripts/formChat.js" defer></script>
-
+  <%@include file = "footer.jsp" %>
 </body>
 </html>

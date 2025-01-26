@@ -23,49 +23,15 @@
 %>
 <html>
 <head>
-    <title>Aula</title>
+    <title> Aule </title>
         <script src="scripts/sidebar.js" type="text/javascript"></script>
         <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
         <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
         <link type="text/css" rel="stylesheet" href="styles/formcss.css"/>
         <link type="text/css" rel="stylesheet" href="styles/footerstyle.css">
+        <link type="text/css" rel="stylesheet" href="styles/aulastyle.css.css">
+        <link rel="icon" href="images/logois.png" sizes="32x32" type="image/png">
 
-    <style>
-        a {
-            text-decoration: none;
-            color: white;
-        }
-        h1
-        {
-            text-align: center;
-        }
-        .container-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1000px;
-            height: 255px;
-            margin: 0 auto;
-        }
-        .container {
-            align-items: center;
-            flex: 0 1 30%;
-            padding: 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
-            color: white;
-            background-color: #3498db;
-        }
-        .container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .container h2 {
-            margin-top: 0;
-        }
-    </style>
 </head>
 <body>
 <% if(tipoUtente == null) { %>

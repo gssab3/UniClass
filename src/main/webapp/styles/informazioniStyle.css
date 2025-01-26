@@ -51,3 +51,23 @@
     border-radius: 50%; /* Rende l'immagine circolare */
     border: 2px solid #ddd;
 }
+
+.logout-button {
+    padding: 10px 20px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+form
+{
+    align-items: center;
+    display: grid;
+}
+
+.logout-button:hover {
+    background-color: #d9363e;
+}

@@ -4741,7 +4741,6 @@
         <res-auth>Container</res-auth>
     </resource-ref>-->
 
-
     <!-- ==================== Default Welcome File List ===================== -->
     <!-- When a request URI refers to a directory, the default servlet looks  -->
     <!-- for a "welcome file" within that directory and, if present, to the   -->
