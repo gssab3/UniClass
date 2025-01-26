@@ -24,7 +24,7 @@
 <html>
 
 <head>
-    <title>JSP - Hello World</title>
+    <title>Mappa UniSA</title>
     <script src="scripts/sidebar.js" type="text/javascript"></script>
     <link type="text/css" rel="stylesheet" href="styles/headerStyle.css"/>
     <link type="text/css" rel="stylesheet" href="styles/barraNavigazioneStyle.css"/>
