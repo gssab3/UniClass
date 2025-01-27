@@ -9,6 +9,10 @@
     /* Sessione HTTP */
     HttpSession sessione = request.getSession(true);
     Utente user = (Utente) sessione.getAttribute("currentSessionUser");
+    if(user != null){
+        session.setAttribute("utenteEmail", user.getEmail());
+    }
+
 
     StudenteService studenteService = new StudenteService();
 
@@ -65,51 +69,48 @@
 <% if(tipoUtente.equals(Tipo.Studente)) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
-		<p>Menu<p>
-		<ul id="menu">
-			<li id="orari"> <a href="servelt">Orari</a>
-			</li>
-			<li id="aule"><a href="servelt">Aule</a>
-			</li>
-			<li id="agenda"><a href="servelt">Gestisci Agenda</a>
-            </li>
-            <li id="appelli"><a href="servelt">Appelli</a>
-            </li>
-            <li id="conversazioni"><a href="/ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
-            </li>
-			<li id="mappa"><a href="mappa.jsp">Mappa</a>
-			</li>
-			<li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
-                        </li>
-			<li id="infoapp"><a href="infoapp.jsp">Info App</a>
-            </li>
-			<li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
-			</li>
-		</ul>
-	</div>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
+    <p>Menu<p>
+    <ul id="menu">
+        <li id="aule"><a href="aula.jsp">Aule</a>
+        </li>
+        <li id="agenda"><a href="servelt">Agenda</a>
+        </li>
+        <li id="appelli"><a href="servelt">Appelli</a>
+        </li>
+        <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
+        </li>
+        <li id="mappa"><a href="mappa.jsp">Mappa</a>
+        </li>
+        <li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
+        </li>
+        <li id="infoapp"><a href="infoapp.jsp">Info App</a>
+        </li>
+        <li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
+        </li>
+    </ul>
+</div>
 <% } else if(tipoUtente.equals(Tipo.Docente) || tipoUtente.equals(Tipo.Coordinatore)) { %>
 
 <div class="barraNavigazione" id="barraNavigazione">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
-		<p>Menu<p>
-		<ul id="menu">
-			<li id="aule"><a href="servelt">Aule</a>
-			</li>
-            <li id="appelli"><a href="servelt">Appelli</a>
-            </li>
-            <li id="conversazioni"><a href="/ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
-            </li>
-			<li id="mappa"><a href="mappa.jsp">Mappa</a>
-			</li>
-			<li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
-                        </li>
-			<li id="infoapp"><a href="infoapp.jsp">Info App</a>
-            </li>
-			<li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
-			</li>
-		</ul>
-	</div>
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
+    <p>Menu<p>
+    <li id="aule"><a href="aula.jsp">Aule</a>
+    </li>
+    <li id="appelli"><a href="servelt">Appelli</a>
+    </li>
+    <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
+    </li>
+    <li id="mappa"><a href="mappa.jsp">Mappa</a>
+    </li>
+    <li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
+    </li>
+    <li id="infoapp"><a href="infoapp.jsp">Info App</a>
+    </li>
+    <li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
+    </li>
+    </ul>
+</div>
 
 <% } else if(tipoUtente.equals(Tipo.PersonaleTA)) { %>
 
@@ -121,7 +122,7 @@
         </li>
         <li id="appelli"><a href="servelt">Appelli</a>
         </li>
-        <li id="gutenti"><a href="/GestioneUtenti">Gestione Utenti</a>
+        <li id="gutenti"><a href="PersonaleTA/AttivaUtenti.jsp">Gestione Utenti</a>
         </li>
         <li id="mappa"><a href="mappa.jsp">Mappa</a>
         </li>
@@ -149,7 +150,7 @@
             <li id="dataNascita"><%= studente.getDataNascita() %></li>
             <li id="matricola"><%= studente.getMatricola() %></li>
             <li id="email"><%= studente.getEmail() %></li>
-            <li id="corsoLaurea"><%= studente.getCorsoLaurea()%></li>
+            <li id="corsoLaurea"><%= studente.getCorsoLaurea().getNome()%></li>
             <li id="dataIscrizione"><%= studente.getIscrizione() %></li>
         </ul>
         <form action="LogoutServlet" method="post">
@@ -168,7 +169,7 @@
             <li id="dataNascita"><%= docente.getDataNascita() %></li>
             <li id="matricola"><%= docente.getMatricola() %></li>
             <li id="email"><%= docente.getEmail() %></li>
-            <li id="corsoLaurea"><%= docente.getCorsoLaurea() %></li>
+            <li id="corsoLaurea"><%= docente.getCorsoLaurea().getNome() %></li>
             <li id="dataIscrizione"><%= docente.getIscrizione() %></li>
             <li id="corsiInsegnati:"><%= "Corsi Insegnati: " + docente.getCorsi() %></li>
         </ul>
@@ -188,7 +189,7 @@
             <li id="dataNascita"><%= coordinatore.getDataNascita() %></li>
             <li id="matricola"><%= coordinatore.getMatricola() %></li>
             <li id="email"><%= coordinatore.getEmail() %></li>
-            <li id="corsoLaurea"><%= coordinatore.getCorsoLaurea() %></li>
+            <li id="corsoLaurea"><%= coordinatore.getCorsoLaurea().getNome() %></li>
             <li id="dataIscrizione"><%= coordinatore.getIscrizione() %></li>
             <li id="corsiInsegnati:"><%= "Corsi Insegnati: " + docente.getCorsi() %></li>
         </ul>

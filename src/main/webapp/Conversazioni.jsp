@@ -13,6 +13,10 @@
   /* Sessione HTTP */
   HttpSession sessione = request.getSession(true);
   Utente user = (Utente) sessione.getAttribute("currentSessionUser");
+  if(user != null){
+    session.setAttribute("utenteEmail", user.getEmail());
+  }
+
 
 
   /* controllo tipo utente*/
@@ -61,15 +65,13 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
     <p>Menu<p>
     <ul id="menu">
-      <li id="orari"> <a href="OrarioSingolo.jsp">Orari</a>
+      <li id="aule"><a href="aula.jsp">Aule</a>
       </li>
-      <li id="aule"><a href="edificio.jsp">Aule</a>
+      <li id="agenda"><a href="servelt">Agenda</a>
       </li>
-      <li id="agenda"><a href="servelt">Gestisci Agenda</a>
+      <li id="appelli"><a href="servelt">Appelli</a>
       </li>
-      <li id="appelli"><a href="appellistudente.jsp">Appelli</a>
-      </li>
-      <li id="conversazioni"><a href="servelt">Conversazioni</a>
+      <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
       </li>
       <li id="mappa"><a href="mappa.jsp">Mappa</a>
       </li>
@@ -86,21 +88,20 @@
   <div class="barraNavigazione" id="barraNavigazione">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
     <p>Menu<p>
-    <ul id="menu">
-      <li id="aule"><a href="edificio.jsp">Aule</a>
-      </li>
-      <li id="appelli"><a href="appellidocente.jsp">Appelli</a>
-      </li>
-      <li id="conversazioni"><a href="servelt">Conversazioni</a>
-      </li>
-      <li id="mappa"><a href="mappa.jsp">Mappa</a>
-      </li>
-      <li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
-      </li>
-      <li id="infoapp"><a href="infoapp.jsp">Info App</a>
-      </li>
-      <li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
-      </li>
+    <li id="aule"><a href="aula.jsp">Aule</a>
+    </li>
+    <li id="appelli"><a href="servelt">Appelli</a>
+    </li>
+    <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
+    </li>
+    <li id="mappa"><a href="mappa.jsp">Mappa</a>
+    </li>
+    <li id="ChatBot"><a href="ChatBot.jsp">ChatBot</a>
+    </li>
+    <li id="infoapp"><a href="infoapp.jsp">Info App</a>
+    </li>
+    <li id="aboutus"><a href="aboutus.jsp">Chi Siamo</a>
+    </li>
     </ul>
   </div>
 
@@ -142,7 +143,7 @@
   <h1>Crea una nuova Chat</h1>
 
   <div class="form-container">
-    <form id="myForm" method="post" class="chat-form">
+    <form id="myForm" action="invioMessaggioServlet" method="post" class="chat-form">
       <label for="email" class="form-label">Seleziona un'email:</label>
       <select id="email" name="email" class="form-select">
         <!-- Le opzioni delle email verranno caricate tramite AJAX -->

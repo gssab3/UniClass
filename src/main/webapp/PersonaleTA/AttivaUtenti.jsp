@@ -10,7 +10,6 @@
     HttpSession sessione = request.getSession(true);
     Utente user = (Utente) sessione.getAttribute("currentSessionUser");
 
-
     /* controllo tipo utente*/
 
     Tipo tipoUtente;

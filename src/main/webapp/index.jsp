@@ -8,7 +8,9 @@
     /* Sessione HTTP */
     HttpSession sessione = request.getSession(true);
     Utente user = (Utente) sessione.getAttribute("currentSessionUser");
-
+	if(user != null){
+		session.setAttribute("utenteEmail", user.getEmail());
+	}
 
     /* controllo tipo utente*/
 
@@ -63,15 +65,13 @@
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
 		<p>Menu<p>
 		<ul id="menu">
-			<li id="orari"> <a href="servelt">Orari</a>
-			</li>
 			<li id="aule"><a href="aula.jsp">Aule</a>
 			</li>
 			<li id="agenda"><a href="servelt">Agenda</a>
             </li>
             <li id="appelli"><a href="servelt">Appelli</a>
             </li>
-            <li id="conversazioni"><a href="ConversazioniServlet?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
+            <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
             </li>
 			<li id="mappa"><a href="mappa.jsp">Mappa</a>
 			</li>
@@ -90,13 +90,9 @@
 		<p>Menu<p>
 			<li id="aule"><a href="aula.jsp">Aule</a>
 			</li>
-			<!--
-			<li id="agenda"><a href="servelt">Agenda</a>
-            </li>
-			-->
             <li id="appelli"><a href="servelt">Appelli</a>
             </li>
-            <li id="conversazioni"><a href="Conversazioni?utenteEmail=<%=user.getEmail()%>">Conversazioni</a>
+            <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
             </li>
 			<li id="mappa"><a href="mappa.jsp">Mappa</a>
 			</li>
@@ -135,10 +131,6 @@
 
     <jsp:include page="header.jsp"/>
 
-	<% if (tipoUtente != null && tipoUtente.equals(Tipo.Studente)) {%>
-		<p>mostrare agenda</p>
-	<%} else {%>
-
 	<br> <br>
 	<div id="contieniForm">
 		<form id="cercaOrarioForm" action="cercaOrario" method="POST">
@@ -174,7 +166,6 @@
     </form>
 	</div>
 
-	<%}%>
 
 <script src="scripts/formOrario.js"></script>
 <script>

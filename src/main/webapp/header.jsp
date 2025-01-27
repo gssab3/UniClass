@@ -7,6 +7,11 @@
 	HttpSession sessione = request.getSession(true);
 	Utente user = (Utente) sessione.getAttribute("currentSessionUser");
 
+    if(user != null){
+        session.setAttribute("utenteEmail", user.getEmail());
+    }
+
+
 
 	/* controllo tipo utente*/
 
@@ -43,7 +48,7 @@
 
         <div class="TastoLogin" >
             <span style="font-size:30px;cursor:pointer">
-                <a href="Login.jsp">
+                <a href="${pageContext.request.contextPath}/Login.jsp">
                     <img src="${pageContext.request.contextPath}/images/icons/usericonnolog.png" alt="open">
                 </a>
             </span>
@@ -52,7 +57,7 @@
         <% } else if(tipoUtente != null) { %>
         <div class="TastoLogin" >
             <span style="font-size:30px;cursor:pointer">
-                <a href="Account.jsp">
+                <a href="${pageContext.request.contextPath}/Account.jsp">
                     <img src="${pageContext.request.contextPath}/images/icons/usericonlog.png" alt="open">
                 </a>
             </span>

@@ -1,7 +1,7 @@
 <%@ page import="it.unisa.uniclass.utenti.model.Utente" %>
 <%@ page import="it.unisa.uniclass.utenti.model.Tipo" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 
 <%
     HttpSession sessione = request.getSession(true);
@@ -23,6 +23,7 @@
 <title>UniClass</title>
     <link type="text/css" rel="stylesheet" href="styles/login.css">
     <link rel="icon" href="images/logois.png" sizes="32x32" type="image/png">
+    <script src="scripts/login.js" defer></script>
 </head>
 <body style="background-image: none;">
 
@@ -30,7 +31,9 @@
     <div class="squarelogin">
         <div class="contenutologin">
 
-            <form action="Login" class="loginform" method="POST">
+            <form action="Login" class="loginform" method="POST" onsubmit="return validateForm()">
+
+                <div id="error" class="error"></div>
 
                 <% if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("error") ){ %>
                 <div class="tableRow">
@@ -38,8 +41,8 @@
                 </div>
                 <% } else if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("notactivated") ) { %>
                 <div class="tableRow">
-                    <p class="error">Il tuo Account non Ë ancora stato attivato!</p>
-                    <p class="error">Riceverai le credenziali di accesso quando il tuo account sar‡ attivo.</p>
+                    <p class="error">Il tuo Account non √® ancora stato attivato!</p>
+                    <p class="error">Riceverai le credenziali di accesso quando il tuo account sar√† attivo.</p>
                 </div>
                 <% }%>
                 <div>
