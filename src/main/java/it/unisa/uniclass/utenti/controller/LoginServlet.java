@@ -20,6 +20,19 @@ import java.util.List;
 public class LoginServlet extends HttpServlet{
 
 
+    @EJB
+    private AccademicoService accademicoService = new AccademicoService();
+    @EJB
+    private PersonaleTAService personaleTAService = new PersonaleTAService();
+
+    public void setAccademicoService(AccademicoService accademicoService) {
+        this.accademicoService = accademicoService;
+    }
+
+    public void setPersonaleTAService(PersonaleTAService personaleTAService) {
+        this.personaleTAService = personaleTAService;
+    }
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -32,8 +45,6 @@ public class LoginServlet extends HttpServlet{
             //Password non hashata, così come viene digitata
             String password = request.getParameter("password");
 
-            AccademicoService accademicoService = new AccademicoService();
-            PersonaleTAService personaleTAService = new PersonaleTAService();
             //password hashata, da come viene digitata all'hashing
             password = CredentialSecurity.hashPassword(password);
             Accademico user1 = accademicoService.trovaEmailPassUniclass(email, password);
