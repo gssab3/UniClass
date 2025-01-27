@@ -50,6 +50,7 @@
   <link type="text/css" rel="stylesheet" href="styles/conversazioniStyle.css">
   <link type="text/css" rel="stylesheet" href="styles/newChat.css">
   <link type="text/css" rel="stylesheet" href="styles/footerstyle.css">
+  <link rel="icon" href="images/logois.png" sizes="32x32" type="image/png">
 
 </head>
 <body id="uniClassChat">
