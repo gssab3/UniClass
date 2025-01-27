@@ -18,28 +18,32 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-@WebServlet(name = "ConversazioniServlet", value = "/ConversazioniServlet")
+@WebServlet(name = "ConversazioniServlet", value = "/Conversazioni")
 public class ConversazioniServlet extends HttpServlet {
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String email = request.getParameter("utenteEmail");
-
-        AccademicoService accademicoService = new AccademicoService();
-        Accademico accademicoSelf = accademicoService.trovaEmailUniClass(email);
-
-        ConversazioneService conversazioneService = new ConversazioneService();
-        List<Conversazione> conversazioni = conversazioneService.trovaConversazioneAccademico(accademicoSelf);
-
-
-        List<Accademico> accademici = conversazioneService.trovaAccademiciConversazione(accademicoSelf);
-
-        request.setAttribute("conversazioni", conversazioni);
-        request.setAttribute("accademici", accademici);
-        request.setAttribute("accademicoSelf", accademicoSelf);
-
-        request.getRequestDispatcher("Conversazioni.jsp").forward(request, response);
+        doPost(request, response);
     }
+
+     @Override
+     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         String email = request.getParameter("utenteEmail");
+
+         AccademicoService accademicoService = new AccademicoService();
+         Accademico accademicoSelf = accademicoService.trovaEmailUniClass(email);
+
+         ConversazioneService conversazioneService = new ConversazioneService();
+         List<Conversazione> conversazioni = conversazioneService.trovaConversazioneAccademico(accademicoSelf);
+
+
+         List<Accademico> accademici = conversazioneService.trovaAccademiciConversazione(accademicoSelf);
+
+         request.setAttribute("conversazioni", conversazioni);
+         request.setAttribute("accademici", accademici);
+         request.setAttribute("accademicoSelf", accademicoSelf);
+
+         request.getRequestDispatcher("Conversazioni.jsp").forward(request, response);
+     }
 }
