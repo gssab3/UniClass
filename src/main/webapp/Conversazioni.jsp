@@ -149,7 +149,14 @@
         <!-- Le opzioni delle email verranno caricate tramite AJAX -->
       </select>
 
+      <% if(tipoUtente.equals(Tipo.Docente) || tipoUtente.equals(Tipo.Coordinatore)) { %>
       <br><br>
+      <label for="topic" class="form-label">Topic:</label>
+      <textarea id="testo" name="testo" class="form-textarea" rows="5" cols="40"></textarea>
+
+      <% } %>
+      <br><br>
+
 
       <label for="testo" class="form-label">Testo del messaggio:</label>
       <textarea id="testo" name="testo" class="form-textarea" rows="5" cols="40"></textarea>
