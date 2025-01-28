@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@WebServlet(name = "invioMessaggioServlet", value = "/invioMessaggio")
+@WebServlet(name = "invioMessaggio", value = "/invioMessaggioServlet")
 public class invioMessaggioServlet extends HttpServlet {
 
     @EJB
@@ -46,7 +46,7 @@ public class invioMessaggioServlet extends HttpServlet {
         Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSession);
         Accademico accademicoDest = accademicoService.trovaEmailUniClass(emailDest);
 
-        Topic top = null;
+        Topic top = new Topic();
         if(topic != null) {
             top.setNome(topic);
             top.setCorsoLaurea(accademicoSelf.getCorsoLaurea());
@@ -84,6 +84,9 @@ public class invioMessaggioServlet extends HttpServlet {
             conversazione.getMessaggi().add(messaggio1);
             conversazioneService.aggiungiConversazione(conversazione);
         }
+
+        response.sendRedirect("Conversazioni.jsp");
+
     }
 
     @Override
