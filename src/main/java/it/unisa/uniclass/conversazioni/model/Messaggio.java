@@ -217,6 +217,14 @@ public class Messaggio implements Serializable {
         this.topic = topic;
     }
 
+    public Conversazione getConversazione() {
+        return conversazione;
+    }
+
+    public void setConversazione(Conversazione conversazione) {
+        this.conversazione = conversazione;
+    }
+
     /**
      * Rappresentazione testuale dell'oggetto Messaggio.
      *

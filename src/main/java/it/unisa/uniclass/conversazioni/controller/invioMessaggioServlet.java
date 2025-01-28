@@ -72,7 +72,7 @@ public class invioMessaggioServlet extends HttpServlet {
             conversazione.setMessaggeri(messaggeri);
 
             conversazioneService.aggiungiConversazione(conversazione);
-
+            messaggio1.setConversazione(conversazione);
             conversazione.getMessaggi().add(messaggio1);
             conversazioneService.aggiungiConversazione(conversazione);
             conversazioni.add(conversazione);
@@ -87,13 +87,11 @@ public class invioMessaggioServlet extends HttpServlet {
             if(topic != null) {
                 messaggio1.setTopic(top);
             }
+            messaggio1.setConversazione(conversazione);
             conversazione.getMessaggi().add(messaggio1);
             conversazioneService.aggiungiConversazione(conversazione);
             conversazioni.add(conversazione);
         }
-
-
-
 
         System.out.println(conversazioni);
 
