@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -47,38 +48,45 @@ public class invioMessaggioServlet extends HttpServlet {
         Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSession);
         Accademico accademicoDest = accademicoService.trovaEmailUniClass(emailDest);
 
-        List<Conversazione> conversazioni = conversazioneService.trovaConversazioneAccademico(accademicoSelf);
-
         Topic top = new Topic();
         if(topic != null) {
             top.setNome(topic);
             top.setCorsoLaurea(accademicoSelf.getCorsoLaurea());
         }
 
+        Conversazione conversazione;
+
+        System.out.println(conversazioneService.trovaConversazioneDueAccademici(accademicoDest, accademicoSelf));
+
         if(conversazioneService.trovaConversazioneDueAccademici(accademicoDest, accademicoSelf) == null) {
             Set<Accademico> messaggeri = new HashSet<>();
             messaggeri.add(accademicoSelf);
             messaggeri.add(accademicoDest);
 
-            Messaggio messaggio1 = new Messaggio();
-            messaggio1.setAutore(accademicoSelf);
-            messaggio1.setDestinatario(accademicoDest);
-            messaggio1.setBody(messaggio);
-            messaggio1.setDateTime(LocalDateTime.now());
-            if(topic != null) {
-                messaggio1.setTopic(top);
-            }
-            Conversazione conversazione = new Conversazione();
+            conversazione = new Conversazione();
             conversazione.setMessaggeri(messaggeri);
 
+            Messaggio messaggio1 = new Messaggio();
+            messaggio1.setAutore(accademicoSelf);
+            messaggio1.setDestinatario(accademicoDest);
+            messaggio1.setBody(messaggio);
+            messaggio1.setDateTime(LocalDateTime.now());
+            if(topic != null) {
+                messaggio1.setTopic(top);
+            }
+
             conversazioneService.aggiungiConversazione(conversazione);
+
+
+
             messaggio1.setConversazione(conversazione);
             conversazione.getMessaggi().add(messaggio1);
             conversazioneService.aggiungiConversazione(conversazione);
-            conversazioni.add(conversazione);
+
         }
         else {
-            Conversazione conversazione = conversazioneService.trovaConversazioneDueAccademici(accademicoDest, accademicoSelf);
+            conversazione = conversazioneService.trovaConversazioneDueAccademici(accademicoDest, accademicoSelf);
+            System.out.println(conversazione.getId());
             Messaggio messaggio1 = new Messaggio();
             messaggio1.setAutore(accademicoSelf);
             messaggio1.setDestinatario(accademicoDest);
@@ -90,12 +98,15 @@ public class invioMessaggioServlet extends HttpServlet {
             messaggio1.setConversazione(conversazione);
             conversazione.getMessaggi().add(messaggio1);
             conversazioneService.aggiungiConversazione(conversazione);
-            conversazioni.add(conversazione);
         }
+
+        List<Conversazione> conversazioni = conversazioneService.trovaConversazioneAccademico(accademicoSelf);
+        List<Accademico> accademicoConv = conversazioneService.trovaAccademiciConversazione(accademicoSelf);
 
         System.out.println(conversazioni);
 
         request.setAttribute("conversazioni", conversazioni);
+        request.setAttribute("accademici", accademicoConv);
         response.sendRedirect("Conversazioni");
 
     }

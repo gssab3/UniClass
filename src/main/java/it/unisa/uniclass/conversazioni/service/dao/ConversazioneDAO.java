@@ -29,7 +29,15 @@ public class ConversazioneDAO implements ConversazioneRemote {
 
     @Override
     public void aggiungiConversazione(Conversazione c) {
-        emUniClass.merge(c);
+        if (c == null) {
+            throw new IllegalArgumentException("La conversazione non può essere null");
+        }
+
+        if (c.getId() == null) {
+            emUniClass.persist(c); // Salva un nuovo oggetto nel database
+        } else {
+            emUniClass.merge(c); // Aggiorna l'oggetto esistente
+        }
     }
 
     @Override

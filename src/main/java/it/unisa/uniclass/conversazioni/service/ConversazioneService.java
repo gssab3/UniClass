@@ -38,7 +38,7 @@ public class ConversazioneService {
 
     public Conversazione trovaConversazioneDueAccademici(Accademico accademico, Accademico accademicoSelf) {
 
-        List<Conversazione> conversazioni = trovaTutte();
+        List<Conversazione> conversazioni = conversazioneDao.trovaTutte();
         for (Conversazione conversazione : conversazioni) {
             if(conversazione.getMessaggeri().contains(accademico) && conversazione.getMessaggeri().contains(accademicoSelf)) {
                 return conversazione;

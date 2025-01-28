@@ -41,8 +41,10 @@ public class ConversazioniServlet extends HttpServlet {
          ConversazioneService conversazioneService = new ConversazioneService();
          List<Conversazione> conversazioni = conversazioneService.trovaConversazioneAccademico(accademicoSelf);
 
-         request.setAttribute("conversazioni", conversazioni);
+         List<Accademico> accademicoConv = conversazioneService.trovaAccademiciConversazione(accademicoSelf);
 
+         request.setAttribute("conversazioni", conversazioni);
+         request.setAttribute("accademici", accademicoConv);
          request.setAttribute("accademicoSelf", accademicoSelf);
 
          request.getRequestDispatcher("Conversazioni.jsp").forward(request, response);

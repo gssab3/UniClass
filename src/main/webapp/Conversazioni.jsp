@@ -38,6 +38,8 @@
 
   Accademico accademicoSelf = (Accademico) request.getAttribute("accademicoSelf");
 
+  AccademicoService accademicoService = new AccademicoService();
+  List<Accademico> accademici = (List<Accademico>) request.getAttribute("accademici");
 
   ConversazioneService conversazioneService = new ConversazioneService();
   List<Conversazione> conversazioni = new ArrayList<Conversazione>();
@@ -118,7 +120,11 @@
 //fare retrieve delle conversazioni dell'utente'
 
 
+<%if(accademici.isEmpty()){ %>
 
+si
+
+  <% } %>
 
 
 
@@ -127,21 +133,20 @@
     <h1>Conversazioni</h1>
       <div class="conversations-container">
         <%
-          for(Conversazione conversazione: conversazioni){
-            Accademico accademicoDest = conversazioneService.trovaAltroConversazione(conversazione,accademicoSelf);%>
-        <a href="chatServlet?accademico=<%=accademicoDest.getEmail()%>&accademicoSelf=<%=accademicoSelf.getEmail()%>" class="conversation">
-            <% if(accademicoDest.getTipo().equals(Tipo.Studente)){ %>
+          for(Accademico accademico: accademici){%>
+        <a href="chatServlet?accademico=<%=accademico.getEmail()%>&accademicoSelf=<%=accademicoSelf.getEmail()%>" class="conversation">
+          <%    if(accademico.getTipo().equals(Tipo.Studente)){ %>
           <div class="profile-picture">
             <img src="images/icons/iconstudent.png" alt="Foto profilo">
           </div>
-          <%   } else if (accademicoDest.getTipo().equals(Tipo.Docente) || accademicoDest.getTipo().equals(Tipo.Coordinatore)) { %>
+          <%   } else if (accademico.getTipo().equals(Tipo.Docente) || accademico.getTipo().equals(Tipo.Coordinatore)) { %>
           <div class="profile-picture">
             <img src="images/icons/iconprof.png" alt="Foto profilo">
           </div>
           <%
             }
           %>
-          <div class="username"><%=accademicoDest.getNome()%> <%=accademicoDest.getCognome()%></div>
+          <div class="username"><%=accademico.getNome()%> <%=accademico.getCognome()%></div>
         </a>
         <% } %>
       </div>
