@@ -60,6 +60,10 @@ public class Conversazione implements Serializable {
      * */
     public Conversazione() {}
 
+    public Conversazione(Set<Accademico> messaggeri) {
+        this.messaggeri = messaggeri;
+    }
+
     /**
      * Restituisce l'ID della conversazione.
      *
