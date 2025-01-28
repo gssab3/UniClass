@@ -142,6 +142,8 @@
 
   <h1>Crea una nuova Chat</h1>
 
+  <% if(tipoUtente.equals(Tipo.Docente) || tipoUtente.equals(Tipo.Coordinatore)) { %>
+
   <div class="form-container">
     <form id="myForm" action="invioMessaggioServlet" method="post" class="chat-form">
       <label for="email" class="form-label">Seleziona un'email:</label>
@@ -149,12 +151,10 @@
         <!-- Le opzioni delle email verranno caricate tramite AJAX -->
       </select>
 
-      <% if(tipoUtente.equals(Tipo.Docente) || tipoUtente.equals(Tipo.Coordinatore)) { %>
       <br><br>
       <label for="topic" class="form-label">Topic:</label>
-      <textarea id="testo" name="testo" class="form-textarea" rows="5" cols="40"></textarea>
+      <textarea id="topic" name="topic" class="form-textarea" rows="5" cols="40"></textarea>
 
-      <% } %>
       <br><br>
 
 
@@ -166,6 +166,30 @@
       <button type="submit" class="form-button">Invia</button>
     </form>
   </div>
+
+  <% } else { %>
+  <div class="form-container">
+    <form id="myForm" action="invioMessaggioServlet" method="post" class="chat-form">
+      <label for="email" class="form-label">Seleziona un'email:</label>
+      <select id="email" name="email" class="form-select">
+        <!-- Le opzioni delle email verranno caricate tramite AJAX -->
+      </select>
+
+      <br><br>
+      <input type="hidden" name="topic" value="null"/>
+
+      <br><br>
+
+      <label for="testo" class="form-label">Testo del messaggio:</label>
+      <textarea id="testo" name="testo" class="form-textarea" rows="5" cols="40"></textarea>
+
+      <br><br>
+
+      <button type="submit" class="form-button">Invia</button>
+    </form>
+  </div>
+  <% } %>
+
 
   <script src="scripts/formChat.js" defer></script>
   <%@include file = "footer.jsp" %>
