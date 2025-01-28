@@ -71,6 +71,19 @@ public class invioMessaggioServlet extends HttpServlet {
             conversazione.getMessaggi().add(messaggio1);
             conversazioneService.aggiungiConversazione(conversazione);
         }
+        else {
+            Conversazione conversazione = conversazioneService.trovaConversazioneDueAccademici(accademicoDest, accademicoSelf);
+            Messaggio messaggio1 = new Messaggio();
+            messaggio1.setAutore(accademicoSelf);
+            messaggio1.setDestinatario(accademicoDest);
+            messaggio1.setBody(messaggio);
+            messaggio1.setDateTime(LocalDateTime.now());
+            if(topic != null) {
+                messaggio1.setTopic(top);
+            }
+            conversazione.getMessaggi().add(messaggio1);
+            conversazioneService.aggiungiConversazione(conversazione);
+        }
     }
 
     @Override
