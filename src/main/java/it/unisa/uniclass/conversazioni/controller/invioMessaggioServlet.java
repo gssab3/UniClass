@@ -2,6 +2,7 @@ package it.unisa.uniclass.conversazioni.controller;
 
 import it.unisa.uniclass.conversazioni.model.Conversazione;
 import it.unisa.uniclass.conversazioni.model.Messaggio;
+import it.unisa.uniclass.conversazioni.model.Topic;
 import it.unisa.uniclass.conversazioni.service.ConversazioneService;
 import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.service.AccademicoService;
@@ -37,10 +38,19 @@ public class invioMessaggioServlet extends HttpServlet {
         //Messaggio da inviare quando ci si trova al di sotto in conversazioni
         String messaggio = request.getParameter("testo");
 
+        //Topic da inviare quando ci si trova nel lato Docente/Coordinatore e c'è un topic inviato
+        String topic = (String) request.getParameter("topic");
+
 
         AccademicoService accademicoService = new AccademicoService();
         Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSession);
         Accademico accademicoDest = accademicoService.trovaEmailUniClass(emailDest);
+
+        Topic top = null;
+        if(topic != null) {
+            top.setNome(topic);
+            top.setCorsoLaurea(accademicoSelf.getCorsoLaurea());
+        }
 
         if(conversazioneService.trovaConversazioneDueAccademici(accademicoDest, accademicoSelf) == null) {
             Set<Accademico> messaggeri = new HashSet<>();
@@ -52,20 +62,15 @@ public class invioMessaggioServlet extends HttpServlet {
             messaggio1.setDestinatario(accademicoDest);
             messaggio1.setBody(messaggio);
             messaggio1.setDateTime(LocalDateTime.now());
-
+            if(topic != null) {
+                messaggio1.setTopic(top);
+            }
             Conversazione conversazione = new Conversazione();
             conversazione.setMessaggeri(messaggeri);
 
             conversazione.getMessaggi().add(messaggio1);
             conversazioneService.aggiungiConversazione(conversazione);
         }
-
-
-
-
-
-
-
     }
 
     @Override
