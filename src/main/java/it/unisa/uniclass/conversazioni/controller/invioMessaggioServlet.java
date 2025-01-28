@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @WebServlet(name = "invioMessaggio", value = "/invioMessaggioServlet")
@@ -46,6 +47,8 @@ public class invioMessaggioServlet extends HttpServlet {
         Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSession);
         Accademico accademicoDest = accademicoService.trovaEmailUniClass(emailDest);
 
+        List<Conversazione> conversazioni = conversazioneService.trovaConversazioneAccademico(accademicoSelf);
+
         Topic top = new Topic();
         if(topic != null) {
             top.setNome(topic);
@@ -68,8 +71,11 @@ public class invioMessaggioServlet extends HttpServlet {
             Conversazione conversazione = new Conversazione();
             conversazione.setMessaggeri(messaggeri);
 
+            conversazioneService.aggiungiConversazione(conversazione);
+
             conversazione.getMessaggi().add(messaggio1);
             conversazioneService.aggiungiConversazione(conversazione);
+            conversazioni.add(conversazione);
         }
         else {
             Conversazione conversazione = conversazioneService.trovaConversazioneDueAccademici(accademicoDest, accademicoSelf);
@@ -83,9 +89,16 @@ public class invioMessaggioServlet extends HttpServlet {
             }
             conversazione.getMessaggi().add(messaggio1);
             conversazioneService.aggiungiConversazione(conversazione);
+            conversazioni.add(conversazione);
         }
 
-        response.sendRedirect("Conversazioni.jsp");
+
+
+
+        System.out.println(conversazioni);
+
+        request.setAttribute("conversazioni", conversazioni);
+        response.sendRedirect("Conversazioni");
 
     }
 

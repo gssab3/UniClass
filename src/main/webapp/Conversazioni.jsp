@@ -8,6 +8,7 @@
 <%@ page import="it.unisa.uniclass.utenti.model.Accademico" %>
 <%@ page import="it.unisa.uniclass.conversazioni.service.ConversazioneService" %>
 <%@ page import="it.unisa.uniclass.utenti.service.AccademicoService" %>
+<%@ page import="java.util.ArrayList" %>
 
 <%
   /* Sessione HTTP */
@@ -34,11 +35,16 @@
     return; // Interrompi l'esecuzione della pagina JSP
   }
 
+
   Accademico accademicoSelf = (Accademico) request.getAttribute("accademicoSelf");
-  List<Accademico> accademici = (List<Accademico>) request.getAttribute("accademici");
+
+
+  ConversazioneService conversazioneService = new ConversazioneService();
+  List<Conversazione> conversazioni = new ArrayList<Conversazione>();
+
 
   if (tipoUtente == Tipo.Docente || tipoUtente == Tipo.Studente || tipoUtente == Tipo.Coordinatore) {
-    List<Conversazione> conversazioni = (List<Conversazione>) request.getAttribute("conversazioni");
+    conversazioni = (List<Conversazione>) request.getAttribute("conversazioni");
   }
 %>
 
@@ -120,21 +126,23 @@
   <div class="mega-container">
     <h1>Conversazioni</h1>
       <div class="conversations-container">
-        <% for(Accademico accademico: accademici){ %>
-            <a href="chatServlet?accademico=<%=accademico.getEmail()%>&accademicoSelf=<%=accademicoSelf.getEmail()%>" class="conversation">
-            <%    if(accademico.getTipo().equals(Tipo.Studente)){ %>
-                <div class="profile-picture">
-                  <img src="images/icons/iconstudent.png" alt="Foto profilo">
-                </div>
-            <%   } else if (accademico.getTipo().equals(Tipo.Docente) || accademico.getTipo().equals(Tipo.Coordinatore)) { %>
-                <div class="profile-picture">
-                  <img src="images/icons/iconprof.png" alt="Foto profilo">
-                </div>
-            <%
+        <%
+          for(Conversazione conversazione: conversazioni){
+            Accademico accademicoDest = conversazioneService.trovaAltroConversazione(conversazione,accademicoSelf);%>
+        <a href="chatServlet?accademico=<%=accademicoDest.getEmail()%>&accademicoSelf=<%=accademicoSelf.getEmail()%>" class="conversation">
+            <% if(accademicoDest.getTipo().equals(Tipo.Studente)){ %>
+          <div class="profile-picture">
+            <img src="images/icons/iconstudent.png" alt="Foto profilo">
+          </div>
+          <%   } else if (accademicoDest.getTipo().equals(Tipo.Docente) || accademicoDest.getTipo().equals(Tipo.Coordinatore)) { %>
+          <div class="profile-picture">
+            <img src="images/icons/iconprof.png" alt="Foto profilo">
+          </div>
+          <%
             }
-            %>
-            <div class="username"><%=accademico.getNome()%> <%=accademico.getCognome()%></div>
-            </a>
+          %>
+          <div class="username"><%=accademicoDest.getNome()%> <%=accademicoDest.getCognome()%></div>
+        </a>
         <% } %>
       </div>
   </div>

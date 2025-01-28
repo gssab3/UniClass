@@ -33,17 +33,16 @@ public class ConversazioniServlet extends HttpServlet {
          HttpSession session = request.getSession();
          String email = session.getAttribute("utenteEmail").toString();
 
+
          AccademicoService accademicoService = new AccademicoService();
          Accademico accademicoSelf = accademicoService.trovaEmailUniClass(email);
+
 
          ConversazioneService conversazioneService = new ConversazioneService();
          List<Conversazione> conversazioni = conversazioneService.trovaConversazioneAccademico(accademicoSelf);
 
-
-         List<Accademico> accademici = conversazioneService.trovaAccademiciConversazione(accademicoSelf);
-
          request.setAttribute("conversazioni", conversazioni);
-         request.setAttribute("accademici", accademici);
+
          request.setAttribute("accademicoSelf", accademicoSelf);
 
          request.getRequestDispatcher("Conversazioni.jsp").forward(request, response);
