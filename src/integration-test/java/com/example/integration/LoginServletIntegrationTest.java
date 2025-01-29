@@ -1,5 +1,6 @@
 package com.example.integration;
 
+import com.zaxxer.hikari.HikariDataSource;
 import it.unisa.uniclass.utenti.controller.LoginServlet;
 import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.service.AccademicoService;
@@ -10,120 +11,94 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import jakarta.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.SQLException;
+import jakarta.sql.DataSource;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class LoginIntegrationTest {
+public class LoginServletIntegrationTest {
 
-    // Mock HTTP components
-    // Mock objects for the servlet request, response, and session
-    @Mock private HttpServletRequest request;
-    @Mock private HttpServletResponse response;
-    @Mock private HttpSession session;
-
-    // Mock objects for database-related components
-    @Mock private InitialContext initialContext;
-    @Mock private DataSource dataSource;
-    @Mock private Connection connection;
-    @Mock private PreparedStatement preparedStatement;
-    @Mock private ResultSet resultSet;
-
-    // The actual components we're testing
+    private DataSource dataSource;
+    private Connection connection;
     private AccademicoDAO accademicoDAO;
     private AccademicoService accademicoService;
     private LoginServlet loginServlet;
 
     @BeforeEach
-    void setUp() throws Exception {
-        // Initialize Mockito annotations
-        MockitoAnnotations.openMocks(this);
+    void setUp() throws SQLException {
+        // Crea un DataSource per H2 in memoria
+        HikariDataSource h2DataSource = new HikariDataSource();
+        h2DataSource.setJdbcUrl("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1"); // Database in memoria
+        h2DataSource.setUsername("sa");
+        h2DataSource.setPassword("");
 
-        // Set up the JNDI lookup for the DataSource
-        when(initialContext.lookup("java:comp/env/jdbc/UniClass")).thenReturn(dataSource);
-        when(dataSource.getConnection()).thenReturn(connection);
+        // Usa il DataSource per ottenere la connessione
+        dataSource = h2DataSource;
+        connection = dataSource.getConnection();
 
-        // Create real DAO with mocked database connection
-        accademicoDAO = new AccademicoDAO() {
-            @Override
-            protected Connection getConnection() {
-                return connection;
-            }
-        };
-
-        // Create real AccademicoService with the real DAO
-        accademicoService = new AccademicoService() {
-            @Override
-            protected AccademicoDAO getAccademicoDAO() {
-                return accademicoDAO;
-            }
-        };
-
-        // Create LoginServlet with the real AccademicoService
-        loginServlet = new LoginServlet() {
-            @Override
-            protected AccademicoService getAccademicoService() {
-                return accademicoService;
-            }
-        };
-
-        // Set up common request attributes
-        when(request.getSession()).thenReturn(session);
+        // Inizializza DAO e Service (AccademicoDAO deve ricevere una Connection)
+        accademicoDAO = new AccademicoDAO(dataSource);  // Passa il DataSource al costruttore di AccademicoDAO
+        accademicoService = new AccademicoService(accademicoDAO);
+        loginServlet = new LoginServlet();  // Usa la servlet come al solito
     }
 
     @Test
     void testSuccessfulLogin() throws ServletException, IOException {
-        // Arrange: Set up test data
+        // Dati di test
         String email = "test@example.com";
         String password = "password123";
 
-        // Set up request parameters
+        // Inserimento di un utente di test nel database H2
+        try (PreparedStatement ps = connection.prepareStatement(
+                "INSERT INTO accademico (email, password, attivato) VALUES (?, ?, ?)")) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ps.setBoolean(3, true);
+            ps.executeUpdate();
+        }
+
+        // Mock della richiesta, risposta e sessione HTTP
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpSession session = mock(HttpSession.class);
+
+        when(request.getSession()).thenReturn(session);
         when(request.getParameter("email")).thenReturn(email);
         when(request.getParameter("password")).thenReturn(password);
 
-        // Mock database query results for a successful login
-        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
-        when(preparedStatement.executeQuery()).thenReturn(resultSet);
-        when(resultSet.next()).thenReturn(true);
-        when(resultSet.getString("email")).thenReturn(email);
-        when(resultSet.getString("password")).thenReturn(password);
-        when(resultSet.getBoolean("attivato")).thenReturn(true);
-
-        // Act: Perform the login
+        // Esegui il login
         loginServlet.doPost(request, response);
 
-        // Assert: Verify the expected outcomes
+        // Verifica che l'utente sia stato autenticato correttamente
         verify(session).setAttribute(eq("currentSessionUser"), any(Accademico.class));
         verify(response).sendRedirect("/Home");
     }
 
     @Test
     void testFailedLogin() throws ServletException, IOException {
-        // Arrange: Set up test data
-        String email = "test@example.com";
+        // Dati di test per login fallito
+        String email = "nonEsiste@example.com";
         String password = "wrongpassword";
 
-        // Set up request parameters
+        // Mock della richiesta, risposta e sessione HTTP
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        HttpSession session = mock(HttpSession.class);
+
+        when(request.getSession()).thenReturn(session);
         when(request.getParameter("email")).thenReturn(email);
         when(request.getParameter("password")).thenReturn(password);
 
-        // Mock database query results for a failed login (no user found)
-        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
-        when(preparedStatement.executeQuery()).thenReturn(resultSet);
-        when(resultSet.next()).thenReturn(false);
-
-        // Act: Perform the login
+        // Esegui il login
         loginServlet.doPost(request, response);
 
-        // Assert: Verify the expected outcomes
+        // Verifica che nessun utente sia stato autenticato
         verify(session, never()).setAttribute(eq("currentSessionUser"), any(Accademico.class));
         verify(response).sendRedirect(contains("error"));
     }
