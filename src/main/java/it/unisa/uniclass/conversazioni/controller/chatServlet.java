@@ -1,11 +1,10 @@
 package it.unisa.uniclass.conversazioni.controller;
 
-import it.unisa.uniclass.conversazioni.model.Conversazione;
 import it.unisa.uniclass.conversazioni.model.Messaggio;
-import it.unisa.uniclass.conversazioni.service.ConversazioneService;
 import it.unisa.uniclass.conversazioni.service.MessaggioService;
 import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.service.AccademicoService;
+import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,6 +18,9 @@ import java.util.List;
 @WebServlet(name = "chatServlet", value = "/chatServlet")
 public class chatServlet extends HttpServlet {
 
+    @EJB
+    private MessaggioService messaggioService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -31,20 +33,23 @@ public class chatServlet extends HttpServlet {
         Accademico accademico = accademicoService.trovaEmailUniClass(email);
         Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSelf);
 
-        ConversazioneService conversazioneService = new ConversazioneService();
-
-        Conversazione conversazione = conversazioneService.trovaConversazioneDueAccademici(accademico, accademicoSelf);
-
-
-
-        MessaggioService messaggioService = new MessaggioService();
-
-        List<Messaggio> messaggi = messaggioService.trovaMessaggiConversazione(conversazione);
+        List<Messaggio> messaggi = messaggioService.trovaMessaggi(email, emailSelf);
+        List<Messaggio> messaggiInviati = new ArrayList<>();
+        List<Messaggio> messaggiRicevuti = new ArrayList<>();
+        for(Messaggio messaggio : messaggi) {
+            if(messaggio.getDestinatario().getMatricola().equals(accademicoSelf.getMatricola())) {
+                messaggiRicevuti.add(messaggio);
+            }
+            if(messaggio.getAutore().getMatricola().equals(accademicoSelf.getMatricola())) {
+                messaggiInviati.add(messaggio);
+            }
+        }
 
         req.setAttribute("messaggi", messaggi);
+        req.setAttribute("messaggiInviati", messaggiInviati);
+        req.setAttribute("messaggiRicevuti", messaggiRicevuti);
         req.setAttribute("accademico", accademico);
         req.setAttribute("accdemicoSelf", accademicoSelf);
-        req.setAttribute("conversazione", conversazione);
 
         req.getRequestDispatcher("chat.jsp").forward(req, resp);
     }

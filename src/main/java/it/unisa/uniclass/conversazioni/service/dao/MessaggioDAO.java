@@ -30,15 +30,14 @@ public class MessaggioDAO implements MessaggioRemote {
     }
 
     @Override
-    public List<Messaggio> trovaMessaggiInviatiConversazione(String matricola, long id) {
-        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_INVIATI_CONVERSAZIONE, Messaggio.class);
+    public List<Messaggio> trovaMessaggiRicevuti(String matricola) {
+        TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_RICEVUTI, Messaggio.class);
         query.setParameter("matricola", matricola);
-        query.setParameter("id", id);
         return query.getResultList();
     }
 
     @Override
-    public List<Messaggio> trovaMessaggeri(String matricola1, String matricola2) {
+    public List<Messaggio> trovaMessaggi(String matricola1, String matricola2) {
         TypedQuery<Messaggio> query = emUniClass.createNamedQuery(Messaggio.TROVA_MESSAGGI_MESSAGGERI, Messaggio.class);
         query.setParameter("autore", matricola1);
         query.setParameter("destinatario", matricola2);
@@ -79,8 +78,16 @@ public class MessaggioDAO implements MessaggioRemote {
     }
 
     @Override
-    public void aggiungiMessaggio(Messaggio messaggio) {
-        emUniClass.merge(messaggio);
+    public Messaggio aggiungiMessaggio(Messaggio messaggio) {
+        if(messaggio.getId() == null) {
+            emUniClass.persist(messaggio);
+        }
+        else {
+            emUniClass.merge(messaggio);
+        }
+        emUniClass.flush();
+        System.out.println("Messaggio dopo flush: " + messaggio);
+        return messaggio;
     }
 
     @Override
