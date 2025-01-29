@@ -2,11 +2,11 @@ package com.example.controller;
 
 import it.unisa.uniclass.common.security.CredentialSecurity;
 import it.unisa.uniclass.utenti.model.Accademico;
-import it.unisa.uniclass.utenti.model.PersonaleTA;
 import it.unisa.uniclass.utenti.controller.LoginServlet;
 import it.unisa.uniclass.utenti.service.AccademicoService;
 import it.unisa.uniclass.utenti.service.PersonaleTAService;
 import it.unisa.uniclass.utenti.service.dao.AccademicoRemote;
+import it.unisa.uniclass.utenti.model.Docente;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -51,6 +51,32 @@ class LoginServletTest {
     }
 
     @Test
+    void TC1() throws ServletException, IOException {
+        System.out.println("\nTest Case 1");
+        //Arrange
+        String email = "giacomoporetti@unisa.it";
+        String password = "2222WxY$";
+        String hashedpassword = CredentialSecurity.hashPassword(password);
+
+        Docente docente = new Docente();
+        docente.setEmail(email);
+        docente.setPassword(hashedpassword);
+
+        when(request.getParameter("email")).thenReturn(email);
+        when(request.getParameter("password")).thenReturn(hashedpassword);
+        when(academicDao.trovaEmailUniClass(email)).thenReturn(docente);
+        when(personaleTAService.trovaEmailPass(email,hashedpassword)).thenReturn(null);
+        when(request.getSession(true)).thenReturn(session);
+        when(request.getContextPath()).thenReturn("/Home");
+
+        loginServlet.doPost(request, response);
+
+        verify(session).setAttribute("currentSessionUser", docente);
+        verify(response).sendRedirect("/Home");
+
+    }
+
+    @Test
     void doPost_ValidAccademico_SuccessfulLogin() throws ServletException, IOException {
         // Arrange
         String email = "giannisereni@unisa.it";
@@ -67,7 +93,7 @@ class LoginServletTest {
         when(academicDao.trovaEmailUniClass(email)).thenReturn(accademico);
         when(personaleTAService.trovaEmailPass(email, hashedPassword)).thenReturn(null);
         when(request.getSession(true)).thenReturn(session);
-        when(request.getContextPath()).thenReturn("/Home");
+        when(request.getContextPath()).thenReturn("");
         // DEBUG: Stampa valori prima di eseguire la servlet
         System.out.println("Email fornita: " + request.getParameter("email"));
         System.out.println("Password fornita: " + request.getParameter("password"));
