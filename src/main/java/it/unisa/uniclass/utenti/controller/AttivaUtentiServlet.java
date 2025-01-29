@@ -21,17 +21,32 @@ import java.nio.file.Paths;
 @WebServlet(name = "AttivaUtentiServlet", value = "/AttivaUtentiServlet")
 public class AttivaUtentiServlet extends HttpServlet {
 
+    private AccademicoService accademicoService;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        this.accademicoService = new AccademicoService();
+    }
+
+    // This method is added for testing purposes
+    public void setAccademicoService(AccademicoService accademicoService) {
+        this.accademicoService = accademicoService;
+    }
+
+    // This method is added for testing purposes
+    public void doPostPublic(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
         String param = req.getParameter("param");
-        AccademicoService accademicoService = new AccademicoService();
 
         if(param.equals("add")){
             String email = (String) req.getParameter("email");
@@ -40,7 +55,7 @@ public class AttivaUtentiServlet extends HttpServlet {
 
             Accademico accademicoEmail = accademicoService.trovaEmailUniClass(email);
             Accademico accademicoMatricola = accademicoService.trovaAccademicoUniClass(matricola);
-            Accademico accademico = null; //L'accademico reale. Se è null, i parametri inseriti sono sbagliati o inesistenti.
+            Accademico accademico = null;
             Tipo tipo = null;
             if(tiporeq.equals("Studente")) {
                 tipo = Tipo.Studente;
@@ -52,40 +67,32 @@ public class AttivaUtentiServlet extends HttpServlet {
                 tipo = Tipo.Coordinatore;
             }
 
-            if(accademicoEmail.getEmail().equals(accademicoMatricola.getEmail()) && accademicoEmail.getMatricola().equals(accademicoMatricola.getMatricola())){
-                System.out.println("\n\n\nCASO A\n\n\n");
+            if(accademicoEmail != null && accademicoMatricola != null &&
+                    accademicoEmail.getEmail().equals(accademicoMatricola.getEmail()) &&
+                    accademicoEmail.getMatricola().equals(accademicoMatricola.getMatricola())){
                 if(accademicoEmail.getTipo().equals(tipo)) {
-                    System.out.println("\n\n\nCASO B\n\n\n");
                     accademico = accademicoEmail;
                     String password = PasswordGenerator.generatePassword(8);
-                    System.out.println("\n\n" + password + "\n\n");
-
 
                     accademico.setAttivato(true);
                     accademico.setPassword(CredentialSecurity.hashPassword(password));
 
-                    //Dopo averlo attivato e settato password hashata, facciamo il merge con la funzione del DAO
                     accademicoService.aggiungiAccademico(accademico);
-                    //A questo punto, si ritorna in AttivaUtenti.jsp
                     resp.sendRedirect(req.getContextPath() + "/PersonaleTA/AttivaUtenti.jsp");
                 } else {
                     resp.sendRedirect(req.getContextPath() + "/PersonaleTA/AttivaUtenti.jsp?action=error");
                 }
-            }else{
+            } else {
                 resp.sendRedirect(req.getContextPath() + "/PersonaleTA/AttivaUtenti.jsp?action=error");
             }
         } else if(param.equals("remove")){
-
             String email = (String) req.getParameter("email-remove");
 
             Accademico accademico = accademicoService.trovaEmailUniClass(email);
-            accademicoService.cambiaAttivazione(accademico, false);
+            if (accademico != null) {
+                accademicoService.cambiaAttivazione(accademico, false);
+            }
             resp.sendRedirect(req.getContextPath() + "/PersonaleTA/AttivaUtenti.jsp");
         }
-
-
-        /*
-
-       */
     }
 }
