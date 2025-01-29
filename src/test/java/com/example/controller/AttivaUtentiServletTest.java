@@ -34,7 +34,7 @@ class AttivaUtentiServletTest {
         MockitoAnnotations.openMocks(this);
         servlet = new AttivaUtentiServlet() {
             @Override
-            protected AccademicoService getAccademicoService() {
+            public AccademicoService getAccademicoService() {
                 return accademicoService;
             }
         };
