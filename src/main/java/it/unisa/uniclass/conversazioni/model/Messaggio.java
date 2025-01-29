@@ -17,8 +17,8 @@ import static it.unisa.uniclass.conversazioni.model.Messaggio.*;
 @NamedQueries({
         @NamedQuery(name = TROVA_MESSAGGIO, query = "SELECT m FROM Messaggio m WHERE m.id = :id"),
         @NamedQuery(name = TROVA_MESSAGGI_INVIATI, query = "SELECT m FROM Messaggio m WHERE m.autore.matricola = :matricola"),
-        @NamedQuery(name = TROVA_MESSAGGI_INVIATI_CONVERSAZIONE, query = "SELECT m FROM Messaggio m WHERE m.autore.matricola = :matricola AND m.conversazione.id = :id"),
-        @NamedQuery(name = TROVA_MESSAGGI_MESSAGGERI, query = "SELECT m FROM Messaggio m WHERE m.autore.matricola = :autore AND m.destinatario.matricola = :destinatario OR m.autore.matricola = :destinatario AND m.destinatario.matricola = :autore"),
+        @NamedQuery(name = TROVA_MESSAGGI_RICEVUTI, query = "SELECT m FROM Messaggio m WHERE m.destinatario.matricola = :matricola"),
+        @NamedQuery(name = TROVA_MESSAGGI_MESSAGGERI, query = "SELECT m FROM Messaggio m WHERE ((m.autore.matricola = :autore) AND (m.destinatario.matricola = :destinatario)) OR ((m.autore.matricola = :destinatario) AND (m.destinatario.matricola = :autore))"),
         @NamedQuery(name = TROVA_TUTTI, query = "SELECT m FROM Messaggio m"),
         @NamedQuery(name = TROVA_AVVISI, query = "SELECT m FROM Messaggio m WHERE m.topic <> null"),
         @NamedQuery(name = TROVA_AVVISI_AUTORE, query = "SELECT m FROM Messaggio m WHERE m.topic <> null AND m.autore.matricola = :autore"),
@@ -35,10 +35,12 @@ public class Messaggio implements Serializable {
      * Nome della query per trovare i messaggi inviati da un autore.
      * */
     public static final String TROVA_MESSAGGI_INVIATI = "Messaggio.trovaMessaggiInviati";
+
     /**
-     * Nome della query per trovare i messaggi inviati in una conversazione specifica.
-     * */
-    public static final String TROVA_MESSAGGI_INVIATI_CONVERSAZIONE = "Messaggio.trovaMessaggiInviatiConversazione";
+     * Nome della query per trovare i messaggi ricevuti da un accademico
+     */
+    public static final String TROVA_MESSAGGI_RICEVUTI = "Messaggio.trovaMessaggiRicevuti";
+
     /**
      * Nome della query per trovare i messaggi tra due specifici utenti.
      * */
@@ -86,20 +88,17 @@ public class Messaggio implements Serializable {
     private Accademico autore;
 
     /**
-     * Conversazione a cui appartiene il messaggio.
-     * */
-    @ManyToOne
-    @JoinColumn(name = "conversazione_id")
-    private Conversazione conversazione;
-
-    /**
      * Destinatario del messaggio. E' un riferimento a un oggetto di tipo Accademico.
      * */
     @ManyToOne
     @JoinColumn(name = "destinatario")
     private Accademico destinatario;
 
-    @ManyToOne
+    /**
+     * Topic del messaggio eventuale.
+     */
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "topic")
     private Topic topic;
 
@@ -215,6 +214,15 @@ public class Messaggio implements Serializable {
      * */
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    /**
+     * Restituisce l'id del messaggio
+     *
+     * @return L'id
+     */
+    public Long getId() {
+        return id;
     }
 
     /**

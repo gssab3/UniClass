@@ -16,11 +16,25 @@ public class AccademicoService {
 
     public AccademicoService() {
         try {
+            System.out.println(" ATTENZIONE: Sto facendo la lookup JNDI del DAO! ");
             InitialContext ctx = new InitialContext();
             accademicoDao = (AccademicoRemote) ctx.lookup("java:global/UniClass/AccademicoDAO");
         }
         catch(NamingException e) {
             throw new RuntimeException("Errore durante il lookup di AccademicoDAO", e);
+        }
+    }
+
+    public AccademicoService(AccademicoRemote academicDao) {
+        if (academicDao == null) {
+            try {
+                InitialContext ctx = new InitialContext();
+                this.accademicoDao = (AccademicoRemote) ctx.lookup("java:global/UniClass/AcademicDAO");
+            } catch (NamingException e) {
+                throw new RuntimeException("Error during AcademicDAO lookup", e);
+            }
+        } else {
+            this.accademicoDao = academicDao;
         }
     }
 

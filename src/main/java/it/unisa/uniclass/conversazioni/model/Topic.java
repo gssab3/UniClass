@@ -4,6 +4,9 @@ import it.unisa.uniclass.orari.model.Corso;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+import java.util.List;
+
 import static it.unisa.uniclass.conversazioni.model.Topic.*;
 
 @Entity
@@ -15,7 +18,7 @@ import static it.unisa.uniclass.conversazioni.model.Topic.*;
         @NamedQuery(name = TROVA_CORSO, query = "SELECT t FROM Topic t WHERE t.corso.nome = :nome"),
         @NamedQuery(name = TROVA_TUTTI, query = "SELECT t FROM Topic t")
 })
-public class Topic {
+public class Topic implements Serializable {
 
     public static final String TROVA_ID = "Topic.trovaId";
     public static final String TROVA_NOME = "Topic.trovaNome";
@@ -36,6 +39,9 @@ public class Topic {
     @ManyToOne
     @JoinColumn(name = "corso_id", nullable = true)
     private Corso corso; // Nullable se il topic è per un corso di laurea.
+
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
+    private List<Messaggio> messaggi;
 
     public String getNome() {
         return nome;

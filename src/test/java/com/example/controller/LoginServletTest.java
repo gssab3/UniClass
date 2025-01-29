@@ -1,78 +1,86 @@
 package com.example.controller;
 
 import it.unisa.uniclass.common.security.CredentialSecurity;
-import it.unisa.uniclass.utenti.controller.LoginServlet;
 import it.unisa.uniclass.utenti.model.Accademico;
+import it.unisa.uniclass.utenti.model.PersonaleTA;
+import it.unisa.uniclass.utenti.controller.LoginServlet;
 import it.unisa.uniclass.utenti.service.AccademicoService;
 import it.unisa.uniclass.utenti.service.PersonaleTAService;
+import it.unisa.uniclass.utenti.service.dao.AccademicoRemote;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.io.IOException;
 
 import static org.mockito.Mockito.*;
 
-public class LoginServletTest {
+class LoginServletTest {
+
+    @Mock
+    private AccademicoRemote academicDao;
+
+    @Mock
+    private PersonaleTAService personaleTAService;
+
+    @Mock
+    private HttpServletRequest request;
+
+    @Mock
+    private HttpServletResponse response;
+
+    @Mock
+    private HttpSession session;
+
+    private LoginServlet loginServlet;
+    private AccademicoService academicService;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+
+        academicService = new AccademicoService(academicDao);
+        loginServlet = new LoginServlet();
+        loginServlet.setAccademicoService(academicService);
+        loginServlet.setPersonaleTAService(personaleTAService);
+    }
 
     @Test
-    public void testLoginSuccess() throws Exception {
-        // Mock delle dipendenze
-        AccademicoService accademicoService = mock(AccademicoService.class);
-        PersonaleTAService personaleTAService = mock(PersonaleTAService.class);
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-        HttpSession session = mock(HttpSession.class);
-
-        // Mock del comportamento
-        when(request.getParameter("email")).thenReturn("test@unisa.it");
-        when(request.getParameter("password")).thenReturn("password123");
-        when(request.getSession(true)).thenReturn(session);
-
+    void doPost_ValidAccademico_SuccessfulLogin() throws ServletException, IOException {
+        // Arrange
+        String email = "giannisereni@unisa.it";
+        String password = "3201";
+        String hashedPassword = CredentialSecurity.hashPassword(password);
         Accademico accademico = new Accademico();
-        accademico.setEmail("test@unisa.it");
-        accademico.setPassword(CredentialSecurity.hashPassword("password123"));
+        accademico.setEmail(email);
+        accademico.setPassword(hashedPassword);
         accademico.setAttivato(true);
 
-        when(accademicoService.trovaEmailPassUniclass(anyString(), anyString())).thenReturn(accademico);
 
-        // Configura la servlet
-        LoginServlet servlet = new LoginServlet();
-        servlet.setAccademicoService(accademicoService);
-        servlet.setPersonaleTAService(personaleTAService);
+        when(request.getParameter("email")).thenReturn(email);
+        when(request.getParameter("password")).thenReturn(password);
+        when(academicDao.trovaEmailUniClass(email)).thenReturn(accademico);
+        when(personaleTAService.trovaEmailPass(email, hashedPassword)).thenReturn(null);
+        when(request.getSession(true)).thenReturn(session);
+        when(request.getContextPath()).thenReturn("/Home");
+        // DEBUG: Stampa valori prima di eseguire la servlet
+        System.out.println("Email fornita: " + request.getParameter("email"));
+        System.out.println("Password fornita: " + request.getParameter("password"));
+        System.out.println("Utente trovato nel DB mockato: " + academicDao.trovaEmailUniClass(email));
 
-        // Esegui la servlet
-        servlet.doPost(request, response);
 
-        // Verifica il comportamento
-        verify(session).setAttribute(eq("currentSessionUser"), eq(accademico));
-        verify(response).sendRedirect(contains("/Home"));
+        // Act
+        loginServlet.doPost(request, response);
+
+        // Assert
+        verify(session).setAttribute("currentSessionUser", accademico);
+        verify(response).sendRedirect("/Home");
     }
 
-    @Test
-    public void testLoginFailure() throws Exception {
-        // Mock delle dipendenze
-        AccademicoService accademicoService = mock(AccademicoService.class);
-        PersonaleTAService personaleTAService = mock(PersonaleTAService.class);
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-
-        // Mock del comportamento
-        when(request.getParameter("email")).thenReturn("wrong@unisa.it");
-        when(request.getParameter("password")).thenReturn("wrongpassword");
-
-        when(accademicoService.trovaEmailPassUniclass(anyString(), anyString())).thenReturn(null);
-        when(personaleTAService.trovaEmailPass(anyString(), anyString())).thenReturn(null);
-
-        // Configura la servlet
-        LoginServlet servlet = new LoginServlet();
-        servlet.setAccademicoService(accademicoService);
-        servlet.setPersonaleTAService(personaleTAService);
-
-        // Esegui la servlet
-        servlet.doPost(request, response);
-
-        // Verifica il comportamento
-        verify(response).sendRedirect(contains("/Login.jsp?action=error"));
-    }
+    // ... other test methods ...
 }

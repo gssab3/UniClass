@@ -49,7 +49,13 @@ public class TopicDAO implements TopicRemote {
 
     @Override
     public void aggiungiTopic(Topic topic) {
-        emUniClass.merge(topic);
+        if(topic.getId() == null) {
+            emUniClass.persist(topic);
+        }
+        else {
+            emUniClass.merge(topic);
+        }
+        emUniClass.flush();
     }
 
     @Override

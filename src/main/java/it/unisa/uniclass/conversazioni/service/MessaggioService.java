@@ -1,12 +1,13 @@
 package it.unisa.uniclass.conversazioni.service;
 
-import it.unisa.uniclass.conversazioni.model.Conversazione;
 import it.unisa.uniclass.conversazioni.model.Messaggio;
 import it.unisa.uniclass.conversazioni.model.Topic;
 import it.unisa.uniclass.conversazioni.service.dao.MessaggioRemote;
 import it.unisa.uniclass.utenti.model.Accademico;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.NoResultException;
+import java.util.List;
+import java.util.ArrayList;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -42,12 +43,12 @@ public class MessaggioService {
         return messaggioDao.trovaMessaggiInviati(matricola);
     }
 
-    public List<Messaggio> trovaMessaggiInviatiConversazione(String matricola, long id) {
-        return messaggioDao.trovaMessaggiInviatiConversazione(matricola, id);
+    public List<Messaggio> trovaMessaggiRicevuti(String matricola) {
+        return messaggioDao.trovaMessaggiRicevuti(matricola);
     }
 
-    public List<Messaggio> trovaMessaggeri(String matricola1, String matricola2) {
-        return messaggioDao.trovaMessaggeri(matricola1, matricola2);
+    public List<Messaggio> trovaMessaggi(String matricola1, String matricola2) {
+        return messaggioDao.trovaMessaggi(matricola1, matricola2);
     }
 
     public List<Messaggio> trovaTutti() {
@@ -66,26 +67,24 @@ public class MessaggioService {
         return messaggioDao.trovaMessaggiData(dateTime);
     }
 
+    public List<Accademico> trovaMessaggeriDiUnAccademico(String matricola) {
+        List<Messaggio> messaggi = messaggioDao.trovaMessaggiRicevuti(matricola);
+        List<Accademico> accademici = new ArrayList<>();
+        for(Messaggio messaggio : messaggi) {
+            accademici.add(messaggio.getDestinatario());
+        }
+        return accademici;
+    }
+
     public List<Messaggio> trovaTopic(Topic topic) {
         return messaggioDao.trovaTopic(topic);
     }
 
-    public List<Messaggio> trovaMessaggiConversazione(Conversazione conversazione) {
-        List<Messaggio> results = new java.util.ArrayList<>(List.of());
-        if (conversazione != null) {
-            List<Accademico> accademiciMessaggeri = (List<Accademico>) conversazione.getMessaggeri();
-            for(Accademico acc : accademiciMessaggeri) {
-                results.addAll(trovaMessaggiInviatiConversazione(acc.getMatricola(),conversazione.getId()));
-            }
-            results.sort(Comparator.comparing(Messaggio::getDateTime));
-        }
-        return results;
-    }
-
-    public void aggiungiMessaggio(Messaggio messaggio) {
+    public Messaggio aggiungiMessaggio(Messaggio messaggio) {
         if (messaggio != null) {
-            messaggioDao.aggiungiMessaggio(messaggio);
+            messaggio = messaggioDao.aggiungiMessaggio(messaggio);
         }
+        return messaggio;
     }
     public void rimuoviMessaggio(Messaggio messaggio) {
         if (messaggio != null) {
