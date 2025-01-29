@@ -30,14 +30,11 @@ class AttivaUtentiServletTest {
     private AttivaUtentiServlet servlet;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ServletException {
         MockitoAnnotations.openMocks(this);
-        servlet = new AttivaUtentiServlet() {
-            @Override
-            protected AccademicoService getAccademicoService() {
-                return accademicoService;
-            }
-        };
+        servlet = new AttivaUtentiServlet();
+        servlet.init();
+        servlet.setAccademicoService(accademicoService);
     }
 
     @Test
@@ -58,10 +55,14 @@ class AttivaUtentiServletTest {
         when(accademicoService.trovaAccademicoUniClass("12345")).thenReturn(accademico);
 
         // Act
-        servlet.doPost(request, response);
+        servlet.doPostPublic(request, response);
 
         // Assert
-        verify(accademicoService).aggiungiAccademico(any(Accademico.class));
+        verify(accademicoService).aggiungiAccademico(argThat(acc ->
+                acc.getEmail().equals("test@example.com") &&
+                        acc.getMatricola().equals("12345") &&
+                        acc.getTipo() == Tipo.Studente
+        ));
         verify(response).sendRedirect("/context/PersonaleTA/AttivaUtenti.jsp");
     }
 
@@ -88,7 +89,7 @@ class AttivaUtentiServletTest {
         when(accademicoService.trovaAccademicoUniClass("12345")).thenReturn(accademico2);
 
         // Act
-        servlet.doPost(request, response);
+        servlet.doPostPublic(request, response);
 
         // Assert
         verify(accademicoService, never()).aggiungiAccademico(any(Accademico.class));
@@ -108,7 +109,7 @@ class AttivaUtentiServletTest {
         when(accademicoService.trovaEmailUniClass("test@example.com")).thenReturn(accademico);
 
         // Act
-        servlet.doPost(request, response);
+        servlet.doPostPublic(request, response);
 
         // Assert
         verify(accademicoService).cambiaAttivazione(accademico, false);
