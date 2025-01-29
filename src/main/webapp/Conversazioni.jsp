@@ -7,6 +7,7 @@
 <%@ page import="it.unisa.uniclass.utenti.model.Accademico" %>
 <%@ page import="it.unisa.uniclass.utenti.service.AccademicoService" %>
 <%@ page import="it.unisa.uniclass.conversazioni.model.Messaggio" %>
+<%@ page import="java.util.ArrayList" %>
 
 <%
   /* Sessione HTTP */
@@ -37,16 +38,13 @@
   Accademico accademicoSelf = (Accademico) request.getAttribute("accademicoSelf");
 
   AccademicoService accademicoService = new AccademicoService();
-  List<Accademico> accademici = (List<Accademico>) request.getAttribute("accademici");
-  List<Messaggio> messaggi = (List<Messaggio>) request.getAttribute("messaggi");
 
-  List<Messaggio> messaggiInviati;
-  List<Messaggio> messaggiRicevuti;
+
   List<Accademico> accademiciConversazione;
+  List<Messaggio> messaggi = new ArrayList<Messaggio>();
 
   if (tipoUtente == Tipo.Docente || tipoUtente == Tipo.Studente || tipoUtente == Tipo.Coordinatore) {
-    messaggiInviati = (List<Messaggio>) request.getAttribute("messaggiInviati");
-    messaggiRicevuti = (List<Messaggio>) request.getAttribute("messaggiRicevuti");
+     messaggi = (List<Messaggio>) request.getAttribute("messaggi");
   }
 %>
 
@@ -117,23 +115,19 @@
 
 <jsp:include page="header.jsp"/>
 
-//fare retrieve delle conversazioni dell'utente'
-
-
-<%if(messaggi.isEmpty()){ %>
-
-si
-
-  <% } %>
-
-
-
 
   <div class="mega-container">
     <h1>Conversazioni</h1>
       <div class="conversations-container">
         <%
-          for(Accademico accademico: accademici){%>
+          for(Messaggio m: messaggi){
+            Accademico accademico = new Accademico();
+            if(m.getDestinatario().getEmail().equals(accademicoSelf.getEmail())){
+              accademico = m.getAutore();
+            }else if(m.getAutore().getEmail().equals(accademicoSelf.getEmail())){
+              accademico = m.getDestinatario();
+            }
+        %>
         <a href="chatServlet?accademico=<%=accademico.getEmail()%>&accademicoSelf=<%=accademicoSelf.getEmail()%>" class="conversation">
           <%    if(accademico.getTipo().equals(Tipo.Studente)){ %>
           <div class="profile-picture">

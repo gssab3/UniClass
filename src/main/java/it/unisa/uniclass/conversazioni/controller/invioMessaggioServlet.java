@@ -65,9 +65,12 @@ public class invioMessaggioServlet extends HttpServlet {
             messaggio1.setTopic(top);
         }
         Messaggio test = messaggioService.aggiungiMessaggio(messaggio1);
+        test.getId();
         System.out.println(test + "\n\n nella servlet");
-        List<Messaggio> messaggi = messaggioService.trovaMessaggi(accademicoSelf.getMatricola(), accademicoDest.getMatricola());
+        List<Messaggio> messaggi = messaggioService.trovaTutti();
         System.out.println(messaggi);
+
+
         request.setAttribute("messaggi", messaggi);
         request.setAttribute("accademici", messaggioService.trovaMessaggeriDiUnAccademico(accademicoSelf.getMatricola()));
         response.sendRedirect("Conversazioni");

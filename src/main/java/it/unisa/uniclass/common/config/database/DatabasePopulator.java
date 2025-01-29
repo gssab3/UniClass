@@ -152,7 +152,7 @@ public class DatabasePopulator {
         docente3.setIscrizione(LocalDate.now());
         docente3.setMatricola("0512111101");
         docente3.setDataNascita(LocalDate.of(1990,1,10));
-        docente3.setPassword(CredentialSecurity.hashPassword("2222"));
+        docente3.setPassword(CredentialSecurity.hashPassword("2222WxY$"));
         docente3.setTipo(Tipo.Docente);
         docente3.getCorsi().add(corso3);
         docente3.setEmail("giacomoporetti@unisa.it");
