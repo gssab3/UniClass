@@ -50,6 +50,8 @@
         }
     }
 
+
+
 %>
 
 <!DOCTYPE html>
@@ -189,7 +191,7 @@
             <li id="dataNascita"><%= coordinatore.getDataNascita() %></li>
             <li id="matricola"><%= coordinatore.getMatricola() %></li>
             <li id="email"><%= coordinatore.getEmail() %></li>
-            <li id="corsoLaurea"><%= coordinatore.getCorsoLaurea().getNome() %></li>
+            <li id="corsoLaurea"><%= coordinatore.getCorsoLaurea().getNome()     %></li>
             <li id="dataIscrizione"><%= coordinatore.getIscrizione() %></li>
             <li id="corsiInsegnati:"><%= "Corsi Insegnati: " + docente.getCorsi() %></li>
         </ul>

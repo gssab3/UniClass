@@ -33,13 +33,16 @@
 
             <form action="Login" class="loginform" method="POST" onsubmit="return validateForm()">
 
-                <div id="error" class="error"></div>
 
-                <% if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("error") ){ %>
+                <div id="error" class="error">
+
+                </div>
+
+                <% if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("error")){ %>
                 <div class="tableRow">
                     <p class="error">email o password errati!</p>
                 </div>
-                <% } else if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("notactivated") ) { %>
+                <% } else if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("notactivated")) { %>
                 <div class="tableRow">
                     <p class="error">Il tuo Account non è ancora stato attivato!</p>
                     <p class="error">Riceverai le credenziali di accesso quando il tuo account sarà attivo.</p>
@@ -80,7 +83,17 @@
     </div>
 </div>
 
+<script>
+    const errorMessage = sessionStorage.getItem("loginError");
+    if (errorMessage) {
+        console.log(errorMessage);
 
+        document.getElementById("error").innerText = errorMessage;
+        document.getElementById("error").classList.add("error");
+
+        sessionStorage.removeItem("loginError");
+    }
+</script>
 
 </body>
 </html>

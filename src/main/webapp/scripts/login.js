@@ -27,13 +27,13 @@ function validateForm() {
         errorMessage += 'La password non può essere più lunga di 20 caratteri.\n';
     }
 
-    /*
+
     if (errorMessage !== '') {
-        const errorContainer = document.getElementById("error");
-        errorContainer.innerText = errorMessage;
-        errorContainer.classList.add("error");
+        sessionStorage.setItem("loginError", errorMessage);
+        window.location.href = window.location.pathname + "?action=errorFormat";
+
         return false;
-    } */
+    }
 
     return true;
 }
