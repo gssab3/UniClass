@@ -23,15 +23,17 @@ public class AttivaUtentiServlet extends HttpServlet {
 
     private AccademicoService accademicoService;
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        this.accademicoService = new AccademicoService();
-    }
-
     // This method is added for testing purposes
     public void setAccademicoService(AccademicoService accademicoService) {
         this.accademicoService = accademicoService;
+    }
+
+    public AttivaUtentiServlet() {
+        accademicoService = new AccademicoService();
+    }
+
+    public AttivaUtentiServlet(AccademicoService acc) {
+        accademicoService = acc;
     }
 
     // This method is added for testing purposes

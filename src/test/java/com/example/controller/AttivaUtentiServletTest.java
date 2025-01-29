@@ -4,9 +4,11 @@ import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.model.Tipo;
 import it.unisa.uniclass.utenti.service.AccademicoService;
 import it.unisa.uniclass.utenti.controller.AttivaUtentiServlet;
+import it.unisa.uniclass.utenti.service.dao.AccademicoRemote;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -27,14 +29,15 @@ class AttivaUtentiServletTest {
     @Mock
     private AccademicoService accademicoService;
 
+    @Mock
+    private HttpSession session;
+
     private AttivaUtentiServlet servlet;
 
     @BeforeEach
     void setUp() throws ServletException {
         MockitoAnnotations.openMocks(this);
-        servlet = new AttivaUtentiServlet();
-        servlet.init();
-        servlet.setAccademicoService(accademicoService);
+        servlet = new AttivaUtentiServlet(accademicoService);
     }
 
     @Test
