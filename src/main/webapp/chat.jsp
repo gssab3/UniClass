@@ -4,8 +4,6 @@
 <%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
 <%@ page import="java.util.List" %>
 <%@ page import="it.unisa.uniclass.conversazioni.model.Messaggio" %>
-<%@ page import="it.unisa.uniclass.conversazioni.service.ConversazioneService" %>
-<%@ page import="it.unisa.uniclass.conversazioni.model.Conversazione" %>
 <%@ page import="it.unisa.uniclass.utenti.model.Accademico" %>
 <%@ page import="it.unisa.uniclass.utenti.service.AccademicoService" %>
 
@@ -17,7 +15,7 @@
 
     /* controllo tipo utente*/
 
-    Tipo tipoUtente;
+    Tipo tipoUtente = null;
     if(user != null && ((user.getTipo() != Tipo.Docente) && (user.getTipo() != Tipo.Coordinatore) && (user.getTipo()) != Tipo.Studente))
         tipoUtente = (Tipo) user.getTipo();
     else if (user != null && (user.getTipo() == Tipo.PersonaleTA))
@@ -28,20 +26,19 @@
     Long id = (Long) request.getAttribute("id");
     String email = (String) request.getAttribute("email");
 
-
-
-    Conversazione conversazione = (Conversazione) request.getAttribute("conversazione");
-
-
     Accademico accademico = (Accademico) request.getAttribute("accademico");
     Accademico accademicoSelf = (Accademico) request.getAttribute("accademicoSelf");
 
 
 
-    List<Messaggio> messaggi = List.of();
+    List<Messaggio> messaggi;
+    List<Messaggio> messaggiInviati;
+    List<Messaggio> messaggiRicevuti;
 
     if (tipoUtente == Tipo.Docente || tipoUtente == Tipo.Studente || tipoUtente == Tipo.Coordinatore){
          messaggi = (List<Messaggio>) request.getAttribute("messaggi");
+         messaggiInviati = (List<Messaggio>) request.getAttribute("messaggiInviati");
+         messaggiRicevuti = (List<Messaggio>) request.getAttribute("messaggiRicevuti");
     }
 
 %>

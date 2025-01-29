@@ -1,6 +1,5 @@
 package it.unisa.uniclass.utenti.model;
 
-import it.unisa.uniclass.conversazioni.model.Conversazione;
 import it.unisa.uniclass.conversazioni.model.Messaggio;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
 import jakarta.persistence.*;
@@ -59,9 +58,6 @@ public class Accademico extends Utente implements Serializable {
 
 
     protected boolean attivato = false;
-
-    @ManyToMany(mappedBy = "messaggeri")
-    private Set<Conversazione> conversazioni = new HashSet<>();
 
     /** Relazione unidirezionale {@code @OneToMany}, con cascata totale e rimoazione orfana
      * */
@@ -155,23 +151,6 @@ public class Accademico extends Utente implements Serializable {
         this.matricola = matricola;
     }
 
-    /**
-     * Restituisce le conversazioni a cui l'accademico partecipa.
-     *
-     * @return un {@link Set} di {@link Conversazione}.
-     * */
-    public Set<Conversazione> getConversazioni() {
-        return conversazioni;
-    }
-
-    /**
-     * Imposta le conversazioni a cui l'accademico partecipa.
-     *
-     * @param conversazioni il nuovo set di conversazioni
-     * */
-    public void setConversazioni(Set<Conversazione> conversazioni) {
-        this.conversazioni = conversazioni;
-    }
 
     /**
      * Restituisce i messaggi inviati all'accademico.

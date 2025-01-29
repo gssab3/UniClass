@@ -4,11 +4,9 @@
 <%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
 <%@ page import="java.util.List" %>
 <%@ page import="it.unisa.uniclass.orari.service.dao.CorsoLaureaDAO" %>
-<%@ page import="it.unisa.uniclass.conversazioni.model.Conversazione" %>
 <%@ page import="it.unisa.uniclass.utenti.model.Accademico" %>
-<%@ page import="it.unisa.uniclass.conversazioni.service.ConversazioneService" %>
 <%@ page import="it.unisa.uniclass.utenti.service.AccademicoService" %>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="it.unisa.uniclass.conversazioni.model.Messaggio" %>
 
 <%
   /* Sessione HTTP */
@@ -40,13 +38,15 @@
 
   AccademicoService accademicoService = new AccademicoService();
   List<Accademico> accademici = (List<Accademico>) request.getAttribute("accademici");
+  List<Messaggio> messaggi = (List<Messaggio>) request.getAttribute("messaggi");
 
-  ConversazioneService conversazioneService = new ConversazioneService();
-  List<Conversazione> conversazioni = new ArrayList<Conversazione>();
-
+  List<Messaggio> messaggiInviati;
+  List<Messaggio> messaggiRicevuti;
+  List<Accademico> accademiciConversazione;
 
   if (tipoUtente == Tipo.Docente || tipoUtente == Tipo.Studente || tipoUtente == Tipo.Coordinatore) {
-    conversazioni = (List<Conversazione>) request.getAttribute("conversazioni");
+    messaggiInviati = (List<Messaggio>) request.getAttribute("messaggiInviati");
+    messaggiRicevuti = (List<Messaggio>) request.getAttribute("messaggiRicevuti");
   }
 %>
 
@@ -120,7 +120,7 @@
 //fare retrieve delle conversazioni dell'utente'
 
 
-<%if(accademici.isEmpty()){ %>
+<%if(messaggi.isEmpty()){ %>
 
 si
 

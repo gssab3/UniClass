@@ -1,9 +1,8 @@
 package it.unisa.uniclass.conversazioni.controller;
-
-import it.unisa.uniclass.conversazioni.model.Conversazione;
 import it.unisa.uniclass.conversazioni.model.Messaggio;
 import it.unisa.uniclass.conversazioni.model.Topic;
-import it.unisa.uniclass.conversazioni.service.ConversazioneService;
+import it.unisa.uniclass.conversazioni.service.MessaggioService;
+import it.unisa.uniclass.conversazioni.service.dao.MessaggioDAO;
 import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.service.AccademicoService;
 import jakarta.ejb.EJB;
@@ -25,7 +24,10 @@ import java.util.Set;
 public class invioMessaggioServlet extends HttpServlet {
 
     @EJB
-    private ConversazioneService conversazioneService;
+    private MessaggioService messaggioService;
+
+    @EJB
+    private AccademicoService accademicoService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,8 +45,6 @@ public class invioMessaggioServlet extends HttpServlet {
         //Topic da inviare quando ci si trova nel lato Docente/Coordinatore e c'è un topic inviato
         String topic = (String) request.getParameter("topic");
 
-
-        AccademicoService accademicoService = new AccademicoService();
         Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSession);
         Accademico accademicoDest = accademicoService.trovaEmailUniClass(emailDest);
 
@@ -54,59 +54,22 @@ public class invioMessaggioServlet extends HttpServlet {
             top.setCorsoLaurea(accademicoSelf.getCorsoLaurea());
         }
 
-        Conversazione conversazione;
-
-        System.out.println(conversazioneService.trovaConversazioneDueAccademici(accademicoDest, accademicoSelf));
-
-        if(conversazioneService.trovaConversazioneDueAccademici(accademicoDest, accademicoSelf) == null) {
-            Set<Accademico> messaggeri = new HashSet<>();
-            messaggeri.add(accademicoSelf);
-            messaggeri.add(accademicoDest);
-
-            conversazione = new Conversazione();
-            conversazione.setMessaggeri(messaggeri);
-
-            Messaggio messaggio1 = new Messaggio();
-            messaggio1.setAutore(accademicoSelf);
-            messaggio1.setDestinatario(accademicoDest);
-            messaggio1.setBody(messaggio);
-            messaggio1.setDateTime(LocalDateTime.now());
-            if(topic != null) {
-                messaggio1.setTopic(top);
-            }
-
-            conversazioneService.aggiungiConversazione(conversazione);
 
 
-
-            messaggio1.setConversazione(conversazione);
-            conversazione.getMessaggi().add(messaggio1);
-            conversazioneService.aggiungiConversazione(conversazione);
-
+        Messaggio messaggio1 = new Messaggio();
+        messaggio1.setAutore(accademicoSelf);
+        messaggio1.setDestinatario(accademicoDest);
+        messaggio1.setBody(messaggio);
+        messaggio1.setDateTime(LocalDateTime.now());
+        if(topic != null) {
+            messaggio1.setTopic(top);
         }
-        else {
-            conversazione = conversazioneService.trovaConversazioneDueAccademici(accademicoDest, accademicoSelf);
-            System.out.println(conversazione.getId());
-            Messaggio messaggio1 = new Messaggio();
-            messaggio1.setAutore(accademicoSelf);
-            messaggio1.setDestinatario(accademicoDest);
-            messaggio1.setBody(messaggio);
-            messaggio1.setDateTime(LocalDateTime.now());
-            if(topic != null) {
-                messaggio1.setTopic(top);
-            }
-            messaggio1.setConversazione(conversazione);
-            conversazione.getMessaggi().add(messaggio1);
-            conversazioneService.aggiungiConversazione(conversazione);
-        }
-
-        List<Conversazione> conversazioni = conversazioneService.trovaConversazioneAccademico(accademicoSelf);
-        List<Accademico> accademicoConv = conversazioneService.trovaAccademiciConversazione(accademicoSelf);
-
-        System.out.println(conversazioni);
-
-        request.setAttribute("conversazioni", conversazioni);
-        request.setAttribute("accademici", accademicoConv);
+        Messaggio test = messaggioService.aggiungiMessaggio(messaggio1);
+        System.out.println(test + "\n\n nella servlet");
+        List<Messaggio> messaggi = messaggioService.trovaMessaggi(accademicoSelf.getMatricola(), accademicoDest.getMatricola());
+        System.out.println(messaggi);
+        request.setAttribute("messaggi", messaggi);
+        request.setAttribute("accademici", messaggioService.trovaMessaggeriDiUnAccademico(accademicoSelf.getMatricola()));
         response.sendRedirect("Conversazioni");
 
     }
