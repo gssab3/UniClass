@@ -1,6 +1,5 @@
 package it.unisa.uniclass.orari.model;
 
-import it.unisa.uniclass.esami.model.Appello;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -57,12 +56,6 @@ public class Aula implements Serializable {
      * */
     @OneToMany(mappedBy = "aula", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Lezione> lezioni = new ArrayList<>();
-
-    /**
-     * Elenco degli appelli associati all'aula
-     * */
-    @OneToMany(mappedBy = "aula", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Appello> appelli = new ArrayList<>();
 
     /**
      * Edificio in cui si trova l'Aula

@@ -47,8 +47,6 @@
     <ul id="menu">
         <li id="aule"><a href="${pageContext.request.contextPath}/aula.jsp">Aule</a>
         </li>
-        <li id="appelli"><a href="servelt">Appelli</a>
-        </li>
         <li id="gutenti"><a href="AttivaUtenti.jsp">Gestione Utenti</a>
         </li>
         <li id="mappa"><a href="${pageContext.request.contextPath}/mappa.jsp">Mappa</a>

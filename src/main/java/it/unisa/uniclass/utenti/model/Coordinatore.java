@@ -69,6 +69,5 @@ public class Coordinatore extends Docente implements Serializable {
         this.iscrizione = iscrizione;
         this.corsoLaurea = corsoLaurea;
         this.dipartimento = dipartimento;
-        appelloDocenti = new ArrayList<>();
     }
 }

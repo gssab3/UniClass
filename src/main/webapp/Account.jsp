@@ -76,10 +76,6 @@
     <ul id="menu">
         <li id="aule"><a href="aula.jsp">Aule</a>
         </li>
-        <li id="agenda"><a href="servelt">Agenda</a>
-        </li>
-        <li id="appelli"><a href="servelt">Appelli</a>
-        </li>
         <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
         </li>
         <li id="mappa"><a href="mappa.jsp">Mappa</a>
@@ -98,8 +94,6 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
     <p>Menu<p>
     <li id="aule"><a href="aula.jsp">Aule</a>
-    </li>
-    <li id="appelli"><a href="servelt">Appelli</a>
     </li>
     <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
     </li>
@@ -121,8 +115,6 @@
     <p>Menu<p>
     <ul id="menu">
         <li id="aule"><a href="aula.jsp">Aule</a>
-        </li>
-        <li id="appelli"><a href="servelt">Appelli</a>
         </li>
         <li id="gutenti"><a href="PersonaleTA/AttivaUtenti.jsp">Gestione Utenti</a>
         </li>
@@ -149,11 +141,11 @@
             <%} %>
             <li id="nome"><%= studente.getNome() %></li>
             <li id="cognome"><%= studente.getCognome() %></li>
-            <li id="dataNascita"><%= studente.getDataNascita() %></li>
+            <li id="dataNascita">Data di nascita: <%= studente.getDataNascita() %></li>
             <li id="matricola"><%= studente.getMatricola() %></li>
             <li id="email"><%= studente.getEmail() %></li>
             <li id="corsoLaurea"><%= studente.getCorsoLaurea().getNome()%></li>
-            <li id="dataIscrizione"><%= studente.getIscrizione() %></li>
+            <li id="dataIscrizione">Data di iscrizione: <%= studente.getIscrizione() %></li>
         </ul>
         <form action="LogoutServlet" method="post">
             <button type="submit" class="logout-button">Logout</button>
@@ -168,12 +160,12 @@
             <%}%>
             <li id="nome"><%= docente.getNome() %></li>
             <li id="cognome"><%= docente.getCognome() %></li>
-            <li id="dataNascita"><%= docente.getDataNascita() %></li>
+            <li id="dataNascita">Data di nascita: <%= docente.getDataNascita() %></li>
             <li id="matricola"><%= docente.getMatricola() %></li>
             <li id="email"><%= docente.getEmail() %></li>
             <li id="corsoLaurea"><%= docente.getCorsoLaurea().getNome() %></li>
-            <li id="dataIscrizione"><%= docente.getIscrizione() %></li>
-            <li id="corsiInsegnati:"><%= "Corsi Insegnati: " + docente.getCorsi() %></li>
+            <li id="dataIscrizione">Data di iscrizione: <%= docente.getIscrizione() %></li>
+            <!-- <li id="corsiInsegnati:"><%= "Corsi Insegnati: " + docente.getCorsi() %></li> -->
         </ul>
         <form action="LogoutServlet" method="post">
             <button type="submit" class="logout-button">Logout</button>
@@ -188,12 +180,12 @@
             <%}%>
             <li id="nome"><%= coordinatore.getNome() %></li>
             <li id="cognome"><%= coordinatore.getCognome() %></li>
-            <li id="dataNascita"><%= coordinatore.getDataNascita() %></li>
+            <li id="dataNascita">Data di nascita: <%= coordinatore.getDataNascita() %></li>
             <li id="matricola"><%= coordinatore.getMatricola() %></li>
             <li id="email"><%= coordinatore.getEmail() %></li>
             <li id="corsoLaurea"><%= coordinatore.getCorsoLaurea().getNome()     %></li>
-            <li id="dataIscrizione"><%= coordinatore.getIscrizione() %></li>
-            <li id="corsiInsegnati:"><%= "Corsi Insegnati: " + docente.getCorsi() %></li>
+            <li id="dataIscrizione">Data di iscrizione alla piattaforma: <%= coordinatore.getIscrizione() %></li>
+            <!-- <li id="corsiInsegnati:"><%= "Corsi Insegnati: " + docente.getCorsi() %></li> -->
         </ul>
         <form action="LogoutServlet" method="post">
             <button type="submit" class="logout-button">Logout</button>

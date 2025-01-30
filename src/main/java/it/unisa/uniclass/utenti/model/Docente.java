@@ -1,6 +1,5 @@
 package it.unisa.uniclass.utenti.model;
 
-import it.unisa.uniclass.esami.model.AppelloDocente;
 import it.unisa.uniclass.orari.model.Corso;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
 import it.unisa.uniclass.orari.model.Lezione;
@@ -72,9 +71,6 @@ public class Docente extends Accademico implements Serializable {
      * */
     protected String dipartimento;
 
-    @OneToMany(mappedBy = "docente", cascade = CascadeType.ALL, orphanRemoval = true)
-    protected List<AppelloDocente> appelloDocenti = new ArrayList<>();
-
     /**
      * Costruttore parametrico della classe Docente
      * */
@@ -90,14 +86,12 @@ public class Docente extends Accademico implements Serializable {
         this.iscrizione = iscrizione;
         this.corsoLaurea = corsoLaurea;
         this.dipartimento = dipartimento;
-        appelloDocenti = new ArrayList<>();
     }
 
     /**
      * Costruttore di default della classe Docente
      * */
     public Docente() {
-        appelloDocenti = new ArrayList<>();
         corsi = new ArrayList<>();
         tipo = Tipo.Docente;
     }
@@ -108,24 +102,6 @@ public class Docente extends Accademico implements Serializable {
 
     public void setLezioni(List<Lezione> lezioni) {
         this.lezioni = lezioni;
-    }
-
-    /**
-     * Restituisce la lista di appelli associati al docente.
-     *
-     * @return Lista di {@link AppelloDocente}
-     * */
-    public List<AppelloDocente> getAppelloDocenti() {
-        return appelloDocenti;
-    }
-
-    /**
-     * Imposta la lista di appelli associati al docente.
-     *
-     * @param appelloDocenti Lista di {@link AppelloDocente}.
-     * */
-    public void setAppelloDocenti(List<AppelloDocente> appelloDocenti) {
-        this.appelloDocenti = appelloDocenti;
     }
 
     /**
