@@ -1,14 +1,8 @@
 /* General Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
-  display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -16,13 +10,16 @@ body {
 
 /* Chat Container */
 .chat-container {
-  width: 360px;
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   height: 500px;
+  width: 50%;
+  margin: auto;
+  margin-top: 3%;
+
 }
 
 /* Chat Header */
@@ -62,7 +59,7 @@ body {
 }
 
 .message.author .message-text {
-  background-color: #ddd;
+  background-color: #24d949;
   color: black;
   align-self: flex-end;
 }

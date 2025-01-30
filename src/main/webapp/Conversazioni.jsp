@@ -156,6 +156,7 @@
       <label for="email" class="form-label">Seleziona un'email:</label>
       <select id="email" name="email" class="form-select">
         <!-- Le opzioni delle email verranno caricate tramite AJAX -->
+        <option value="tutti">Annuncio</option>`;
       </select>
 
       <br><br>
