@@ -1,4 +1,4 @@
-package com.example.dao;
+package it.unisa.uniclass.testing.dao;
 
 import it.unisa.uniclass.utenti.model.PersonaleTA;
 import it.unisa.uniclass.utenti.service.PersonaleTAService;

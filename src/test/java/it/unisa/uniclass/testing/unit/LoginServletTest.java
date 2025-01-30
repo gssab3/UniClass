@@ -49,7 +49,7 @@ Test Case 7          (Key = 2.2.2.2.)
  */
 
 
-package com.example.unit;
+package it.unisa.uniclass.testing.unit;
 
 import it.unisa.uniclass.common.security.CredentialSecurity;
 import it.unisa.uniclass.utenti.controller.LoginServlet;

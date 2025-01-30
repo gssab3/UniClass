@@ -71,7 +71,7 @@ Test Case 8          (Key = 2.2.2.2.1.2.)
    Associazione :  Errata
  */
 
-package com.example.unit;
+package it.unisa.uniclass.testing.unit;
 
 import it.unisa.uniclass.utenti.model.Docente;
 import it.unisa.uniclass.utenti.model.Studente;
