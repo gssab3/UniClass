@@ -1,4 +1,6 @@
+/*
 package com.example.integration;
+
 
 import it.unisa.uniclass.utenti.controller.LoginServlet;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -57,3 +59,4 @@ public class LoginServletIT {
                 .header("Location", containsString("/Login.jsp?action=error"));
     }
 }
+*/

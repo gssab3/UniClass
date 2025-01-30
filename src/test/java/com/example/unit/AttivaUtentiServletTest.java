@@ -360,7 +360,7 @@ class AttivaUtentiServletTest {
         boolean approvato;
         // Arrange
         when(request.getParameter("param")).thenReturn("add");
-        when(request.getParameter("email")).thenReturn("s.davanzostudenti.unisa.it");
+        when(request.getParameter("email")).thenReturn("s.davanzostudenti@uni");
         when(request.getParameter("matricola")).thenReturn("0512118330");
         when(request.getParameter("tipo")).thenReturn("Studente");
         when(request.getContextPath()).thenReturn("/UniClass");
@@ -523,7 +523,7 @@ class AttivaUtentiServletTest {
 
         // Arrange
         when(request.getParameter("param")).thenReturn("add");
-        when(request.getParameter("email")).thenReturn("s.davanzostudenti.unisa.it");
+        when(request.getParameter("email")).thenReturn("s.davanzostudenti@uni");
         when(request.getParameter("matricola")).thenReturn("0512117895");
         when(request.getParameter("tipo")).thenReturn("Studente");
         when(request.getContextPath()).thenReturn("/UniClass");
@@ -681,13 +681,13 @@ class AttivaUtentiServletTest {
 
     @Test
     void TC8_nothingGood() throws ServletException, IOException {
-        System.out.println("\nTest 7: Matricola ed email non formattati correttamente, non presenti di conseguenza");
+        System.out.println("\nTest 8: Matricola ed email non formattati correttamente, non presenti di conseguenza");
 
         boolean approvato;
 
         // Arrange
         when(request.getParameter("param")).thenReturn("add");
-        when(request.getParameter("email")).thenReturn("s.davanzostudenti.unisa.it");
+        when(request.getParameter("email")).thenReturn("s.davanzostudenti@uni");
         when(request.getParameter("matricola")).thenReturn("aaaaa");
         when(request.getParameter("tipo")).thenReturn("Studente");
         when(request.getContextPath()).thenReturn("/UniClass");
