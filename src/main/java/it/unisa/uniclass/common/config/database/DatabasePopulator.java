@@ -167,7 +167,7 @@ public class DatabasePopulator {
         docente1_1.setIscrizione(LocalDate.now());
         docente1_1.setMatricola("0512110033");
         docente1_1.setDataNascita(LocalDate.of(1977,4,20));
-        docente1_1.setPassword(CredentialSecurity.hashPassword("3333"));
+        docente1_1.setPassword(CredentialSecurity.hashPassword("3333WxY$"));
         docente1_1.setTipo(Tipo.Docente);
         docente1_1.getCorsi().add(corso1);
         docente1_1.setAttivato(true);

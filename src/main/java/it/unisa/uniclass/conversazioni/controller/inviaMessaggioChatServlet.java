@@ -1,11 +1,13 @@
 package it.unisa.uniclass.conversazioni.controller;
+
 import it.unisa.uniclass.conversazioni.model.Messaggio;
 import it.unisa.uniclass.conversazioni.model.Topic;
 import it.unisa.uniclass.conversazioni.service.MessaggioService;
-import it.unisa.uniclass.conversazioni.service.dao.MessaggioDAO;
 import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.service.AccademicoService;
 import jakarta.ejb.EJB;
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,14 +16,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-@WebServlet(name = "invioMessaggio", value = "/invioMessaggioServlet")
-public class invioMessaggioServlet extends HttpServlet {
+@WebServlet(name = "inviaMessaggioChat", value = "/inviaMessaggioChatServlet")
+public class inviaMessaggioChatServlet extends HttpServlet {
 
     @EJB
     private MessaggioService messaggioService;
@@ -33,49 +33,50 @@ public class invioMessaggioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        //Email attuale (autore del messaggio)
+        // Email attuale (autore del messaggio)
         String emailSession = (String) session.getAttribute("utenteEmail");
 
-        //Email di destinazione
-        String emailDest = request.getParameter("email");
+        // Email di destinazione
+        String emailDest = request.getParameter("emailInvio");
+        System.out.println("lo sto inviando a :" + emailDest);
 
-        //Messaggio da inviare quando ci si trova al di sotto in conversazioni
+        // Messaggio da inviare
         String messaggio = request.getParameter("testo");
 
-        //Topic da inviare quando ci si trova nel lato Docente/Coordinatore e c'è un topic inviato
-        String topic = (String) request.getParameter("topic");
+        System.out.println("guarda che mssaggio:" + messaggio);
 
-        System.out.println(topic);
 
         Accademico accademicoSelf = accademicoService.trovaEmailUniClass(emailSession);
         Accademico accademicoDest = accademicoService.trovaEmailUniClass(emailDest);
 
+
         Topic top = new Topic();
-        if(topic != null) {
-            top.setNome(topic);
-            top.setCorsoLaurea(accademicoSelf.getCorsoLaurea());
-        }
+        top.setCorsoLaurea(accademicoSelf.getCorsoLaurea());
+        top.setNome("VUOTO");
 
-
-
+        // Crea un nuovo messaggio
         Messaggio messaggio1 = new Messaggio();
         messaggio1.setAutore(accademicoSelf);
         messaggio1.setDestinatario(accademicoDest);
         messaggio1.setBody(messaggio);
         messaggio1.setDateTime(LocalDateTime.now());
-        if(topic != null) {
-            messaggio1.setTopic(top);
-        }
-        Messaggio test = messaggioService.aggiungiMessaggio(messaggio1);
-        test.getId();
-        System.out.println(test + "\n\n nella servlet");
-        List<Messaggio> messaggi = messaggioService.trovaTutti();
-        System.out.println(messaggi);
+        messaggio1.setTopic(top);
 
+
+        // Salva il messaggio
+        Messaggio test = messaggioService.aggiungiMessaggio(messaggio1);
+
+        // Recupera il messaggio appena creato per inviarlo come risposta
+        String messaggioRisposta = test.getBody(); // Usa il corpo del messaggio appena creato
+        String autoreRisposta = test.getAutore().getNome(); // Usa il nome dell'autore del messaggio
+        String dataRisposta = test.getDateTime().toString(); // Usa la data del messaggio
+
+
+        List<Messaggio> messaggi = messaggioService.trovaTutti();
 
         request.setAttribute("messaggi", messaggi);
         request.setAttribute("accademici", messaggioService.trovaMessaggeriDiUnAccademico(accademicoSelf.getMatricola()));
-        response.sendRedirect("Conversazioni");
+        response.sendRedirect("chatServlet?accademico="+accademicoDest.getEmail()+"&accademicoSelf="+accademicoSelf.getEmail());
 
     }
 
@@ -84,3 +85,4 @@ public class invioMessaggioServlet extends HttpServlet {
         doGet(request, response);
     }
 }
+
