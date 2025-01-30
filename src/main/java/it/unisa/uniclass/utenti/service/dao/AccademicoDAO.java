@@ -1,14 +1,42 @@
 package it.unisa.uniclass.utenti.service.dao;
 
 import it.unisa.uniclass.utenti.model.Accademico;
+import jakarta.activation.DataSource;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
+import jakarta.resource.cci.Connection;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+
 
 @Stateless(name = "AccademicoDAO")
 public class AccademicoDAO implements AccademicoRemote {
 
+    private DataSource dataSource;
+
+    }
+
+    // Costruttore che riceve un DataSource
+    public AccademicoDAO(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    // Metodo per ottenere una connessione JDBC standard
+    private Connection getConnection() throws SQLException {
+        return dataSource.getConnection();  // Assicurati che sia una Connection JDBC
+    }
+
+    // Esempio di un metodo che usa la connessione
+    public void doSomethingWithConnection() {
+        try (Connection connection = getConnection()) {
+            // Esegui le operazioni sul database
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     @PersistenceContext(unitName = "DBUniClassPU")
     private EntityManager emUniclass;
 
