@@ -1,4 +1,4 @@
-package com.example.integration;
+package it.unisa.uniclass.testing.integration;
 
 import org.junit.Test;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package com.example.dao;
+package it.unisa.uniclass.testing.dao;
 
 import it.unisa.uniclass.utenti.model.Accademico;
 import it.unisa.uniclass.utenti.service.AccademicoService;
