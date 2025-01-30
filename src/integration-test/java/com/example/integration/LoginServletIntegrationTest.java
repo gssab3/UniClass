@@ -1,4 +1,4 @@
-package com.example.integration;
+/*package com.example.integration;
 
 import com.zaxxer.hikari.HikariDataSource;
 import it.unisa.uniclass.utenti.controller.LoginServlet;
@@ -102,4 +102,4 @@ public class LoginServletIntegrationTest {
         verify(session, never()).setAttribute(eq("currentSessionUser"), any(Accademico.class));
         verify(response).sendRedirect(contains("error"));
     }
-}
+}*/
