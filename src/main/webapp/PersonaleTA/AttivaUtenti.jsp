@@ -36,6 +36,7 @@
     <link type="text/css" rel="stylesheet" href="../styles/uniClassAdd.css" />
     <link rel="icon" href="images/logois.png" sizes="32x32" type="image/png">
     <script src="${pageContext.request.contextPath}/scripts/trovaNonAttivati.js" defer></script>
+    <script src="${pageContext.request.contextPath}/scripts/attivaUtentiControl.js" defer></script>
 </head>
 <body id="uniClassAdd">
 
@@ -68,11 +69,9 @@
     <jsp:include page="../header.jsp"/>
 
 <div class="container">
-    <% if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("error") ){ %>
-        <div class="tableRow">
-            <p class="error">email o password errati!</p>
-        </div>
-    <% } %>
+
+
+
 
     <div class="left-block">
         <h2>Lista Utenti non Attivati</h2>
@@ -83,8 +82,18 @@
 
     <div class="center-block">
         <h2>Attivazione Utente</h2>
+
+        <% if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("error") ){ %>
+        <div class="tableRow">
+            <p class="error">Email, matricola o tipo utente errato!</p>
+        </div>
+        <% } %>
+
         <br>
-        <form action="${pageContext.request.contextPath}/AttivaUtentiServlet?param=add" method="POST">
+        <div id="error" class="error"></div>
+        <br>
+
+        <form action="${pageContext.request.contextPath}/AttivaUtentiServlet?param=add" method="POST" onsubmit="return validateActivation()">
             <label for="matricola">Matricola:</label>
             <input type="text" id="matricola" name="matricola" required><br><br>
             <label for="email">Email:</label>
@@ -119,7 +128,17 @@
 
 </div>
 
+<script>
+    const errorMessage = sessionStorage.getItem("activationError");
+    if (errorMessage) {
+        console.log(errorMessage);
 
+        document.getElementById("error").innerText = errorMessage;
+        document.getElementById("error").classList.add("error");
+
+        sessionStorage.removeItem("activationError");
+    }
+</script>
 
 
 </body>

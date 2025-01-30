@@ -40,17 +40,17 @@ public class ConversazioniServlet extends HttpServlet {
          AccademicoService accademicoService = new AccademicoService();
          Accademico accademicoSelf = accademicoService.trovaEmailUniClass(email);
 
-         //Accademici con cui è avvenuto scambio di messaggi
-         List<Accademico> accademiciConversazioni = messaggioService.trovaMessaggeriDiUnAccademico(email);
          //Messaggi ricevuti dall'accademicoSelf
          List<Messaggio> messaggiRicevuti = messaggioService.trovaMessaggiRicevuti(email);
          //Messaggi inviati
          List<Messaggio> messaggiInviati = messaggioService.trovaMessaggiInviati(email);
 
-         request.setAttribute("accademici", accademiciConversazioni);
+         List<Messaggio> messaggi = messaggioService.trovaAvvisi();
+
          request.setAttribute("accademicoSelf", accademicoSelf);
          request.setAttribute("messaggiRicevuti", messaggiRicevuti);
          request.setAttribute("messaggiInviati", messaggiInviati);
+         request.setAttribute("messaggi", messaggi);
 
          request.getRequestDispatcher("Conversazioni.jsp").forward(request, response);
      }

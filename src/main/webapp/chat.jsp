@@ -6,17 +6,22 @@
 <%@ page import="it.unisa.uniclass.conversazioni.model.Messaggio" %>
 <%@ page import="it.unisa.uniclass.utenti.model.Accademico" %>
 <%@ page import="it.unisa.uniclass.utenti.service.AccademicoService" %>
+<%@ page import="java.util.ArrayList" %>
 
 <%
     /* Sessione HTTP */
     HttpSession sessione = request.getSession(true);
     Utente user = (Utente) sessione.getAttribute("currentSessionUser");
+    if(user != null){
+        session.setAttribute("utenteEmail", user.getEmail());
+    }
+
 
 
     /* controllo tipo utente*/
 
     Tipo tipoUtente = null;
-    if(user != null && ((user.getTipo() != Tipo.Docente) && (user.getTipo() != Tipo.Coordinatore) && (user.getTipo()) != Tipo.Studente))
+    if(user != null && ((user.getTipo() != Tipo.Docente) || (user.getTipo() != Tipo.Coordinatore) || (user.getTipo()) != Tipo.Studente))
         tipoUtente = (Tipo) user.getTipo();
     else if (user != null && (user.getTipo() == Tipo.PersonaleTA))
         response.sendRedirect("ErroreAccesso.jsp");
@@ -26,17 +31,21 @@
     Long id = (Long) request.getAttribute("id");
     String email = (String) request.getAttribute("email");
 
-    Accademico accademico = (Accademico) request.getAttribute("accademico");
-    Accademico accademicoSelf = (Accademico) request.getAttribute("accademicoSelf");
+    //Accademico accademico = (Accademico) request.getAttribute("accademico");
+    Accademico accademico = (Accademico) session.getAttribute("accademico");
+    //Accademico accademicoSelf = (Accademico) request.getAttribute("accademicoSelf");
+    Accademico accademicoSelf = (Accademico) session.getAttribute("accademicoSelf");
 
 
 
-    List<Messaggio> messaggi;
+    List<Messaggio> messaggi = new ArrayList<Messaggio>();
     List<Messaggio> messaggiInviati;
     List<Messaggio> messaggiRicevuti;
+    //List<Messaggio> messaggigi = (List<Messaggio>) request.getAttribute("messaggigi");
+    List<Messaggio> messaggigi = (List<Messaggio>) session.getAttribute("messaggigi");
 
     if (tipoUtente == Tipo.Docente || tipoUtente == Tipo.Studente || tipoUtente == Tipo.Coordinatore){
-         messaggi = (List<Messaggio>) request.getAttribute("messaggi");
+        // messaggi = (List<Messaggio>) request.getAttribute("messaggi");
          messaggiInviati = (List<Messaggio>) request.getAttribute("messaggiInviati");
          messaggiRicevuti = (List<Messaggio>) request.getAttribute("messaggiRicevuti");
     }
@@ -113,30 +122,42 @@
 <jsp:include page="header.jsp"/>
 
 
+<% //if(messaggi.isEmpty()){ %>
+    si
+<%// } %>
+
 <div class="chat-container">
     <div class="chat-header">
         <h2></h2>
     </div>
 
-    <div class="chat-box">
+    <div id="chat-box" class="chat-box">
         <%
-            for (Messaggio messaggio : messaggi) {
-                if (messaggio.getTopic() != null) {
+            for (Messaggio messaggio : messaggigi) {
+                if (!messaggio.getTopic().getNome().equals("VUOTO")) {
         %>
         <div class="message red-text">
-            <span class="message-text"><%= messaggio.getTopic() %></span>
+            <span class="message-text">[<%= messaggio.getTopic().getNome()%>]</span>
         </div>
-        <div class="message self">
-            <span class="message-text"><%= messaggio.getBody() %></span>
-        </div>
+            <% if (messaggio.getAutore().getEmail().equals(accademicoSelf.getEmail())) {%>
+            <div class="message self">
+                <span class="message-text"><%= messaggio.getBody() %></span>
+            </div>
+            <%
+            } else if (messaggio.getAutore().getEmail().equals(accademico.getEmail())) {
+            %>
+            <div class="message author">
+                <span class="message-text"><%= messaggio.getBody() %></span>
+            </div>
+                <% } %>
         <%
-        } else if (messaggio.getAutore().equals(accademicoSelf)) {
+        } else if (messaggio.getAutore().getEmail().equals(accademicoSelf.getEmail())) {
         %>
         <div class="message self">
             <span class="message-text"><%= messaggio.getBody() %></span>
         </div>
         <%
-        } else if (messaggio.getAutore().equals(accademico)) {
+        } else if (messaggio.getAutore().getEmail().equals(accademico.getEmail())) {
         %>
         <div class="message author">
             <span class="message-text"><%= messaggio.getBody() %></span>
@@ -147,18 +168,17 @@
         %>
     </div>
 
-    <form action="invioMessaggioServlet" method="POST" class="chat-input-container">
-        <input type="text" name="messaggio" class="chat-input" placeholder="Scrivi un messaggio..." required>
-        <button type="submit" class="send-button">Invia</button>
-    </form>
+    <div class="chat-input-container">
+        <label for="testo">Messaggio:</label>
+        <input type="text" id="testo" name="testo" class="chat-input" placeholder="Scrivi un messaggio..." required>
+
+        <input type="hidden" id="emailInvio" name="emailInvio" value="<%=accademico.getEmail()%>">
+
+        <button type="button" class="send-button" onclick="window.location.href='inviaMessaggioChatServlet?testo=' + encodeURIComponent(document.getElementById('testo').value) + '&emailInvio=' + encodeURIComponent(document.getElementById('emailInvio').value)">Invia</button>
+    </div>
+
 </div>
 
-<script src="scripts/aggiornaChat.js"></script>
 
-
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
 </body>
 </html>

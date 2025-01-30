@@ -152,7 +152,7 @@ public class DatabasePopulator {
         docente3.setIscrizione(LocalDate.now());
         docente3.setMatricola("0512111101");
         docente3.setDataNascita(LocalDate.of(1990,1,10));
-        docente3.setPassword(CredentialSecurity.hashPassword("2222"));
+        docente3.setPassword(CredentialSecurity.hashPassword("2222WxY$"));
         docente3.setTipo(Tipo.Docente);
         docente3.getCorsi().add(corso3);
         docente3.setEmail("giacomoporetti@unisa.it");
@@ -167,7 +167,7 @@ public class DatabasePopulator {
         docente1_1.setIscrizione(LocalDate.now());
         docente1_1.setMatricola("0512110033");
         docente1_1.setDataNascita(LocalDate.of(1977,4,20));
-        docente1_1.setPassword(CredentialSecurity.hashPassword("3333"));
+        docente1_1.setPassword(CredentialSecurity.hashPassword("3333WxY$"));
         docente1_1.setTipo(Tipo.Docente);
         docente1_1.getCorsi().add(corso1);
         docente1_1.setAttivato(true);
@@ -596,7 +596,7 @@ public class DatabasePopulator {
         personaleTA1.setTelefono("3294839201");
         personaleTA1.setEmail("giannisereni@unisa.it");
         personaleTA1.setDataNascita(LocalDate.of(1974,6,27));
-        personaleTA1.setPassword(CredentialSecurity.hashPassword("3201"));
+        personaleTA1.setPassword(CredentialSecurity.hashPassword("3201$wEr"));
         personaleTA1.setTipo(Tipo.PersonaleTA);
 
 
