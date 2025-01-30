@@ -9,6 +9,9 @@ import java.util.List;
 
 import static it.unisa.uniclass.conversazioni.model.Topic.*;
 
+/**
+ * Rappresenta un topic di discussione associato a un corso di laurea o a un corso specifico.
+ */
 @Entity
 @Table(name = "topics")
 @NamedQueries({
@@ -20,57 +23,111 @@ import static it.unisa.uniclass.conversazioni.model.Topic.*;
 })
 public class Topic implements Serializable {
 
+    /** Nome della NamedQuery per trovare un topic tramite ID. */
     public static final String TROVA_ID = "Topic.trovaId";
+    /** Nome della NamedQuery per trovare un topic tramite nome. */
     public static final String TROVA_NOME = "Topic.trovaNome";
+    /** Nome della NamedQuery per trovare un topic associato a un corso di laurea. */
     public static final String TROVA_CORSOLAUREA = "Topic.trovaCorsoLaurea";
+    /** Nome della NamedQuery per trovare un topic associato a un corso specifico. */
     public static final String TROVA_CORSO = "Topic.trovaCorso";
+    /** Nome della NamedQuery per trovare tutti i topic. */
     public static final String TROVA_TUTTI = "Topic.trovaTutti";
 
+    /** Identificatore univoco del topic. */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String nome; // Es. "Informatica" o "Programmazione Distribuita"
+    /** Nome del topic, ad esempio "Informatica" o "Programmazione Distribuita". */
+    private String nome;
 
+    /**
+     * Corso di laurea associato al topic. Può essere null se il topic è relativo a un corso specifico.
+     */
     @ManyToOne
     @JoinColumn(name = "corso_laurea_id", nullable = true)
-    private CorsoLaurea corsoLaurea; // Nullable se il topic è per un corso specifico.
+    private CorsoLaurea corsoLaurea;
 
+    /**
+     * Corso specifico associato al topic. Può essere null se il topic è relativo a un corso di laurea.
+     */
     @ManyToOne
     @JoinColumn(name = "corso_id", nullable = true)
-    private Corso corso; // Nullable se il topic è per un corso di laurea.
+    private Corso corso;
 
+    /** Lista dei messaggi associati al topic. */
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL)
     private List<Messaggio> messaggi;
 
+    /**
+     * Restituisce il nome del topic.
+     *
+     * @return il nome del topic
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Imposta il nome del topic.
+     *
+     * @param nome il nome del topic
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     * Restituisce il corso di laurea associato al topic.
+     *
+     * @return il corso di laurea associato
+     */
     public CorsoLaurea getCorsoLaurea() {
         return corsoLaurea;
     }
 
+    /**
+     * Imposta il corso di laurea associato al topic.
+     *
+     * @param corsoLaurea il corso di laurea da associare
+     */
     public void setCorsoLaurea(CorsoLaurea corsoLaurea) {
         this.corsoLaurea = corsoLaurea;
     }
 
+    /**
+     * Restituisce il corso associato al topic.
+     *
+     * @return il corso associato
+     */
     public Corso getCorso() {
         return corso;
     }
 
+    /**
+     * Imposta il corso associato al topic.
+     *
+     * @param corso il corso da associare
+     */
     public void setCorso(Corso corso) {
         this.corso = corso;
     }
 
+    /**
+     * Restituisce l'identificatore univoco del topic.
+     *
+     * @return l'ID del topic
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Restituisce una rappresentazione testuale dell'oggetto Topic.
+     *
+     * @return stringa rappresentativa del topic
+     */
     @Override
     public String toString() {
         return "Topic{" +
@@ -81,4 +138,3 @@ public class Topic implements Serializable {
                 '}';
     }
 }
-
