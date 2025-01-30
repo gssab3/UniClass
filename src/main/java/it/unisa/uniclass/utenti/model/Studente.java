@@ -1,7 +1,5 @@
 package it.unisa.uniclass.utenti.model;
 
-import it.unisa.uniclass.esami.model.Prenotazione;
-import it.unisa.uniclass.orari.model.Agenda;
 import it.unisa.uniclass.orari.model.CorsoLaurea;
 import it.unisa.uniclass.orari.model.Resto;
 import jakarta.persistence.*;
@@ -45,20 +43,6 @@ public class Studente extends Accademico implements Serializable {
      * */
     public static final String TROVA_EMAIL = "Studente.trovaEmail";
 
-    /**
-     * Lista delle prenotazioni associate allo studente.
-     *  La relazione è unidirezionale e gesita tramite la classe {@link Prenotazione}.
-     * */
-    @OneToMany(mappedBy = "studente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Prenotazione> prenotazioni;
-
-    /**
-     * Agenda personale dello studente.
-     * Relazione unoo-a-uno
-     * */
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "agenda")
-    private Agenda agenda;
 
     /**
      * Costruttore predefinito.
@@ -66,8 +50,6 @@ public class Studente extends Accademico implements Serializable {
      * */
     public Studente() {
         super.setTipo(Tipo.Studente);
-        prenotazioni = new ArrayList<>();
-        agenda = new Agenda();
     }
 
     /**
@@ -88,8 +70,6 @@ public class Studente extends Accademico implements Serializable {
      * Inizializza i campi principali dello stuedente.
      * */
     public Studente(String nome, String cognome, LocalDate dataNascita, String email, String password, String matricola, LocalDate iscrizione, CorsoLaurea corsoLaurea, Resto resto) {
-        prenotazioni = new ArrayList<Prenotazione>();
-        agenda = new Agenda();
         super.setNome(nome);
         super.setCognome(cognome);
         super.setEmail(email);
@@ -104,39 +84,12 @@ public class Studente extends Accademico implements Serializable {
     }
 
     /**
-     * Restituisce la lista delle prenotazioni dello studente.
-     *
-     * @return Lista delle prentazioni.
-     * */
-    public List<Prenotazione> getPrenotazioni() {
-        return prenotazioni;
-    }
-
-    /**
-     * Restituisce l'agenda associata allo studente.
-     *
-     * @return Oggetto {@link Agenda}.
-     * */
-    public Agenda getAgenda() {
-        return agenda;
-    }
-
-    /**
      * Restituisce il resto associato allo studente
      *
      * @return Oggetto {@link Resto}.
      * */
     public Resto getResto() {
         return resto;
-    }
-
-    /**
-     * Imposta l'agenda associata allo Studente.
-     *
-     * @param agenda Oggetto {@link Agenda} da associare.
-     * */
-    public void setAgenda(Agenda agenda) {
-        this.agenda = agenda;
     }
 
     @Override
@@ -147,15 +100,6 @@ public class Studente extends Accademico implements Serializable {
     @Override
     public void setCorsoLaurea(CorsoLaurea corsoLaurea) {
         this.corsoLaurea = corsoLaurea;
-    }
-
-    /**
-     * Imposta la lista delle prenotazioni dello studente.
-     *
-     * @param prenotazioni Lista delle prentazioni.
-     * */
-    public void setPrenotazioni(List<Prenotazione> prenotazioni) {
-        this.prenotazioni = prenotazioni;
     }
 
     /**

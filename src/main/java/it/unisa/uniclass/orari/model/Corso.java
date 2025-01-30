@@ -1,6 +1,5 @@
 package it.unisa.uniclass.orari.model;
 
-import it.unisa.uniclass.esami.model.Appello;
 import it.unisa.uniclass.utenti.model.Docente;
 import jakarta.persistence.*;
 
@@ -62,12 +61,6 @@ public class Corso implements Serializable {
     private List<Docente> docenti;
 
     /**
-     * Lista degli appelli d'esame associati al corso
-     * */
-    @OneToMany(mappedBy = "corso", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Appello> appelli;
-
-    /**
      * Anno didattico a cui appartiene il corso
      */
     @ManyToOne
@@ -105,7 +98,6 @@ public class Corso implements Serializable {
      * */
     public Corso(String nome) {
         this.nome = nome;
-        appelli = new ArrayList<>();
         lezioni = new ArrayList<>();
         docenti = new ArrayList<>();
     }
@@ -114,7 +106,6 @@ public class Corso implements Serializable {
      * Costruttore di default per creare un corso vuoto
      * */
     public Corso() {
-        appelli = new ArrayList<>();
         lezioni = new ArrayList<>();
         docenti = new ArrayList<>();
     }
@@ -134,24 +125,6 @@ public class Corso implements Serializable {
      * */
     public void setDocenti(List<Docente> docenti) {
         this.docenti = docenti;
-    }
-
-    /**
-     * Restituisce la lista degli appelli d'esame del corso.
-     *
-     * @return Lista degli appelli
-     * */
-    public List<Appello> getAppelli() {
-        return appelli;
-    }
-
-    /**Imposta la lista degli appelli d'esame del corso.
-     *
-     * @param appelli Lista degli appelli
-     * */
-
-    public void setAppelli(List<Appello> appelli) {
-        this.appelli = appelli;
     }
 
     /**

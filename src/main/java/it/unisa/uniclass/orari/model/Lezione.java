@@ -86,9 +86,6 @@ public class Lezione implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToMany(mappedBy = "lezioni") // Relazione inversa
-    private List<Agenda> agende;
-
     @ManyToMany(mappedBy = "lezioni")
     private List<Docente> docenti = new ArrayList<>();
 
@@ -133,7 +130,6 @@ public class Lezione implements Serializable {
         this.resto = resto;
         this.corso = corso;
         this.aula = aula;
-        this.agende = new ArrayList<>();
     }
 
     /**
@@ -152,24 +148,6 @@ public class Lezione implements Serializable {
      */
     public void setDocenti(List<Docente> docenti) {
         this.docenti = docenti;
-    }
-
-    /**
-     * Ottiene la lista di agende associate alla lezione.
-     *
-     * @return Lista di agende.
-     */
-    public List<Agenda> getAgende() {
-        return agende;
-    }
-
-    /**
-     * Imposta la lista di agende associate alla lezione.
-     *
-     * @param agende Lista di agende.
-     */
-    public void setAgende(List<Agenda> agende) {
-        this.agende = agende;
     }
 
     /**

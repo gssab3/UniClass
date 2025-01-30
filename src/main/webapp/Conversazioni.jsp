@@ -73,10 +73,6 @@
     <ul id="menu">
       <li id="aule"><a href="aula.jsp">Aule</a>
       </li>
-      <li id="agenda"><a href="servelt">Agenda</a>
-      </li>
-      <li id="appelli"><a href="servelt">Appelli</a>
-      </li>
       <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
       </li>
       <li id="mappa"><a href="mappa.jsp">Mappa</a>
@@ -95,8 +91,6 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
     <p>Menu<p>
     <li id="aule"><a href="aula.jsp">Aule</a>
-    </li>
-    <li id="appelli"><a href="servelt">Appelli</a>
     </li>
     <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
     </li>
@@ -120,13 +114,22 @@
     <h1>Conversazioni</h1>
       <div class="conversations-container">
         <%
-          for(Messaggio m: messaggi){
+          List<Accademico> accademiciFor = new ArrayList<>();
+          for(Messaggio m: messaggi) {
             Accademico accademico = new Accademico();
-            if(m.getDestinatario().getEmail().equals(accademicoSelf.getEmail())){
+            if (m.getDestinatario().getEmail().equals(accademicoSelf.getEmail()) && !accademiciFor.contains(m.getAutore())) {
               accademico = m.getAutore();
-            }else if(m.getAutore().getEmail().equals(accademicoSelf.getEmail())){
+              accademiciFor.add(accademico);
+            } else if (m.getDestinatario().getEmail().equals(accademicoSelf.getEmail()) && accademiciFor.contains(m.getAutore())) {
+              continue;
+            } else if (m.getAutore().getEmail().equals(accademicoSelf.getEmail()) && accademiciFor.contains(m.getDestinatario())) {
+              continue;
+            } else if (m.getAutore().getEmail().equals(accademicoSelf.getEmail()) && !accademiciFor.contains(m.getDestinatario())) {
               accademico = m.getDestinatario();
+              accademiciFor.add(accademico);
             }
+          }
+          for(Accademico accademico : accademiciFor) {
         %>
         <a href="chatServlet?accademico=<%=accademico.getEmail()%>&accademicoSelf=<%=accademicoSelf.getEmail()%>" class="conversation">
           <%    if(accademico.getTipo().equals(Tipo.Studente)){ %>
@@ -158,12 +161,14 @@
         <!-- Le opzioni delle email verranno caricate tramite AJAX -->
         <option value="tutti">Annuncio</option>`;
       </select>
-
+      <%if(tipoUtente.equals(Tipo.Docente) || tipoUtente.equals(Tipo.Coordinatore)) { %>
       <br><br>
       <label for="topic" class="form-label">Topic:</label>
       <textarea id="topic" name="topic" class="form-textarea" rows="5" cols="40"></textarea>
 
       <br><br>
+      <%} %>
+
 
 
       <label for="testo" class="form-label">Testo del messaggio:</label>

@@ -76,13 +76,9 @@
     <ul id="menu">
         <li id="orari"> <a href="servelt">Orari</a>
         </li>
-        <li id="aule"><a href="servelt">Aule</a>
+        <li id="aule"><a href="aula.jsp">Aule</a>
         </li>
-        <li id="agenda"><a href="servelt">Gestisci Agenda</a>
-        </li>
-        <li id="appelli"><a href="servelt">Appelli</a>
-        </li>
-        <li id="conversazioni"><a href="servelt">Conversazioni</a>
+        <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
         </li>
         <li id="mappa"><a href="mappa.jsp">Mappa</a>
         </li>
@@ -100,11 +96,9 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><img src="images/icons/menuOpenIcon.png" alt="closebtn"></a>
     <p>Menu<p>
     <ul id="menu">
-        <li id="aule"><a href="servelt">Aule</a>
+        <li id="aule"><a href="aula.jsp">Aule</a>
         </li>
-        <li id="appelli"><a href="servelt">Appelli</a>
-        </li>
-        <li id="conversazioni"><a href="servelt">Conversazioni</a>
+        <li id="conversazioni"><a href="Conversazioni">Conversazioni</a>
         </li>
         <li id="mappa"><a href="mappa.jsp">Mappa</a>
         </li>

@@ -137,7 +137,7 @@ public class DatabasePopulator {
         docente2.setIscrizione(LocalDate.now());
         docente2.setMatricola("0512111090");
         docente2.setDataNascita(LocalDate.of(1980,1,13));
-        docente2.setPassword(CredentialSecurity.hashPassword("1111"));
+        docente2.setPassword(CredentialSecurity.hashPassword("1111WxY$"));
         docente2.setTipo(Tipo.Docente);
         docente2.getCorsi().add(corso2);
         docente2.setEmail("albertorossi@unisa.it");
@@ -197,7 +197,7 @@ public class DatabasePopulator {
         docente1_2.setIscrizione(LocalDate.now());
         docente1_2.setMatricola("0512112033");
         docente1_2.setDataNascita(LocalDate.of(1991,1,3));
-        docente1_2.setPassword(CredentialSecurity.hashPassword("3333"));
+        docente1_2.setPassword(CredentialSecurity.hashPassword("333sLa£3"));
         docente1_2.setTipo(Tipo.Docente);
         docente1_2.getCorsi().add(corso1);
         docente1_2.setEmail("angelinimar@unisa.it");
@@ -212,7 +212,7 @@ public class DatabasePopulator {
         docente3_2.setIscrizione(LocalDate.now());
         docente3_2.setMatricola("0512112133");
         docente3_2.setDataNascita(LocalDate.of(1980,8,30));
-        docente3_2.setPassword(CredentialSecurity.hashPassword("6666"));
+        docente3_2.setPassword(CredentialSecurity.hashPassword("66662WxY"));
         docente3_2.setTipo(Tipo.Docente);
         docente3_2.getCorsi().add(corso3);
         docente3_2.setEmail("lorelanz@unisa.it");
@@ -574,17 +574,6 @@ public class DatabasePopulator {
         studente.setTipo(Tipo.Studente);
         studente.setResto(resto);
         studente.setMatricola("0512118330");
-        Agenda agendaStudente = new Agenda();
-        agendaStudente.setStudente(studente);
-        agendaStudente.getLezioni().add(lezione1);
-        agendaStudente.getLezioni().add(lezione2);
-        agendaStudente.getLezioni().add(lezione3);
-        agendaStudente.getLezioni().add(lezione4);
-        agendaStudente.getLezioni().add(lezione5);
-        agendaStudente.getLezioni().add(lezione6);
-        agendaStudente.getLezioni().add(lezione7);
-        agendaStudente.getLezioni().add(lezione8);
-        studente.setAgenda(agendaStudente);
         studente.setCorsoLaurea(corsoLaurea);
         corsoLaurea.getStudenti().add(studente);
         studente.setDataNascita(LocalDate.of(2004,1,27));
@@ -653,7 +642,6 @@ public class DatabasePopulator {
         em.persist(lezione6_2);
         em.persist(lezione7_2);
         em.persist(lezione8_2);
-        em.persist(agendaStudente);
         em.persist(studente);
         em.persist(personaleTA1);
 

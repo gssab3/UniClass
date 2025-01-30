@@ -60,9 +60,9 @@ public class AccademicoDAO implements AccademicoRemote {
     @Override
     public Accademico trovaEmailUniClass(String email) {
         try {
-        TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_EMAIL, Accademico.class);
-        query.setParameter("email", email);
-        return query.getSingleResult();
+            TypedQuery<Accademico> query = emUniclass.createNamedQuery(Accademico.TROVA_EMAIL, Accademico.class);
+            query.setParameter("email", email);
+            return query.getSingleResult();
         } catch (jakarta.persistence.NoResultException e) {
             return null;
         }

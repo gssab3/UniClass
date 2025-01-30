@@ -23,15 +23,17 @@ public class AttivaUtentiServlet extends HttpServlet {
 
     private AccademicoService accademicoService;
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        this.accademicoService = new AccademicoService();
-    }
-
     // This method is added for testing purposes
     public void setAccademicoService(AccademicoService accademicoService) {
         this.accademicoService = accademicoService;
+    }
+
+    public AttivaUtentiServlet() {
+        accademicoService = new AccademicoService();
+    }
+
+    public AttivaUtentiServlet(AccademicoService acc) {
+        accademicoService = acc;
     }
 
     // This method is added for testing purposes
@@ -78,6 +80,7 @@ public class AttivaUtentiServlet extends HttpServlet {
                     accademico.setPassword(CredentialSecurity.hashPassword(password));
 
                     accademicoService.aggiungiAccademico(accademico);
+                    System.out.println("\n\n\nPassword generata per l'attivato: " + password + "\n\n\n");
                     resp.sendRedirect(req.getContextPath() + "/PersonaleTA/AttivaUtenti.jsp");
                 } else {
                     resp.sendRedirect(req.getContextPath() + "/PersonaleTA/AttivaUtenti.jsp?action=error");

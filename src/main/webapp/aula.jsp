@@ -3,6 +3,7 @@
 <%@ page import="it.unisa.uniclass.utenti.model.Utente, it.unisa.uniclass.utenti.model.Tipo" %>
 <%@ page import="it.unisa.uniclass.orari.model.CorsoLaurea" %>
 <%@ page import="java.util.List" %>
+<%@ page import="it.unisa.uniclass.orari.service.AulaService" %>
 
 <%
     /* Sessione HTTP */
@@ -21,6 +22,9 @@
         tipoUtente = (Tipo) user.getTipo();
     else
         tipoUtente = null;
+
+    AulaService aulaService = new AulaService();
+    List<String> edificitotali = aulaService.trovaEdifici();
 
     List<CorsoLaurea> corsiLaurea = (List<CorsoLaurea>) request.getAttribute("corsi");
 
@@ -135,14 +139,13 @@
 <h1> Edifici </h1>
 <br>
 <div class="container-wrapper">
+    <%
+            for(String edificio: edificitotali) {
+    %>
     <div class="container">
-        <h2> <a href="EdificioServlet?ed=F">Edificio F</a></h2>
+        <h2> <a href="EdificioServlet?ed=<%=edificio%>">Edificio <%=edificio%></a></h2>
     </div>
-    <div class="container">
-        <h2><a href="EdificioServlet?ed=F2">Edificio F2</a> </h2>
-    </div>
-    <div class="container">
-        <h2><a href="EdificioServlet?ed=F3">Edificio F3</a> </h2>
+    <% } %>
 
     </div>
 </div>
