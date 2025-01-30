@@ -7,6 +7,8 @@ import org.junit.After;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNot.not;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,7 +16,10 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.*;
 
 public class AttivazioneTest {
@@ -26,7 +31,27 @@ public class AttivazioneTest {
     driver = new ChromeDriver();
     js = (JavascriptExecutor) driver;
     vars = new HashMap<String, Object>();
+
+    login();
   }
+
+  private void login() {
+    driver.get("http://localhost:8080/UniClass/Home");
+    driver.findElement(By.cssSelector("span > a > img")).click();
+    driver.findElement(By.id("email")).sendKeys("giannisereni@unisa.it");
+    driver.findElement(By.id("password")).sendKeys("3201$wEr");
+    driver.findElement(By.cssSelector(".logreg")).click();
+
+
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebElement userIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span > img")));
+    userIcon.click();
+
+
+    WebElement gestioneUtenti = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Gestione Utenti")));
+    gestioneUtenti.click();
+  }
+
   @After
   public void tearDown() {
     driver.quit();
@@ -36,8 +61,6 @@ public class AttivazioneTest {
     driver.get("http://localhost:8080/UniClass/PersonaleTA/AttivaUtenti.jsp");
     driver.findElement(By.id("matricola")).click();
     driver.findElement(By.id("matricola")).sendKeys("0512118330");
-    driver.findElement(By.cssSelector("p > p:nth-child(2)")).click();
-    driver.findElement(By.cssSelector("form:nth-child(5)")).click();
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).sendKeys("s.davanzo5@studenti.unisa.it");
     driver.findElement(By.cssSelector(".submit-btn")).click();
@@ -47,7 +70,6 @@ public class AttivazioneTest {
     driver.get("http://localhost:8080/UniClass/PersonaleTA/AttivaUtenti.jsp");
     driver.findElement(By.id("matricola")).click();
     driver.findElement(By.id("matricola")).sendKeys("0512118330");
-    driver.findElement(By.cssSelector("p > p:nth-child(2)")).click();
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).sendKeys("s.davanzo5@studenti.unisa.it");
     driver.findElement(By.id("tipo")).click();
@@ -60,10 +82,9 @@ public class AttivazioneTest {
   @Test
   public void tC3mailNotPresentDB() {
     driver.get("http://localhost:8080/UniClass/PersonaleTA/AttivaUtenti.jsp");
-    driver.manage().window().setSize(new Dimension(1405, 1017));
     driver.findElement(By.id("matricola")).click();
     driver.findElement(By.id("matricola")).sendKeys("0512118330");
-    driver.findElement(By.cssSelector("p > p:nth-child(2)")).click();
+
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).sendKeys("s.davanzo@studenti.unisa.it");
@@ -88,10 +109,8 @@ public class AttivazioneTest {
   @Test
   public void tC4emailNotFormatted() {
     driver.get("http://localhost:8080/UniClass/PersonaleTA/AttivaUtenti.jsp");
-    driver.manage().window().setSize(new Dimension(1405, 1017));
     driver.findElement(By.id("email")).sendKeys("s.davanzostudenti@uni");
     driver.findElement(By.id("matricola")).click();
-    driver.findElement(By.cssSelector("p > p:nth-child(1)")).click();
     driver.findElement(By.id("matricola")).click();
     driver.findElement(By.id("matricola")).sendKeys("0512118330");
     driver.findElement(By.id("tipo")).click();
@@ -101,7 +120,6 @@ public class AttivazioneTest {
   @Test
   public void tC5notPresentBothInfo() {
     driver.get("http://localhost:8080/UniClass/PersonaleTA/AttivaUtenti.jsp");
-    driver.manage().window().setSize(new Dimension(1405, 1017));
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).sendKeys("s.davanzo@studenti.unisa.it");
     driver.findElement(By.id("matricola")).click();
@@ -111,8 +129,6 @@ public class AttivazioneTest {
   @Test
   public void tC6notPresentBothAndNotFormattedEmail() {
     driver.get("http://localhost:8080/UniClass/PersonaleTA/AttivaUtenti.jsp");
-    driver.manage().window().setSize(new Dimension(1405, 1017));
-    driver.findElement(By.id("matricola")).click();
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).sendKeys("s.davanzostudenti@uni");
     driver.findElement(By.id("matricola")).click();
@@ -122,7 +138,6 @@ public class AttivazioneTest {
   @Test
   public void tC7notPresentBothNotFormattedMatricola() {
     driver.get("http://localhost:8080/UniClass/PersonaleTA/AttivaUtenti.jsp");
-    driver.manage().window().setSize(new Dimension(1405, 1017));
     driver.findElement(By.id("matricola")).click();
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).sendKeys("s.davanzo@studenti.unisa.it");
@@ -134,7 +149,6 @@ public class AttivazioneTest {
   @Test
   public void tC8nothingGood() {
     driver.get("http://localhost:8080/UniClass/PersonaleTA/AttivaUtenti.jsp");
-    driver.manage().window().setSize(new Dimension(1405, 1017));
     driver.findElement(By.id("email")).click();
     driver.findElement(By.id("email")).sendKeys("s.davanzostudenti@uni");
     driver.findElement(By.id("matricola")).click();
