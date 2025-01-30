@@ -9,15 +9,18 @@
       <option name="ignoredModules">
         <list>
           <option value="UniClass" />
+          <option value="UniClass" />
         </list>
       </option>
       <option name="ignoredPackages">
         <list>
           <option value="com.google.protobuf:protobuf-java:4.26.1" />
+          <option value="org.apache.commons:commons-compress:1.24.0" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
         </list>
       </option>
